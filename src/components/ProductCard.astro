@@ -1,0 +1,27 @@
+---
+export interface Props {
+  title: string;
+  handle: string;
+  price: number;
+  image: string;
+  imageAlt?: string;
+  category?: string;
+}
+const { title, handle, price, image, imageAlt, category } = Astro.props;
+---
+
+<div class="group bg-white border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
+  <a href={`/products/${handle}`} class="block">
+    <div class="aspect-square bg-gray-50 p-6 flex items-center justify-center overflow-hidden">
+      <img src={image} alt={imageAlt || title} class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+    </div>
+    <div class="p-5 border-t border-gray-50">
+      {category && (
+        <span class="text-xs font-semibold uppercase tracking-wider text-orange mb-1 block">{category}</span>
+      )}
+      <h3 class="text-sm font-semibold text-navy leading-snug mb-2 line-clamp-2">{title}</h3>
+      <span class="text-lg font-extrabold text-navy">${price.toFixed(2)}</span>
+      <p class="text-xs text-gray-400 mt-1">Wholesale / MOQ Available</p>
+    </div>
+  </a>
+</div>

@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="B2B Buying Guide & FAQ" description="Frequently asked questions about wholesale toy sourcing from Kidtoy Factory - MOQ, shipping, OEM/ODM, certifications.">
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-navy mb-4">B2B Buying Guide & FAQ</h1>
+    <p class="text-gray-500 mb-10">Everything international buyers need to know about sourcing from our Chenghai factory.</p>
+
+    <div class="space-y-4">
+      {[
+        { q: "What is your Minimum Order Quantity (MOQ)?", a: "Our standard MOQ is 50 pieces per design for most products. For bubble toys and small accessories, we accept orders as low as 36 pieces. Custom OEM orders typically start at 500-1000 units depending on complexity." },
+        { q: "Can I customize products with my own brand (OEM/ODM)?", a: "Yes! We specialize in OEM and ODM manufacturing. You can customize colors, packaging, logos, and product features. Typical turnaround for custom samples is 7-14 days. Our design team supports your ideas from concept to production." },
+        { q: "What certifications do your products have?", a: "Our factory is certified with ISO 22716 (GMPC), BSCI, SEDEX, and GSV. Products meet CE (EN71), ASTM F963, CPSIA, and EN62115 standards. We provide full compliance documentation for customs clearance and retail requirements." },
+        { q: "What are your shipping options and lead times?", a: "We offer air freight (7-10 days), sea freight (20-30 days), and express courier (DHL/UPS/FedEx, 3-7 days). Production lead time is 15-25 days for standard orders and 25-40 days for custom OEM orders." },
+        { q: "How can I get samples before placing a bulk order?", a: "Sample orders are welcome! Existing product samples ship within 2-3 days. Custom OEM samples take 7-14 days to produce. Sample fees are refundable when you place a bulk order." },
+        { q: "Do you offer wholesale prices for retailers?", a: "Yes, we offer tiered wholesale pricing based on order volume. The more you order, the lower the unit price. Contact our sales team for a detailed quotation." }
+      ].map(faq => (
+        <details class="border border-gray-200 rounded-xl p-5 bg-gray-50 cursor-pointer">
+          <summary class="font-bold text-navy flex justify-between items-center list-none">{faq.q}<span class="text-orange text-xl">+</span></summary>
+          <p class="mt-4 text-gray-500 leading-relaxed text-sm">{faq.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

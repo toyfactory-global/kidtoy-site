@@ -1,0 +1,65 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SEOMeta from '../components/SEOMeta.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage } = Astro.props;
+const fullTitle = title ? `${title} | Kidtoy Factory` : 'Experienced Toy Manufacturer | B2B Wholesale Supply Chenghai';
+const fullDesc = description || 'Direct source for high-quality toys and children\'s makeup from Chenghai. Professional OEM/ODM factory with competitive wholesale pricing.';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <SEOMeta title={fullTitle} description={fullDesc} image={ogImage || '/og-default.jpg'} />
+
+    <!-- JSON-LD Organization -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Corporation",
+      "@id": "https://kidtoycn.com/#organization",
+      "name": "Kidtoy Factory",
+      "url": "https://kidtoycn.com",
+      "description": fullDesc,
+      "foundingDate": "2001",
+      "address": { "@type": "PostalAddress", "addressLocality": "Chenghai", "addressRegion": "Guangdong", "addressCountry": "CN" },
+      "contactPoint": { "@type": "ContactPoint", "telephone": "+86-15976917707", "contactType": "sales", "availableLanguage": ["English", "Chinese"] }
+    })} />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://kidtoycn.com/#website",
+      "url": "https://kidtoycn.com",
+      "name": "Kidtoy Factory | B2B Wholesale Toy Supply",
+      "publisher": { "@id": "https://kidtoycn.com/#organization" },
+      "potentialAction": { "@type": "SearchAction", "target": "https://kidtoycn.com/search?q={search_term_string}", "query-input": "required name=search_term_string" }
+    })} />
+
+    <script is:inline>
+      document.documentElement.classList.add('loaded');
+    </script>
+  </head>
+  <body class="bg-white text-gray-800 font-sans">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

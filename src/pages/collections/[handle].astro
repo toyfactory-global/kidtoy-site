@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import productsData from '../../../data/products.json';
+
+export function getStaticPaths() {
+  return productsData.collections.map(c => ({
+    params: { handle: c.handle }
+  }));
+}
+
+const { handle } = Astro.params;
+const collection = productsData.collections.find(c => c.handle === handle);
+
+if (!collection) {
+  return Astro.redirect('/404');
+}
+
+// Match products to this collection
+const allProducts = productsData.products;
+let catProducts = allProducts;
+switch(handle) {
+  case 'electric-water-guns':
+    catProducts = allProducts.filter(p => p.title.toLowerCase().includes('water') || p.title.toLowerCase().includes('gun') || p.title.toLowerCase().includes('blaster'));
+    break;
+  case 'kids-makeup-sets':
+    catProducts = allProducts.filter(p => p.title.toLowerCase().includes('makeup') || p.title.toLowerCase().includes('cosmetic'));
+    break;
+  case 'premium-bubble-toys':
+    catProducts = allProducts.filter(p => p.title.toLowerCase().includes('bubble'));
+    break;
+  default:
+    catProducts = allProducts;
+}
+---
+
+<BaseLayout title={collection.title} description={`Browse our ${collection.title.toLowerCase()} collection - factory direct wholesale pricing, OEM/ODM available.`}>
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <nav class="text-sm text-gray-400 mb-6">
+      <a href="/" class="hover:text-orange">Home</a> / <span class="text-navy font-semibold">{collection.title}</span>
+    </nav>
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-navy mb-2">{collection.title}</h1>
+    <p class="text-gray-400 mb-10">Factory direct wholesale &bull; MOQ from 50 pcs &bull; OEM/ODM supported</p>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      {catProducts.map(product => (
+        <ProductCard
+          title={product.title}
+          handle={product.handle}
+          price={product.price}
+          image={product.images?.[0]?.src || '/placeholder.jpg'}
+          imageAlt={product.images?.[0]?.alt || product.title}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

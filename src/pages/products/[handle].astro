@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import productsData from '../../../data/products.json';
+
+export function getStaticPaths() {
+  return productsData.products.map(p => ({
+    params: { handle: p.handle }
+  }));
+}
+
+const { handle } = Astro.params;
+const product = productsData.products.find(p => p.handle === handle);
+
+if (!product) {
+  return Astro.redirect('/404');
+}
+
+const mainImage = product.images?.[0]?.src || '/placeholder.jpg';
+const detailImages = product.images?.slice(1) || [];
+---
+
+<BaseLayout title={product.title} description={product.title + ' - Factory direct wholesale pricing. MOQ 50+ pcs, OEM/ODM supported.'} ogImage={mainImage}>
+  <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <nav class="text-sm text-gray-400 mb-8">
+      <a href="/" class="hover:text-orange">Home</a> / 
+      <a href="/collections/all" class="hover:text-orange">Products</a> / 
+      <span class="text-navy font-semibold">{product.title}</span>
+    </nav>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <!-- Images -->
+      <div>
+        <div class="aspect-square bg-gray-50 rounded-2xl flex items-center justify-center overflow-hidden mb-4">
+          <img src={mainImage} alt={product.title} class="w-full h-full object-contain p-6" />
+        </div>
+        {detailImages.length > 0 && (
+          <div class="grid grid-cols-4 gap-3">
+            {detailImages.slice(0, 4).map((img, i) => (
+              <div class="aspect-square bg-gray-50 rounded-lg overflow-hidden">
+                <img src={img.src} alt={img.alt || product.title} class="w-full h-full object-contain p-2" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <!-- Info -->
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-navy leading-tight mb-4">{product.title}</h1>
+        
+        <div class="bg-gray-50 rounded-xl p-6 mb-6">
+          <div class="flex items-baseline gap-3">
+            <span class="text-3xl font-extrabold text-navy">${product.price.toFixed(2)}</span>
+            {product.compare_at_price && (
+              <span class="text-lg text-gray-400 line-through">${product.compare_at_price.toFixed(2)}</span>
+            )}
+            <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-bold">WHOLESALE</span>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">MOQ from 50 pcs | Bulk pricing available</p>
+        </div>
+
+        <!-- Variants -->
+        {product.variants.length > 1 && (
+          <div class="mb-6">
+            <h3 class="text-sm font-bold text-navy mb-2">Variants</h3>
+            <div class="flex flex-wrap gap-2">
+              {product.variants.map(v => (
+                <span class="text-xs bg-white border border-gray-200 px-3 py-1.5 rounded-full text-navy font-semibold">
+                  {v.title}: ${v.price.toFixed(2)}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- CTA -->
+        <div class="flex flex-col sm:flex-row gap-3 mb-8">
+          <a href={`https://wa.me/8615952917707?text=Hello%2C%20I%20am%20interested%20in%20${encodeURIComponent(product.title)}%20(SKU:%20${encodeURIComponent(product.id)})`} target="_blank" rel="noopener noreferrer" class="flex-1 bg-green-500 text-white text-center px-6 py-3 rounded font-bold text-sm hover:bg-green-600 transition-colors">
+            WhatsApp Inquiry
+          </a>
+          <a href="/contact" class="flex-1 bg-navy text-white text-center px-6 py-3 rounded font-bold text-sm hover:bg-orange transition-colors">
+            Request Quote
+          </a>
+        </div>
+
+        <!-- Description -->
+        <div class="prose prose-sm max-w-none text-gray-500 leading-relaxed">
+          <div set:html={product.body_html || ''} />
+        </div>
+      </div>
+    </div>
+
+    <!-- Product JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": product.title,
+      "image": mainImage,
+      "description": product.title,
+      "sku": product.id.toString(),
+      "brand": { "@type": "Brand", "name": "Kidtoy Factory" },
+      "manufacturer": { "@type": "Organization", "name": "Kidtoy Factory" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": product.price.toString(),
+        "availability": "https://schema.org/InStock",
+        "url": `https://kidtoycn.com/products/${product.handle}`
+      }
+    })} />
+  </article>
+</BaseLayout>

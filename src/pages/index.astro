@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import productsData from '../../data/products.json';
+
+const products = productsData.products;
+const collections = productsData.collections;
+
+// Group products by type keywords
+const waterGuns = products.filter(p => p.title.toLowerCase().includes('water') || p.title.toLowerCase().includes('gun') || p.title.toLowerCase().includes('blaster'));
+const makeup = products.filter(p => p.title.toLowerCase().includes('makeup') || p.title.toLowerCase().includes('cosmetic'));
+const bubbleToys = products.filter(p => p.title.toLowerCase().includes('bubble'));
+
+// Featured products (pick first 8)
+const featured = products.slice(0, 8);
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="relative bg-white overflow-hidden" style="min-height: 700px;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center justify-between py-16 lg:py-24 gap-12">
+      <div class="flex-1 text-center lg:text-left">
+        <span class="inline-block bg-orange text-white px-5 py-2 rounded-full text-xs font-extrabold tracking-widest mb-6">FACTORY DIRECT SELECTION</span>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-navy leading-tight tracking-tight">
+          WHOLESALE GIFT & TOY<br/>
+          <span class="text-orange text-3xl sm:text-4xl lg:text-5xl">FACTORY DIRECT SUPPLY</span>
+        </h1>
+        <p class="text-lg text-gray-500 mt-6 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+          Premium OEM/ODM solutions for global toy brands. Precision engineering, industrial scale, certified quality.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 mt-8 justify-center lg:justify-start">
+          <a href="/collections/all" class="bg-navy text-white px-8 py-4 rounded font-bold text-sm hover:bg-orange transition-colors">EXPLORE CATALOG</a>
+          <a href="/contact" class="border-2 border-navy text-navy px-8 py-4 rounded font-bold text-sm hover:bg-navy hover:text-white transition-colors">REQUEST QUOTE</a>
+        </div>
+      </div>
+      <div class="flex-1 flex justify-center gap-6">
+        <div class="w-40 h-72 sm:w-52 sm:h-80 bg-cream rounded-3xl flex items-center justify-center overflow-hidden shadow-lg">
+          <img src={makeup[0]?.images?.[0]?.src || '/placeholder.jpg'} alt="Kids Makeup" class="w-full h-full object-contain p-4 mix-blend-multiply" />
+        </div>
+        <div class="w-40 h-72 sm:w-52 sm:h-80 bg-blue-50 rounded-3xl flex items-center justify-center overflow-hidden shadow-lg mt-8">
+          <img src={waterGuns[0]?.images?.[0]?.src || '/placeholder.jpg'} alt="Water Gun" class="w-full h-full object-contain p-4 mix-blend-multiply" />
+        </div>
+        <div class="w-40 h-72 sm:w-52 sm:h-80 bg-green-50 rounded-3xl flex items-center justify-center overflow-hidden shadow-lg mt-16 hidden sm:flex">
+          <img src={bubbleToys[0]?.images?.[0]?.src || '/placeholder.jpg'} alt="Bubble Toy" class="w-full h-full object-contain p-4 mix-blend-multiply" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Factory Info -->
+  <section class="py-16 bg-white border-y border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+      <div class="grid grid-cols-2 gap-4 -skew-y-3">
+        <div class="space-y-4">
+          <div class="h-44 bg-gray-100 rounded-xl overflow-hidden skew-y-3"><img src="https://sc01.alicdn.com/kf/H428b51622ec946f4932ed35bc5920addu.png" alt="Factory" class="w-full h-full object-cover" /></div>
+          <div class="h-44 bg-gray-100 rounded-xl overflow-hidden skew-y-3"><img src="https://sc01.alicdn.com/kf/H86381d3008dd4c6598369147d6676cd3V.png" alt="Workshop" class="w-full h-full object-cover" /></div>
+        </div>
+        <div class="space-y-4 mt-8">
+          <div class="h-44 bg-gray-100 rounded-xl overflow-hidden skew-y-3"><img src="https://sc01.alicdn.com/kf/H6b5dd0979c984ccdb93d56d8b7799d670.png" alt="Production" class="w-full h-full object-cover" /></div>
+          <div class="h-44 bg-gray-100 rounded-xl overflow-hidden skew-y-3"><img src="https://sc01.alicdn.com/kf/H713c066d3f76416b92eedacf7add641eM.png" alt="Quality Control" class="w-full h-full object-cover" /></div>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-6">Trusted Manufacturing<br/>Since 2001</h2>
+        <p class="text-gray-500 leading-relaxed mb-8">
+          Located in <strong>Chenghai, Guangdong</strong>. Our 5,000sqm facility specializes in premium children's toys and makeup. Certified by <strong>GMPC, ISO 22716, GSV, BSCI, and SEDEX</strong>.
+        </p>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-white p-5 border-l-4 border-orange shadow-sm"><strong class="block text-navy text-xl">25+ Years</strong><span class="text-sm text-gray-400">Global Export</span></div>
+          <div class="bg-white p-5 border-l-4 border-orange shadow-sm"><strong class="block text-navy text-xl">ISO Certified</strong><span class="text-sm text-gray-400">Quality Control</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Badges -->
+  <section class="bg-gray-50 border-y border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+          <div class="text-navy font-extrabold text-lg mb-1">GLOBAL SHIPPING</div>
+          <div class="text-gray-400 text-xs">7-14 Days Express Delivery</div>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+          <div class="text-navy font-extrabold text-lg mb-1">MOQ 50+ PCS</div>
+          <div class="text-gray-400 text-xs">Support Small Batch B2B</div>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+          <div class="text-navy font-extrabold text-lg mb-1">ISO CERTIFIED</div>
+          <div class="text-gray-400 text-xs">GMPC & BSCI Audited Factory</div>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+          <div class="text-navy font-extrabold text-lg mb-1">FACTORY DIRECT</div>
+          <div class="text-gray-400 text-xs">Source Pricing, No Middleman</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Categories -->
+  {collections.filter(c => c.handle !== 'zhu-ye').map(collection => (
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <a href={`/collections/${collection.handle}`} class="block mb-8">
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-navy text-center hover:text-orange transition-colors">{collection.title}</h2>
+          <p class="text-gray-400 text-center mt-2 text-sm">B2B Wholesale &mdash; Factory Direct</p>
+        </a>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          {(() => {
+            let catProducts;
+            switch(collection.handle) {
+              case 'electric-water-guns': catProducts = waterGuns; break;
+              case 'kids-makeup-sets': catProducts = makeup; break;
+              case 'premium-bubble-toys': catProducts = bubbleToys; break;
+              default: catProducts = featured;
+            }
+            return catProducts.slice(0, 8).map(product => (
+              <ProductCard
+                title={product.title}
+                handle={product.handle}
+                price={product.price}
+                image={product.images?.[0]?.src || '/placeholder.jpg'}
+                imageAlt={product.images?.[0]?.alt || product.title}
+              />
+            ));
+          })()}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- FAQ Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-navy text-center mb-4">B2B Buying Guide & FAQ</h2>
+      <p class="text-center text-gray-400 mb-12">Everything international buyers need to know about sourcing from our Chenghai factory.</p>
+      
+      <div class="space-y-3">
+        {[
+          { q: "What is your Minimum Order Quantity (MOQ)?", a: "Our standard MOQ is 50 pieces per design for most products. For bubble toys and small accessories, we accept orders as low as 36 pieces. Custom OEM orders typically start at 500-1000 units depending on complexity." },
+          { q: "Can I customize products with my own brand (OEM/ODM)?", a: "Yes! We specialize in OEM and ODM manufacturing. You can customize colors, packaging, logos, and product features. Typical turnaround for custom samples is 7-14 days." },
+          { q: "What certifications do your products have?", a: "Our factory is certified with ISO 22716 (GMPC), BSCI, SEDEX, and GSV. Products meet CE (EN71), ASTM F963, CPSIA, and EN62115 standards." },
+          { q: "What are your shipping options and lead times?", a: "We offer air freight (7-10 days), sea freight (20-30 days), and express courier (DHL/UPS/FedEx, 3-7 days). Production lead time is 15-25 days for standard orders." },
+          { q: "How can I get samples before placing a bulk order?", a: "Sample orders are welcome! Existing product samples ship within 2-3 days. Custom OEM samples take 7-14 days to produce. Sample fees are refundable when you place a bulk order." },
+          { q: "Do you offer wholesale prices for retailers?", a: "Yes, we offer tiered wholesale pricing based on order volume. The more you order, the lower the unit price." }
+        ].map((faq, i) => (
+          <details class="border border-gray-200 rounded-xl p-5 bg-gray-50 cursor-pointer group">
+            <summary class="font-bold text-navy flex justify-between items-center list-none">
+              {faq.q}
+              <span class="text-orange text-xl group-open:hidden">+</span>
+              <span class="text-orange text-xl hidden group-open:inline">−</span>
+            </summary>
+            <p class="mt-4 text-gray-500 leading-relaxed text-sm">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="/contact" class="inline-block bg-navy text-white px-8 py-4 rounded font-bold text-sm hover:bg-orange transition-colors">CONTACT OUR SALES TEAM</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQPage JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is your Minimum Order Quantity (MOQ)?", "acceptedAnswer": { "@type": "Answer", "text": "Our standard MOQ is 50 pieces per design. For bubble toys and small accessories, we accept orders as low as 36 pieces. Custom OEM orders start at 500-1000 units." } },
+      { "@type": "Question", "name": "Can I customize products with my own brand (OEM/ODM)?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we specialize in OEM and ODM manufacturing. You can customize colors, packaging, logos, and product features. Custom samples take 7-14 days." } },
+      { "@type": "Question", "name": "What certifications does Kidtoy Factory have?", "acceptedAnswer": { "@type": "Answer", "text": "Our factory is certified with ISO 22716 (GMPC), BSCI, SEDEX, and GSV. Products meet CE (EN71), ASTM F963, CPSIA, and EN62115 standards." } },
+      { "@type": "Question", "name": "How long is your shipping and production time?", "acceptedAnswer": { "@type": "Answer", "text": "Air freight takes 7-10 days, sea freight 20-30 days, express 3-7 days. Production lead time is 15-25 days for standard orders." } },
+      { "@type": "Question", "name": "How can I get product samples?", "acceptedAnswer": { "@type": "Answer", "text": "Sample orders are welcome. Existing product samples ship in 2-3 days. Custom OEM samples take 7-14 days. Sample fees are refundable on bulk orders." } },
+      { "@type": "Question", "name": "Do you offer wholesale prices?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we offer tiered wholesale pricing based on order volume." } }
+    ]
+  })} />
+</BaseLayout>
