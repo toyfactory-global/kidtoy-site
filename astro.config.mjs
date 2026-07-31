@@ -4,5 +4,6 @@ import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://kidtoycn.com',
+  output: 'static',
   integrations: [tailwind(), react()],
 });
