@@ -20,7 +20,7 @@ const { title, handle, price, image, imageAlt, category } = Astro.props;
         <span class="text-xs font-semibold uppercase tracking-wider text-orange mb-1 block">{category}</span>
       )}
       <h3 class="text-sm font-semibold text-navy leading-snug mb-2 line-clamp-2">{title}</h3>
-      <span class="text-lg font-extrabold text-navy">${price.toFixed(2)}</span>
+      <span class="text-lg font-extrabold text-navy">{price > 0 ? `$${price.toFixed(2)}` : 'Price on Request'}</span>
       <p class="text-xs text-gray-400 mt-1">Wholesale / MOQ Available</p>
     </div>
   </a>
