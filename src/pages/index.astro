@@ -15,32 +15,39 @@ const heroWaterGun = 'https://sc02.alicdn.com/kf/Aacb85bc4dfdb40438c391ee78e83a5
 ---
 
 <BaseLayout>
-  <!-- Hero (V3.8 studio lighting style) -->
-  <section class="relative bg-white overflow-hidden" style="min-height: 700px;">
+  <!-- Hero (original V3.8: centered text, product images left & right) -->
+  <section class="relative bg-white overflow-hidden" style="min-height: 720px;">
     <style>
-      .hero-glow { position: absolute; width: 480px; height: 480px; border-radius: 50%; filter: blur(100px); opacity: 0.35; pointer-events: none; }
-      .hero-img { mix-blend-mode: multiply; filter: brightness(1.05) contrast(1.1); }
+      .hero-glow { position: absolute; width: 420px; height: 420px; border-radius: 50%; filter: blur(100px); opacity: 0.35; pointer-events: none; }
+      .hero-img { mix-blend-mode: multiply; filter: brightness(1.05) contrast(1.1); pointer-events: none; }
     </style>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center justify-between py-16 lg:py-20 gap-12">
-      <div class="flex-1 text-center lg:text-left relative z-10">
+    <div class="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-8 py-16 lg:py-24" style="min-height: 720px;">
+      <!-- Left product: Kids Makeup Set -->
+      <div class="relative w-[22%] min-w-[140px] flex items-center justify-center hidden md:flex" style="min-height: 400px;">
+        <div class="hero-glow" style="left: -20px; top: 15%; background: #FFEDD5;"></div>
+        <img src={heroMakeup} alt="Kids Makeup Set" class="hero-img relative z-[1] w-full h-auto" style="transform: scale(1.08);" />
+      </div>
+
+      <!-- Center: marketing text -->
+      <div class="text-center flex-1 max-w-2xl mx-auto relative z-10">
         <span class="inline-block bg-orange text-white px-5 py-2 rounded-full text-xs font-extrabold tracking-widest mb-6">FACTORY DIRECT SELECTION</span>
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-navy leading-tight tracking-tight">
+        <h1 class="text-4xl sm:text-5xl lg:text-[3.2rem] font-extrabold text-navy leading-tight tracking-tight">
           WHOLESALE GIFT & TOY<br/>
           <span class="text-orange text-3xl sm:text-4xl lg:text-5xl">FACTORY DIRECT SUPPLY</span>
         </h1>
-        <p class="text-lg text-gray-500 mt-6 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+        <p class="text-lg text-gray-500 mt-6 max-w-xl mx-auto leading-relaxed">
           Premium OEM/ODM solutions for global toy brands. Precision engineering, industrial scale, certified quality.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 mt-8 justify-center lg:justify-start">
+        <div class="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
           <a href="/collections/all" class="bg-navy text-white px-8 py-4 rounded font-bold text-sm hover:bg-orange transition-colors">EXPLORE CATALOG</a>
           <a href="/contact" class="border-2 border-navy text-navy px-8 py-4 rounded font-bold text-sm hover:bg-navy hover:text-white transition-colors">REQUEST QUOTE</a>
         </div>
       </div>
-      <div class="flex-1 flex items-center justify-center gap-0 relative" style="min-height: 420px;">
-        <div class="hero-glow" style="left: 0; top: 20%; background: #FFEDD5;"></div>
-        <img src={heroMakeup} alt="Kids Makeup Set" class="hero-img w-1/2 h-auto relative z-[1] transform scale-105 -mr-4" style="max-width: 300px;" />
-        <div class="hero-glow" style="right: 0; top: 30%; background: #99D6FF;"></div>
-        <img src={heroWaterGun} alt="Electric Water Gun" class="hero-img w-1/2 h-auto relative z-[1] transform scale-110 -ml-4" style="max-width: 320px;" />
+
+      <!-- Right product: Electric Water Gun -->
+      <div class="relative w-[24%] min-w-[150px] flex items-center justify-center hidden md:flex" style="min-height: 400px;">
+        <div class="hero-glow" style="right: -20px; top: 20%; background: #99D6FF;"></div>
+        <img src={heroWaterGun} alt="Electric Water Gun" class="hero-img relative z-[1] w-full h-auto" style="transform: scale(1.12);" />
       </div>
     </div>
   </section>
