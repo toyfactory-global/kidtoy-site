@@ -15,39 +15,39 @@ const heroWaterGun = 'https://sc02.alicdn.com/kf/Aacb85bc4dfdb40438c391ee78e83a5
 ---
 
 <BaseLayout>
-  <!-- Hero (original V3.8: centered text, product images left & right) -->
-  <section class="relative bg-white overflow-hidden" style="min-height: 720px;">
+  <!-- Hero (large V3.8: full-width banner, big product images left & right) -->
+  <section class="relative overflow-hidden" style="min-height: 850px; background: linear-gradient(90deg, #EDF4FF 0%, #FFFFFF 40%, #FFFFFF 60%, #F3F0FF 100%);">
     <style>
-      .hero-glow { position: absolute; width: 420px; height: 420px; border-radius: 50%; filter: blur(100px); opacity: 0.35; pointer-events: none; }
+      .hero-glow { position: absolute; width: 520px; height: 520px; border-radius: 50%; filter: blur(110px); opacity: 0.4; pointer-events: none; }
       .hero-img { mix-blend-mode: multiply; filter: brightness(1.05) contrast(1.1); pointer-events: none; }
     </style>
-    <div class="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-8 py-16 lg:py-24" style="min-height: 720px;">
-      <!-- Left product: Kids Makeup Set -->
-      <div class="relative w-[22%] min-w-[140px] flex items-center justify-center hidden md:flex" style="min-height: 400px;">
-        <div class="hero-glow" style="left: -20px; top: 15%; background: #FFEDD5;"></div>
-        <img src={heroMakeup} alt="Kids Makeup Set" class="hero-img relative z-[1] w-full h-auto" style="transform: scale(1.08);" />
+    <div class="relative w-full flex items-center justify-between gap-6 px-[6%] py-20" style="min-height: 850px;">
+      <!-- Left product: Kids Makeup Set (large) -->
+      <div class="relative w-[26%] min-w-[200px] flex items-center justify-center hidden md:flex" style="min-height: 500px;">
+        <div class="hero-glow" style="left: -60px; top: 10%; background: #FFE3E3;"></div>
+        <img src={heroMakeup} alt="Kids Makeup Set" class="hero-img relative z-[1] w-full h-auto" style="transform: scale(1.15);" />
       </div>
 
-      <!-- Center: marketing text -->
-      <div class="text-center flex-1 max-w-2xl mx-auto relative z-10">
-        <span class="inline-block bg-orange text-white px-5 py-2 rounded-full text-xs font-extrabold tracking-widest mb-6">FACTORY DIRECT SELECTION</span>
-        <h1 class="text-4xl sm:text-5xl lg:text-[3.2rem] font-extrabold text-navy leading-tight tracking-tight">
+      <!-- Center: marketing text (large) -->
+      <div class="text-center flex-1 max-w-3xl mx-auto relative z-10">
+        <span class="inline-block bg-orange text-white px-6 py-2.5 rounded-full text-sm font-extrabold tracking-[0.15em] mb-8">FACTORY DIRECT SELECTION</span>
+        <h1 class="text-5xl sm:text-6xl lg:text-[4.8rem] font-extrabold text-navy leading-[1.05] tracking-tight">
           WHOLESALE GIFT & TOY<br/>
-          <span class="text-orange text-3xl sm:text-4xl lg:text-5xl">FACTORY DIRECT SUPPLY</span>
+          <span class="text-orange text-4xl sm:text-5xl lg:text-[3.2rem] tracking-tight">FACTORY DIRECT SUPPLY</span>
         </h1>
-        <p class="text-lg text-gray-500 mt-6 max-w-xl mx-auto leading-relaxed">
+        <p class="text-lg lg:text-xl text-gray-500 mt-8 max-w-2xl mx-auto leading-relaxed">
           Premium OEM/ODM solutions for global toy brands. Precision engineering, industrial scale, certified quality.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
-          <a href="/collections/all" class="bg-navy text-white px-8 py-4 rounded font-bold text-sm hover:bg-orange transition-colors">EXPLORE CATALOG</a>
-          <a href="/contact" class="border-2 border-navy text-navy px-8 py-4 rounded font-bold text-sm hover:bg-navy hover:text-white transition-colors">REQUEST QUOTE</a>
+        <div class="flex flex-col sm:flex-row gap-5 mt-10 justify-center">
+          <a href="/collections/all" class="bg-navy text-white px-10 py-4.5 rounded font-bold text-base hover:bg-orange transition-colors" style="padding: 18px 50px;">EXPLORE CATALOG</a>
+          <a href="/contact" class="border-2 border-navy text-navy px-10 py-4.5 rounded font-bold text-base hover:bg-navy hover:text-white transition-colors" style="padding: 18px 50px;">REQUEST QUOTE</a>
         </div>
       </div>
 
-      <!-- Right product: Electric Water Gun -->
-      <div class="relative w-[24%] min-w-[150px] flex items-center justify-center hidden md:flex" style="min-height: 400px;">
-        <div class="hero-glow" style="right: -20px; top: 20%; background: #99D6FF;"></div>
-        <img src={heroWaterGun} alt="Electric Water Gun" class="hero-img relative z-[1] w-full h-auto" style="transform: scale(1.12);" />
+      <!-- Right product: Electric Water Gun (large) -->
+      <div class="relative w-[27%] min-w-[210px] flex items-center justify-center hidden md:flex" style="min-height: 500px;">
+        <div class="hero-glow" style="right: -60px; top: 12%; background: #CDE9FF;"></div>
+        <img src={heroWaterGun} alt="Electric Water Gun" class="hero-img relative z-[1] w-full h-auto" style="transform: scale(1.18);" />
       </div>
     </div>
   </section>
