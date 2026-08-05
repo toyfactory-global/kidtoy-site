@@ -6,20 +6,23 @@ import productsData from '../../data/products.json';
 const products = productsData.products;
 const collections = productsData.collections;
 
-// Group products by type keywords
-const waterGuns = products.filter(p => p.title.toLowerCase().includes('water') || p.title.toLowerCase().includes('gun') || p.title.toLowerCase().includes('blaster'));
-const makeup = products.filter(p => p.title.toLowerCase().includes('makeup') || p.title.toLowerCase().includes('cosmetic'));
-const bubbleToys = products.filter(p => p.title.toLowerCase().includes('bubble'));
+// Group products by REAL collection assignment
+const getCategoryProducts = (handle) => products.filter(p => p.collections.includes(handle));
 
-// Featured products (pick first 8)
-const featured = products.slice(0, 8);
+// Hero images (original V3.8 transparent PNGs)
+const heroMakeup = 'https://sc02.alicdn.com/kf/Af8923c1f621547b6ab6869248b119717w.png';
+const heroWaterGun = 'https://sc02.alicdn.com/kf/Aacb85bc4dfdb40438c391ee78e83a560B.png';
 ---
 
 <BaseLayout>
-  <!-- Hero -->
+  <!-- Hero (V3.8 studio lighting style) -->
   <section class="relative bg-white overflow-hidden" style="min-height: 700px;">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center justify-between py-16 lg:py-24 gap-12">
-      <div class="flex-1 text-center lg:text-left">
+    <style>
+      .hero-glow { position: absolute; width: 480px; height: 480px; border-radius: 50%; filter: blur(100px); opacity: 0.35; pointer-events: none; }
+      .hero-img { mix-blend-mode: multiply; filter: brightness(1.05) contrast(1.1); }
+    </style>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center justify-between py-16 lg:py-20 gap-12">
+      <div class="flex-1 text-center lg:text-left relative z-10">
         <span class="inline-block bg-orange text-white px-5 py-2 rounded-full text-xs font-extrabold tracking-widest mb-6">FACTORY DIRECT SELECTION</span>
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-navy leading-tight tracking-tight">
           WHOLESALE GIFT & TOY<br/>
@@ -33,16 +36,11 @@ const featured = products.slice(0, 8);
           <a href="/contact" class="border-2 border-navy text-navy px-8 py-4 rounded font-bold text-sm hover:bg-navy hover:text-white transition-colors">REQUEST QUOTE</a>
         </div>
       </div>
-      <div class="flex-1 flex justify-center gap-6">
-        <div class="w-40 h-72 sm:w-52 sm:h-80 bg-cream rounded-3xl flex items-center justify-center overflow-hidden shadow-lg">
-          <img src={makeup[0]?.images?.[0]?.src || '/placeholder.jpg'} alt="Kids Makeup" class="w-full h-full object-contain p-4 mix-blend-multiply" />
-        </div>
-        <div class="w-40 h-72 sm:w-52 sm:h-80 bg-blue-50 rounded-3xl flex items-center justify-center overflow-hidden shadow-lg mt-8">
-          <img src={waterGuns[0]?.images?.[0]?.src || '/placeholder.jpg'} alt="Water Gun" class="w-full h-full object-contain p-4 mix-blend-multiply" />
-        </div>
-        <div class="w-40 h-72 sm:w-52 sm:h-80 bg-green-50 rounded-3xl flex items-center justify-center overflow-hidden shadow-lg mt-16 hidden sm:flex">
-          <img src={bubbleToys[0]?.images?.[0]?.src || '/placeholder.jpg'} alt="Bubble Toy" class="w-full h-full object-contain p-4 mix-blend-multiply" />
-        </div>
+      <div class="flex-1 flex items-center justify-center gap-0 relative" style="min-height: 420px;">
+        <div class="hero-glow" style="left: 0; top: 20%; background: #FFEDD5;"></div>
+        <img src={heroMakeup} alt="Kids Makeup Set" class="hero-img w-1/2 h-auto relative z-[1] transform scale-105 -mr-4" style="max-width: 300px;" />
+        <div class="hero-glow" style="right: 0; top: 30%; background: #99D6FF;"></div>
+        <img src={heroWaterGun} alt="Electric Water Gun" class="hero-img w-1/2 h-auto relative z-[1] transform scale-110 -ml-4" style="max-width: 320px;" />
       </div>
     </div>
   </section>
@@ -97,33 +95,25 @@ const featured = products.slice(0, 8);
     </div>
   </section>
 
-  <!-- Product Categories -->
+  <!-- Product Categories with Banners -->
   {collections.filter(c => c.handle !== 'frontpage').map(collection => (
     <section class="py-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <a href={`/collections/${collection.handle}`} class="block mb-8">
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-navy text-center hover:text-orange transition-colors">{collection.title}</h2>
-          <p class="text-gray-400 text-center mt-2 text-sm">B2B Wholesale &mdash; Factory Direct</p>
-        </a>
+        {collection.banner && (
+          <a href={`/collections/${collection.handle}`} class="block mb-8 overflow-hidden rounded-xl">
+            <img src={collection.banner} alt={collection.title} class="w-full h-auto" />
+          </a>
+        )}
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {(() => {
-            let catProducts;
-            switch(collection.handle) {
-              case 'electric-water-guns': catProducts = waterGuns; break;
-              case 'kids-makeup-sets': catProducts = makeup; break;
-              case 'premium-bubble-toys': catProducts = bubbleToys; break;
-              default: catProducts = featured;
-            }
-            return catProducts.slice(0, 8).map(product => (
-              <ProductCard
-                title={product.title}
-                handle={product.handle}
-                price={product.price}
-                image={product.images?.[0]?.src || '/placeholder.jpg'}
-                imageAlt={product.images?.[0]?.alt || product.title}
-              />
-            ));
-          })()}
+          {getCategoryProducts(collection.handle).map(product => (
+            <ProductCard
+              title={product.title}
+              handle={product.handle}
+              price={product.price}
+              image={product.images?.[0]?.src || '/placeholder.jpg'}
+              imageAlt={product.images?.[0]?.alt || product.title}
+            />
+          ))}
         </div>
       </div>
     </section>

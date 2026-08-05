@@ -4,34 +4,25 @@ import ProductCard from '../../components/ProductCard.astro';
 import productsData from '../../../data/products.json';
 
 export function getStaticPaths() {
-  return productsData.collections.map(c => ({
+  const all = { id: 0, title: 'All Products', handle: 'all', body_html: '' };
+  return [{ params: { handle: 'all' } }, ...productsData.collections.map(c => ({
     params: { handle: c.handle }
-  }));
+  }))];
 }
 
 const { handle } = Astro.params;
-const collection = productsData.collections.find(c => c.handle === handle);
+const collection = handle === 'all'
+  ? { id: 0, title: 'All Products', handle: 'all', body_html: '' }
+  : productsData.collections.find(c => c.handle === handle);
 
 if (!collection) {
   return Astro.redirect('/404');
 }
 
-// Match products to this collection
-const allProducts = productsData.products;
-let catProducts = allProducts;
-switch(handle) {
-  case 'electric-water-guns':
-    catProducts = allProducts.filter(p => p.title.toLowerCase().includes('water') || p.title.toLowerCase().includes('gun') || p.title.toLowerCase().includes('blaster'));
-    break;
-  case 'kids-makeup-sets':
-    catProducts = allProducts.filter(p => p.title.toLowerCase().includes('makeup') || p.title.toLowerCase().includes('cosmetic'));
-    break;
-  case 'premium-bubble-toys':
-    catProducts = allProducts.filter(p => p.title.toLowerCase().includes('bubble'));
-    break;
-  default:
-    catProducts = allProducts;
-}
+// Match products to this collection using REAL assignments
+const catProducts = handle === 'all'
+  ? productsData.products
+  : productsData.products.filter(p => p.collections.includes(handle));
 ---
 
 <BaseLayout title={collection.title} description={`Browse our ${collection.title.toLowerCase()} collection - factory direct wholesale pricing, OEM/ODM available.`}>

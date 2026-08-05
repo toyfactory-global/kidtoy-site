@@ -62,6 +62,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "kids-makeup"
       ]
     },
     {
@@ -120,6 +123,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "kids-makeup"
       ]
     },
     {
@@ -148,6 +154,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "water-guns"
       ]
     },
     {
@@ -206,6 +215,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "water-guns"
       ]
     },
     {
@@ -264,6 +276,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "bubble-toys"
       ]
     },
     {
@@ -310,6 +325,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "bubble-toys"
       ]
     },
     {
@@ -362,6 +380,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "bubble-toys"
       ]
     },
     {
@@ -420,6 +441,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "bubble-toys"
       ]
     },
     {
@@ -490,6 +514,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "water-guns"
       ]
     },
     {
@@ -548,6 +575,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "water-guns"
       ]
     },
     {
@@ -606,6 +636,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "kids-makeup"
       ]
     },
     {
@@ -676,6 +709,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "bubble-toys"
       ]
     },
     {
@@ -734,6 +770,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "kids-makeup"
       ]
     },
     {
@@ -780,6 +819,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "water-guns"
       ]
     },
     {
@@ -838,6 +880,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "kids-makeup"
       ]
     },
     {
@@ -896,6 +941,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "water-guns"
       ]
     },
     {
@@ -948,6 +996,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "water-guns"
       ]
     },
     {
@@ -1006,6 +1057,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "water-guns"
       ]
     },
     {
@@ -1064,6 +1118,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "kids-makeup"
       ]
     },
     {
@@ -1122,6 +1179,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "bubble-toys"
       ]
     },
     {
@@ -1186,6 +1246,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "kids-makeup"
       ]
     },
     {
@@ -1250,6 +1313,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "bubble-toys"
       ]
     },
     {
@@ -1308,6 +1374,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "kids-makeup"
       ]
     },
     {
@@ -1366,6 +1435,9 @@
           "option1": "Default Title",
           "option2": null
         }
+      ],
+      "collections": [
+        "bubble-toys"
       ]
     }
   ],
@@ -1374,19 +1446,22 @@
       "id": 467021889773,
       "title": "Electric Water Guns",
       "handle": "water-guns",
-      "body_html": ""
+      "body_html": "",
+      "banner": "https://sc01.alicdn.com/kf/Hbe47f1a15220467bae753552617aca338.png"
     },
     {
       "id": 467021955309,
       "title": "Kids Makeup Sets",
       "handle": "kids-makeup",
-      "body_html": ""
+      "body_html": "",
+      "banner": "https://sc01.alicdn.com/kf/H40d25f48645142f5b104c33273ca3d06N.png"
     },
     {
       "id": 467021922541,
       "title": "Premium Bubble Toys",
       "handle": "bubble-toys",
-      "body_html": ""
+      "body_html": "",
+      "banner": "https://sc01.alicdn.com/kf/H5b709afcbe1b418ebb9114ba3f7d528ea.png"
     },
     {
       "id": 467021365485,
