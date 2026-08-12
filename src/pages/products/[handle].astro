@@ -30,13 +30,13 @@ const detailImages = product.images?.slice(1) || [];
     <div class="grid lg:grid-cols-2 gap-12">
       <!-- Images -->
       <div>
-        <div class="aspect-square bg-gray-50 rounded-2xl flex items-center justify-center overflow-hidden mb-4">
-          <img src={mainImage} alt={product.title} class="w-full h-full object-contain p-6" />
+        <div class="aspect-square bg-gray-50 rounded-2xl flex items-center justify-center overflow-hidden mb-4 cursor-zoom-in" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+          <img id="main-product-image" src={mainImage} alt={product.title} class="w-full h-full object-contain p-6" />
         </div>
         {detailImages.length > 0 && (
           <div class="grid grid-cols-4 gap-3">
             {detailImages.slice(0, 4).map((img, i) => (
-              <div class="aspect-square bg-gray-50 rounded-lg overflow-hidden">
+              <div class="aspect-square bg-gray-50 rounded-lg overflow-hidden cursor-zoom-in" onclick={`swapMainImage(this.querySelector('img').src, this.querySelector('img').alt); openLightbox(this.querySelector('img').src, this.querySelector('img').alt)`}>
                 <img src={img.src} alt={img.alt || product.title} class="w-full h-full object-contain p-2" loading="lazy" />
               </div>
             ))}
@@ -108,5 +108,38 @@ const detailImages = product.images?.slice(1) || [];
         "url": `https://kidtoycn.com/products/${product.handle}`
       }
     })} />
+
+    <!-- Lightbox for image zoom -->
+    <div id="lightbox" class="fixed inset-0 bg-black/80 z-[100] hidden items-center justify-center p-4" onclick="if(event.target===this) closeLightbox()">
+      <button class="absolute top-4 right-4 text-white text-4xl w-12 h-12 leading-none hover:opacity-70" onclick="closeLightbox()" aria-label="Close">&times;</button>
+      <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[90vh] object-contain rounded" />
+      <p id="lightbox-caption" class="absolute bottom-4 left-0 right-0 text-center text-white text-sm px-6"></p>
+    </div>
   </article>
+
+  <script is:inline>
+    function openLightbox(src, alt) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-img').alt = alt || '';
+      document.getElementById('lightbox-caption').textContent = alt || '';
+      const lb = document.getElementById('lightbox');
+      lb.classList.remove('hidden');
+      lb.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      const lb = document.getElementById('lightbox');
+      lb.classList.add('hidden');
+      lb.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+    function swapMainImage(src, alt) {
+      const main = document.getElementById('main-product-image');
+      main.src = src;
+      main.alt = alt || main.alt;
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
 </BaseLayout>

@@ -39,8 +39,8 @@ const heroWaterGun = 'https://sc02.alicdn.com/kf/Aacb85bc4dfdb40438c391ee78e83a5
           Premium OEM/ODM solutions for global toy brands. Precision engineering, industrial scale, certified quality.
         </p>
         <div class="flex flex-col sm:flex-row gap-5 mt-10 justify-center">
-          <a href="/collections/all" class="bg-navy text-white px-10 py-4.5 rounded font-bold text-base hover:bg-orange transition-colors" style="padding: 18px 50px;">EXPLORE CATALOG</a>
-          <a href="/contact" class="border-2 border-navy text-navy px-10 py-4.5 rounded font-bold text-base hover:bg-navy hover:text-white transition-colors" style="padding: 18px 50px;">REQUEST QUOTE</a>
+          <a href="/collections/all" target="_blank" rel="noopener noreferrer" class="bg-navy text-white px-10 py-4.5 rounded font-bold text-base hover:bg-orange transition-colors" style="padding: 18px 50px;">EXPLORE CATALOG</a>
+          <a href="/contact" target="_blank" rel="noopener noreferrer" class="border-2 border-navy text-navy px-10 py-4.5 rounded font-bold text-base hover:bg-navy hover:text-white transition-colors" style="padding: 18px 50px;">REQUEST QUOTE</a>
         </div>
       </div>
 
@@ -107,7 +107,7 @@ const heroWaterGun = 'https://sc02.alicdn.com/kf/Aacb85bc4dfdb40438c391ee78e83a5
     <section class="py-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {collection.banner && (
-          <a href={`/collections/${collection.handle}`} class="block mb-8 overflow-hidden rounded-xl">
+          <a href={`/collections/${collection.handle}`} target="_blank" rel="noopener noreferrer" class="block mb-8 overflow-hidden rounded-xl">
             <img src={collection.banner} alt={collection.title} class="w-full h-auto" />
           </a>
         )}

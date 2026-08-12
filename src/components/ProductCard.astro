@@ -11,7 +11,7 @@ const { title, handle, price, image, imageAlt, category } = Astro.props;
 ---
 
 <div class="group bg-white border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
-  <a href={`/products/${handle}`} class="block">
+  <a href={`/products/${handle}`} target="_blank" rel="noopener noreferrer" class="block">
     <div class="aspect-square bg-gray-50 p-6 flex items-center justify-center overflow-hidden">
       <img src={image} alt={imageAlt || title} class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
     </div>
