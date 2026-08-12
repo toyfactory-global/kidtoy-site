@@ -17,6 +17,8 @@ if (!product) {
 
 const mainImage = product.images?.[0]?.src || '/placeholder.jpg';
 const detailImages = product.images?.slice(1) || [];
+const productSku = product.variants?.[0]?.sku || `KT-${product.id.toString().slice(-8)}`;
+const skuLabel = product.variants?.[0]?.sku ? 'Item No.' : 'Item No.';
 ---
 
 <BaseLayout title={product.title} description={product.title + ' - Factory direct wholesale pricing. MOQ 50+ pcs, OEM/ODM supported.'} ogImage={mainImage}>
@@ -57,6 +59,7 @@ const detailImages = product.images?.slice(1) || [];
             <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-bold">WHOLESALE</span>
           </div>
           <p class="text-xs text-gray-400 mt-2">MOQ from 50 pcs | Bulk pricing available</p>
+          <p class="text-sm font-semibold text-navy mt-3 border-t border-gray-200 pt-3">{skuLabel}: <span class="text-gray-500 font-normal">{productSku}</span></p>
         </div>
 
         <!-- Variants -->
