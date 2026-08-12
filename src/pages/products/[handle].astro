@@ -19,6 +19,7 @@ const mainImage = product.images?.[0]?.src || '/placeholder.jpg';
 const detailImages = product.images?.slice(1) || [];
 const productSku = product.variants?.[0]?.sku || `KT-${product.id.toString().slice(-8)}`;
 const skuLabel = product.variants?.[0]?.sku ? 'Item No.' : 'Item No.';
+const gallery = [{ src: mainImage, alt: product.title }, ...detailImages.map(img => ({ src: img.src, alt: img.alt || product.title }))];
 ---
 
 <BaseLayout title={product.title} description={product.title + ' - Factory direct wholesale pricing. MOQ 50+ pcs, OEM/ODM supported.'} ogImage={mainImage}>
@@ -32,13 +33,24 @@ const skuLabel = product.variants?.[0]?.sku ? 'Item No.' : 'Item No.';
     <div class="grid lg:grid-cols-2 gap-12">
       <!-- Images -->
       <div>
-        <div class="aspect-square bg-gray-50 rounded-2xl flex items-center justify-center overflow-hidden mb-4">
-          <img id="main-product-image" src={mainImage} alt={product.title} class="w-full h-full object-contain p-6" />
+        <div class="relative">
+          <div class="aspect-square bg-gray-50 rounded-2xl flex items-center justify-center overflow-hidden mb-4">
+            <img id="main-product-image" src={mainImage} alt={product.title} class="w-full h-full object-contain p-6" />
+          </div>
+          {(() => {
+            const allImages = [{ src: mainImage, alt: product.title }, ...detailImages];
+            return (
+              <div>
+                <button aria-label="Previous image" onclick="prevImage()" class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 shadow-md flex items-center justify-center text-navy text-xl hover:bg-white transition-colors z-10">&#8249;</button>
+                <button aria-label="Next image" onclick="nextImage()" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 shadow-md flex items-center justify-center text-navy text-xl hover:bg-white transition-colors z-10">&#8250;</button>
+              </div>
+            );
+          })()}
         </div>
         {detailImages.length > 0 && (
           <div class="grid grid-cols-4 gap-3">
-            {detailImages.slice(0, 4).map((img, i) => (
-              <div class="aspect-square bg-gray-50 rounded-lg overflow-hidden cursor-pointer" onclick={`swapMainImage(this.querySelector('img').src, this.querySelector('img').alt)`}>
+            {[{ src: mainImage, alt: product.title }, ...detailImages].map((img, i) => (
+              <div class="aspect-square bg-gray-50 rounded-lg overflow-hidden cursor-pointer" onclick={`goToImage(${i})`}>
                 <img src={img.src} alt={img.alt || product.title} class="w-full h-full object-contain p-2" loading="lazy" />
               </div>
             ))}
@@ -113,11 +125,27 @@ const skuLabel = product.variants?.[0]?.sku ? 'Item No.' : 'Item No.';
     })} />
   </article>
 
+  <script type="application/json" id="gallery-data" set:html={JSON.stringify(gallery)}></script>
   <script is:inline>
-    function swapMainImage(src, alt) {
+    const galleryImages = JSON.parse(document.getElementById('gallery-data').textContent);
+    let currentImage = 0;
+
+    function renderMain() {
       const main = document.getElementById('main-product-image');
-      main.src = src;
-      main.alt = alt || main.alt;
+      main.src = galleryImages[currentImage].src;
+      main.alt = galleryImages[currentImage].alt || main.alt;
+    }
+    function nextImage() {
+      currentImage = (currentImage + 1) % galleryImages.length;
+      renderMain();
+    }
+    function prevImage() {
+      currentImage = (currentImage - 1 + galleryImages.length) % galleryImages.length;
+      renderMain();
+    }
+    function goToImage(i) {
+      currentImage = i;
+      renderMain();
     }
   </script>
 </BaseLayout>
