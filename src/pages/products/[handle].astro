@@ -123,6 +123,17 @@ const gallery = [{ src: mainImage, alt: product.title }, ...detailImages.map(img
         "url": `https://kidtoycn.com/products/${product.handle}`
       }
     })} />
+
+    <!-- Breadcrumb JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://kidtoycn.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://kidtoycn.com/collections/all" },
+        { "@type": "ListItem", "position": 3, "name": product.title, "item": `https://kidtoycn.com/products/${product.handle}` }
+      ]
+    })} />
   </article>
 
   <script type="application/json" id="gallery-data" set:html={JSON.stringify(gallery)}></script>
