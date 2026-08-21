@@ -61,17 +61,52 @@ const gallery = [{ src: mainImage, alt: product.title }, ...detailImages.map(img
       <!-- Info -->
       <div>
         <h1 class="text-2xl sm:text-3xl font-extrabold text-navy leading-tight mb-4">{product.title}</h1>
-        
-        <div class="bg-gray-50 rounded-xl p-6 mb-6">
-          <div class="flex items-baseline gap-3">
-            <span class="text-3xl font-extrabold text-navy">{product.price > 0 ? `$${product.price.toFixed(2)}` : 'Price on Request'}</span>
-            {product.compare_at_price && product.price > 0 && (
-              <span class="text-lg text-gray-400 line-through">${product.compare_at_price.toFixed(2)}</span>
-            )}
-            <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-bold">WHOLESALE</span>
+
+        <!-- Price Card -->
+        <div class="border-2 border-gray-200 rounded-xl p-6 mb-6 bg-white">
+          <div class="flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-baseline gap-3">
+              <span class="text-4xl font-extrabold text-navy">{product.price > 0 ? `$${product.price.toFixed(2)}` : 'Price on Request'}</span>
+              {product.compare_at_price && product.price > 0 && (
+                <span class="text-lg text-gray-400 line-through">${product.compare_at_price.toFixed(2)}</span>
+              )}
+            </div>
+            <span class="text-xs bg-green-600 text-white px-3 py-1.5 rounded-full font-bold tracking-wide">WHOLESALE PRICE</span>
           </div>
-          <p class="text-xs text-gray-400 mt-2">MOQ from 50 pcs | Bulk pricing available</p>
-          <p class="text-sm font-semibold text-navy mt-3 border-t border-gray-200 pt-3">{skuLabel}: <span class="text-gray-500 font-normal">{productSku}</span></p>
+          <p class="text-sm font-semibold text-navy mt-3 border-t border-gray-100 pt-3">{skuLabel}: <span class="text-gray-500 font-normal">{productSku}</span></p>
+          <p class="text-xs text-gray-400 mt-1">Base wholesale price · Tiered discounts for bulk orders</p>
+        </div>
+
+        <!-- Key Selling Points -->
+        <div class="grid grid-cols-2 gap-3 mb-6">
+          <div class="flex items-start gap-2.5 bg-gray-50 rounded-lg p-3.5">
+            <span class="text-green-600 text-lg leading-none mt-0.5">✓</span>
+            <div>
+              <p class="text-sm font-bold text-navy leading-tight">Tiered Pricing</p>
+              <p class="text-xs text-gray-400">Better price for bulk</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-2.5 bg-gray-50 rounded-lg p-3.5">
+            <span class="text-green-600 text-lg leading-none mt-0.5">✓</span>
+            <div>
+              <p class="text-sm font-bold text-navy leading-tight">OEM/ODM</p>
+              <p class="text-xs text-gray-400">Custom branding available</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-2.5 bg-gray-50 rounded-lg p-3.5">
+            <span class="text-green-600 text-lg leading-none mt-0.5">✓</span>
+            <div>
+              <p class="text-sm font-bold text-navy leading-tight">Certified Safety</p>
+              <p class="text-xs text-gray-400">CE · ASTM · EN71</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-2.5 bg-gray-50 rounded-lg p-3.5">
+            <span class="text-green-600 text-lg leading-none mt-0.5">✓</span>
+            <div>
+              <p class="text-sm font-bold text-navy leading-tight">Global Shipping</p>
+              <p class="text-xs text-gray-400">Sea · Air · Express</p>
+            </div>
+          </div>
         </div>
 
         <!-- Variants -->
@@ -89,13 +124,39 @@ const gallery = [{ src: mainImage, alt: product.title }, ...detailImages.map(img
         )}
 
         <!-- CTA -->
-        <div class="flex flex-col sm:flex-row gap-3 mb-8">
-          <a href={`https://wa.me/8613715961913?text=Hello%2C%20I%20am%20interested%20in%20${encodeURIComponent(product.title)}%20(SKU:%20${encodeURIComponent(product.id)})`} target="_blank" rel="noopener noreferrer" class="flex-1 bg-green-500 text-white text-center px-6 py-3 rounded font-bold text-sm hover:bg-green-600 transition-colors">
+        <div class="flex flex-col sm:flex-row gap-3 mb-6">
+          <a href={`https://wa.me/8613715961913?text=Hello%2C%20I%20am%20interested%20in%20${encodeURIComponent(product.title)}%20(SKU:%20${encodeURIComponent(product.id)})`} target="_blank" rel="noopener noreferrer" class="flex-1 bg-green-500 text-white text-center px-6 py-4 rounded font-bold text-sm hover:bg-green-600 transition-colors">
             WhatsApp Inquiry
           </a>
-          <a href="/contact" target="_blank" rel="noopener noreferrer" class="flex-1 bg-navy text-white text-center px-6 py-3 rounded font-bold text-sm hover:bg-orange transition-colors">
+          <a href="/contact" target="_blank" rel="noopener noreferrer" class="flex-1 bg-navy text-white text-center px-6 py-4 rounded font-bold text-sm hover:bg-orange transition-colors">
             Request Quote
           </a>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="bg-navy text-white rounded-xl p-5 mb-8">
+          <p class="text-sm font-extrabold text-center mb-3 tracking-wide">EXPERIENCED TOY MANUFACTURER SINCE 2001</p>
+          <div class="flex justify-center gap-4 text-center">
+            <div class="flex-1">
+              <p class="text-orange font-extrabold text-lg leading-none">25+</p>
+              <p class="text-xs text-gray-300 mt-1">Years Export</p>
+            </div>
+            <div class="w-px bg-gray-600"></div>
+            <div class="flex-1">
+              <p class="text-orange font-extrabold text-lg leading-none">ISO</p>
+              <p class="text-xs text-gray-300 mt-1">22716/GMPC</p>
+            </div>
+            <div class="w-px bg-gray-600"></div>
+            <div class="flex-1">
+              <p class="text-orange font-extrabold text-lg leading-none">BSCI</p>
+              <p class="text-xs text-gray-300 mt-1">Certified</p>
+            </div>
+            <div class="w-px bg-gray-600"></div>
+            <div class="flex-1">
+              <p class="text-orange font-extrabold text-lg leading-none">OEM</p>
+              <p class="text-xs text-gray-300 mt-1">Custom OK</p>
+            </div>
+          </div>
         </div>
 
         <!-- Description -->
