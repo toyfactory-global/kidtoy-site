@@ -62,19 +62,24 @@ const gallery = [{ src: mainImage, alt: product.title }, ...detailImages.map(img
       <div>
         <h1 class="text-2xl sm:text-3xl font-extrabold text-navy leading-tight mb-4">{product.title}</h1>
 
-        <!-- Price Card -->
-        <div class="border-2 border-gray-200 rounded-xl p-6 mb-6 bg-white">
-          <div class="flex items-center justify-between flex-wrap gap-3">
-            <div class="flex items-baseline gap-3">
-              <span class="text-4xl font-extrabold text-navy">{product.price > 0 ? `$${product.price.toFixed(2)}` : 'Price on Request'}</span>
-              {product.compare_at_price && product.price > 0 && (
-                <span class="text-lg text-gray-400 line-through">${product.compare_at_price.toFixed(2)}</span>
-              )}
+        <!-- Price Card: Tiered Pricing -->
+        <div class="relative bg-white rounded-2xl shadow-md border border-gray-100 p-6 mb-6 overflow-hidden">
+          <span class="absolute top-0 right-0 bg-orange text-white text-[11px] font-extrabold uppercase tracking-wider px-4 py-1.5" style="border-bottom-left-radius: 10px;">Tiered Pricing</span>
+          <p class="text-sm font-semibold text-navy mb-4">{skuLabel}: <span class="text-gray-500 font-normal">{productSku}</span></p>
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between bg-gray-100 rounded-lg px-4 py-3.5">
+              <span class="text-sm font-bold text-gray-500 uppercase tracking-wide">Standard MOQ ({product.moq || 'Bulk'}+)</span>
+              <span class="text-2xl font-extrabold text-navy">{product.price > 0 ? `$${product.price.toFixed(2)}` : 'Price on Request'}<span class="text-sm font-bold text-gray-400">/Piece</span></span>
             </div>
-            <span class="text-xs bg-green-600 text-white px-3 py-1.5 rounded-full font-bold tracking-wide">WHOLESALE PRICE</span>
+            <div class="flex items-center justify-between bg-orange-50 border border-orange-200 rounded-lg px-4 py-3.5">
+              <span class="text-sm font-extrabold text-gray-800 uppercase tracking-wide">Bulk Discount</span>
+              <span class="text-sm font-extrabold text-orange uppercase tracking-wide">Contact for Discount</span>
+            </div>
+            <div class="flex items-center justify-between bg-blue-50 border border-blue-100 rounded-lg px-4 py-3.5">
+              <span class="text-sm font-bold text-blue-400 uppercase tracking-wide">Container Load</span>
+              <span class="text-sm font-extrabold text-navy uppercase tracking-wide">Best Price | Inquiry Now</span>
+            </div>
           </div>
-          <p class="text-sm font-semibold text-navy mt-3 border-t border-gray-100 pt-3">{skuLabel}: <span class="text-gray-500 font-normal">{productSku}</span></p>
-          <p class="text-xs text-gray-400 mt-1">Base wholesale price · Tiered discounts for bulk orders</p>
         </div>
 
         <!-- Key Selling Points -->
