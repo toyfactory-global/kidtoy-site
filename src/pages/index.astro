@@ -103,7 +103,9 @@ const heroWaterGun = 'https://sc02.alicdn.com/kf/Aacb85bc4dfdb40438c391ee78e83a5
   </section>
 
   <!-- Product Categories with Banners -->
-  {collections.filter(c => c.handle !== 'frontpage').map(collection => (
+  {collections.filter(c => c.handle !== 'frontpage').map(collection => {
+    const catProducts = getCategoryProducts(collection.handle);
+    return (
     <section class="py-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {collection.banner && (
@@ -112,7 +114,7 @@ const heroWaterGun = 'https://sc02.alicdn.com/kf/Aacb85bc4dfdb40438c391ee78e83a5
           </a>
         )}
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {getCategoryProducts(collection.handle).map(product => (
+          {catProducts.slice(0, 8).map(product => (
             <ProductCard
               title={product.title}
               handle={product.handle}
@@ -122,9 +124,15 @@ const heroWaterGun = 'https://sc02.alicdn.com/kf/Aacb85bc4dfdb40438c391ee78e83a5
             />
           ))}
         </div>
+        {catProducts.length > 8 && (
+          <a href={`/collections/${collection.handle}`} target="_blank" rel="noopener noreferrer" class="mt-8 flex items-center justify-center gap-3 bg-navy text-white py-4 rounded-xl font-extrabold tracking-[0.2em] hover:bg-orange transition-colors">
+            VIEW ALL {collection.title.toUpperCase()} <span class="text-orange text-xl">→</span>
+          </a>
+        )}
       </div>
     </section>
-  ))}
+    );
+  })}
 
   <!-- FAQ Section -->
   <section class="py-16 bg-white">
