@@ -124,6 +124,12 @@ const heroWaterGun = 'https://sc02.alicdn.com/kf/Aacb85bc4dfdb40438c391ee78e83a5
             />
           ))}
         </div>
+        {catProducts.length === 0 && (
+          <div class="text-center bg-gray-50 border border-dashed border-gray-200 rounded-xl py-12">
+            <p class="text-navy font-bold text-lg mb-2">New STEM Toy Lineup Coming Soon</p>
+            <p class="text-gray-400 text-sm">Contact us for the latest STEM educational toy catalog and MOQ pricing.</p>
+          </div>
+        )}
         {catProducts.length > 8 && (
           <a href={`/collections/${collection.handle}`} target="_blank" rel="noopener noreferrer" class="mt-8 flex items-center justify-center gap-3 bg-navy text-white py-4 rounded-xl font-extrabold tracking-[0.2em] hover:bg-orange transition-colors">
             VIEW ALL {collection.title.toUpperCase()} <span class="text-orange text-xl">→</span>
