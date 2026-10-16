@@ -429,6 +429,55 @@ function checkOrphans(pages) {
   console.log(`  orphan pages: ${orphans.length}`);
 }
 
+/* ------------------------------------------- 9. Cloudflare Pages _redirects */
+
+// Cloudflare Pages silently ignores the ENTIRE _redirects file when any line is
+// malformed — the redirects simply stop working with no error anywhere. That
+// makes this file a prime candidate for the gate. Also checks that same-domain
+// destinations were actually built, so a redirect cannot land on a 404.
+function checkRedirects(pages) {
+  const file = path.join(PUBLIC, '_redirects');
+  if (!fs.existsSync(file)) {
+    console.log('  _redirects: not present');
+    return;
+  }
+  const built = new Set(pages.map((f) => expectedPathFromFile(f)).filter(Boolean));
+  const lines = fs.readFileSync(file, 'utf8').split(/\r?\n/);
+  let rules = 0;
+
+  lines.forEach((raw, i) => {
+    const line = raw.trim();
+    if (!line || line.startsWith('#')) return;
+
+    if (/[\u2018\u2019\u201c\u201d]/.test(line)) {
+      fail(`REDIRECTS line ${i + 1}: contains smart quotes — must be plain ASCII: "${line}"`);
+      return;
+    }
+    const parts = line.split(/\s+/);
+    if (parts.length !== 3) {
+      fail(`REDIRECTS line ${i + 1}: expected 3 fields (<from> <to> <status>), got ${parts.length}: "${line}"`);
+      return;
+    }
+    const [from, to, status] = parts;
+    if (!from.startsWith('/')) fail(`REDIRECTS line ${i + 1}: "from" must start with / — got "${from}"`);
+    if (!/^(\/|https?:\/\/)/.test(to)) fail(`REDIRECTS line ${i + 1}: "to" must be a path or URL — got "${to}"`);
+    if (!['301', '302', '303', '307', '308', '200'].includes(status)) {
+      fail(`REDIRECTS line ${i + 1}: unsupported status "${status}"`);
+    }
+    // Static (non-:splat) same-domain destinations must exist, otherwise we
+    // have only moved the 404 to another URL.
+    if (to.startsWith('/') && !to.includes(':')) {
+      const dest = to === '/' ? '/' : to.endsWith('/') ? to : to + '/';
+      if (!built.has(dest)) {
+        fail(`REDIRECTS line ${i + 1}: destination ${to} was not built — this redirect would land on a 404`);
+      }
+    }
+    rules++;
+  });
+
+  console.log(`  _redirects: ${rules} rule(s)`);
+}
+
 /* -------------------------------------------------------------- runner */
 
 console.log('Site integrity check — kidtoycn.com');
@@ -454,6 +503,7 @@ checkJsonLd(pages);
 checkData(pages);
 checkAssets();
 checkOrphans(pages);
+checkRedirects(pages);
 
 console.log('');
 if (warnings.length) {

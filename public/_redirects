@@ -1,0 +1,44 @@
+# Cloudflare Pages redirects — kidtoycn.com
+#
+# These are SAME-DOMAIN 301s, which Cloudflare Pages does support.
+# (Cross-subdomain redirects in this file do NOT work — that is why the
+#  www.kidtoycn.com 403 is handled by a Cloudflare Page Rule instead.)
+#
+# Context: this domain was migrated off Shopify in Aug 2026. GSC reports 39
+# legacy URLs as 404 (First detected 8/22/26). These rules recover the ones
+# that have a genuine new equivalent page.
+#
+# Deliberately NOT done: blanket "everything unknown -> /" catch-alls. Google
+# treats unrelated redirects as soft 404s, which is worse hygiene than a real
+# 404. Only 1:1 equivalent mappings are listed here.
+#
+# RULE ORDER MATTERS — Cloudflare Pages uses the FIRST matching rule.
+# Syntax:  <from>  <to>  <status>
+
+# --- Shopify language prefix /zh/ ( "/zh/X" is the Chinese version of "/X" ) ---
+/zh/                       /                          301
+/zh/products/*             /products/:splat/          301
+/zh/collections/*          /collections/:splat/       301
+/zh/about                  /about/                    301
+/zh/faq                    /faq/                      301
+/zh/contact                /contact/                  301
+/zh/refund                 /refund/                   301
+/zh/shipping               /shipping/                 301
+/zh/*                      /:splat                    301
+
+# --- Shopify “page” type (/pages/<handle>) ---
+/pages/about-us            /about/                    301
+/pages/about               /about/                    301
+/pages/faq                 /faq/                      301
+/pages/contact             /contact/                  301
+/pages/contact-us          /contact/                  301
+/pages/refund-policy       /refund/                   301
+/pages/shipping-policy     /shipping/                 301
+
+# --- Shopify policy paths (/policies/<handle>) ---
+/policies/refund-policy    /refund/                   301
+/policies/shipping-policy  /shipping/                 301
+# NOTE: /policies/terms-of-service and /policies/privacy-policy have NO
+# equivalent page on this site (there is no /terms/ or /privacy/ — both 404).
+# They are intentionally left to 404 until those pages exist. Adding the pages
+# is a content task, tracked in 3-site-roadmap.md.
