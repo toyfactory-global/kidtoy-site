@@ -203,7 +203,7 @@ function checkLinks(pages) {
   for (const file of pages) {
     const rel = path.relative(DIST, file).split(path.sep).join('/');
     const { text } = readText(file);
-    for (const m of text.matchAll(/href="(\/[^"#?]*)"/g)) {
+    for (const m of text.matchAll(/href="(\/[^"]*)"/g)) {
       const target = m[1];
       if (target.startsWith('//')) continue;
       const clean = target.split('?')[0].split('#')[0];
@@ -378,6 +378,57 @@ function checkAssets() {
   console.log(`  public assets: ${files.length} (${zero} empty, ${skipped} gitignored/skipped)`);
 }
 
+/* ---------------------------------------------------- 8. orphan pages */
+
+// A page that is in the sitemap but has no inbound internal link is an orphan:
+// Google can discover it, but nothing on the site passes authority to it.
+// Real case (2026-10-16, kidstoyglobal.com): /category/water-gun/ was added to
+// the sitemap while no page linked to it — GSC reported "Referring page: None
+// detected". Warn rather than block: an orphan still loads for a direct visitor.
+const ORPHAN_ALLOW = new Set([
+  // Known Shopify-export artifact, already excluded from the sitemap above.
+  // Nothing links to it and its <title> is Chinese; the fix is to delete the
+  // collection or give it a noindex, not to link it. See 3-site-roadmap.md.
+  '/collections/frontpage/',
+]);
+
+function checkOrphans(pages) {
+  const norm = (p) => (p.length > 1 ? p.replace(/\/+$/, '') : p);
+  const inbound = new Map(); // normalized target -> Set of source paths
+
+  for (const file of pages) {
+    const rel = path.relative(DIST, file).split(path.sep).join('/');
+    if (SPECIAL_PAGES.has(rel)) continue;
+    const self = norm(expectedPathFromFile(file) || '');
+    const { text } = readText(file);
+    for (const m of text.matchAll(/href="(\/[^"]*)"/g)) {
+      const target = m[1];
+      if (target.startsWith('//')) continue;
+      const t = norm(target.split('?')[0].split('#')[0]);
+      if (!t) continue;
+      if (!inbound.has(t)) inbound.set(t, new Set());
+      inbound.get(t).add(self);
+    }
+  }
+
+  const orphans = [];
+  for (const file of pages) {
+    const rel = path.relative(DIST, file).split(path.sep).join('/');
+    if (SPECIAL_PAGES.has(rel)) continue;
+    const p = expectedPathFromFile(file);
+    if (!p) continue;
+    const np = norm(p);
+    const sources = inbound.get(np) || new Set();
+    const fromOtherPages = [...sources].filter((s) => s !== np);
+    if (fromOtherPages.length === 0 && !ORPHAN_ALLOW.has(p)) orphans.push(p);
+  }
+
+  for (const p of orphans) {
+    warn(`ORPHAN ${p} has no inbound internal link — nothing on the site points to it`);
+  }
+  console.log(`  orphan pages: ${orphans.length}`);
+}
+
 /* -------------------------------------------------------------- runner */
 
 console.log('Site integrity check — kidtoycn.com');
@@ -402,6 +453,7 @@ checkLinks(pages);
 checkJsonLd(pages);
 checkData(pages);
 checkAssets();
+checkOrphans(pages);
 
 console.log('');
 if (warnings.length) {
