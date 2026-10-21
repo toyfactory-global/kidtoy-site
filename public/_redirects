@@ -42,3 +42,7 @@
 # equivalent page on this site (there is no /terms/ or /privacy/ — both 404).
 # They are intentionally left to 404 until those pages exist. Adding the pages
 # is a content task, tracked in 3-site-roadmap.md.
+
+# /products/ has no index page; the catalogue lives at /collections/all
+/products/                 /collections/all/          301
+/products                  /collections/all/          301
