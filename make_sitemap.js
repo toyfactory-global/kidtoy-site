@@ -14,6 +14,15 @@ add('https://kidtoycn.com/', '1.0');
 ['privacy', 'terms'].forEach(p => add('https://kidtoycn.com/' + p + '/', '0.3'));
 d.collections.filter(c => c.handle !== 'frontpage').forEach(c => add('https://kidtoycn.com/collections/' + c.handle + '/', '0.8'));
 add('https://kidtoycn.com/collections/all/', '0.8');
+
+// Buyer guides: one sitemap entry per markdown file in src/pages/blog/
+const BLOG_DIR = 'src/pages/blog';
+if (fs.existsSync(BLOG_DIR)) {
+  const posts = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith('.md'));
+  if (posts.length) add('https://kidtoycn.com/blog/', '0.8');
+  posts.forEach((f) => add('https://kidtoycn.com/blog/' + f.replace(/\.md$/, '') + '/', '0.7'));
+}
+
 d.products.forEach(p => add('https://kidtoycn.com/products/' + p.handle + '/', '0.8'));
 xml += '</urlset>';
 

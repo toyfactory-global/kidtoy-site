@@ -1,0 +1,133 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import productsData from '../../data/products.json';
+
+export interface Props {
+  title: string;
+  description: string;
+  date: string;
+  updated?: string;
+  related?: string[];
+}
+
+const { title, description, date, updated, related = [] } = Astro.props;
+const SITE = 'https://kidtoycn.com';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+const relatedProducts = related
+  .map((h) => productsData.products.find((p) => p.handle === h))
+  .filter(Boolean) as any[];
+
+const fmt = (d: string) =>
+  new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <nav class="text-sm text-gray-400 mb-8">
+      <a href="/" class="hover:text-orange">Home</a> /
+      <a href="/blog" class="hover:text-orange">Buyer Guides</a> /
+      <span class="text-navy font-semibold">{title}</span>
+    </nav>
+
+    <header class="mb-10 pb-8 border-b border-gray-100">
+      <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Buyer Guide</p>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-4">{title}</h1>
+      <p class="text-lg text-gray-500 leading-relaxed mb-5">{description}</p>
+      <p class="text-xs text-gray-400">
+        Published {fmt(date)}{updated ? ` · Updated ${fmt(updated)}` : ''} · Kidtoy Factory, Chenghai
+      </p>
+    </header>
+
+    <div class="article-body">
+      <slot />
+    </div>
+
+    <!-- Conversion block -->
+    <aside class="mt-14 bg-navy rounded-2xl p-8 text-white">
+      <h2 class="text-xl font-extrabold mb-2 text-white">Need a quotation for a specific item?</h2>
+      <p class="text-sm text-gray-300 leading-relaxed mb-5">
+        Send us the item numbers and target quantity. We reply with unit price, carton dimensions, total CBM
+        and freight options — direct from the factory, no trading company in between.
+      </p>
+      <a href="/contact" class="inline-block bg-orange text-white font-bold px-7 py-3 rounded-lg hover:bg-white hover:text-navy transition-colors">
+        Request a Quote
+      </a>
+    </aside>
+
+    {relatedProducts.length > 0 && (
+      <section class="mt-14 pt-10 border-t border-gray-100">
+        <h2 class="text-xl font-extrabold text-navy mb-6">Products Related to This Guide</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          {relatedProducts.map((p) => (
+            <ProductCard
+              title={p.title}
+              handle={p.handle}
+              price={p.price}
+              image={p.images?.[0]?.src || '/placeholder.jpg'}
+              imageAlt={p.images?.[0]?.alt || p.title}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <div class="mt-12">
+      <a href="/blog" class="text-sm font-bold text-orange hover:underline">&larr; All buyer guides</a>
+    </div>
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "@id": `${canonical}#article`,
+      "headline": title,
+      "description": description,
+      "datePublished": date,
+      "dateModified": updated || date,
+      "inLanguage": "en",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },
+      "author": { "@id": `${SITE}/#organization` },
+      "publisher": { "@id": `${SITE}/#organization` }
+    })} />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": `${SITE}/` },
+        { "@type": "ListItem", "position": 2, "name": "Buyer Guides", "item": `${SITE}/blog/` },
+        { "@type": "ListItem", "position": 3, "name": title, "item": canonical }
+      ]
+    })} />
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .article-body { font-size: 1rem; line-height: 1.8; color: #374151; }
+  .article-body h2 {
+    font-size: 1.35rem; font-weight: 800; color: #0b1f3f;
+    margin: 2.4rem 0 0.8rem; line-height: 1.35; letter-spacing: -0.01em;
+  }
+  .article-body h3 {
+    font-size: 1.08rem; font-weight: 700; color: #0b1f3f;
+    margin: 1.8rem 0 0.6rem;
+  }
+  .article-body p { margin: 0 0 1.1rem; }
+  .article-body ul, .article-body ol { margin: 0 0 1.2rem; padding-left: 1.35rem; }
+  .article-body li { margin: 0.4rem 0; }
+  .article-body ul { list-style: disc; }
+  .article-body ol { list-style: decimal; }
+  .article-body strong { color: #0b1f3f; font-weight: 700; }
+  .article-body a { color: #ff6b35; text-decoration: underline; text-underline-offset: 2px; }
+  .article-body table { width: 100%; border-collapse: collapse; margin: 0 0 1.4rem; font-size: 0.9rem; }
+  .article-body th { background: #0b1f3f; color: #fff; text-align: left; padding: 0.6rem 0.75rem; font-weight: 600; }
+  .article-body td { border: 1px solid #e5e7eb; padding: 0.6rem 0.75rem; vertical-align: top; }
+  .article-body tr:nth-child(even) td { background: #fafafa; }
+  .article-body blockquote {
+    border-left: 4px solid #ff6b35; background: #f8f9fa;
+    padding: 0.9rem 1.2rem; margin: 0 0 1.4rem; font-size: 0.95rem;
+  }
+  .article-body blockquote p { margin: 0; }
+  .article-body hr { border: 0; border-top: 1px solid #e5e7eb; margin: 2rem 0; }
+</style>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
 import productsData from '../../../data/products.json';
 
 export function getStaticPaths() {
@@ -20,6 +21,59 @@ const detailImages = product.images?.slice(1) || [];
 const productSku = product.variants?.[0]?.sku || `KT-${product.id.toString().slice(-8)}`;
 const skuLabel = product.variants?.[0]?.sku ? 'Item No.' : 'Item No.';
 const gallery = [{ src: mainImage, alt: product.title }, ...detailImages.map(img => ({ src: img.src, alt: img.alt || product.title }))];
+
+/* ---- SEO helpers ------------------------------------------------------- */
+const SITE = 'https://kidtoycn.com';
+const stripHtml = (h) =>
+  String(h || '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&[a-z]+;/gi, ' ')
+    .replace(/[\u2700-\u27bf\u{1f300}-\u{1faff}]/gu, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const plainBody = stripHtml(product.body_html);
+// Use the real body copy when it is substantive; otherwise fall back to a
+// factual B2B sentence. Never emit the title alone (duplicate of `name`).
+const metaDescription =
+  plainBody.length >= 120 && !/^Global Shipping/i.test(plainBody)
+    ? plainBody.slice(0, 300).replace(/\s+\S*$/, '') + '.'
+    : `${product.title} — factory-direct wholesale from our Chenghai toy factory (est. 2001). MOQ ${product.moq} pcs, OEM/ODM and custom packaging available.`;
+
+const catHandle = (product.collections || [])[0] || '';
+const catTitle = productsData.collections.find((c) => c.handle === catHandle)?.title || 'All Products';
+
+/* Internal linking: 4 same-category + 4 cross-category, always 8 targets.
+   Before this the 40 product pages had ZERO links between them. */
+const others = productsData.products.filter((p) => p.handle !== product.handle);
+const inSameCat = others.filter((p) => catHandle && (p.collections || []).includes(catHandle));
+const inOtherCat = others.filter((p) => !(catHandle && (p.collections || []).includes(catHandle)));
+const relatedProducts = [...inSameCat.slice(0, 4), ...inOtherCat.slice(0, 8 - Math.min(4, inSameCat.length))];
+
+/* Closing the loop: articles link to products, so products link back to the
+   guides a buyer of this category actually needs. */
+const GUIDE_MAP: Record<string, { slug: string; title: string }[]> = {
+  'water-guns': [
+    { slug: 'hs-code-9503-toy-import-duty', title: 'How toy import duty is calculated' },
+    { slug: 'container-loading-calculation-cartons-cbm', title: 'How many cartons fit in a container' },
+  ],
+  'bubble-toys': [
+    { slug: 'toy-moq-landed-cost-calculation', title: 'MOQ and landed cost, calculated' },
+    { slug: 'container-loading-calculation-cartons-cbm', title: 'How many cartons fit in a container' },
+  ],
+  'stem-toys': [
+    { slug: 'en71-vs-astm-f963-toy-certification', title: 'EN71 vs ASTM F963 vs CPSIA' },
+    { slug: 'verify-toy-factory-chenghai-checklist', title: 'Verifying a toy factory before you pay' },
+  ],
+  'kids-makeup': [
+    { slug: 'oem-vs-odm-toys', title: 'OEM vs ODM for toys' },
+    { slug: 'verify-toy-factory-chenghai-checklist', title: 'Verifying a toy factory before you pay' },
+  ],
+};
+const relatedGuides = GUIDE_MAP[catHandle] || [];
+
+const priceValidUntil = new Date(Date.now() + 365 * 864e5).toISOString().slice(0, 10);
+const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
 ---
 
 <BaseLayout title={product.title} description={product.title + ' - Factory direct wholesale pricing. MOQ 50+ pcs, OEM/ODM supported.'} ogImage={mainImage}>
@@ -175,18 +229,36 @@ const gallery = [{ src: mainImage, alt: product.title }, ...detailImages.map(img
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Product",
+      "@id": `${SITE}/products/${product.handle}/#product`,
       "name": product.title,
-      "image": mainImage,
-      "description": product.title,
-      "sku": product.id.toString(),
+      "url": `${SITE}/products/${product.handle}/`,
+      "image": gallery.map((g) => absoluteImage(g.src)),
+      "description": metaDescription,
+      "sku": productSku,
+      "mpn": productSku,
+      "category": catTitle,
       "brand": { "@type": "Brand", "name": "Kidtoy Factory" },
-      "manufacturer": { "@type": "Organization", "name": "Kidtoy Factory" },
+      "manufacturer": { "@id": `${SITE}/#organization` },
+      "itemCondition": "https://schema.org/NewCondition",
+      "audience": {
+        "@type": "BusinessAudience",
+        "audienceType": "Wholesale distributors, retailers and brand owners"
+      },
+      "additionalProperty": [
+        { "@type": "PropertyValue", "name": "Minimum Order Quantity", "value": `${product.moq} pcs` },
+        { "@type": "PropertyValue", "name": "OEM/ODM", "value": "Available, including custom packaging" },
+        { "@type": "PropertyValue", "name": "Place of Origin", "value": "Chenghai, Guangdong, China" },
+        { "@type": "PropertyValue", "name": "Factory Established", "value": "2001" }
+      ],
       "offers": {
         "@type": "Offer",
+        "url": `${SITE}/products/${product.handle}/`,
         "priceCurrency": "USD",
-        "price": product.price.toString(),
+        "price": product.price.toFixed(2),
+        "priceValidUntil": priceValidUntil,
         "availability": "https://schema.org/InStock",
-        "url": `https://kidtoycn.com/products/${product.handle}`
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": { "@id": `${SITE}/#organization` }
       }
     })} />
 
@@ -200,6 +272,50 @@ const gallery = [{ src: mainImage, alt: product.title }, ...detailImages.map(img
         { "@type": "ListItem", "position": 3, "name": product.title, "item": `https://kidtoycn.com/products/${product.handle}` }
       ]
     })} />
+
+    <!-- Related buying guides (product -> article half of the internal link loop) -->
+    {relatedGuides.length > 0 && (
+      <section class="mt-16 pt-10 border-t border-gray-100">
+        <h2 class="text-xl font-extrabold text-navy mb-5">Before You Order: Buyer Guides</h2>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {relatedGuides.map((g) => (
+            <a href={`/blog/${g.slug}`} class="group block border border-gray-100 rounded-xl p-5 hover:border-orange hover:shadow-sm transition-all">
+              <p class="text-xs font-bold uppercase tracking-widest text-orange mb-2">Guide</p>
+              <p class="text-sm font-bold text-navy group-hover:text-orange transition-colors leading-snug">{g.title}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Related products: internal-link matrix (was 0 links between product pages) -->
+    {relatedProducts.length > 0 && (
+      <section class="mt-20 pt-12 border-t border-gray-100">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy mb-2">Related Wholesale Products</h2>
+        <p class="text-gray-400 mb-8">
+          More items from our {catTitle} range and across the factory catalogue — same OEM/ODM terms, same quality control.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          {relatedProducts.map((rp) => (
+            <ProductCard
+              title={rp.title}
+              handle={rp.handle}
+              price={rp.price}
+              image={rp.images?.[0]?.src || '/placeholder.jpg'}
+              imageAlt={rp.images?.[0]?.alt || rp.title}
+            />
+          ))}
+        </div>
+        <div class="text-center mt-10">
+          <a
+            href={catHandle ? `/collections/${catHandle}` : '/collections/all'}
+            class="inline-block bg-navy text-white font-bold px-8 py-3 rounded-lg hover:bg-orange transition-colors"
+          >
+            View All {catTitle}
+          </a>
+        </div>
+      </section>
+    )}
   </article>
 
   <script type="application/json" id="gallery-data" set:html={JSON.stringify(gallery)}></script>
