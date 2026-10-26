@@ -54,20 +54,27 @@ const relatedProducts = [...inSameCat.slice(0, 4), ...inOtherCat.slice(0, 8 - Ma
    guides a buyer of this category actually needs. */
 const GUIDE_MAP: Record<string, { slug: string; title: string }[]> = {
   'water-guns': [
+    { slug: 'electric-water-gun-specs-that-matter', title: 'Electric water gun specs that matter' },
+    { slug: 'shipping-bubble-toys-batteries-liquids', title: 'Shipping: batteries, liquids and freight' },
     { slug: 'hs-code-9503-toy-import-duty', title: 'How toy import duty is calculated' },
     { slug: 'container-loading-calculation-cartons-cbm', title: 'How many cartons fit in a container' },
   ],
   'bubble-toys': [
+    { slug: 'wholesale-bubble-toys-buyers-guide', title: 'The bubble toy category, explained' },
+    { slug: 'shipping-bubble-toys-batteries-liquids', title: 'Shipping: batteries, liquids and freight' },
     { slug: 'toy-moq-landed-cost-calculation', title: 'MOQ and landed cost, calculated' },
     { slug: 'container-loading-calculation-cartons-cbm', title: 'How many cartons fit in a container' },
   ],
   'stem-toys': [
     { slug: 'en71-vs-astm-f963-toy-certification', title: 'EN71 vs ASTM F963 vs CPSIA' },
     { slug: 'verify-toy-factory-chenghai-checklist', title: 'Verifying a toy factory before you pay' },
+    { slug: 'toy-moq-landed-cost-calculation', title: 'MOQ and landed cost, calculated' },
   ],
   'kids-makeup': [
-    { slug: 'oem-vs-odm-toys', title: 'OEM vs ODM for toys' },
-    { slug: 'verify-toy-factory-chenghai-checklist', title: 'Verifying a toy factory before you pay' },
+    { slug: 'wholesale-kids-beauty-sets-build-a-range', title: 'Building a kids beauty range' },
+    { slug: 'kids-makeup-case-formats-buying-guide', title: 'How the case sets your retail price' },
+    { slug: 'wholesale-kids-makeup-compliance-guide', title: 'Why kids makeup is not a toy' },
+    { slug: 'private-label-kids-makeup-moq-labelling', title: 'Private label: MOQ and label fields' },
   ],
 };
 const relatedGuides = GUIDE_MAP[catHandle] || [];
