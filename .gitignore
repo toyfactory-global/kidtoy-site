@@ -2,3 +2,14 @@ node_modules/
 dist/
 .astro/
 *.log
+
+# local one-off audit scripts (never part of the build)
+casecheck.js
+fix_slashes.js
+hrefs.js
+slcheck.js
+seo_audit.js
+seo_audit2.js
+slim_images.js
+verify_build.js
+link_check.js
