@@ -43,6 +43,12 @@
 /policies/terms-of-service /terms/                    301
 /policies/privacy-policy   /privacy/                  301
 
+# --- Retired article (unpublished 2026-10-26, replaced by a different angle later) ---
+# The URL was live for under an hour and submitted to IndexNow, so send it back
+# to the guides index rather than letting it become a fresh 404.
+/blog/wholesale-kids-makeup-compliance-guide   /blog/  301
+/blog/wholesale-kids-makeup-compliance-guide/* /blog/  301
+
 # --- Shopify app / auth paths: deliberately NOT redirected ---
 # /wpm, /customer_authentication/*, /services/login_with_shop/* are Shopify
 # runtime endpoints with no equivalent. A 301 to "/" would be an unrelated
