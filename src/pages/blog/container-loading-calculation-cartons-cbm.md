@@ -89,7 +89,7 @@ Before you book freight, request this in one message:
 
 From those six numbers you can build the loading plan yourself and cross-check any quote you receive. If a supplier cannot give you carton dimensions before you order, they are quoting from a catalogue rather than from their own packing line.
 
-Our product pages carry this data because buyers ask for it in the first email — the [dinosaur egg bubble machine](/products/wholesale-dinosaur-egg-bubble-machine-toy-automatic-electric-bubble-blower-with-dynamic-music-cool-led-lights-for-kids-outdoor-play) and the [DIY makeup craft box](/products/diy-kids-makeup-craft-box-with-electric-nail-grinder) both list carton size, units per carton and CBM, which is enough to run the calculation above before you inquire.
+Our product pages carry this data because buyers ask for it in the first email — the [dinosaur egg bubble machine](/products/wholesale-dinosaur-egg-bubble-machine-toy-automatic-electric-bubble-blower-with-dynamic-music-cool-led-lights-for-kids-outdoor-play/) and the [DIY makeup craft box](/products/diy-kids-makeup-craft-box-with-electric-nail-grinder/) both list carton size, units per carton and CBM, which is enough to run the calculation above before you inquire.
 
 ## Quick reference
 

@@ -95,7 +95,7 @@ Send these four questions with your inquiry. A factory that answers all four qui
 3. Do you provide a certificate of origin, and which one?
 4. Which test reports exist for this exact item, and can you send the PDF?
 
-If you want to see how those answers look on a real product page, our [dinosaur egg bubble machine](/products/wholesale-dinosaur-egg-bubble-machine-toy-automatic-electric-bubble-blower-with-dynamic-music-cool-led-lights-for-kids-outdoor-play) lists MOQ, carton data and the item number you would quote on an inquiry, and the [4-mode bubble and water gun combo](/products/4-mode-dual-function-electric-bubble-water-gun-combo) shows how tiered pricing changes the per-unit cost.
+If you want to see how those answers look on a real product page, our [dinosaur egg bubble machine](/products/wholesale-dinosaur-egg-bubble-machine-toy-automatic-electric-bubble-blower-with-dynamic-music-cool-led-lights-for-kids-outdoor-play/) lists MOQ, carton data and the item number you would quote on an inquiry, and the [4-mode bubble and water gun combo](/products/4-mode-dual-function-electric-bubble-water-gun-combo/) shows how tiered pricing changes the per-unit cost.
 
 ---
 

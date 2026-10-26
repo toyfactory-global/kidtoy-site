@@ -58,7 +58,7 @@ None of this makes ODM a bad choice. It makes it a **market-entry tool**, not a 
 
 The single highest-leverage change on an ODM product is the retail packaging. A colour box redesign changes how the product reads on a shelf or in a marketplace thumbnail, and it is typically the cheapest customisation available.
 
-That is why our own makeup sets are listed with both the item and its case format — the [princess 2-layer glitter case](/products/wholesale-princess-kids-makeup-set-2-layer-pink-glitter-aluminum-trolley-case-with-14-color-eyeshadow-lip-gloss-girls-cosmetic-kit-for-pretend-play) and the [3-layer laser-surface case](/products/wholesale-fashion-girl-makeup-set-3-layer-aluminum-case-laser-surface-18-color-eyeshadow-lip-gloss-kit-kids-cosmetic-pretend-play-toy) share a production platform but present very differently to a buyer. Changing which case you specify is an ODM decision with an OEM-sized effect on perceived value.
+That is why our own makeup sets are listed with both the item and its case format — the [princess 2-layer glitter case](/products/wholesale-princess-kids-makeup-set-2-layer-pink-glitter-aluminum-trolley-case-with-14-color-eyeshadow-lip-gloss-girls-cosmetic-kit-for-pretend-play/) and the [3-layer laser-surface case](/products/wholesale-fashion-girl-makeup-set-3-layer-aluminum-case-laser-surface-18-color-eyeshadow-lip-gloss-kit-kids-cosmetic-pretend-play-toy/) share a production platform but present very differently to a buyer. Changing which case you specify is an ODM decision with an OEM-sized effect on perceived value.
 
 ## A decision sequence that works
 
@@ -77,4 +77,4 @@ This sequence keeps your capital concentrated on the products that have already 
 
 The second question is uncomfortable to ask and highly informative to hear answered.
 
-If you are at step 1 and want something to test with, our [STEM range](/collections/stem-toys) and [bubble toys](/collections/bubble-toys) both sit at ODM-friendly MOQs, while anything you see on this site can be quoted as an OEM project once you have a specification to work from.
+If you are at step 1 and want something to test with, our [STEM range](/collections/stem-toys/) and [bubble toys](/collections/bubble-toys/) both sit at ODM-friendly MOQs, while anything you see on this site can be quoted as an OEM project once you have a specification to work from.

@@ -78,7 +78,7 @@ Ask for the PDF and check four things:
 
 ## What we tell buyers
 
-For any item where a certificate matters to your customer, ask us for the report for **that exact item number** before you place the order. On our [squishy jelly building block set](/products/wholesale-squishy-jelly-building-blocks-40-pcs-soft-rubber-sensory-blocks-set-with-flexible-tpe-material-for-toddlers-astm-intertek-tested-stem-toy) the ASTM and Intertek testing is stated on the product page because the report exists for that item. On the [banana sensor rhythm piano](/products/wholesale-banana-sensor-rhythm-piano-toy-touch-induction-musical-plush-with-dual-player-mode-for-kids-early-education) the tested scope is listed on the page in the same way.
+For any item where a certificate matters to your customer, ask us for the report for **that exact item number** before you place the order. On our [squishy jelly building block set](/products/wholesale-squishy-jelly-building-blocks-40-pcs-soft-rubber-sensory-blocks-set-with-flexible-tpe-material-for-toddlers-astm-intertek-tested-stem-toy/) the ASTM and Intertek testing is stated on the product page because the report exists for that item. On the [banana sensor rhythm piano](/products/wholesale-banana-sensor-rhythm-piano-toy-touch-induction-musical-plush-with-dual-player-mode-for-kids-early-education/) the tested scope is listed on the page in the same way.
 
 Where a report does not exist, we say so rather than borrowing one from a similar product. A certification you cannot produce at the border is worse than no certification at all.
 

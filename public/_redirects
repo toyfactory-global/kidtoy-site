@@ -38,10 +38,16 @@
 # --- Shopify policy paths (/policies/<handle>) ---
 /policies/refund-policy    /refund/                   301
 /policies/shipping-policy  /shipping/                 301
-# NOTE: /policies/terms-of-service and /policies/privacy-policy have NO
-# equivalent page on this site (there is no /terms/ or /privacy/ — both 404).
-# They are intentionally left to 404 until those pages exist. Adding the pages
-# is a content task, tracked in 3-site-roadmap.md.
+# /terms/ and /privacy/ now exist and return 200, so these two can finally be
+# recovered. (An earlier note here said those pages did not exist — they do.)
+/policies/terms-of-service /terms/                    301
+/policies/privacy-policy   /privacy/                  301
+
+# --- Shopify app / auth paths: deliberately NOT redirected ---
+# /wpm, /customer_authentication/*, /services/login_with_shop/* are Shopify
+# runtime endpoints with no equivalent. A 301 to "/" would be an unrelated
+# redirect, which Google treats as a soft 404 — worse hygiene than a real 404.
+# They are left to 404 and will drop out of the index on their own.
 
 # /products/ has no index page; the catalogue lives at /collections/all
 /products/                 /collections/all/          301

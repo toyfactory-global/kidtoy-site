@@ -113,4 +113,4 @@ Send this, and the quote you get back will be directly comparable:
 
 > Item number, quantity in units, destination city and country, preferred Incoterm, and whether the order is stock colour or custom.
 
-You can run the numbers on any of our product pages — the [sunflower bubble machine](/products/wholesale-electric-sunflower-bubble-machine-usb-rechargeable-flower-bubble-blower-with-cool-led-lights-for-kids-outdoor-play) and the [high-volume cartoon bubble blower](/products/high-volume-cartoon-bubble-blower-gun-12000-per-min) both list MOQ and carton data, and they sit at very different MOQ levels (240 versus 360) because of their carton sizes.
+You can run the numbers on any of our product pages — the [sunflower bubble machine](/products/wholesale-electric-sunflower-bubble-machine-usb-rechargeable-flower-bubble-blower-with-cool-led-lights-for-kids-outdoor-play/) and the [high-volume cartoon bubble blower](/products/high-volume-cartoon-bubble-blower-gun-12000-per-min/) both list MOQ and carton data, and they sit at very different MOQ levels (240 versus 360) because of their carton sizes.

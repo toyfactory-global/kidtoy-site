@@ -80,7 +80,7 @@ const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
   <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <nav class="text-sm text-gray-400 mb-8">
       <a href="/" class="hover:text-orange">Home</a> / 
-      <a href="/collections/all" class="hover:text-orange">Products</a> / 
+      <a href="/collections/all/" class="hover:text-orange">Products</a> / 
       <span class="text-navy font-semibold">{product.title}</span>
     </nav>
 
@@ -187,7 +187,7 @@ const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
           <a href={`https://wa.me/8613715961913?text=Hello%2C%20I%20am%20interested%20in%20${encodeURIComponent(product.title)}%20(SKU:%20${encodeURIComponent(product.id)})`} target="_blank" rel="noopener noreferrer" class="flex-1 bg-green-500 text-white text-center px-6 py-4 rounded font-bold text-sm hover:bg-green-600 transition-colors">
             WhatsApp Inquiry
           </a>
-          <a href="/contact" target="_blank" rel="noopener noreferrer" class="flex-1 bg-navy text-white text-center px-6 py-4 rounded font-bold text-sm hover:bg-orange transition-colors">
+          <a href="/contact/" target="_blank" rel="noopener noreferrer" class="flex-1 bg-navy text-white text-center px-6 py-4 rounded font-bold text-sm hover:bg-orange transition-colors">
             Request Quote
           </a>
         </div>
@@ -279,7 +279,7 @@ const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
         <h2 class="text-xl font-extrabold text-navy mb-5">Before You Order: Buyer Guides</h2>
         <div class="grid sm:grid-cols-2 gap-4">
           {relatedGuides.map((g) => (
-            <a href={`/blog/${g.slug}`} class="group block border border-gray-100 rounded-xl p-5 hover:border-orange hover:shadow-sm transition-all">
+            <a href={`/blog/${g.slug}/`} class="group block border border-gray-100 rounded-xl p-5 hover:border-orange hover:shadow-sm transition-all">
               <p class="text-xs font-bold uppercase tracking-widest text-orange mb-2">Guide</p>
               <p class="text-sm font-bold text-navy group-hover:text-orange transition-colors leading-snug">{g.title}</p>
             </a>
@@ -308,7 +308,7 @@ const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
         </div>
         <div class="text-center mt-10">
           <a
-            href={catHandle ? `/collections/${catHandle}` : '/collections/all'}
+            href={catHandle ? `/collections/${catHandle}/` : '/collections/all/'}
             class="inline-block bg-navy text-white font-bold px-8 py-3 rounded-lg hover:bg-orange transition-colors"
           >
             View All {catTitle}
