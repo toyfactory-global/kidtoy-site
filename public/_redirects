@@ -58,3 +58,10 @@
 # /products/ has no index page; the catalogue lives at /collections/all
 /products/                 /collections/all/          301
 /products                  /collections/all/          301
+
+# --- Shopify default collection handle (weekly check 2026-10-27) ---
+# "frontpage" is the handle Shopify gives the all-products collection, so old
+# links and GSC hits on /collections/frontpage are 1:1 equivalents of the
+# catalogue index, not unrelated traffic. Mapped to /collections/all/ only.
+/collections/frontpage/    /collections/all/          301
+/collections/frontpage     /collections/all/          301
