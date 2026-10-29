@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProductCard from '../../components/ProductCard.astro';
+import ProductInquiryForm from '../../components/ProductInquiryForm.astro';
 import productsData from '../../../data/products.json';
 
 export function getStaticPaths() {
@@ -190,10 +191,10 @@ const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
 
         <!-- CTA -->
         <div class="flex flex-col sm:flex-row gap-3 mb-6">
-          <a href={`https://wa.me/8613715961913?text=Hello%2C%20I%20am%20interested%20in%20${encodeURIComponent(product.title)}%20(SKU:%20${encodeURIComponent(product.id)})`} target="_blank" rel="noopener noreferrer" class="flex-1 bg-green-500 text-white text-center px-6 py-4 rounded font-bold text-sm hover:bg-green-600 transition-colors">
+          <a href={`https://wa.me/8613715961913?text=Hello%2C%20I%20am%20interested%20in%20${encodeURIComponent(product.title)}%20(Item%20No.%3A%20${encodeURIComponent(productSku)})`} target="_blank" rel="noopener noreferrer" class="flex-1 bg-green-500 text-white text-center px-6 py-4 rounded font-bold text-sm hover:bg-green-600 transition-colors">
             WhatsApp Inquiry
           </a>
-          <a href="/contact/" target="_blank" rel="noopener noreferrer" class="flex-1 bg-navy text-white text-center px-6 py-4 rounded font-bold text-sm hover:bg-orange transition-colors">
+          <a href="#inquiry" class="flex-1 bg-navy text-white text-center px-6 py-4 rounded font-bold text-sm hover:bg-orange transition-colors">
             Request Quote
           </a>
         </div>
@@ -230,6 +231,8 @@ const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
         </div>
       </div>
     </div>
+
+    <ProductInquiryForm productTitle={product.title} sku={productSku} moq={product.moq} />
 
     <!-- Product JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify({

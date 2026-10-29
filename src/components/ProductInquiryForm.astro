@@ -1,0 +1,109 @@
+---
+export interface Props {
+  productTitle: string;
+  sku: string;
+  moq?: number | string;
+}
+
+const { productTitle, sku, moq } = Astro.props;
+const defaultQty = moq ? String(moq) : '';
+const prefilledMessage = `I would like a quotation for ${productTitle} (Item No. ${sku}).`;
+
+const fieldClass =
+  'w-full px-4 py-3 bg-white border border-gray-200 focus:border-orange focus:outline-none rounded-lg text-sm text-navy placeholder:text-gray-300';
+const labelClass = 'block text-[11px] font-extrabold uppercase tracking-wider text-gray-300 mb-1.5';
+---
+
+<section id="inquiry" class="mt-14 scroll-mt-24">
+  <div class="bg-navy rounded-2xl p-6 sm:p-10">
+    <div class="max-w-2xl">
+      <p class="text-orange text-[11px] font-extrabold uppercase tracking-[0.2em] mb-2">Direct Factory Quote</p>
+      <h2 class="text-xl sm:text-2xl font-extrabold text-white mb-2">Get a Price for This Item</h2>
+      <p class="text-sm text-gray-300 mb-7">
+        Send the details and we reply with FOB pricing, lead time and available certifications.
+        Item No. <span class="text-white font-bold">{sku}</span> is attached to your message automatically.
+      </p>
+
+      <form id="inquiry-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+        <input type="hidden" name="access_key" value="a9f6af03-8274-436c-9dc6-046d466bce9c" />
+        <input type="hidden" name="subject" value={`Inquiry: ${productTitle} (${sku})`} />
+        <input type="hidden" name="from_name" value="Product Page Inquiry — kidtoycn.com" />
+        <input type="hidden" name="product" value={productTitle} />
+        <input type="hidden" name="sku" value={sku} />
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class={labelClass} for="inq-name">Your Name *</label>
+            <input class={fieldClass} id="inq-name" type="text" name="name" required placeholder="Full name" />
+          </div>
+          <div>
+            <label class={labelClass} for="inq-email">Business Email *</label>
+            <input class={fieldClass} id="inq-email" type="email" name="email" required placeholder="you@company.com" />
+          </div>
+          <div>
+            <label class={labelClass} for="inq-company">Company</label>
+            <input class={fieldClass} id="inq-company" type="text" name="company" placeholder="Company name" />
+          </div>
+          <div>
+            <label class={labelClass} for="inq-qty">Quantity (pcs)</label>
+            <input class={fieldClass} id="inq-qty" type="text" name="quantity" value={defaultQty} placeholder="Target order quantity" />
+          </div>
+        </div>
+
+        <div>
+          <label class={labelClass} for="inq-message">Message</label>
+          <textarea class={`${fieldClass} resize-none`} id="inq-message" name="message" rows="3">{prefilledMessage}</textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full sm:w-auto bg-orange hover:bg-white hover:text-navy text-white px-8 py-4 rounded-lg font-extrabold text-sm uppercase tracking-wider transition-colors"
+        >
+          Send Inquiry
+        </button>
+
+        <p id="inquiry-status" class="text-sm font-semibold hidden" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('inquiry-form') as HTMLFormElement | null;
+  const status = document.getElementById('inquiry-status');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status) return;
+
+    const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const label = button.innerHTML;
+    button.disabled = true;
+    button.textContent = 'Sending...';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        form.reset();
+        status.className = 'text-sm font-bold text-green-400';
+        status.textContent = 'Thank you — your inquiry has been sent. We reply within one business day.';
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch {
+      status.className = 'text-sm font-bold text-red-300';
+      status.textContent =
+        'Could not send automatically. Please email hntoys6@sinuotoys.com or message us on WhatsApp.';
+    } finally {
+      button.disabled = false;
+      button.innerHTML = label;
+    }
+  });
+</script>
