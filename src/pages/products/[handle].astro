@@ -41,6 +41,15 @@ const metaDescription =
     ? plainBody.slice(0, 300).replace(/\s+\S*$/, '') + '.'
     : `${product.title} — factory-direct wholesale from our Chenghai toy factory (est. 2001). MOQ ${product.moq} pcs, OEM/ODM and custom packaging available.`;
 
+// <meta name="description"> is capped near 155 chars and must always carry the
+// REAL order quantity for this SKU. A hardcoded "MOQ 50+" used to be stamped on
+// all 40 products, which was wrong for every item whose MOQ is higher.
+const metaDescShort = (() => {
+  const base = metaDescription.replace(/\s+/g, ' ').trim();
+  const trimmed = base.length > 132 ? base.slice(0, 132).replace(/\s+\S*$/, '') + '…' : base;
+  return `${trimmed} MOQ ${product.moq} pcs.`;
+})();
+
 const catHandle = (product.collections || [])[0] || '';
 const catTitle = productsData.collections.find((c) => c.handle === catHandle)?.title || 'All Products';
 
@@ -83,7 +92,7 @@ const priceValidUntil = new Date(Date.now() + 365 * 864e5).toISOString().slice(0
 const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
 ---
 
-<BaseLayout title={product.title} description={product.title + ' - Factory direct wholesale pricing. MOQ 50+ pcs, OEM/ODM supported.'} ogImage={mainImage}>
+<BaseLayout title={product.title} description={metaDescShort} ogImage={absoluteImage(mainImage)}>
   <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <nav class="text-sm text-gray-400 mb-8">
       <a href="/" class="hover:text-orange">Home</a> / 
