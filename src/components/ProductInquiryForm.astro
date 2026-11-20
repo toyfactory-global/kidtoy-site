@@ -91,6 +91,14 @@ const labelClass = 'block text-[11px] font-extrabold uppercase tracking-wider te
       const data = await res.json();
 
       if (data.success) {
+        // Only counted once Web3Forms confirms receipt, so failed or blocked
+        // submissions never inflate the lead count.
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', {
+            form_name: 'product_inquiry',
+            page_path: window.location.pathname,
+          });
+        }
         form.reset();
         status.className = 'text-sm font-bold text-green-400';
         status.textContent = 'Thank you — your inquiry has been sent. We reply within one business day.';

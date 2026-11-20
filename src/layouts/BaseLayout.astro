@@ -54,6 +54,45 @@ const fullDesc = description || 'Direct source for high-quality toys and childre
       "potentialAction": { "@type": "SearchAction", "target": "https://kidtoycn.com/search?q={search_term_string}", "query-input": "required name=search_term_string" }
     })} />
 
+    <!-- Google Analytics 4. Deliberately a plain top-level function rather than
+         define:vars, which Astro wraps in an IIFE and would leave window.gtag
+         undefined for the listeners below. -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-TDNP3XVNMP"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-TDNP3XVNMP');
+
+      // One delegated listener covers every WhatsApp link on the site.
+      document.addEventListener('click', function (e) {
+        var el = e.target;
+        while (el && el !== document.body) {
+          if (el.tagName === 'A' && el.href &&
+              (el.href.indexOf('wa.me') !== -1 || el.href.indexOf('api.whatsapp.com') !== -1)) {
+            gtag('event', 'contact_whatsapp', {
+              link_url: el.href,
+              page_path: window.location.pathname
+            });
+            return;
+          }
+          el = el.parentNode;
+        }
+      });
+
+      // The contact page posts straight to Web3Forms with no JS in between, so the
+      // submit event is the only signal available. The product form is excluded here
+      // because it reports generate_lead only after Web3Forms confirms receipt.
+      document.addEventListener('submit', function (e) {
+        var f = e.target;
+        if (!f || f.id === 'inquiry-form') return;
+        gtag('event', 'form_submit', {
+          form_destination: f.action,
+          page_path: window.location.pathname
+        });
+      });
+    </script>
+
     <script is:inline>
       document.documentElement.classList.add('loaded');
     </script>
