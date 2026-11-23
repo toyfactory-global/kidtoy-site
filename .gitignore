@@ -21,3 +21,5 @@ blogdiag.py
 probe-labels.js
 list-products.js
 verify-new.js
+live-check.js
+live-verify.js
