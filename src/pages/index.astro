@@ -233,45 +233,51 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ================= SELF-QUALIFICATION ================= -->
-  <section class="py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[0.9fr_1.1fr] gap-12">
+  <!-- ================= WHO THIS IS FOR ================= -->
+  <section class="py-16 border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[0.75fr_1.25fr] gap-12">
       <div>
-        <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Before you read further</p>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight">
-          Is Kidtoy the right supplier for your order?
+        <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Who we work with</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-5">
+          Do you buy the way we sell?
         </h2>
+        <p class="text-gray-600 leading-relaxed">
+          We are a factory, not a wholesaler with a catalogue of everything. That works well for buyers who order
+          <strong class="text-navy">at least {moqMin} pieces per design</strong> and care about the carton and the
+          paperwork as much as the product photograph.
+        </p>
       </div>
-      <div class="space-y-5 text-gray-600 leading-relaxed">
-        <p>
-          We are a good fit if you are buying <strong>at least {moqMin} pieces per design</strong>, you resell rather than
-          gift, and you care more about the carton and the paperwork than about a catalogue that photographs well. Most of
-          our buyers are importers, distributors, gift and pharmacy buyers, and marketplace sellers building a range.
+
+      <div>
+        <div class="grid sm:grid-cols-2 gap-x-8 gap-y-6">
+          {[
+            { t: 'Importers & distributors', d: 'You resell in volume and need carton data you can put to a forwarder.' },
+            { t: 'Gift, toy & pharmacy buyers', d: 'You are building a range across three or four price points, not buying one SKU.' },
+            { t: 'Amazon & TikTok sellers', d: 'You need retail-ready packing, a barcode and a tracking label, not just a toy.' },
+            { t: 'OEM & private label', d: 'You want your brand on the case, the box or the product itself.' },
+            { t: 'First-time importers', d: 'You want the sample, deposit, inspection and shipping steps spelled out.' },
+            { t: 'Seasonal & educational', d: 'You buy against a school year or a holiday window and plan backwards from it.' },
+          ].map((f) => (
+            <div class="flex gap-3">
+              <svg class="w-5 h-5 shrink-0 mt-0.5 text-orange" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3a1 1 0 00-1.4-1.4L9 10.6 7.7 9.3a1 1 0 10-1.4 1.4l2 2a1 1 0 001.4 0l4-3.9z" clip-rule="evenodd" />
+              </svg>
+              <div>
+                <div class="font-bold text-navy text-sm leading-snug">{f.t}</div>
+                <div class="text-sm text-gray-500 leading-relaxed mt-1">{f.d}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p class="mt-9 pt-6 border-t border-gray-100 text-sm text-gray-500 leading-relaxed">
+          <strong class="text-navy">And when we are the wrong call:</strong> if you need a single unit, a
+          consumer checkout, or a certified claim for a market we have not tested, tell us and we will say so on the
+          first reply rather than after the deposit. It costs us a few orders and saves both sides a quarter.
         </p>
-        <p>
-          We are probably a bad fit if you need <strong>one unit</strong>, if you need a <strong>retail storefront with
-          checkout</strong>, or if you need a <strong>certified claim for a market we have not tested for</strong>. We will
-          say so rather than take the order and disappoint you at the border.
-        </p>
-        <div class="grid sm:grid-cols-2 gap-4 pt-2">
-          <div class="bg-green-50 border border-green-100 rounded-xl p-5">
-            <div class="font-extrabold text-navy text-sm mb-3">Good fit</div>
-            <ul class="text-sm space-y-2 text-gray-600">
-              <li>Importers and distributors</li>
-              <li>Gift, toy and pharmacy retail buyers</li>
-              <li>Amazon / eBay / TikTok sellers</li>
-              <li>Mixed first orders across several items</li>
-            </ul>
-          </div>
-          <div class="bg-gray-50 border border-gray-200 rounded-xl p-5">
-            <div class="font-extrabold text-navy text-sm mb-3">Not a fit</div>
-            <ul class="text-sm space-y-2 text-gray-600">
-              <li>Single-unit or sample-only buyers</li>
-              <li>Consumer checkout / dropshipping retail</li>
-              <li>Markets where we hold no test documentation</li>
-              <li>Custom tooling with no deposit</li>
-            </ul>
-          </div>
+
+        <div class="flex flex-wrap gap-3 mt-6">
+          <a href="/industries/" class="text-sm font-bold text-orange hover:text-navy transition-colors">See the eight buyer segments →</a>
         </div>
       </div>
     </div>
