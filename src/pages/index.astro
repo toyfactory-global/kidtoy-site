@@ -235,52 +235,45 @@ const faqs = [
 
   <!-- ================= WHO THIS IS FOR ================= -->
   <section class="py-16 border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[0.75fr_1.25fr] gap-12">
-      <div>
-        <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Who we work with</p>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-5">
-          Who this factory is built for
-        </h2>
-        <p class="text-gray-600 leading-relaxed">
-          We make toys and kids cosmetics ourselves — a narrow range, not a catalogue of everything. That is deliberate:
-          the MOQ, the carton data and the test file come from our own production line, not from a supplier we resell.
-        </p>
-        <p class="text-gray-600 leading-relaxed mt-4">
-          Our buyers order to resell, usually more than once, and want the numbers before they commit. If your order sits
-          outside our lines, we will say so on the first reply — before a sample or a deposit — rather than quote for
-          something we cannot make well.
-        </p>
-        <a href="/industries/" class="inline-block mt-6 text-sm font-bold text-orange hover:text-navy transition-colors">See the eight buyer segments →</a>
-      </div>
-
-      <div>
-        <div class="grid sm:grid-cols-2 gap-x-8 gap-y-6">
-          {[
-            { t: 'Importers & distributors', d: 'You resell in volume and need carton data you can put to a forwarder.' },
-            { t: 'Gift, toy & pharmacy buyers', d: 'You are building a range across three or four price points, not buying one SKU.' },
-            { t: 'Amazon & TikTok sellers', d: 'You need retail-ready packing, a barcode and a tracking label, not just a toy.' },
-            { t: 'OEM & private label', d: 'You want your brand on the case, the box or the product itself.' },
-            { t: 'First-time importers', d: 'You want the sample, deposit, inspection and shipping steps spelled out.' },
-            { t: 'Seasonal & educational', d: 'You buy against a school year or a holiday window and plan backwards from it.' },
-          ].map((f) => (
-            <div class="flex gap-3">
-              <svg class="w-5 h-5 shrink-0 mt-0.5 text-orange" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3a1 1 0 00-1.4-1.4L9 10.6 7.7 9.3a1 1 0 10-1.4 1.4l2 2a1 1 0 001.4 0l4-3.9z" clip-rule="evenodd" />
-              </svg>
-              <div>
-                <div class="font-bold text-navy text-sm leading-snug">{f.t}</div>
-                <div class="text-sm text-gray-500 leading-relaxed mt-1">{f.d}</div>
-              </div>
-            </div>
-          ))}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Who we work with</p>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight">
+            Who this factory is built for
+          </h2>
         </div>
-
-        <p class="mt-8 pt-6 border-t border-gray-100 text-sm text-gray-500 leading-relaxed">
-          Not sure which one you are? Send the item list and we will tell you what the order needs —
-          including the parts that will cost you money.
-          <a href="#quote" class="font-bold text-orange hover:text-navy transition-colors whitespace-nowrap">Start here →</a>
-        </p>
+        <a href="/industries/" class="text-sm font-bold text-orange hover:text-navy transition-colors">
+          All eight buyer segments →
+        </a>
       </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-7">
+        {[
+          { t: 'Importers & distributors', d: 'You resell in volume and need carton data you can put to a forwarder.' },
+          { t: 'Gift, toy & pharmacy buyers', d: 'You are building a range across three or four price points, not buying one SKU.' },
+          { t: 'Amazon & TikTok sellers', d: 'You need retail-ready packing, a barcode and a tracking label, not just a toy.' },
+          { t: 'OEM & private label', d: 'You want your brand on the case, the box or the product itself.' },
+          { t: 'First-time importers', d: 'You want the sample, deposit, inspection and shipping steps spelled out.' },
+          { t: 'Seasonal & educational', d: 'You buy against a school year or a holiday window and plan backwards from it.' },
+        ].map((f) => (
+          <div class="flex gap-3">
+            <svg class="w-5 h-5 shrink-0 mt-0.5 text-orange" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3a1 1 0 00-1.4-1.4L9 10.6 7.7 9.3a1 1 0 10-1.4 1.4l2 2a1 1 0 001.4 0l4-3.9z" clip-rule="evenodd" />
+            </svg>
+            <div>
+              <div class="font-bold text-navy text-sm leading-snug">{f.t}</div>
+              <div class="text-sm text-gray-500 leading-relaxed mt-1">{f.d}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-10 pt-6 border-t border-gray-100 text-sm text-gray-500 leading-relaxed">
+        Not sure which one you are? Send the item list and we will tell you what the order needs —
+        including the parts that will cost you money.
+        <a href="#quote" class="font-bold text-orange hover:text-navy transition-colors whitespace-nowrap">Start here →</a>
+      </p>
     </div>
   </section>
 
