@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "The Toy Sample Approval Checklist (and Why It Sets the Whole Order)"
+title: "The Toy Sample Approval Checklist"
 description: "An approved sample is the reference every later argument is settled against. What to check on a toy sample, what to sign, and the five things buyers forget to test."
 date: "2026-11-06"
 related:

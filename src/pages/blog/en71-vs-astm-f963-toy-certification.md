@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "EN71 vs ASTM F963 vs CPSIA: Which Toy Certification Do You Actually Need?"
+title: "EN71 vs ASTM F963 vs CPSIA: Which One?"
 description: "EN71 is the EU route, ASTM F963 plus CPSIA is the US route, and the codes on a Chinese spec sheet (10P, HR4040, EN62115, PAHS) mean specific tests rather than a whole certificate. A plain-English map of what each one covers."
 date: "2026-10-19"
 related:

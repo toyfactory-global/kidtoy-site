@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Electric Water Gun Specs That Actually Matter (And the One Nobody Asks About)"
+title: "Water Gun Specs That Actually Matter"
 description: "Range and magazine size are what buyers compare. Seal quality is what decides your return rate. A field guide to the specs on an electric water blaster, and the questions to ask before a container order."
 date: "2026-10-25"
 related:

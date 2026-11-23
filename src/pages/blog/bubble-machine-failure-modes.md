@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Why Bubble Machines Fail: Five Modes and How to Test for Them"
+title: "Why Bubble Machines Fail: Five Modes"
 description: "Leaking reservoirs, seized motors, corroded switches, weak battery contacts and clogged wands — the five failure modes of an electric bubble toy and the sample tests that expose them."
 date: "2026-11-17"
 related:

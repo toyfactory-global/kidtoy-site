@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Toy Age Grading: Why 3+ Is a Safety Decision, Not Marketing"
+title: "Toy Age Grading: Why 3+ Is a Safety Call"
 description: "How age grading is actually set, what the small-parts test has to do with it, why some products are graded 3+ when they look suitable for younger children, and what happens if you get it wrong."
 date: "2026-11-19"
 related:

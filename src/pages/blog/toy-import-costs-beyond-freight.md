@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "The Import Costs Buyers Forget (and Argue About at the Port)"
+title: "Import Costs Buyers Forget at the Port"
 description: "Duty is the visible cost. Demurrage, detention, terminal handling, inspection and re-packing are the ones that turn a profitable order into a break-even."
 date: "2026-11-16"
 related:

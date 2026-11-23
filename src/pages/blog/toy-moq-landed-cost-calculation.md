@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Toy MOQ and Landed Cost: The Calculation Most Buyers Get Wrong"
+title: "Toy MOQ and Landed Cost, Calculated"
 description: "MOQ is usually a carton quantity in disguise, and landed cost is not the unit price plus shipping. A worked example using a real carton: 72 pcs per carton, 0.254 CBM, 29.4 kg gross weight."
 date: "2026-10-21"
 related:

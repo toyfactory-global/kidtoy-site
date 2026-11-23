@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Container Loading for Toys: How Many Cartons Fit in a 20GP, 40GP or 40HQ"
+title: "How Many Cartons Fit a 20GP, 40GP or 40HQ"
 description: "Nominal container volume is not usable volume. A realistic planning figure, the carton maths for a real toy SKU, and why weight rather than space limits some toy shipments."
 date: "2026-10-22"
 related:

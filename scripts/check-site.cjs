@@ -478,6 +478,62 @@ function checkRedirects(pages) {
   console.log(`  _redirects: ${rules} rule(s)`);
 }
 
+/**
+ * Declared facts.
+ *
+ * The pages read their numbers from products.json, so nothing on a page can go
+ * stale. public/llms.txt is the exception: it is a hand-written file that states
+ * the catalogue size, the MOQ range, the FOB range, the per-category counts and
+ * the number of guides. Every one of those is a moving value.
+ *
+ * This compares llms.txt against products.json and the blog folder, so adding a
+ * product or a category fails the build until the file is updated — the reminder
+ * is the build, not somebody's memory.
+ */
+function checkDeclaredFacts() {
+  const llmsFile = path.join(ROOT, 'public', 'llms.txt');
+  const dataFile = path.join(ROOT, 'data', 'products.json');
+  if (!fs.existsSync(llmsFile) || !fs.existsSync(dataFile)) return;
+
+  const text = fs.readFileSync(llmsFile, 'utf8');
+  const dump = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
+  const products = dump.products || [];
+  const collections = (dump.collections || []).filter((c) => c.handle !== 'frontpage');
+
+  const moqs = products.map((p) => p.moq).filter((n) => typeof n === 'number' && n > 0);
+  const prices = products.map((p) => p.price).filter((n) => typeof n === 'number' && n > 0);
+  const moqMin = Math.min(...moqs);
+  const moqMax = Math.max(...moqs);
+  const priceMin = Math.min(...prices).toFixed(2);
+  const priceMax = Math.max(...prices).toFixed(2);
+
+  const blogDir = path.join(ROOT, 'src', 'pages', 'blog');
+  const posts = fs.existsSync(blogDir)
+    ? fs.readdirSync(blogDir).filter((f) => f.endsWith('.md')).length
+    : 0;
+
+  const expect = [];
+  expect.push(['catalogue size', new RegExp(`Catalogue size:\\s*${products.length} product lines`)]);
+  expect.push(['category count', new RegExp(`Catalogue size:.*across\\s+${collections.length}\\s+categor`, 'i')]);
+  expect.push(['MOQ range', new RegExp(`the range is ${moqMin}–${moqMax} pcs`)]);
+  expect.push(['FOB range', new RegExp(`USD ${priceMin}–${priceMax}`)]);
+  expect.push(['guide count', new RegExp(`${posts} sourcing and import guides`)]);
+
+  for (const c of collections) {
+    const n = products.filter((p) => (p.collections || []).includes(c.handle)).length;
+    expect.push([`${c.handle} line count`, new RegExp(`${c.handle}[^\\n]*?—\\s*${n} lines`)]);
+  }
+
+  const stale = expect.filter(([, re]) => !re.test(text)).map(([label]) => label);
+  if (stale.length) {
+    fail(
+      `LLMS public/llms.txt is out of date (${stale.join(', ')}). ` +
+        `Current truth: ${products.length} lines across ${collections.length} categories, ` +
+        `MOQ ${moqMin}-${moqMax}, FOB ${priceMin}-${priceMax}, ${posts} guides. Update the file.`
+    );
+  }
+}
+
 /* -------------------------------------------------------------- runner */
 
 console.log('Site integrity check — kidtoycn.com');
@@ -504,6 +560,7 @@ checkData(pages);
 checkAssets();
 checkOrphans(pages);
 checkRedirects(pages);
+checkDeclaredFacts();
 
 console.log('');
 if (warnings.length) {

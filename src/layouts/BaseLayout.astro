@@ -10,7 +10,16 @@ export interface Props {
 }
 
 const { title, description, ogImage } = Astro.props;
-const fullTitle = title ? `${title} | Kidtoy Factory` : 'Experienced Toy Manufacturer | B2B Wholesale Supply Chenghai';
+// Append the brand only when the result still fits a search result. Google
+// truncates around 60 characters, so a 70-character page title plus an
+// 18-character suffix shows as a cut-off fragment — the suffix is the part that
+// gets dropped anyway, so drop it ourselves and keep the full page title.
+const TITLE_SUFFIX = ' | Kidtoy Factory';
+const fullTitle = title
+  ? title.length + TITLE_SUFFIX.length <= 60
+    ? title + TITLE_SUFFIX
+    : title
+  : 'Experienced Toy Manufacturer | B2B Wholesale Supply Chenghai';
 const fullDesc = description || 'Direct source for high-quality toys and children\'s makeup from Chenghai. Professional OEM/ODM factory with competitive wholesale pricing.';
 ---
 

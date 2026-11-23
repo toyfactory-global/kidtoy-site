@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Washable vs Long-Wear Kids Makeup: What the Formula Decides"
+title: "Washable vs Long-Wear Kids Makeup"
 description: "Why water-soluble formulas dominate kids cosmetics, what 'washable' actually promises, which ingredients drive the claim, and how to read a cosmetic spec without a lab."
 date: "2026-11-14"
 related:

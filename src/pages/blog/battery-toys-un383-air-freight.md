@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Battery Toys and Air Freight: What UN 38.3 Actually Requires"
+title: "Battery Toys by Air: What UN 38.3 Requires"
 description: "Why a lithium battery toy cannot fly without a UN 38.3 report, what the report covers, the difference between installed and loose cells, and how to plan around it."
 date: "2026-11-10"
 related:

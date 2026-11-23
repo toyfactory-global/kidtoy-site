@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Kids Cosmetics vs Toy Regulation: Why the Certificate Is the Wrong One"
+title: "Kids Cosmetics Are Not Toys: Which Rules Apply"
 description: "A kids makeup set is usually a cosmetic, not a toy. What that changes: the regulation, the responsible person, the ingredient file and the label."
 date: "2026-11-09"
 related:

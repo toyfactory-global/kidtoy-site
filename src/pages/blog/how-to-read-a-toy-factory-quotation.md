@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "How to Read a Toy Factory Quotation (7 Lines That Decide the Order)"
+title: "How to Read a Toy Factory Quotation"
 description: "Most toy quotations leave out the four numbers you need to cost the shipment. Here is what a usable quote contains, what each line means, and the questions to send back."
 date: "2026-11-05"
 related:

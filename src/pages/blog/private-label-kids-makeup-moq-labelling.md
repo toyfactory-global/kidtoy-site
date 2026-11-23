@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Private Label Kids Makeup: MOQ, Artwork and the Label Fields People Forget"
+title: "Private Label Kids Makeup: MOQ and Labelling"
 description: "What actually changes when you put your own brand on a children's makeup kit: which MOQ applies to printed packaging, what must appear on the label, and the four fields that most first orders get wrong."
 date: "2026-10-24"
 related:

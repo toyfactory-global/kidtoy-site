@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Bulk Kids Beauty Sets: How to Build a Range Instead of Buying One SKU"
+title: "Bulk Kids Beauty Sets: Build a Range"
 description: "The kids beauty category runs from about $5.70 to $23.00 ex-factory. How to pick four SKUs that cover four shelf roles, and why buying three similar kits is the most common first-order mistake."
 date: "2026-10-26"
 related:

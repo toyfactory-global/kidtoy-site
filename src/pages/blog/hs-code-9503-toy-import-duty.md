@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "HS Code 9503 Explained: How Toy Import Duty Is Actually Calculated"
+title: "HS Code 9503: How Toy Import Duty Works"
 description: "Toys classify under HS heading 9503, but the duty you pay depends on the 8- or 10-digit national code, the country of origin and any trade-remedy duties on top. Here is how the calculation works and which documents you need."
 date: "2026-10-18"
 related:

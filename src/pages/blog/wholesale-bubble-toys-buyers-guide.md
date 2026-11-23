@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Wholesale Bubble Toys: A Buyer's Guide to the Electric Bubble Category"
+title: "Wholesale Bubble Toys: A Buyer's Guide"
 description: "Electric bubble machines, bubble guns and bubble wands span a 9x price range ex-factory. What actually drives the price, how battery type changes your freight, and how to build a range instead of buying one SKU."
 date: "2026-10-26"
 related:

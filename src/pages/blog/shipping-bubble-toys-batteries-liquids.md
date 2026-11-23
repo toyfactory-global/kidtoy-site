@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Shipping Bubble Toys: Why Batteries and Bubble Liquid Change the Freight Bill"
+title: "Shipping Bubble Toys: Batteries and Liquid"
 description: "A bubble machine has two properties that make it awkward to ship: a lithium cell and a bottle of liquid. What that does to air freight, why volumetric weight matters more than actual weight, and when to ship concentrate instead."
 date: "2026-10-24"
 related:

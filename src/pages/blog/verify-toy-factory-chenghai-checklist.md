@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "How to Verify a Toy Factory in Chenghai: 8 Checks Before You Wire a Deposit"
+title: "How to Verify a Toy Factory in Chenghai"
 description: "Chenghai is the densest toy production cluster in Guangdong, which means real factories and trading companies sit in the same buildings. Eight checks that separate them, in the order that costs you least to run."
 date: "2026-10-20"
 related:

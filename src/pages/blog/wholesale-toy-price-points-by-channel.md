@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Wholesale Toy Price Points by Channel: What Each One Can Absorb"
+title: "Toy Price Points by Sales Channel"
 description: "The same FOB price supports a different retail price in a gift shop, a pharmacy, a marketplace and a discount chain. How to work back from the shelf price to the price you can pay."
 date: "2026-11-21"
 related:

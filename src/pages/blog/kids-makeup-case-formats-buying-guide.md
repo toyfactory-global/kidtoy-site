@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Kids Makeup Case Formats: How Packaging Sets Your Retail Price"
+title: "Kids Makeup Case Formats: What Sets the Price"
 description: "In children's makeup the case is not packaging, it is the product. A comparison of bag, box, iron case, aluminium case and trolley formats, with real ex-factory price bands and what each one signals to a buyer."
 date: "2026-10-25"
 related:
