@@ -179,9 +179,15 @@ import SectionLayout from '../../layouts/SectionLayout.astro';
   <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">A worked example</h2>
   <p>
     Take 1,000 pieces at $2.40 FOB with $1,800 of sea freight, 0.5% insurance, 6.5% duty and $250 of brokerage and port
-    charges. The goods are $2,400 and the duty is about $156. Total landed is roughly $4,606, or <strong>$4.61 per
-    unit</strong> — a 92% uplift on the FOB price. To hold a 30% gross margin the wholesale price has to be about
-    $6.58, and a retailer taking a 50% margin then needs roughly $13.16 on shelf.
+    charges. The goods are $2,400, and because duty is assessed on the CIF value rather than on the goods alone it comes
+    to about $274 — not the $156 you get if you apply 6.5% to the goods value only. Total landed is $4,735.78, or
+    <strong>$4.74 per unit</strong>, a 97.3% uplift on the FOB price. To hold a 30% gross margin the wholesale price has to
+    be $6.77, and a retailer taking a 50% margin then needs roughly $13.54 on shelf.
+  </p>
+  <p>
+    That last gap is the arithmetic most buyers miss. Applying the duty rate to the goods value instead of the CIF value
+    understates the landed cost by about $118 on this order, and the error grows with the freight share — which is exactly
+    the case on a small shipment.
   </p>
   <p>
     That is the arithmetic buyers skip. The $2.40 toy is not a $2.40 toy, and the retail price the market will accept

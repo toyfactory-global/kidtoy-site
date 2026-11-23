@@ -205,24 +205,27 @@ import SectionLayout from '../../layouts/SectionLayout.astro';
       var addBtn = document.getElementById('mix-add');
       var n = 0;
 
-      function addRow() {
+      function addRow(isBlank) {
         n++;
         var div = document.createElement('div');
         div.className = 'grid grid-cols-2 sm:grid-cols-5 gap-2 items-end';
         div.innerHTML =
           '<label class="block col-span-2 sm:col-span-1"><span class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">Carton L×W×H (cm)</span>' +
           '<div class="flex gap-1">' +
-          '<input class="ml m-w w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="56" inputmode="decimal">' +
-          '<input class="ml m-w w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="50" inputmode="decimal">' +
-          '<input class="ml m-h w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="32" inputmode="decimal">' +
+          '<input class="ml m-w w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="56" value="56.5" inputmode="decimal">' +
+          '<input class="ml m-w w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="50" value="50" inputmode="decimal">' +
+          '<input class="ml m-h w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="32" value="32" inputmode="decimal">' +
           '</div></label>' +
           '<label class="block"><span class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">Qty (pcs)</span>' +
-          '<input class="m-q w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="1000" inputmode="numeric"></label>' +
+          '<input class="m-q w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="1000" value="500" inputmode="numeric"></label>' +
           '<label class="block"><span class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">Pcs / carton</span>' +
-          '<input class="m-p w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="36" inputmode="numeric"></label>' +
+          '<input class="m-p w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="36" value="36" inputmode="numeric"></label>' +
           '<div class="text-sm font-bold text-navy pb-2" data-out>—</div>' +
           '<button type="button" class="text-xs font-bold text-gray-400 hover:text-orange pb-2 text-left" data-del>Remove</button>';
         rows.appendChild(div);
+        if (isBlank) {
+          div.querySelectorAll('input').forEach(function (i) { i.value = ''; });
+        }
         div.querySelectorAll('input').forEach(function (i) { i.addEventListener('input', calc); });
         div.querySelector('[data-del]').addEventListener('click', function () { div.remove(); calc(); });
         calc();
@@ -256,9 +259,9 @@ import SectionLayout from '../../layouts/SectionLayout.astro';
         document.getElementById('mix-fit').textContent = fit;
       }
 
-      addBtn.addEventListener('click', addRow);
-      addRow();
-      addRow();
+      addBtn.addEventListener('click', function () { addRow(true); });
+      addRow(false);
+      addRow(true);
     })();
   </script>
 
