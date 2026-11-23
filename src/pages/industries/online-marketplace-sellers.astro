@@ -1,0 +1,85 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import ProductPickGrid from '../../components/ProductPickGrid.astro';
+---
+
+<SectionLayout
+  title="Wholesale Toys for Amazon, eBay & TikTok Shop Sellers"
+  description="Retail-ready toy sourcing for marketplace sellers: barcodes, poly bags, tracking labels, carton data for FBA, and MOQ that works for a first listing."
+  kicker="Buyer Segment"
+  h1="Toys for Online Marketplace Sellers"
+  lede="On a marketplace the product is not the only deliverable. The packaging, the label, the carton and the listing image are all part of what you sell — and a factory that only quotes the toy leaves you to solve the other four yourself."
+  parent={{ href: '/industries/', label: 'Buyer Segments' }}
+  faqs={[
+    {
+      q: 'Can you print barcodes and marketplace labels?',
+      a: 'Yes. We can print a barcode on the retail box or apply a label, add a poly bag with a suffocation warning, and print SKU-level carton marks. Send the exact specification from the marketplace — including label size and placement — and we will confirm what can be printed at the factory versus what has to be applied at your end.',
+    },
+    {
+      q: 'Do you provide carton data for FBA or 3PL shipment plans?',
+      a: 'Every product page carries pieces per carton, carton dimensions, CBM and gross weight, taken from the export carton table in our system. That is the data a shipment plan needs. If you need a carton-level label or a specific pallet configuration, tell us before production, not before shipping.',
+    },
+    {
+      q: 'What MOQ makes sense for a first listing?',
+      a: 'Enough to test the listing without betting the business on it. In our catalogue the floor is 54 pieces for several water gun lines and 72 for most makeup items, so a first order of two or three designs at MOQ is realistic. A single-item order of 50 pieces is possible on some lines but the freight per piece will be poor — that is the honest trade-off, not a rule.',
+    },
+    {
+      q: 'Can I use your product photos in my listing?',
+      a: 'The images on each product page are the supplier images for that item and they show the actual product. Many sellers use them for a first listing and replace them with their own photography once the product is in hand. If you are selling under your own brand on a custom box, plan your own shots — the supplier images will show the stock packaging, not yours.',
+    },
+    {
+      q: 'What about batteries and marketplace restrictions?',
+      a: 'Battery-operated toys attract additional restrictions on some marketplaces and on air freight. A product containing a lithium cell needs a UN 38.3 test report before an airline will carry it, and some marketplaces require the battery to be user-replaceable or the listing is restricted. Ask us which cell a specific item uses and whether the report exists before you build a listing around it.',
+    },
+  ]}
+  related={[
+    { href: '/tools/wholesale-price-break-calculator/', label: 'Order volume calculator', note: 'See cartons, CBM and container fill for a real item before you order.' },
+    { href: '/blog/shipping-bubble-toys-batteries-liquids/', label: 'Shipping batteries and liquids', note: 'Why an air shipment can be refused for a toy that is fine by sea.' },
+    { href: '/blog/private-label-kids-makeup-moq-labelling/', label: 'Private label and labelling', note: 'What a custom box actually costs in MOQ and time.' },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mt-2 mb-4">The five things a listing needs that a price list omits</h2>
+  <ul>
+    <li><strong>A retail package that survives shipping.</strong> A poly bag is not a retail box. If the item ships in a
+      bare colour box, expect corner damage on a percentage of units.</li>
+    <li><strong>A barcode in the right place.</strong> Printed on the box, or a label applied — and the placement matters
+      to the marketplace, not to the printer.</li>
+    <li><strong>A tracking label</strong> where the destination requires one. In the US this is a children's product
+      requirement, not a marketplace preference.</li>
+    <li><strong>Carton data that matches reality.</strong> A shipment plan built on an estimated carton size fails at the
+      warehouse, and the rebooking fee is yours.</li>
+    <li><strong>Consistent photography.</strong> The listing image has to look like the thing that arrives, or the
+      returns eat the margin.</li>
+  </ul>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">The economics of a marketplace toy</h2>
+  <p>
+    A $2.40 FOB toy does not become profitable because the retail price is $14.99. Marketplace referral fees, fulfilment,
+    storage, advertising and returns typically take a large share of the sale price, and they are charged on the retail
+    price, not on your cost. Before you commit to a quantity, run the landed cost and then subtract the platform's cut —
+    on many toys the advertising cost per unit is larger than the factory cost.
+  </p>
+  <p>
+    That is the reason low-unit-value items underperform online unless they are sold in multipacks. A single $2 bubble
+    gun cannot absorb $4 of fulfilment and advertising; a three-pack of the same item at $12 can. If you are sourcing for
+    a marketplace, price the multipack, not the unit.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">What we will not do</h2>
+  <p>
+    We will not print a claim on a box that the product has not been tested for, and we will not describe an item as
+    certified for a market where the paperwork does not exist. On a marketplace that is a takedown waiting to happen,
+    and it is your account at risk, not ours. If a listing needs a compliance claim, get the document first and build the
+    copy around what it actually says.
+  </p>
+
+  <ProductPickGrid
+    handles={[
+      'wholesale-electric-sunflower-bubble-machine-usb-rechargeable-flower-bubble-blower-with-cool-led-lights-for-kids-outdoor-play',
+      'wholesale-kids-diy-makeup-set-unicorn-rainbow-backpack-cosmetic-kit-with-nail-polish-lip-gloss-childrens-pretend-play-beauty-toy-for-girls',
+      'wholesale-kids-makeup-treasure-box-pink-vanity-case-with-seashell-compact-4-color-eyeshadow-nail-art-kit-girls-cosmetic-pretend-play-set-for-children',
+      'high-volume-cartoon-bubble-blower-gun-12000-per-min',
+    ]}
+    note="Items with a retail-ready box and a low enough unit cost to survive marketplace fees — including one designed for high-volume multipack selling."
+  />
+</SectionLayout>

@@ -1,188 +1,600 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProductCard from '../components/ProductCard.astro';
+import HeroInquiryForm from '../components/HeroInquiryForm.astro';
 import productsData from '../../data/products.json';
 
 const products = productsData.products;
 const collections = productsData.collections;
 
-// Group products by REAL collection assignment
-const getCategoryProducts = (handle) => products.filter(p => p.collections.includes(handle));
+const getCategoryProducts = (handle: string) => products.filter((p: any) => p.collections.includes(handle));
 
-// Hero images (original V3.8 transparent PNGs)
-const heroMakeup = 'https://sc02.alicdn.com/kf/Af8923c1f621547b6ab6869248b119717w.png';
-const heroWaterGun = 'https://sc02.alicdn.com/kf/Aacb85bc4dfdb40438c391ee78e83a560B.png';
+// Real numbers only: every stat on this page is derived from products.json at
+// build time, so the homepage cannot claim an MOQ or a price the catalogue does
+// not have. (It previously said "MOQ 50+" and "as low as 36 pieces" while the
+// real floor was 54 — the kind of drift that costs trust on the first reply.)
+const moqs = products.map((p: any) => p.moq).filter((n: any) => typeof n === 'number' && n > 0);
+const moqMin = Math.min(...moqs);
+const moqMax = Math.max(...moqs);
+const prices = products.map((p: any) => p.price).filter((n: any) => typeof n === 'number' && n > 0);
+const priceMin = Math.min(...prices);
+const priceMax = Math.max(...prices);
+
+const money = (n: number) => '$' + n.toFixed(2);
+
+const faqs = [
+  {
+    q: 'What is your minimum order quantity?',
+    a: `Per item it is between ${moqMin} and ${moqMax} pieces, depending on the mould and the packaging. ${moqMin} pieces is the floor, on a small number of water gun and makeup lines. A first order can be mixed across several items, so you do not have to commit to ${moqMax} pieces of one design to start.`,
+  },
+  {
+    q: 'How much does a wholesale toy cost from your factory?',
+    a: `Our current catalogue runs from ${money(priceMin)} to ${money(priceMax)} FOB per piece, across ${products.length} items. The FOB price is not the landed cost — freight, duty and brokerage add 15–35% depending on volume and destination. Use the landed cost calculator to see what a specific item costs delivered.`,
+  },
+  {
+    q: 'Can you put our brand on the product and the packaging?',
+    a: 'Yes. We manufacture to your specification (OEM) or brand an existing mould (ODM). In practice that means a colour change, a pad-printed logo, a printed colour box, a sleeve or a private label. Each of those has its own minimum quantity and its own artwork approval step, so the branding often sets a higher quantity than the toy itself.',
+  },
+  {
+    q: 'Which certifications do you provide?',
+    a: 'Testing scope varies by model and by market, so the honest answer is item-specific. Our factory holds the social and quality audits; product test reports sit at item level. Ask for a specific item number and the destination market and we will tell you what documentation exists for that item today, and whether more testing is needed.',
+  },
+  {
+    q: 'How long does production and shipping take?',
+    a: 'Production is typically 15–25 days for a standard order and longer for a custom box or a new colour. Sea freight adds 20–35 days depending on the lane, clearance and inland delivery 7–10 days, express 3–7 days. For a seasonal deadline, count backwards from the shelf date rather than forwards from the order.',
+  },
+  {
+    q: 'Do you ship worldwide, and can you quote freight?',
+    a: 'Yes. We quote FOB, CIF and door-to-door. We will give you the carton count and total CBM with every quote so you can put the same numbers to your own forwarder and compare — and we will tell you which container the order actually fills.',
+  },
+  {
+    q: 'Can I get a sample before ordering?',
+    a: 'Yes. A stock item ships in a few days; a customised sample takes longer because the colour or the artwork has to be produced. The sample fee is refundable against the first order once it reaches five cartons. The buyer pays the sample freight.',
+  },
+  {
+    q: 'What happens if the goods are defective?',
+    a: 'Pre-shipment inspection is where defects are caught and reworked — before the container leaves. That is why we push buyers to book an inspection rather than rely on a post-arrival claim: the return freight on a container usually exceeds the value of the claim, which is why this is B2B wholesale with no unconditional returns.',
+  },
+  {
+    q: 'Are you a factory or a trading company?',
+    a: 'A factory, in Chenghai, Guangdong, operating since 2001, with moulding, assembly and packing on site. The practical difference is that the carton data and the MOQ on this site come from production records rather than from a third party, and a change to the product goes through our own line.',
+  },
+  {
+    q: 'How do I place an order?',
+    a: 'Send the item numbers, the quantity and the destination. We quote, you approve a sample, we schedule production against the deposit, you book an inspection, we ship against the balance and the documents. The full sequence is written out on the factory page.',
+  },
+];
 ---
 
-<BaseLayout>
-  <!-- Hero (large V3.8: full-width banner, big product images left & right) -->
-  <section class="relative overflow-hidden" style="min-height: 850px; background: linear-gradient(90deg, #EDF4FF 0%, #FFFFFF 40%, #FFFFFF 60%, #F3F0FF 100%);">
-    <style>
-      .hero-glow { position: absolute; width: 520px; height: 520px; border-radius: 50%; filter: blur(110px); opacity: 0.4; pointer-events: none; }
-      .hero-img { mix-blend-mode: multiply; filter: brightness(1.05) contrast(1.1); pointer-events: none; }
-    </style>
-    <div class="relative w-full flex items-center justify-between gap-6 px-[6%] py-20" style="min-height: 850px;">
-      <!-- Left product: Kids Makeup Set (large) -->
-      <div class="relative w-[26%] min-w-[200px] flex items-center justify-center hidden md:flex" style="min-height: 500px;">
-        <div class="hero-glow" style="left: -60px; top: 10%; background: #FFE3E3;"></div>
-        <img src={heroMakeup} alt="Kids Makeup Set" class="hero-img relative z-[1] w-full h-auto" style="transform: scale(1.15);" />
-      </div>
-
-      <!-- Center: marketing text (large) -->
-      <div class="text-center flex-1 max-w-3xl mx-auto relative z-10">
-        <span class="inline-block bg-orange text-white px-6 py-2.5 rounded-full text-sm font-extrabold tracking-[0.15em] mb-8">FACTORY DIRECT SELECTION</span>
-        <h1 class="text-5xl sm:text-6xl lg:text-[4.8rem] font-extrabold text-navy leading-[1.05] tracking-tight">
-          WHOLESALE GIFT & TOY<br/>
-          <span class="text-orange text-4xl sm:text-5xl lg:text-[3.2rem] tracking-tight">FACTORY DIRECT SUPPLY</span>
-        </h1>
-        <p class="text-lg lg:text-xl text-gray-500 mt-8 max-w-2xl mx-auto leading-relaxed">
-          Premium OEM/ODM solutions for global toy brands. Precision engineering, industrial scale, certified quality.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-5 mt-10 justify-center">
-          <a href="/collections/all/" target="_blank" rel="noopener noreferrer" class="bg-navy text-white px-10 py-4.5 rounded font-bold text-base hover:bg-orange transition-colors" style="padding: 18px 50px;">EXPLORE CATALOG</a>
-          <a href="/contact/" target="_blank" rel="noopener noreferrer" class="border-2 border-navy text-navy px-10 py-4.5 rounded font-bold text-base hover:bg-navy hover:text-white transition-colors" style="padding: 18px 50px;">REQUEST QUOTE</a>
-        </div>
-      </div>
-
-      <!-- Right product: Electric Water Gun (large) -->
-      <div class="relative w-[27%] min-w-[210px] flex items-center justify-center hidden md:flex" style="min-height: 500px;">
-        <div class="hero-glow" style="right: -60px; top: 12%; background: #CDE9FF;"></div>
-        <img src={heroWaterGun} alt="Electric Water Gun" class="hero-img relative z-[1] w-full h-auto" style="transform: scale(1.18);" />
-      </div>
-    </div>
-  </section>
-
-  <!-- Factory Info -->
-  <section class="py-16 bg-white border-y border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
-      <div class="grid grid-cols-2 gap-4 -skew-y-3">
-        <div class="space-y-4">
-          <div class="h-44 bg-gray-100 rounded-xl overflow-hidden skew-y-3"><img src="https://sc01.alicdn.com/kf/H428b51622ec946f4932ed35bc5920addu.png" alt="Factory" class="w-full h-full object-cover" /></div>
-          <div class="h-44 bg-gray-100 rounded-xl overflow-hidden skew-y-3"><img src="https://sc01.alicdn.com/kf/H86381d3008dd4c6598369147d6676cd3V.png" alt="Workshop" class="w-full h-full object-cover" /></div>
-        </div>
-        <div class="space-y-4 mt-8">
-          <div class="h-44 bg-gray-100 rounded-xl overflow-hidden skew-y-3"><img src="https://sc01.alicdn.com/kf/H6b5dd0979c984ccdb93d56d8b7799d670.png" alt="Production" class="w-full h-full object-cover" /></div>
-          <div class="h-44 bg-gray-100 rounded-xl overflow-hidden skew-y-3"><img src="https://sc01.alicdn.com/kf/H713c066d3f76416b92eedacf7add641eM.png" alt="Quality Control" class="w-full h-full object-cover" /></div>
-        </div>
-      </div>
+<BaseLayout
+  title="Wholesale Toys Direct from a Chenghai Factory"
+  description={`Toy manufacturer in Chenghai since 2001. ${products.length} wholesale lines across kids makeup, bubble toys, electric water guns and STEM — MOQ from ${moqMin} pcs, FOB ${money(priceMin)}–${money(priceMax)}, OEM/ODM.`}
+>
+  <!-- ================= HERO ================= -->
+  <section class="relative overflow-hidden bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 grid lg:grid-cols-[1.15fr_0.85fr] gap-12 items-center">
       <div>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-6">Trusted Manufacturing<br/>Since 2001</h2>
-        <p class="text-gray-500 leading-relaxed mb-8">
-          Located in <strong>Chenghai, Guangdong</strong>. Our 5,000sqm facility specializes in premium children's toys and makeup. Certified by <strong>GMPC, ISO 22716, GSV, BSCI, and SEDEX</strong>.
+        <span class="inline-block bg-orange/10 text-orange px-4 py-2 rounded-full text-[11px] font-extrabold tracking-[0.18em] mb-6">
+          CHENGHAI FACTORY · SINCE 2001
+        </span>
+        <h1 class="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold text-navy leading-[1.05] tracking-tight mb-6">
+          Wholesale toys,<br />
+          straight from the<br />
+          <span class="text-orange">production line.</span>
+        </h1>
+        <p class="text-lg text-gray-500 leading-relaxed max-w-xl mb-8">
+          {products.length} wholesale toy lines for importers, distributors and marketplace sellers — kids makeup,
+          bubble toys, electric water guns and STEM. MOQ from {moqMin} pieces, FOB {money(priceMin)} to {money(priceMax)},
+          with the carton data you need to cost the freight before you commit.
         </p>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="bg-white p-5 border-l-4 border-orange shadow-sm"><strong class="block text-navy text-xl">25+ Years</strong><span class="text-sm text-gray-400">Global Export</span></div>
-          <div class="bg-white p-5 border-l-4 border-orange shadow-sm"><strong class="block text-navy text-xl">ISO Certified</strong><span class="text-sm text-gray-400">Quality Control</span></div>
+
+        <div class="flex flex-wrap gap-x-8 gap-y-4 mb-9">
+          <div>
+            <div class="text-2xl font-extrabold text-navy">{products.length}</div>
+            <div class="text-xs text-gray-400 uppercase tracking-wider">Catalogue lines</div>
+          </div>
+          <div>
+            <div class="text-2xl font-extrabold text-navy">{moqMin}+</div>
+            <div class="text-xs text-gray-400 uppercase tracking-wider">MOQ per item</div>
+          </div>
+          <div>
+            <div class="text-2xl font-extrabold text-navy">25 yrs</div>
+            <div class="text-xs text-gray-400 uppercase tracking-wider">Manufacturing</div>
+          </div>
+          <div>
+            <div class="text-2xl font-extrabold text-navy">5,000 m²</div>
+            <div class="text-xs text-gray-400 uppercase tracking-wider">Chenghai plant</div>
+          </div>
         </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="/collections/all/" class="bg-navy text-white px-7 py-3.5 rounded-lg font-bold text-sm hover:bg-orange transition-colors">
+            Browse the catalogue
+          </a>
+          <a href="https://wa.me/8613715961913?text=Hello%20Kidtoy%20Factory%2C%20I%20would%20like%20a%20quotation" target="_blank" rel="noopener noreferrer" class="border-2 border-navy text-navy px-7 py-3.5 rounded-lg font-bold text-sm hover:bg-navy hover:text-white transition-colors">
+            WhatsApp us
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:pl-4">
+        <HeroInquiryForm />
       </div>
     </div>
   </section>
 
-  <!-- Trust Badges -->
-  <section class="bg-gray-50 border-y border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <!-- ================= TRUST STRIP ================= -->
+  <section class="bg-gray-50 border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        <div class="bg-white p-6 rounded-xl shadow-sm">
-          <div class="text-navy font-extrabold text-lg mb-1">GLOBAL SHIPPING</div>
-          <div class="text-gray-400 text-xs">7-14 Days Express Delivery</div>
+        <div>
+          <div class="text-navy font-extrabold text-sm mb-1">FACTORY DIRECT</div>
+          <div class="text-gray-400 text-xs">No trading company in between</div>
         </div>
-        <div class="bg-white p-6 rounded-xl shadow-sm">
-          <div class="text-navy font-extrabold text-lg mb-1">MOQ 50+ PCS</div>
-          <div class="text-gray-400 text-xs">Support Small Batch B2B</div>
+        <div>
+          <div class="text-navy font-extrabold text-sm mb-1">REAL CARTON DATA</div>
+          <div class="text-gray-400 text-xs">CBM and weight on every item</div>
         </div>
-        <div class="bg-white p-6 rounded-xl shadow-sm">
-          <div class="text-navy font-extrabold text-lg mb-1">ISO CERTIFIED</div>
-          <div class="text-gray-400 text-xs">GMPC & BSCI Audited Factory</div>
+        <div>
+          <div class="text-navy font-extrabold text-sm mb-1">OEM / ODM</div>
+          <div class="text-gray-400 text-xs">Colour, logo and packaging</div>
         </div>
-        <div class="bg-white p-6 rounded-xl shadow-sm">
-          <div class="text-navy font-extrabold text-lg mb-1">FACTORY DIRECT</div>
-          <div class="text-gray-400 text-xs">Source Pricing, No Middleman</div>
+        <div>
+          <div class="text-navy font-extrabold text-sm mb-1">PRE-SHIPMENT QC</div>
+          <div class="text-gray-400 text-xs">Inspected before it leaves</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Product Categories with Banners -->
-  {collections.filter(c => c.handle !== 'frontpage').map(collection => {
+  <!-- ================= SELF-QUALIFICATION ================= -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[0.9fr_1.1fr] gap-12">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Before you read further</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight">
+          Is Kidtoy the right supplier for your order?
+        </h2>
+      </div>
+      <div class="space-y-5 text-gray-600 leading-relaxed">
+        <p>
+          We are a good fit if you are buying <strong>at least {moqMin} pieces per design</strong>, you resell rather than
+          gift, and you care more about the carton and the paperwork than about a catalogue that photographs well. Most of
+          our buyers are importers, distributors, gift and pharmacy buyers, and marketplace sellers building a range.
+        </p>
+        <p>
+          We are probably a bad fit if you need <strong>one unit</strong>, if you need a <strong>retail storefront with
+          checkout</strong>, or if you need a <strong>certified claim for a market we have not tested for</strong>. We will
+          say so rather than take the order and disappoint you at the border.
+        </p>
+        <div class="grid sm:grid-cols-2 gap-4 pt-2">
+          <div class="bg-green-50 border border-green-100 rounded-xl p-5">
+            <div class="font-extrabold text-navy text-sm mb-3">Good fit</div>
+            <ul class="text-sm space-y-2 text-gray-600">
+              <li>Importers and distributors</li>
+              <li>Gift, toy and pharmacy retail buyers</li>
+              <li>Amazon / eBay / TikTok sellers</li>
+              <li>Mixed first orders across several items</li>
+            </ul>
+          </div>
+          <div class="bg-gray-50 border border-gray-200 rounded-xl p-5">
+            <div class="font-extrabold text-navy text-sm mb-3">Not a fit</div>
+            <ul class="text-sm space-y-2 text-gray-600">
+              <li>Single-unit or sample-only buyers</li>
+              <li>Consumer checkout / dropshipping retail</li>
+              <li>Markets where we hold no test documentation</li>
+              <li>Custom tooling with no deposit</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CATALOGUE BY CATEGORY ================= -->
+  {collections.filter((c: any) => c.handle !== 'frontpage').map((collection: any) => {
     const catProducts = getCategoryProducts(collection.handle);
     return (
-    <section class="py-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {collection.banner && (
-          <a href={`/collections/${collection.handle}/`} target="_blank" rel="noopener noreferrer" class="block mb-8 overflow-hidden rounded-xl">
-            <img src={collection.banner} alt={collection.title} class="w-full h-auto" />
-          </a>
-        )}
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {catProducts.slice(0, 8).map(product => (
-            <ProductCard
-              title={product.title}
-              handle={product.handle}
-              price={product.price}
-              image={product.images?.[0]?.src || '/placeholder.jpg'}
-              imageAlt={product.images?.[0]?.alt || product.title}
-            />
-          ))}
-        </div>
-        {catProducts.length === 0 && (
-          <div class="text-center bg-gray-50 border border-dashed border-gray-200 rounded-xl py-12">
-            <p class="text-navy font-bold text-lg mb-2">New STEM Toy Lineup Coming Soon</p>
-            <p class="text-gray-400 text-sm">Contact us for the latest STEM educational toy catalog and MOQ pricing.</p>
+      <section class="py-12 bg-gray-50/60 border-y border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+            <div>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">{collection.title}</h2>
+              <p class="text-sm text-gray-500 mt-1">
+                {catProducts.length} wholesale {catProducts.length === 1 ? 'line' : 'lines'} · OEM/ODM available
+              </p>
+            </div>
+            <a href={`/collections/${collection.handle}/`} class="text-sm font-bold text-orange hover:text-navy transition-colors">
+              View all {collection.title} →
+            </a>
           </div>
-        )}
-        {catProducts.length > 8 && (
-          <a href={`/collections/${collection.handle}/`} target="_blank" rel="noopener noreferrer" class="mt-8 flex items-center justify-center gap-3 bg-navy text-white py-4 rounded-xl font-extrabold tracking-[0.2em] hover:bg-orange transition-colors">
-            VIEW ALL {collection.title.toUpperCase()} <span class="text-orange text-xl">→</span>
-          </a>
-        )}
-      </div>
-    </section>
+
+          {collection.banner && (
+            <a href={`/collections/${collection.handle}/`} class="block mb-6 overflow-hidden rounded-xl">
+              <img src={collection.banner} alt={collection.title} class="w-full h-auto" loading="lazy" />
+            </a>
+          )}
+
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {catProducts.slice(0, 8).map((product: any) => (
+              <ProductCard
+                title={product.title}
+                handle={product.handle}
+                price={product.price}
+                image={product.images?.[0]?.src || '/placeholder.jpg'}
+                imageAlt={product.images?.[0]?.alt || product.title}
+              />
+            ))}
+          </div>
+
+          {catProducts.length === 0 && (
+            <div class="text-center bg-white border border-dashed border-gray-200 rounded-xl py-12">
+              <p class="text-navy font-bold text-lg mb-2">New STEM line-up coming</p>
+              <p class="text-gray-400 text-sm">Ask us for the current STEM catalogue and MOQ pricing.</p>
+            </div>
+          )}
+        </div>
+      </section>
     );
   })}
 
-  <!-- FAQ Section -->
-  <section class="py-16 bg-white">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-navy text-center mb-4">B2B Buying Guide & FAQ</h2>
-      <p class="text-center text-gray-400 mb-12">Everything international buyers need to know about sourcing from our Chenghai factory.</p>
-      
-      <div class="space-y-3">
+  <!-- ================= PRICE AND MOQ ================= -->
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 article-body">
+      <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Costing</p>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-6">
+        How much does a wholesale toy order cost, and what is the minimum?
+      </h2>
+      <p>
+        Two numbers decide whether an order is worth placing: the MOQ, which sets your cash exposure, and the landed cost,
+        which sets whether the retail price works. Neither is visible on a price list.
+      </p>
+      <p>
+        Our MOQ runs from <strong>{moqMin} to {moqMax} pieces per design</strong>. The floor sits on a small number of water
+        gun and makeup lines; the ceiling is on items where the mould or the packaging makes a short run uneconomic. A
+        first order can be mixed across several items, which is how most buyers start — three designs at their individual
+        MOQ rather than {moqMax} pieces of one.
+      </p>
+      <p>
+        The FOB price in the catalogue is <strong>{money(priceMin)} to {money(priceMax)}</strong>. On top of it comes
+        freight, insurance, duty and brokerage, and those do not scale down with the order. On a small shipment the fixed
+        charges can add more than 40% to the goods value, which is why a cheap unit price on a half-empty container is
+        worse than a slightly higher one on a full container.
+      </p>
+
+      <div class="not-prose grid sm:grid-cols-3 gap-4 my-8">
+        <div class="border border-gray-200 rounded-xl p-5">
+          <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">MOQ range</div>
+          <div class="text-2xl font-extrabold text-navy">{moqMin}–{moqMax}</div>
+          <div class="text-xs text-gray-500 mt-1">pcs per design</div>
+        </div>
+        <div class="border border-gray-200 rounded-xl p-5">
+          <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">FOB range</div>
+          <div class="text-2xl font-extrabold text-navy">{money(priceMin)}–{money(priceMax)}</div>
+          <div class="text-xs text-gray-500 mt-1">per piece</div>
+        </div>
+        <div class="border border-gray-200 rounded-xl p-5">
+          <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Landed uplift</div>
+          <div class="text-2xl font-extrabold text-navy">15–35%</div>
+          <div class="text-xs text-gray-500 mt-1">typical, all-in</div>
+        </div>
+      </div>
+
+      <p>
+        Work it out before you ask for a quotation. The <a href="/tools/landed-cost-calculator/" class="text-orange font-semibold">landed
+        cost calculator</a> takes your freight quote and your duty rate and gives you the true cost per piece plus the
+        wholesale price you need to hold a margin. The <a href="/tools/wholesale-price-break-calculator/" class="text-orange font-semibold">order
+        volume calculator</a> runs the same arithmetic on a real catalogue item, including the cartons and the container
+        fill.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= MARKETS AND DOCUMENTS ================= -->
+  <section class="py-16 bg-gray-50 border-y border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 article-body">
+      <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Compliance</p>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-6">
+        Which documents will your market ask for at the border?
+      </h2>
+      <p>
+        The short answer is: it depends on the product, not on the supplier. A plastic role-play toy, a battery-operated
+        bubble machine and a kids lip gloss are three different regulatory objects, even when they sit in the same carton.
+      </p>
+      <ul>
+        <li><strong>EU:</strong> CE mark, EN 71 for the toy, EN 62115 for anything electric, plus REACH — and for a kids
+          cosmetic, the Cosmetics Regulation instead of the toy directive.</li>
+        <li><strong>US:</strong> ASTM F963 testing, CPSIA lead and phthalate limits, a Children's Product Certificate and a
+          tracking label on the product and the packaging.</li>
+        <li><strong>UK, Canada, Australia, Gulf, Brazil, Japan:</strong> each has its own mark or registration and its own
+          labelling language requirement.</li>
+      </ul>
+      <p>
+        The <a href="/tools/toy-certification-matrix/" class="text-orange font-semibold">certification matrix</a> sets the
+        eight main markets side by side, by product type, and states what each document does not prove. Read that before
+        you accept a supplier's folder of certificates as an answer.
+      </p>
+      <p>
+        Our position is narrow and deliberate: we document what a specific item has actually been tested for, and we do not
+        claim a standard on a product that has not been tested against it. Testing scope varies by model and market — ask
+        with an item number and a destination.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= LOGISTICS ================= -->
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 article-body">
+      <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Shipping</p>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-6">
+        What does it take to ship a toy order?
+      </h2>
+      <p>
+        Toys are usually volume-bound rather than weight-bound: a carton of bubble machines fills space long before it
+        approaches a container's payload. That means the number that matters is the carton dimension, and the number that
+        decides your freight per piece is how much of the container the order fills.
+      </p>
+      <p>
+        Every product page carries pieces per carton, carton dimensions, CBM and gross weight, taken from our export
+        records. With those four numbers you can price the freight yourself before you commit — or put them straight into
+        the <a href="/tools/container-loading-calculator/" class="text-orange font-semibold">container loading
+        calculator</a> and see whether the order is a 20GP, a 40HQ, or a mixed load that needs rebalancing.
+      </p>
+      <p>
+        Two things worth planning before the order rather than after. <strong>Battery toys</strong> need a UN 38.3 report
+        on the cell before an airline will carry them, which rules out a last-minute air shipment. And
+        <strong>liquid-filled products</strong> change the shipping class, so a bubble toy that ships comfortably by sea may
+        be restricted by air.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= OEM / ODM ================= -->
+  <section class="py-16 bg-gray-50 border-y border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 article-body">
+      <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Branding</p>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-6">
+        Can you brand the product and the packaging?
+      </h2>
+      <p>
+        Yes, at four levels of commitment, and the cost is mostly in the minimum quantity rather than in the unit price:
+      </p>
+      <ul>
+        <li><strong>Insert card or sticker</strong> in a stock box — lowest minimum, fastest, and it still reads as branded
+          when the box is opened.</li>
+        <li><strong>Printed sleeve</strong> over the stock box — looks like a custom box without a custom-box print run.</li>
+        <li><strong>Fully printed colour box</strong> — the cleanest result, the highest minimum, because it is a separate
+          print and die-cut run.</li>
+        <li><strong>OEM</strong> — a colour change, a new mould or a modified product. This is a tooling and development
+          project with its own timeline, not a packaging option.</li>
+      </ul>
+      <p>
+        ODM is usually the right starting point: you choose from moulds we already run, we brand them, and you reach market
+        in weeks instead of months. Move to OEM once a product has proven itself — starting with OEM on an unproven design
+        is the expensive way to learn.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= HOW TO ORDER ================= -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-10">
+        <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Process</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-4">
+          How do you place an order?
+        </h2>
+        <p class="text-gray-600 leading-relaxed">
+          Four steps, and the two that matter most are the sample and the inspection — because they are the two points at
+          which a problem is still cheap to fix.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {[
-          { q: "What is your Minimum Order Quantity (MOQ)?", a: "Our standard MOQ is 50 pieces per design for most products. For bubble toys and small accessories, we accept orders as low as 36 pieces. Custom OEM orders typically start at 500-1000 units depending on complexity." },
-          { q: "Can I customize products with my own brand (OEM/ODM)?", a: "Yes! We specialize in OEM and ODM manufacturing. You can customize colors, packaging, logos, and product features. Typical turnaround for custom samples is 7-14 days." },
-          { q: "What certifications do your products have?", a: "Our factory is certified with ISO 22716 (GMPC), BSCI, SEDEX, and GSV. Products meet CE (EN71), ASTM F963, CPSIA, and EN62115 standards." },
-          { q: "What are your shipping options and lead times?", a: "We offer air freight (7-10 days), sea freight (20-30 days), and express courier (DHL/UPS/FedEx, 3-7 days). Production lead time is 15-25 days for standard orders." },
-          { q: "How can I get samples before placing a bulk order?", a: "Sample orders are welcome! Existing product samples ship within 2-3 days. Custom OEM samples take 7-14 days to produce. Sample fees are refundable when you place a bulk order." },
-          { q: "Do you offer wholesale prices for retailers?", a: "Yes, we offer tiered wholesale pricing based on order volume. The more you order, the lower the unit price." }
-        ].map((faq, i) => (
-          <details class="border border-gray-200 rounded-xl p-5 bg-gray-50 cursor-pointer group">
-            <summary class="font-bold text-navy flex justify-between items-center list-none">
-              {faq.q}
-              <span class="text-orange text-xl group-open:hidden">+</span>
-              <span class="text-orange text-xl hidden group-open:inline">−</span>
-            </summary>
-            <p class="mt-4 text-gray-500 leading-relaxed text-sm">{faq.a}</p>
-          </details>
+          { n: '01', t: 'Enquiry and quote', d: 'Send item numbers or a description, the quantity and the destination. You get unit price, MOQ, carton data, CBM and a production window.' },
+          { n: '02', t: 'Sample', d: 'A stock item ships in days; a custom colour or box takes longer. The approved sample becomes the reference for everything after it.' },
+          { n: '03', t: 'Production', d: 'Scheduled against the deposit and the approved sample. Typically 15–25 days. Any change is put to you in writing before it happens.' },
+          { n: '04', t: 'Inspection and shipping', d: 'Pre-shipment inspection against the sample and the carton plan, then documents, balance, and the goods move.' },
+        ].map((s) => (
+          <div class="border border-gray-200 rounded-2xl p-6">
+            <div class="text-orange font-extrabold text-2xl mb-3">{s.n}</div>
+            <div class="font-extrabold text-navy mb-2">{s.t}</div>
+            <p class="text-sm text-gray-500 leading-relaxed">{s.d}</p>
+          </div>
         ))}
       </div>
 
-      <div class="text-center mt-10">
-        <a href="/contact/" target="_blank" rel="noopener noreferrer" class="inline-block bg-navy text-white px-8 py-4 rounded font-bold text-sm hover:bg-orange transition-colors">CONTACT OUR SALES TEAM</a>
+      <p class="max-w-3xl mt-8 text-gray-600 leading-relaxed">
+        The full sequence, including what we will and will not claim, is on the <a href="/factory/" class="text-orange font-semibold">factory
+        page</a>. If you want to see the arithmetic end to end, the <a href="/case-studies/" class="text-orange font-semibold">order
+        walk-throughs</a> show a mixed first container and a private-label programme with the numbers visible.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= WHAT BUYERS GET WRONG ================= -->
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 article-body">
+      <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">First order</p>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-6">
+        What do buyers get wrong on a first order?
+      </h2>
+      <p>
+        Five mistakes account for most of the disappointing first shipments we see, and none of them is about the product.
+      </p>
+      <ul>
+        <li>
+          <strong>Ordering to the price tier instead of the container.</strong> A quantity break saves a few percent on the
+          goods; filling the container saves far more on the freight per piece. The container wins almost every time.
+        </li>
+        <li>
+          <strong>Approving a sample without checking the carton.</strong> The carton is what you pay freight on, and it is
+          the line almost nobody verifies. Measure it, and compare it with the quotation.
+        </li>
+        <li>
+          <strong>Treating a toy certificate as a cosmetic file.</strong> A makeup set that goes on the skin is a cosmetic
+          in most markets. The toy report answers a different question, and a pharmacy buyer will spot the gap immediately.
+        </li>
+        <li>
+          <strong>Counting forwards from the order instead of backwards from the shelf.</strong> Production, sea freight,
+          clearance and inland delivery together are ten to twelve weeks. A Q4 shelf date means a summer purchase order,
+          not an autumn one.
+        </li>
+        <li>
+          <strong>Skipping the pre-shipment inspection to save a few hundred dollars.</strong> The inspection is the last
+          point at which a defect is cheap to fix. After the container sails, the return freight usually exceeds the value
+          of the claim — which is exactly why this is B2B wholesale with no unconditional returns.
+        </li>
+      </ul>
+      <p>
+        Each of those is a decision you can make correctly with no extra cost, just a week earlier. If you want the
+        arithmetic behind them, the <a href="/case-studies/" class="text-orange font-semibold">order walk-throughs</a> show
+        both a mixed first container and a private-label programme with the numbers visible.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= SEGMENTS ================= -->
+  <section class="py-16 bg-gray-50 border-y border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mb-10">
+        <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Buying by segment</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-4">
+          The same factory sells differently to a distributor and a pharmacy chain
+        </h2>
+        <p class="text-gray-600 leading-relaxed">
+          The difference is not the price. It is the MOQ, the packaging, the paperwork and the calendar. Pick the segment
+          you buy for and the buying guide tells you what the order has to look like.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { href: '/industries/party-supplies-distributors/', t: 'Party supplies', d: 'Volume, carton economics, consumables.' },
+          { href: '/industries/gift-shop-retailers/', t: 'Gift retail', d: 'A range and three price points, not one SKU.' },
+          { href: '/industries/online-marketplace-sellers/', t: 'Marketplace sellers', d: 'Barcodes, labels, retail-ready packing.' },
+          { href: '/industries/pharmacy-drugstore-chains/', t: 'Pharmacy chains', d: 'Cosmetic regulation, not the toy regime.' },
+        ].map((s) => (
+          <a href={s.href} class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-orange transition-colors group">
+            <span class="block font-extrabold text-navy group-hover:text-orange transition-colors mb-1">{s.t}</span>
+            <span class="block text-sm text-gray-500 leading-relaxed">{s.d}</span>
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="/industries/" class="inline-block text-sm font-bold text-orange hover:text-navy transition-colors">All eight buyer segments →</a>
+        <span class="text-gray-300">|</span>
+        <a href="/factory/" class="inline-block text-sm font-bold text-orange hover:text-navy transition-colors">Inside the factory →</a>
+        <span class="text-gray-300">|</span>
+        <a href="/certifications/" class="inline-block text-sm font-bold text-orange hover:text-navy transition-colors">Certificates and audits →</a>
       </div>
     </div>
   </section>
 
-  <!-- FAQPage JSON-LD -->
+  <!-- ================= TOOLS AND GUIDES ================= -->
+  <section class="py-16 bg-navy">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mb-10">
+        <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Free tools</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+          Cost the order before you ask for a quote
+        </h2>
+        <p class="text-gray-300 leading-relaxed mt-4">
+          Four calculators that run in your browser, built on the same carton data we ship on. No signup, nothing stored.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { href: '/tools/container-loading-calculator/', t: 'Container loading', d: 'Cartons, CBM and container fill.' },
+          { href: '/tools/landed-cost-calculator/', t: 'Landed cost', d: 'Duty, freight and the price you need.' },
+          { href: '/tools/wholesale-price-break-calculator/', t: 'Order volume', d: 'Real item, real carton data.' },
+          { href: '/tools/toy-certification-matrix/', t: 'Certification matrix', d: 'Eight markets, side by side.' },
+        ].map((t) => (
+          <a href={t.href} class="block bg-white/5 border border-white/10 rounded-xl p-5 hover:border-orange transition-colors group">
+            <span class="block font-extrabold text-white group-hover:text-orange transition-colors mb-1">{t.t}</span>
+            <span class="block text-sm text-gray-400 leading-relaxed">{t.d}</span>
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/tools/" class="inline-block bg-orange text-white font-bold px-6 py-3 rounded-lg hover:bg-white hover:text-navy transition-colors text-sm">All tools</a>
+        <a href="/blog/" class="inline-block border border-white/30 text-white font-bold px-6 py-3 rounded-lg hover:bg-white hover:text-navy transition-colors text-sm">Buyer guides</a>
+        <a href="/industries/" class="inline-block border border-white/30 text-white font-bold px-6 py-3 rounded-lg hover:bg-white hover:text-navy transition-colors text-sm">Buying by segment</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">FAQ</p>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-3">
+        Wholesale buying questions
+      </h2>
+      <p class="text-gray-500 mb-10">The answers we give buyers before their first order.</p>
+
+      <div class="divide-y divide-gray-100 border-t border-gray-100">
+        {faqs.map((f) => (
+          <details class="group py-5">
+            <summary class="flex items-start justify-between gap-4 cursor-pointer list-none">
+              <h3 class="text-base font-bold text-navy leading-snug">{f.q}</h3>
+              <span class="text-orange text-xl leading-none group-open:rotate-45 transition-transform shrink-0">+</span>
+            </summary>
+            <p class="mt-3 text-sm text-gray-600 leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CLOSING CTA ================= -->
+  <section class="pb-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-navy rounded-3xl p-10 sm:p-14 text-center">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-4 leading-tight">
+          Send the item numbers. We will send the numbers back.
+        </h2>
+        <p class="text-gray-300 leading-relaxed max-w-xl mx-auto mb-8">
+          Unit price, MOQ, carton dimensions, total CBM and a production window — on the items you actually want, within
+          one business day.
+        </p>
+        <div class="flex flex-wrap gap-3 justify-center">
+          <a href="/contact/" class="bg-orange text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-navy transition-colors">Request a quote</a>
+          <a href="https://wa.me/8613715961913?text=Hello%20Kidtoy%20Factory%2C%20I%20would%20like%20a%20quotation" target="_blank" rel="noopener noreferrer" class="border border-white/40 text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-navy transition-colors">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= JSON-LD ================= -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      { "@type": "Question", "name": "What is your Minimum Order Quantity (MOQ)?", "acceptedAnswer": { "@type": "Answer", "text": "Our standard MOQ is 50 pieces per design. For bubble toys and small accessories, we accept orders as low as 36 pieces. Custom OEM orders start at 500-1000 units." } },
-      { "@type": "Question", "name": "Can I customize products with my own brand (OEM/ODM)?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we specialize in OEM and ODM manufacturing. You can customize colors, packaging, logos, and product features. Custom samples take 7-14 days." } },
-      { "@type": "Question", "name": "What certifications does Kidtoy Factory have?", "acceptedAnswer": { "@type": "Answer", "text": "Our factory is certified with ISO 22716 (GMPC), BSCI, SEDEX, and GSV. Products meet CE (EN71), ASTM F963, CPSIA, and EN62115 standards." } },
-      { "@type": "Question", "name": "How long is your shipping and production time?", "acceptedAnswer": { "@type": "Answer", "text": "Air freight takes 7-10 days, sea freight 20-30 days, express 3-7 days. Production lead time is 15-25 days for standard orders." } },
-      { "@type": "Question", "name": "How can I get product samples?", "acceptedAnswer": { "@type": "Answer", "text": "Sample orders are welcome. Existing product samples ship in 2-3 days. Custom OEM samples take 7-14 days. Sample fees are refundable on bulk orders." } },
-      { "@type": "Question", "name": "Do you offer wholesale prices?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we offer tiered wholesale pricing based on order volume." } }
-    ]
+    "@id": "https://kidtoycn.com/#faq",
+    "mainEntity": faqs.map((f) => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": { "@type": "Answer", "text": f.a }
+    }))
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": "https://kidtoycn.com/#catalogue",
+    "name": "Kidtoy Factory wholesale catalogue",
+    "numberOfItems": collections.filter((c: any) => c.handle !== 'frontpage').length,
+    "itemListElement": collections
+      .filter((c: any) => c.handle !== 'frontpage')
+      .map((c: any, i: number) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": c.title,
+        "url": `https://kidtoycn.com/collections/${c.handle}/`
+      }))
   })} />
 </BaseLayout>

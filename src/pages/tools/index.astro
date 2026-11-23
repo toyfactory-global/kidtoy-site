@@ -1,0 +1,96 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+
+const tools = [
+  {
+    href: '/tools/container-loading-calculator/',
+    name: 'Container Loading Calculator',
+    note: 'Carton size → how many cartons and pieces fit a 20GP, 40GP or 40HQ, and the CBM you should declare to your forwarder.',
+    tag: 'Logistics',
+  },
+  {
+    href: '/tools/landed-cost-calculator/',
+    name: 'Landed Cost Calculator',
+    note: 'FOB price plus freight, insurance, duty and fees → true cost per unit and the wholesale price you need to hit a margin.',
+    tag: 'Costing',
+  },
+  {
+    href: '/tools/wholesale-price-break-calculator/',
+    name: 'Order Volume & Price Break Builder',
+    note: 'Pick a real catalogue item, enter a quantity → order value, carton count, CBM, container fill and shipping weight.',
+    tag: 'Ordering',
+  },
+  {
+    href: '/tools/toy-certification-matrix/',
+    name: 'Toy Certification Matrix',
+    note: 'Which test standard and which mark each market actually requires, by product type — EN71, ASTM F963, CPSIA, UKCA, SABER.',
+    tag: 'Compliance',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Are these calculators free to use?',
+    a: 'Yes. All four run entirely in your browser — nothing is submitted, nothing is stored, and you do not need an account. They exist because buyers kept asking us the same three questions: how many cartons fit a container, what the duty does to the unit cost, and how a quantity break changes the total order.',
+  },
+  {
+    q: 'How accurate are the container and cost results?',
+    a: 'The arithmetic is exact; the planning assumptions behind it are conservative on purpose. Container capacities use practical loading figures rather than the theoretical internal volume, because cartons never fill a container perfectly. Duty rates and freight are inputs you supply, so the result is only as accurate as the numbers you type. Treat the output as a planning figure and confirm the final number with your forwarder and customs broker.',
+  },
+  {
+    q: 'Can you quote the real freight and duty for my order?',
+    a: 'We can quote FOB, CIF and door-to-door delivery once we know your item list, quantity and destination port. We will also give you the carton count and total CBM so you can put the same numbers to your own forwarder and compare. Duty and import VAT are set by your country, not by us — we will tell you the HS heading we ship under and let your broker confirm the national tariff line.',
+  },
+  {
+    q: 'Do the calculators use prices from your catalogue?',
+    a: 'Only the Order Volume calculator does, and it reads the same product data that drives our product pages, so a price change on the site changes the calculator. The container and landed-cost tools are generic: they take whatever numbers you enter, including a competitor quote you are trying to benchmark.',
+  },
+];
+---
+
+<SectionLayout
+  title="Free Toy Import Calculators: Container, Landed Cost, MOQ"
+  description="Four free calculators for toy importers: container loading and CBM, landed cost per unit, order volume against real catalogue prices, and a market-by-market toy certification matrix."
+  kicker="Buyer Tools"
+  h1="Toy Import Calculators"
+  lede="The four numbers that decide whether a toy order makes money: how many cartons fit, what the goods really cost once duty and freight land, how the quantity break changes the total, and which certificate your market will ask for at the border. Each tool runs in your browser."
+  faqs={faqs}
+  related={[
+    { href: '/blog/container-loading-calculation-cartons-cbm/', label: 'How container loading is calculated', note: 'The arithmetic behind the loading tool, with the packing-loss assumption explained.' },
+    { href: '/blog/toy-moq-landed-cost-calculation/', label: 'MOQ and landed cost', note: 'Why a lower unit price can still cost you more per sold piece.' },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mt-2 mb-6">Pick the tool you need</h2>
+
+  <div class="grid sm:grid-cols-2 gap-4 not-prose">
+    {tools.map((t) => (
+      <a href={t.href} class="block border border-gray-200 rounded-2xl p-6 hover:border-orange hover:shadow-sm transition-all group">
+        <span class="inline-block text-[11px] font-bold uppercase tracking-widest text-orange mb-3">{t.tag}</span>
+        <span class="block text-lg font-extrabold text-navy group-hover:text-orange transition-colors leading-snug mb-2">{t.name}</span>
+        <span class="block text-sm text-gray-500 leading-relaxed">{t.note}</span>
+        <span class="inline-block mt-4 text-sm font-bold text-orange">Open tool →</span>
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-14 mb-4">Why we built these instead of a PDF price list</h2>
+  <p>
+    A price list answers one question and goes stale the moment the exchange rate or the freight market moves. The
+    four decisions below are the ones buyers actually get stuck on, and each one has an answer that depends on
+    your own numbers rather than ours.
+  </p>
+  <ul>
+    <li><strong>Container loading</strong> decides your freight per piece. A carton 2 cm too tall can cost you 8% of
+      your container volume, and that is pure margin.</li>
+    <li><strong>Landed cost</strong> decides whether the order is worth doing at all. A $2.10 FOB toy at 6.5% duty
+      plus sea freight is not a $2.10 toy.</li>
+    <li><strong>Quantity break</strong> decides how much cash you tie up. Crossing a carton boundary or hitting a
+      full container tier can change the total by thousands of dollars.</li>
+    <li><strong>Certification</strong> decides whether the shipment clears. A compliant product with the wrong
+      paperwork is a container sitting in a bonded warehouse.</li>
+  </ul>
+  <p>
+    If a calculator raises a question you cannot answer from the page, send it to us — we would rather explain the
+    costing than have you discover it at the port.
+  </p>
+</SectionLayout>

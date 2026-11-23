@@ -1,0 +1,85 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import ProductPickGrid from '../../components/ProductPickGrid.astro';
+---
+
+<SectionLayout
+  title="Wholesale Toys for Gift Shops & Toy Retailers"
+  description="Build a saleable toy range for a gift shop: gift-boxed kids makeup cases, character bubble toys and low-MOQ items, with real carton data and FOB prices."
+  kicker="Buyer Segment"
+  h1="Toys for Gift Shops & Toy Retailers"
+  lede="A gift shop does not buy a product, it buys a decision the customer can make in eight seconds. That changes what you order: the packaging carries more weight than the unit price, and a range that looks like a range sells better than a cheaper single item."
+  parent={{ href: '/industries/', label: 'Buyer Segments' }}
+  faqs={[
+    {
+      q: 'What is the smallest order that still looks like a range?',
+      a: 'In practice, three to five designs at their individual MOQ, which in our catalogue can be as low as 54 to 72 pieces per item for several makeup and water lines. That is enough to fill a shelf with variation without committing to hundreds of one design. If you have a fixed budget, tell us the number and we will propose the mix rather than quote one item.',
+    },
+    {
+      q: 'Why does gift packaging change the MOQ?',
+      a: 'Because printing a box is a separate production run from making the toy. A stock colour box can be pulled from existing stock; a printed gift box needs artwork approval, a plate or a digital print setup, and a minimum print quantity. On some items a custom box doubles the effective MOQ even though the toy itself did not change.',
+    },
+    {
+      q: 'Do the makeup cases come in gift-ready packaging?',
+      a: 'Most of the kids makeup lines ship in a rigid case, an aluminium case or a vanity-style case that is the gift packaging — there is no outer box to hide. Several are designed specifically as gift items, with a mirror, a carry handle or a trolley format. The product page for each item shows the packaging type.',
+    },
+    {
+      q: 'What sells better in a gift shop: makeup or bubble toys?',
+      a: 'They solve different problems. A makeup case is a planned purchase with a price point that supports a gift occasion and a higher ring value. A bubble toy is an impulse purchase near the till. Most gift shops carry both, with the cases at the higher price and one or two bubble items as the add-on. Our makeup range is the larger of the two in our catalogue, which reflects how buyers actually split their budget.',
+    },
+    {
+      q: 'Can I get product photography for my online listings?',
+      a: 'Every item in the catalogue has supplier photography on its product page, and those images show the actual product you would receive. What we cannot do is photograph your branded packaging before it exists. If you need lifestyle or in-use shots for a listing, plan the shoot after the sample stage and before bulk production, so the photography shows the final product rather than a prototype.',
+    },
+  ]}
+  related={[
+    { href: '/collections/kids-makeup/', label: 'Kids makeup sets', note: '17 case formats, from a $5.72 box to a $23.03 trolley case.' },
+    { href: '/blog/kids-makeup-case-formats-buying-guide/', label: 'Makeup case formats', note: 'How the case decides the price point and the gift appeal.' },
+    { href: '/blog/wholesale-kids-beauty-sets-build-a-range/', label: 'Building a beauty range', note: 'How to pick complementary items instead of near-duplicates.' },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mt-2 mb-4">The range problem</h2>
+  <p>
+    The most common first order mistake in gift retail is buying four versions of the same idea. Four pink makeup cases
+    at four price points compete with each other on your own shelf, and the customer compares them instead of choosing
+    one. A range works when each item answers a different question: the cheap one for the under-$10 gift, the case for
+    the birthday present, the big trolley for the grandparent purchase.
+  </p>
+  <p>
+    Our makeup catalogue spans roughly $5.72 to $23.03 FOB across 17 formats — bag, box, aluminium case, trolley, iron
+    vanity, backpack. That spread exists precisely so a retailer can build three price points without three separate
+    suppliers. Look at the case format first, then the contents.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">What the customer actually judges</h2>
+  <ul>
+    <li><strong>The case.</strong> A rigid case with a mirror reads as "real makeup"; a printed card box reads as a toy.
+      That single difference justifies a price step.</li>
+    <li><strong>The contents count.</strong> "18 colours" is a shelf message. Buyers count.</li>
+    <li><strong>Whether it looks used.</strong> A washable, water-soluble formula that wipes off is a selling point to
+      the parent, and it is the most common question at the till.</li>
+    <li><strong>The size in the hand.</strong> A trolley case that is too small disappoints; a case that is too big does
+      not fit the shelf. The product dimensions are on every page for that reason.</li>
+  </ul>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">Ordering for a season, not for a year</h2>
+  <p>
+    Gift retail is quarterly. Q4 is the year, and the order for it is placed in the summer. If you order in October you
+    are buying air freight or nothing. Count backwards: 15 to 25 days production, plus 20 to 35 days sea freight, plus
+    clearance and inland delivery. A Q4 shelf date means a July or August ship date, which means a June purchase order.
+  </p>
+  <p>
+    Outside Q4 the same stock works for Mother's Day, birthdays and back-to-school, but at lower volume. Most of our gift
+    retail buyers place one large Q4 order and one smaller replenishment in the spring rather than four equal orders.
+  </p>
+
+  <ProductPickGrid
+    handles={[
+      'wholesale-glam-maker-unicorn-kids-makeup-set-pink-iron-vanity-case-with-mirror-12-color-eyeshadow-7-brushes-beauty-blender-girls-cosmetic-pretend-play-kit',
+      'wholesale-princess-kids-makeup-set-2-layer-pink-glitter-aluminum-trolley-case-with-14-color-eyeshadow-lip-gloss-girls-cosmetic-kit-for-pretend-play',
+      'kids-torch-bubble-garden-toy-with-light-music',
+      'streetlight-party-bubble-garden-toy-with-stand',
+    ]}
+    note="Two gift-boxed makeup cases at different price points, plus two novelty bubble items that work as till-side add-ons."
+  />
+</SectionLayout>

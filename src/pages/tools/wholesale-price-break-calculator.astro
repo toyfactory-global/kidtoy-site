@@ -1,0 +1,220 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import productsData from '../../../data/products.json';
+
+/**
+ * Every number this page shows is read from the same products.json that builds
+ * the product pages, so the tool cannot drift from the catalogue. Carton data
+ * comes from the export-carton table in each item's body_html — the figures our
+ * logistics team actually ships on, not an estimate.
+ */
+const cell = (html, label) => {
+  const re = new RegExp(label + '[\\s\\S]{0,160}?<td[^>]*>([\\s\\S]*?)</td>', 'i');
+  const m = html.match(re);
+  return m ? m[1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim() : '';
+};
+
+const items = productsData.products.map((p) => {
+  const sku = cell(p.body_html, 'Item No\\.') || cell(p.body_html, 'Factory Item No\\.');
+  const ppcRaw = cell(p.body_html, 'Export Carton Qty');
+  const cbmRaw = cell(p.body_html, 'Carton Volume');
+  const gwRaw = cell(p.body_html, 'Carton Gross Weight');
+  const dimRaw = cell(p.body_html, 'Carton Dimension');
+  const ppc = parseInt((ppcRaw.match(/(\d[\d,]*)\s*(PCS|Pcs|pcs)/) || [])[1]?.replace(/,/g, '') || '0', 10);
+  const cbm = parseFloat((cbmRaw.match(/([\d.]+)\s*CBM/i) || [])[1] || '0');
+  const gw = parseFloat((gwRaw.match(/([\d.]+)\s*KG/i) || [])[1] || '0');
+  return {
+    sku,
+    name: p.title.split(' - ')[0].slice(0, 58),
+    price: p.price,
+    moq: p.moq,
+    ppc,
+    cbm,
+    gw,
+    dim: dimRaw,
+    handle: p.handle,
+  };
+}).sort((a, b) => (a.sku < b.sku ? -1 : 1));
+
+const usable = items.filter((i) => i.ppc > 0 && i.cbm > 0);
+---
+
+<SectionLayout
+  title="Wholesale Toy Order Calculator: Quantity, Cartons, CBM"
+  description="Enter an order quantity against a real catalogue item and see the order value, cartons needed, total CBM, container fill and shipping weight from actual export carton data."
+  kicker="Buyer Tools"
+  h1="Order Volume & Price Break Builder"
+  lede="Pick an item from our catalogue, type the quantity you are planning, and see what the order actually looks like: value, cartons, cubic metres, how much of a container it fills, and how much it weighs. Every figure comes from the export carton data we ship on."
+  parent={{ href: '/tools/', label: 'Tools' }}
+  faqs={[
+    {
+      q: 'Where does the carton and CBM data come from?',
+      a: 'From the export carton table in our own product records — the same figures that appear in the specification table on each product page and that our logistics team uses when booking freight. It is not an estimate derived from the product size.',
+    },
+    {
+      q: 'Why does the calculator round up the carton count?',
+      a: 'Because factories pack full cartons. An order of 1,000 pieces at 36 pieces per carton is 27.8 cartons, which ships as 28 cartons — and you pay freight on 28. The rounded figure is the one that matters for your freight and warehouse planning, so the tool shows it rather than the theoretical number.',
+    },
+    {
+      q: 'Does a bigger quantity always get a better price?',
+      a: 'Usually, and it always gets a better landed cost, because freight and fixed charges are spread across more pieces. The price breaks depend on the item: some have published tiers, others are quoted per order. Fill in the quantity you are considering and ask us for the tier — we would rather quote than have you guess from a website.',
+    },
+    {
+      q: 'Can I mix several items in one order?',
+      a: 'Yes. Mixed orders are normal, particularly for a first shipment or for a retailer buying a range rather than a single SKU. Use the container loading calculator\u2019s mixed-load mode for the combined volume, and send us the item list so we can build one carton plan instead of several shipments.',
+    },
+    {
+      q: 'What does "container fill" tell me?',
+      a: 'It is the share of a 40HQ you would occupy at the selected quantity. Below about 35% the shipment is inefficient and freight per piece will be high; above about 85% loading gets slow and cartons risk damage. The sweet spot is roughly 50–80%, where the container is well used without being over-packed.',
+    },
+  ]}
+  related={[
+    { href: '/tools/container-loading-calculator/', label: 'Container Loading Calculator', note: 'Check a mixed order against a real container.' },
+    { href: '/tools/landed-cost-calculator/', label: 'Landed Cost Calculator', note: 'Add freight and duty to get the true cost per piece.' },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mb-2">Build your order</h2>
+  <p class="text-sm text-gray-500 mb-6">{usable.length} catalogue items with published export carton data.</p>
+
+  <div class="not-prose bg-gray-50 border border-gray-200 rounded-2xl p-6 sm:p-8">
+    <div class="grid sm:grid-cols-2 gap-4">
+      <label class="block sm:col-span-2">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Catalogue item</span>
+        <select id="pb-item" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange bg-white">
+          {usable.map((i) => (
+            <option value={i.sku}>{i.sku} — {i.name}</option>
+          ))}
+        </select>
+      </label>
+      <label class="block">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Quantity (pcs)</span>
+        <input id="pb-qty" type="number" min="1" step="1" value="1000" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange" />
+      </label>
+      <div class="flex items-end">
+        <p id="pb-moq" class="text-sm text-gray-500 leading-relaxed pb-2"></p>
+      </div>
+    </div>
+
+    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Order value (FOB)</div>
+        <div id="pb-value" class="text-2xl font-extrabold text-navy">—</div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Cartons</div>
+        <div id="pb-cartons" class="text-2xl font-extrabold text-navy">—</div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Total CBM</div>
+        <div id="pb-cbm" class="text-2xl font-extrabold text-orange">—</div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Shipping weight</div>
+        <div id="pb-weight" class="text-2xl font-extrabold text-navy">—</div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">40HQ fill</div>
+        <div id="pb-fill" class="text-2xl font-extrabold text-navy">—</div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Carton plan</div>
+        <div id="pb-plan" class="text-sm font-extrabold text-navy leading-snug pt-1">—</div>
+      </div>
+    </div>
+    <p id="pb-note" class="text-xs text-gray-400 mt-4 leading-relaxed">
+      Container fill is measured against a 40HQ at 68 CBM practical capacity. Prices are FOB Chenghai and exclude freight and duty.
+    </p>
+  </div>
+
+  <!-- set:html, not is:inline: an inline script ships its braces literally. -->
+  <script type="application/json" id="pb-data" set:html={JSON.stringify(usable)} />
+
+  <script is:inline>
+    (function () {
+      var data = JSON.parse(document.getElementById('pb-data').textContent);
+      var sel = document.getElementById('pb-item');
+      var qtyEl = document.getElementById('pb-qty');
+      var bySku = {};
+      data.forEach(function (d) { bySku[d.sku] = d; });
+
+      function money(n) {
+        return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+      function n0(n) { return n.toLocaleString('en-US', { maximumFractionDigits: 0 }); }
+
+      function calc() {
+        var d = bySku[sel.value];
+        if (!d) return;
+        var qty = parseInt(qtyEl.value, 10);
+        if (isNaN(qty) || qty < 1) qty = 1;
+
+        var cartons = Math.ceil(qty / d.ppc);
+        var cbm = cartons * d.cbm;
+        var kg = cartons * d.gw;
+        var fill = (cbm / 68) * 100;
+        var value = qty * d.price;
+
+        document.getElementById('pb-value').textContent = money(value);
+        document.getElementById('pb-cartons').textContent = n0(cartons);
+        document.getElementById('pb-cbm').textContent = cbm.toFixed(3) + ' m³';
+        document.getElementById('pb-weight').textContent = n0(kg) + ' kg';
+        document.getElementById('pb-fill').textContent = fill.toFixed(1) + '%';
+
+        var cont = fill <= 41 ? '1 x 20GP' : fill <= 85 ? '1 x 40GP / 40HQ' : Math.ceil(cbm / 68) + ' x 40HQ';
+        document.getElementById('pb-plan').textContent =
+          d.ppc + ' pcs/ctn · ' + d.dim + ' · ' + cont;
+
+        var moqEl = document.getElementById('pb-moq');
+        if (qty < d.moq) {
+          moqEl.innerHTML = '<span class="text-orange font-bold">Below MOQ.</span> This item starts at ' + n0(d.moq) + ' pcs. Smaller runs can be discussed for a mixed order.';
+        } else {
+          moqEl.innerHTML = 'MOQ ' + n0(d.moq) + ' pcs · FOB ' + money(d.price) + ' / pc';
+        }
+
+        var note = 'Container fill is measured against a 40HQ at 68 CBM practical capacity. Prices are FOB Chenghai and exclude freight and duty.';
+        if (fill < 20 && cartons > 0) {
+          note += ' At this volume the freight per piece will be very high — consider combining items.';
+        }
+        document.getElementById('pb-note').textContent = note;
+      }
+
+      sel.addEventListener('change', calc);
+      qtyEl.addEventListener('input', calc);
+      calc();
+    })();
+  </script>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-14 mb-4">Reading the output</h2>
+  <p>
+    <strong>Order value</strong> is the goods cost at the published unit price and the quantity you typed. It is not the
+    amount you will pay to get the goods to your door — add freight and duty from the landed cost calculator for that.
+  </p>
+  <p>
+    <strong>Cartons</strong> is always rounded up, because that is what ships. The gap between the theoretical and the
+    shipped carton count is worth watching on small orders: 40 pieces at 36 per carton is two cartons, so you pay
+    freight on 72 pieces of space for 40 pieces of goods.
+  </p>
+  <p>
+    <strong>Total CBM and shipping weight</strong> are what your forwarder needs for a quote, and what decides whether
+    the load is volume-bound or weight-bound. Toys are usually volume-bound; liquid-filled bubble toys and gel kits are
+    the exceptions and can hit a weight ceiling first.
+  </p>
+  <p>
+    <strong>40HQ fill</strong> is the number most buyers ignore. At 20% fill the freight per piece is punitive, which
+    is why a first order that looks cheap per unit can arrive costing more than a local wholesaler. If you are below
+    about 40%, ask us to build a mixed order across two or three items instead of shipping one.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">When a quantity break actually pays</h2>
+  <p>
+    A price break is only worth taking if the extra units sell. The honest test is: does the discount on the whole
+    order exceed the cost of holding the extra stock for the months it takes to move? At 1,000 pieces against 2,000, a
+    5% unit discount saves 5% of the goods value, but it also doubles the working capital tied up in inventory and
+    storage.
+  </p>
+  <p>
+    Our own guidance to first-time buyers is to order to the container, not to the price tier. Crossing from a 60%
+    full container to a 90% full container reduces freight per piece far more than most published price tiers reduce
+    the unit price — and the goods are the same goods either way.
+  </p>
+</SectionLayout>

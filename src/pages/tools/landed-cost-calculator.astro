@@ -1,0 +1,191 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout
+  title="Landed Cost Calculator for Toy Imports (Duty + Freight)"
+  description="Work out the true landed cost per unit for a toy order: FOB price plus freight, insurance, import duty and port charges, then the wholesale price needed to hit your margin."
+  kicker="Buyer Tools"
+  h1="Landed Cost Calculator"
+  lede="The FOB price is what you pay the factory. Landed cost is what the goods cost you by the time they sit in your warehouse — and it is usually 15–35% higher. This tool builds that number and then back-solves the wholesale price you need."
+  parent={{ href: '/tools/', label: 'Tools' }}
+  faqs={[
+    {
+      q: 'What counts as landed cost?',
+      a: 'Landed cost is the FOB goods value plus everything needed to get them into your warehouse: international freight, marine insurance, import duty, customs brokerage, port and terminal handling, and any bank or documentation fees. It excludes your own domestic delivery after the port and excludes VAT or GST, which are usually recoverable rather than a cost.',
+    },
+    {
+      q: 'What duty rate should I use for toys?',
+      a: 'Most toys fall under HS heading 9503. The rate depends on the destination country and on the 8- or 10-digit national tariff line, not on the 6-digit heading. The United States, the EU, the UK, Canada and Australia all set their own rates and some have additional trade-remedy duties. Enter the rate your broker confirms for your tariff line; do not take a generic percentage from a blog post, including this one.',
+    },
+    {
+      q: 'Why does a small order have such a bad landed cost?',
+      a: 'Because freight and fixed charges do not scale down. A container costs roughly the same whether it holds 500 cartons or 900, and customs brokerage, documentation and terminal fees are per shipment, not per piece. On a small order those fixed costs are divided by fewer units, which is why the unit price can double even when the FOB price did not change.',
+    },
+    {
+      q: 'Should I include VAT or GST in landed cost?',
+      a: 'Usually not. If you are VAT-registered, import VAT is recovered against your sales VAT, so it affects cash flow rather than margin. If you are not registered, or you are selling through a marketplace that collects tax, treat it as a real cost. The calculator leaves it out by default and tells you where to add it if it applies.',
+    },
+    {
+      q: 'What margin should a wholesale toy business target?',
+      a: 'It depends on the channel. A distributor reselling to retailers typically needs 20–30% gross margin to cover warehousing, sales and returns. A retailer needs 45–60% on the shelf price. A marketplace seller has to absorb marketplace fees, fulfilment and advertising on top. Put your own target in the margin field rather than a figure from someone else\u2019s business.',
+    },
+  ]}
+  related={[
+    { href: '/tools/container-loading-calculator/', label: 'Container Loading Calculator', note: 'Get the freight per carton figure this tool needs.' },
+    { href: '/blog/toy-moq-landed-cost-calculation/', label: 'MOQ and landed cost', note: 'Why the cheapest unit price is often the most expensive order.' },
+    { href: '/blog/hs-code-9503-toy-import-duty/', label: 'HS code 9503 and toy duty', note: 'How the tariff line is chosen and why the 6-digit heading is not the rate.' },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mb-2">Build the cost</h2>
+  <p class="text-sm text-gray-500 mb-6">Enter your own figures. Every field is editable; nothing is sent anywhere.</p>
+
+  <div class="not-prose bg-gray-50 border border-gray-200 rounded-2xl p-6 sm:p-8">
+    <div class="grid sm:grid-cols-2 gap-4">
+      <label class="block">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">FOB price per unit (USD)</span>
+        <input id="fob" type="number" min="0" step="0.01" value="2.40" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange" />
+      </label>
+      <label class="block">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Order quantity (pcs)</span>
+        <input id="qty" type="number" min="1" step="1" value="1000" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange" />
+      </label>
+      <label class="block">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Total freight to your port (USD)</span>
+        <input id="freight" type="number" min="0" step="1" value="1800" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange" />
+      </label>
+      <label class="block">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Insurance (% of goods value)</span>
+        <input id="ins" type="number" min="0" step="0.05" value="0.5" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange" />
+      </label>
+      <label class="block">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Import duty (%)</span>
+        <input id="duty" type="number" min="0" step="0.1" value="6.5" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange" />
+      </label>
+      <label class="block">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Other fixed costs (brokerage, docs, port)</span>
+        <input id="other" type="number" min="0" step="1" value="250" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange" />
+      </label>
+      <label class="block">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Target gross margin (%)</span>
+        <input id="margin" type="number" min="0" max="90" step="1" value="30" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange" />
+      </label>
+    </div>
+
+    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Goods value</div>
+        <div id="r-goods" class="text-xl font-extrabold text-navy">—</div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Duty</div>
+        <div id="r-duty" class="text-xl font-extrabold text-navy">—</div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Freight + insurance + fees</div>
+        <div id="r-freight" class="text-xl font-extrabold text-navy">—</div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Total landed</div>
+        <div id="r-total" class="text-xl font-extrabold text-navy">—</div>
+      </div>
+    </div>
+
+    <div class="mt-4 bg-navy rounded-xl p-6 text-white flex flex-wrap items-center gap-8">
+      <div>
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Landed cost per unit</div>
+        <div id="r-unit" class="text-3xl font-extrabold text-orange">—</div>
+      </div>
+      <div>
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Landed uplift over FOB</div>
+        <div id="r-uplift" class="text-3xl font-extrabold">—</div>
+      </div>
+      <div>
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Minimum wholesale price at your margin</div>
+        <div id="r-sell" class="text-3xl font-extrabold">—</div>
+      </div>
+    </div>
+
+    <p id="r-note" class="text-xs text-gray-400 mt-4 leading-relaxed"></p>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var ids = ['fob', 'qty', 'freight', 'ins', 'duty', 'other', 'margin'];
+      var el = {};
+      ids.forEach(function (id) { el[id] = document.getElementById(id); });
+
+      function num(id) {
+        var v = parseFloat(el[id].value);
+        return isNaN(v) || v < 0 ? 0 : v;
+      }
+      function money(n) {
+        return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+
+      function calc() {
+        var fob = num('fob'), qty = num('qty'), freight = num('freight'),
+            insP = num('ins'), dutyP = num('duty'), other = num('other'), margin = num('margin');
+        if (!qty) return;
+
+        var goods = fob * qty;
+        var insurance = goods * insP / 100;
+        // Most customs authorities assess duty on the CIF value: goods + freight + insurance.
+        var duty = (goods + freight + insurance) * dutyP / 100;
+        var total = goods + freight + insurance + duty + other;
+        var unit = total / qty;
+        var fobShare = fob > 0 ? ((unit / fob) - 1) * 100 : 0;
+        var sell = margin < 90 ? unit / (1 - margin / 100) : 0;
+
+        document.getElementById('r-goods').textContent = money(goods);
+        document.getElementById('r-duty').textContent = money(duty);
+        document.getElementById('r-freight').textContent = money(freight + insurance + other);
+        document.getElementById('r-total').textContent = money(total);
+        document.getElementById('r-unit').textContent = money(unit);
+        document.getElementById('r-uplift').textContent = (fobShare > 0 ? '+' : '') + fobShare.toFixed(1) + '%';
+        document.getElementById('r-sell').textContent = sell > 0 ? money(sell) : '—';
+
+        var note = 'Duty is assessed on the CIF value (goods + freight + insurance). VAT and GST are excluded.';
+        var freightShare = total > 0 ? ((freight + insurance + other) / total) * 100 : 0;
+        if (freightShare > 40) {
+          note += ' Warning: logistics and fees are ' + freightShare.toFixed(0) + '% of your landed total — at this order size the shipment is cost-driven, so increasing quantity is usually worth more than negotiating the unit price.';
+        }
+        document.getElementById('r-note').textContent = note;
+      }
+
+      ids.forEach(function (id) { el[id].addEventListener('input', calc); });
+      calc();
+    })();
+  </script>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-14 mb-4">The three numbers that change the answer</h2>
+  <p>
+    <strong>Quantity.</strong> Freight, brokerage, documentation and port fees are per shipment. Double the quantity and
+    those costs halve per unit while the FOB price barely moves. This is the single largest lever on landed cost and
+    the reason a 500-piece order and a 1,000-piece order are rarely 2x apart in total cost.
+  </p>
+  <p>
+    <strong>Carton efficiency.</strong> Freight is billed on volume or weight, whichever is greater. A toy that ships at
+    0.09 CBM per 36 pieces costs less per unit to move than the identical toy in a carton that is 2 cm taller. When you
+    compare two suppliers, compare CBM per 100 pieces, not just the FOB price.
+  </p>
+  <p>
+    <strong>The tariff line.</strong> The 6-digit HS heading tells customs it is a toy. The 8- or 10-digit national line
+    tells them the rate. Two products that both sit under 9503 can carry different rates in the same country, and a
+    misclassified line is corrected later with a penalty. We ship under the heading our classification supports and give
+    you the description so your broker can confirm the national line before the goods leave.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">A worked example</h2>
+  <p>
+    Take 1,000 pieces at $2.40 FOB with $1,800 of sea freight, 0.5% insurance, 6.5% duty and $250 of brokerage and port
+    charges. The goods are $2,400 and the duty is about $156. Total landed is roughly $4,606, or <strong>$4.61 per
+    unit</strong> — a 92% uplift on the FOB price. To hold a 30% gross margin the wholesale price has to be about
+    $6.58, and a retailer taking a 50% margin then needs roughly $13.16 on shelf.
+  </p>
+  <p>
+    That is the arithmetic buyers skip. The $2.40 toy is not a $2.40 toy, and the retail price the market will accept
+    is what decides whether the order is viable — not the factory quote. Run your own numbers above before you commit
+    to a quantity.
+  </p>
+</SectionLayout>

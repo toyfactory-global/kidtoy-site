@@ -1,0 +1,85 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import ProductPickGrid from '../../components/ProductPickGrid.astro';
+---
+
+<SectionLayout
+  title="Promotional & Corporate Gifting Toys with Logo Printing"
+  description="Branded promotional toys for agencies and corporate gifting: logo printing options, MOQ for custom artwork, and toy lines that survive a branded box."
+  kicker="Buyer Segment"
+  h1="Toys for Promotional & Corporate Gifting"
+  lede="A corporate gifting order is judged on arrival: the box, the brand, and whether the item still works after a courier has handled it. Price matters less than you would expect, and lead time matters more."
+  parent={{ href: '/industries/', label: 'Buyer Segments' }}
+  faqs={[
+    {
+      q: 'Where can a logo be printed on these products?',
+      a: 'It depends on the item. A pad print or a sticker on the product body, a printed colour box, a printed sleeve over a stock box, or a printed insert card are the usual routes. Every one of them has a different minimum quantity and a different artwork approval step. On a small promotional run the printed box or sleeve is almost always the better value than printing the product itself.',
+    },
+    {
+      q: 'What is the realistic minimum for a branded order?',
+      a: 'The toy MOQ comes first — between 54 and 500 pieces depending on the item — and the branding then adds its own minimum, which for a printed box is usually higher than the toy quantity on small items. For a 100-piece corporate run, expect to use stock packaging plus a sticker or an insert card rather than a fully printed box. We will quote the options rather than pick one for you.',
+    },
+    {
+      q: 'How long does artwork approval take?',
+      a: 'Plan a week for the print proof cycle and longer if the artwork is not final. The proof has to be approved before printing starts, printing happens before packing, and packing happens before shipping. A corporate deadline that allows three weeks total for a printed order is not a deadline, it is a hope.',
+    },
+    {
+      q: 'Can you ship to multiple addresses?',
+      a: 'We ship to one consignee per shipment. Splitting a promotional order across many recipient addresses is a fulfilment job, and it is normally cheaper to do it in your own market from a single landed shipment than to ask a factory to run a pick-and-pack operation. If the order genuinely needs multi-address delivery, say so early and we can discuss a fulfilment partner rather than pretend the factory does it.',
+    },
+    {
+      q: 'Do promotional orders still need toy certification?',
+      a: 'Yes, if the item is a toy. A corporate logo does not change what the product is. A branded toy given to children still has to meet the toy safety rules of the market where it is handed out, and the branded packaging has to carry the same warnings as the stock one. This is the point where promotional buyers most often get caught.',
+    },
+  ]}
+  related={[
+    { href: '/blog/oem-vs-odm-toys/', label: 'OEM vs ODM', note: 'What a brand owner is actually buying, and who owns the tooling.' },
+    { href: '/blog/private-label-kids-makeup-moq-labelling/', label: 'Private label and labelling', note: 'The artwork and label cycle in detail.' },
+    { href: '/factory/', label: 'How our factory works', note: 'What a buyer can verify before a branded run.' },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mt-2 mb-4">Branding options, cheapest to most involved</h2>
+  <ul>
+    <li><strong>Insert card.</strong> A printed card inside the stock box. Lowest minimum, fastest, and it still reads as
+      branded when the box is opened.</li>
+    <li><strong>Sticker or label.</strong> Applied to the stock box. Cheap, but placement and finish quality vary, and a
+      curled label looks worse than no label.</li>
+    <li><strong>Printed sleeve.</strong> A printed card sleeve over the stock box. The best balance for a few hundred
+      units — it looks like a custom box without the custom-box print run.</li>
+    <li><strong>Fully printed box.</strong> The cleanest result and the highest minimum, because it is a separate print
+      and die-cut run.</li>
+    <li><strong>Printing on the product.</strong> Pad print on the body. Works well on hard plastic; on soft or curved
+      surfaces it wears, and on a tinted product the colour match is a fight.</li>
+  </ul>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">The two ways a corporate order fails</h2>
+  <p>
+    <strong>It arrives late.</strong> Corporate gifting has a hard date — an event, a year-end, a conference. There is no
+    "next week". The whole order has to be planned from that date backwards through shipping, production and artwork
+    approval, and the artwork approval is the step that slips because it depends on the client, not the factory.
+  </p>
+  <p>
+    <strong>The branding is not compliant.</strong> A branded toy still carries the age warning, the importer details and
+    the safety marks of the market it is given in. A promo box designed to look clean often drops them, and a compliance
+    officer at the recipient company can refuse the delivery on exactly that point. Build the warning panel into the
+    artwork from the first proof.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">Choosing an item for gifting</h2>
+  <p>
+    Promotional items need to be self-explanatory, robust enough to survive a courier, and light enough that the shipping
+    does not exceed the product cost. A small novelty that a recipient understands in two seconds beats a clever item that
+    needs instructions. In our range that usually means the bubble and light-up novelties for volume gifting, and the
+    compact makeup or craft kits where the recipient is a child and the giver wants something that looks like a present.
+  </p>
+
+  <ProductPickGrid
+    handles={[
+      'wholesale-magic-water-elf-toy-4-bottles-6-moulds-trial-pack-diy-aqua-fairy-hydrogel-gel-craft-kit-for-kids-stem-sensory-toy',
+      'wholesale-banana-sensor-rhythm-piano-toy-touch-induction-musical-plush-with-dual-player-mode-for-kids-early-education',
+      'wholesale-kids-makeup-treasure-box-pink-vanity-case-with-seashell-compact-4-color-eyeshadow-nail-art-kit-girls-cosmetic-pretend-play-set-for-children',
+      'summer-rose-flower-outdoor-automatic-bubble-machine',
+    ]}
+    note="A low-unit-cost craft kit and a novelty musical toy for volume gifting, a compact gift-boxed case, and a display-friendly bubble machine for event use."
+  />
+</SectionLayout>

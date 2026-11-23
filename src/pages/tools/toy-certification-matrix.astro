@@ -1,0 +1,226 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+
+const markets = [
+  {
+    market: 'European Union',
+    mark: 'CE',
+    standard: 'EN 71-1 / -2 / -3',
+    electric: 'EN 62115',
+    chemicals: 'REACH, EN 71-3 migration limits',
+    label: 'CE mark, importer name and address, age warning, batch traceability',
+  },
+  {
+    market: 'United Kingdom',
+    mark: 'UKCA (CE accepted in Great Britain for now)',
+    standard: 'BS EN 71-1 / -2 / -3',
+    electric: 'BS EN 62115',
+    chemicals: 'UK REACH',
+    label: 'UKCA or CE mark, UK responsible person, age warning',
+  },
+  {
+    market: 'United States',
+    mark: 'Children\u2019s Product Certificate (CPC)',
+    standard: 'ASTM F963-17',
+    electric: 'Battery-operated toys: UL or equivalent for the pack, plus F963',
+    chemicals: 'CPSIA lead and phthalate limits, total lead in paint',
+    label: 'Tracking label on product and packaging, CPSC-accredited lab test report',
+  },
+  {
+    market: 'Canada',
+    mark: 'No mark; compliance is documented',
+    standard: 'Toys Regulations under the Canada Consumer Product Safety Act, referencing ISO 8124 and ASTM F963',
+    electric: 'Same plus battery safety requirements',
+    chemicals: 'CCPSA surface coating and phthalate limits',
+    label: 'Bilingual English/French labelling, dealer name and address, age grading',
+  },
+  {
+    market: 'Australia / New Zealand',
+    mark: 'No single mark; AS/NZS evidence held',
+    standard: 'AS/NZS ISO 8124.1 / .2 / .3',
+    electric: 'AS/NZS 62115',
+    chemicals: 'Heavy element migration limits in the standard',
+    label: 'Age warning, importer details, mandatory button-battery warning where applicable',
+  },
+  {
+    market: 'Saudi Arabia / Gulf',
+    mark: 'SABER: PCoC per model, SCoC per shipment',
+    standard: 'GSO ISO 8124 or EN 71 / ASTM F963 as accepted evidence',
+    electric: 'IEC 62115 basis',
+    chemicals: 'GSO chemical limits',
+    label: 'Arabic and English labelling, SASO technical regulation compliance',
+  },
+  {
+    market: 'Brazil',
+    mark: 'INMETRO seal for regulated toy categories',
+    standard: 'NM 300 series (ABNT) aligned with ISO 8124',
+    electric: 'INMETRO electric toy requirements',
+    chemicals: 'INMETRO chemical limits',
+    label: 'Portuguese labelling, INMETRO registration with the certifying body',
+  },
+  {
+    market: 'Japan',
+    mark: 'ST Mark (voluntary but commercially expected)',
+    standard: 'JIS S 8001 series, aligned with ISO 8124',
+    electric: 'PSE mark for the charger or power supply',
+    chemicals: 'Food Sanitation Act limits where the toy contacts the mouth',
+    label: 'Japanese labelling, importer name, target age',
+  },
+];
+
+const byType = [
+  {
+    type: 'General plastic and role-play toys',
+    needs: 'EN 71-1/-3 or ASTM F963, CPSIA (US), age grading, small-parts test for under-3 products, phthalate screening.',
+    note: 'The most common first shipment. The test most often missed is the small-parts cylinder for a product graded 3+.',
+  },
+  {
+    type: 'Battery-operated and electric toys',
+    needs: 'Everything above plus EN 62115 / IEC 62115, battery pack documentation, and for air freight the UN 38.3 report on the lithium cell.',
+    note: 'Air freight will be refused without UN 38.3. Ask the factory whether the cell is UN 38.3 tested before you book, not after.',
+  },
+  {
+    type: 'Water guns and liquid-filled toys',
+    needs: 'Everything above plus leak testing, and for some markets the liquid itself is assessed as a filling material.',
+    note: 'Liquid-filled products also change the shipping class: sea freight usually fine, air freight often restricted.',
+  },
+  {
+    type: 'Children\u2019s cosmetics and makeup sets',
+    needs: 'Cosmetic regulation, not toy regulation. EU Cosmetics Regulation 1223/2009 with a CPNP notification; US FDA cosmetic requirements and MoCRA registration where applicable.',
+    note: 'A toy certificate does not cover a cosmetic. This is the most commonly mis-scoped product we see.',
+  },
+  {
+    type: 'Plush and soft toys',
+    needs: 'EN 71-1 mechanical plus flammability, fibre content and stuffing cleanliness requirements, seam-strength testing.',
+    note: 'Flammability is the test that fails most often on soft goods, usually on trim and trim attachments.',
+  },
+  {
+    type: 'Gel, slime and putty kits',
+    needs: 'EN 71-3 migration, microbiological testing for the gel, and packaging that survives a pressure change in an aircraft hold.',
+    note: 'Microbiological testing is separate from toy safety testing and is often not quoted in a standard test package.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Is a CE mark the same as an EN 71 test report?',
+    a: 'No. EN 71 is the test standard; the CE mark is the manufacturer\u2019s declaration that the product meets all applicable EU directives, of which the Toy Safety Directive is one. A test report supports the declaration but is not the declaration. The CE mark and the EU declaration of conformity are documents the manufacturer issues, and the importer must be able to produce them.',
+  },
+  {
+    q: 'Do I need new testing for every order?',
+    a: 'Not for every shipment, but a test report is a snapshot of a production batch. Most buyers accept a report from one production run and re-test when the design, the material, the factory or the mould changes. Some markets and some retailers require an annual refresh. Your importer of record decides what is acceptable — we will tell you the date and scope of whatever we hold for a specific item.',
+  },
+  {
+    q: 'Who is legally responsible for compliance?',
+    a: 'The importer of record. The factory tests and documents, but in the EU, US, UK and most other markets the party placing the product on the market carries the legal obligation. That is why we send test documentation and let your compliance team or lab confirm it applies to your market rather than declaring a product universally compliant.',
+  },
+  {
+    q: 'Can you certify a product for a market we have not sold into before?',
+    a: 'We can have a product tested against a named standard by an accredited third-party laboratory, and we can supply the factory-level documents such as the audit reports and the declaration of conformity. Whether a specific report is accepted for a specific market is a question for your lab or your customs broker. Testing scope varies by model and market — contact us to confirm what is available for a particular item.',
+  },
+  {
+    q: 'What paperwork do I need at the border?',
+    a: 'Usually a commercial invoice, packing list, bill of lading or airway bill, certificate of origin where a preferential rate applies, and the conformity documents for the destination market. Some markets add a shipment certificate (SABER SCoC in Saudi Arabia) or a registration number. Your broker confirms the exact set; we supply the commercial and conformity documents from our side.',
+  },
+];
+
+const disclaimer =
+  'This page is a planning reference for buyers, not legal advice. Requirements change, national tariff and conformity rules differ from the standards they reference, and the importer of record carries the legal obligation. Confirm the exact requirement for your market and product with an accredited laboratory or your customs broker before you ship.';
+---
+
+<SectionLayout
+  title="Toy Certification Matrix by Market (EN71, ASTM F963, CPSIA)"
+  description="Which toy safety standard and which mark each major market requires, by product type: EU CE and EN71, US ASTM F963 and CPSIA, UKCA, Canada, Australia, Saudi SABER, Brazil INMETRO, Japan ST."
+  kicker="Compliance Reference"
+  h1="Toy Certification Matrix"
+  lede="Six columns decide whether a toy clears customs: the market, the mark, the test standard, the electrical requirement, the chemical requirement, and the labelling on the box. This page puts all six side by side, then maps them to the product types we actually manufacture."
+  parent={{ href: '/tools/', label: 'Tools' }}
+  faqs={faqs}
+  related={[
+    { href: '/blog/en71-vs-astm-f963-toy-certification/', label: 'EN71 vs ASTM F963 vs CPSIA', note: 'How the three main regimes differ and where they overlap.' },
+    { href: '/certifications/', label: 'What our factory holds', note: 'The factory-level audits and the honest scope of each.' },
+    { href: '/blog/hs-code-9503-toy-import-duty/', label: 'HS code 9503 and duty', note: 'The tariff side of the same shipment.' },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mb-4">By market</h2>
+
+  <div class="not-prose overflow-x-auto -mx-4 px-4">
+    <table class="w-full text-sm border-collapse min-w-[860px]">
+      <thead>
+        <tr class="bg-navy text-white text-left">
+          <th class="p-3 font-bold">Market</th>
+          <th class="p-3 font-bold">Mark / document</th>
+          <th class="p-3 font-bold">Mechanical &amp; physical</th>
+          <th class="p-3 font-bold">Electrical</th>
+          <th class="p-3 font-bold">Chemical</th>
+        </tr>
+      </thead>
+      <tbody>
+        {markets.map((m, i) => (
+          <tr class={i % 2 ? 'bg-gray-50' : 'bg-white'}>
+            <td class="p-3 font-bold text-navy align-top">{m.market}</td>
+            <td class="p-3 align-top text-gray-700">{m.mark}</td>
+            <td class="p-3 align-top text-gray-700">{m.standard}</td>
+            <td class="p-3 align-top text-gray-700">{m.electric}</td>
+            <td class="p-3 align-top text-gray-700">{m.chemicals}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-12 mb-4">Labelling, which is the part that gets shipments held</h2>
+  <ul>
+    {markets.map((m) => (
+      <li><strong>{m.market}:</strong> {m.label}</li>
+    ))}
+  </ul>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-12 mb-4">By product type</h2>
+
+  <div class="not-prose overflow-x-auto -mx-4 px-4">
+    <table class="w-full text-sm border-collapse min-w-[760px]">
+      <thead>
+        <tr class="bg-navy text-white text-left">
+          <th class="p-3 font-bold w-1/4">What you are buying</th>
+          <th class="p-3 font-bold w-2/5">What it needs</th>
+          <th class="p-3 font-bold">The trap</th>
+        </tr>
+      </thead>
+      <tbody>
+        {byType.map((t, i) => (
+          <tr class={i % 2 ? 'bg-gray-50' : 'bg-white'}>
+            <td class="p-3 font-bold text-navy align-top">{t.type}</td>
+            <td class="p-3 align-top text-gray-700">{t.needs}</td>
+            <td class="p-3 align-top text-gray-600">{t.note}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-12 mb-4">The three documents buyers confuse</h2>
+  <p>
+    <strong>A test report</strong> is a laboratory\u2019s record that a sample met a standard on a date. It is issued by a
+    third-party lab, it is item-specific, and it expires the moment the design or the material changes.
+  </p>
+  <p>
+    <strong>A declaration of conformity</strong> is the manufacturer\u2019s own legal statement that the product meets the
+    applicable regulation. It is signed, it names the directives or standards, and it is what the CE or UKCA mark refers
+    to. A test report supports it but does not replace it.
+  </p>
+  <p>
+    <strong>A factory audit</strong> is about the plant, not the product. BSCI, SEDEX and ISO 9001 tell a buyer how the
+    factory is managed; they say nothing about whether a specific toy passes EN 71. Buyers regularly accept an audit
+    report as if it were product certification, which is exactly the gap a compliance officer will find.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">How we handle certificates</h2>
+  <p>
+    We document what a product has actually been tested for and we do not claim a standard on a product that has not been
+    tested against it. Testing scope varies by model and by market, so the honest answer to "does this ship to Germany"
+    is item-specific. Send us the item number and the destination and we will tell you what documentation exists for
+    that item today, and whether additional testing is needed and how long it takes.
+  </p>
+  <p class="text-sm text-gray-500 bg-gray-50 border-l-4 border-orange p-4 not-prose">{disclaimer}</p>
+</SectionLayout>

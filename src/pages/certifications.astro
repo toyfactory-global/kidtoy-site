@@ -1,0 +1,169 @@
+---
+import SectionLayout from '../layouts/SectionLayout.astro';
+
+const docs = [
+  {
+    doc: 'ISO 22716 / GMPC',
+    level: 'Factory',
+    covers: 'Good manufacturing practice for cosmetics: hygiene, batch records, traceability, storage and personnel.',
+    proves: 'The plant is organised to a recognised cosmetics GMP.',
+    notProves: 'That a specific lip gloss formulation is safe or notified in your market.',
+  },
+  {
+    doc: 'BSCI audit',
+    level: 'Factory',
+    covers: 'Social compliance: working hours, wages, health and safety, no forced or child labour, grievance channels.',
+    proves: 'An independent auditor assessed the social conditions on a given date.',
+    notProves: 'Anything about product safety. It is a labour audit, not a product test.',
+  },
+  {
+    doc: 'SEDEX / SMETA',
+    level: 'Factory',
+    covers: 'The same social and ethical audit scope published on the SEDEX platform for supply-chain transparency.',
+    proves: 'A shared audit record your compliance team can read directly.',
+    notProves: 'Product conformity, or a certification with a pass/fail mark.',
+  },
+  {
+    doc: 'GSV',
+    level: 'Factory',
+    covers: 'Supply-chain security: container and seal controls, facility access, cargo handling, personnel screening.',
+    proves: 'The site meets a recognised cargo-security standard for export shipments.',
+    notProves: 'Product safety or social compliance.',
+  },
+  {
+    doc: 'CE declaration of conformity',
+    level: 'Product',
+    covers: 'The manufacturer\u2019s statement that a product meets the applicable EU directives, naming the standards applied.',
+    proves: 'A declaration exists, signed, for that product and those directives.',
+    notProves: 'That a laboratory tested that batch. The declaration is supported by a test report, not a substitute for one.',
+  },
+  {
+    doc: 'EN 71 test report',
+    level: 'Product',
+    covers: 'Mechanical and physical properties, flammability, and migration of elements for a submitted sample.',
+    proves: 'A sample of that item met EN 71 on the date tested.',
+    notProves: 'That every unit of every later production run is identical. A report is a snapshot of one batch.',
+  },
+  {
+    doc: 'ASTM F963 test report',
+    level: 'Product',
+    covers: 'US toy safety specification, tested by a CPSC-accepted laboratory.',
+    proves: 'The item was tested to F963 by an accredited lab.',
+    notProves: 'That a Children\u2019s Product Certificate has been issued for your shipment — that is a separate document.',
+  },
+  {
+    doc: 'CPSIA / Children\u2019s Product Certificate',
+    level: 'Product',
+    covers: 'Lead and phthalate limits, and the certificate the US importer must furnish for a children\u2019s product.',
+    proves: 'Testing against CPSIA limits for the tested item.',
+    notProves: 'That your specific import is compliant — the importer issues and owns the CPC.',
+  },
+  {
+    doc: 'UN 38.3 battery report',
+    level: 'Component',
+    covers: 'Transport testing of the lithium cell or battery pack: altitude, thermal, vibration, shock, external short circuit.',
+    proves: 'The battery has been transport-tested, which is what an airline asks for.',
+    notProves: 'That the toy itself meets a toy safety standard. It is a transport document.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Can you send me copies of these documents?',
+    a: 'For a specific item and a specific market, yes — ask with the item number and the destination. We send what exists for that item rather than a generic pack, because a document for a different model is worse than no document: it looks like an answer and is not one.',
+  },
+  {
+    q: 'Why do you not just list "CE, ASTM, ISO" on every product page?',
+    a: 'Because it would be untrue for some items. Certification claims that do not match the actual test scope get found out at the border or in a marketplace audit, and the party who pays is the importer. We would rather tell you what a specific item has and let your compliance team decide whether it is enough.',
+  },
+  {
+    q: 'Is a factory audit a substitute for product testing?',
+    a: 'No. BSCI, SEDEX and GSV tell you how the plant is run. They say nothing about whether a particular toy passes EN 71 or whether a lip gloss is notified as a cosmetic. Buyers regularly treat an audit report as product certification, and that is exactly the gap a customs officer or a compliance auditor will find.',
+  },
+  {
+    q: 'What if the item I want has no report for my market?',
+    a: 'We can have it tested against a named standard by an accredited third-party laboratory, and we will tell you the cost and the lead time before you commit. Whether a resulting report is accepted for your market is a question for your lab or customs broker, not something a factory can declare on your behalf.',
+  },
+  {
+    q: 'Do certificates expire?',
+    a: 'Test reports do not carry a formal expiry date in most cases, but they are tied to a design, a material and a production batch. Retailers and some markets require a refresh periodically or when anything changes. Factory audits, by contrast, do carry a validity window and are usually renewed on a cycle.',
+  },
+];
+
+const notice =
+  'Nothing on this page is a claim that every product we make is certified for every market. Documents are item-specific and market-specific. Confirm the exact requirement for your destination with an accredited laboratory or your customs broker before you ship.';
+---
+
+<SectionLayout
+  title="Toy Factory Certificates & Audits: What Each One Actually Proves"
+  description="ISO 22716 GMPC, BSCI, SEDEX, GSV factory audits and CE, EN71, ASTM F963, CPSIA and UN 38.3 product documents — what each covers and what it does not."
+  kicker="Trust"
+  h1="Certificates & Audits"
+  lede="A certificate is only useful if you know what it covers. This page separates the factory-level audits from the product-level documents, and states plainly what each one does not prove."
+  related={[
+    { href: '/factory/', label: 'Inside the factory', note: 'The process behind the documents: sample, production, inspection.' },
+    { href: '/tools/toy-certification-matrix/', label: 'Certification matrix', note: 'Which standard each market requires, by product type.' },
+    { href: '/blog/en71-vs-astm-f963-toy-certification/', label: 'EN71 vs ASTM F963 vs CPSIA', note: 'How the three regimes differ and where they overlap.' },
+  ]}
+  faqs={faqs}
+>
+  <h2 class="text-2xl font-extrabold text-navy mt-2 mb-4">Factory-level and product-level are two different things</h2>
+  <p>
+    The distinction that matters: an audit is about the plant, a test report is about a product, and a declaration is about
+    a legal duty. They are issued by different parties, they cover different risks, and a buyer who accepts one in place of
+    another has a gap in their file that nobody has noticed yet.
+  </p>
+
+  <div class="not-prose overflow-x-auto -mx-4 px-4 mt-8">
+    <table class="w-full text-sm border-collapse min-w-[900px]">
+      <thead>
+        <tr class="bg-navy text-white text-left">
+          <th class="p-3 font-bold">Document</th>
+          <th class="p-3 font-bold">Level</th>
+          <th class="p-3 font-bold">What it covers</th>
+          <th class="p-3 font-bold">What it does not prove</th>
+        </tr>
+      </thead>
+      <tbody>
+        {docs.map((d, i) => (
+          <tr class={i % 2 ? 'bg-gray-50' : 'bg-white'}>
+            <td class="p-3 font-bold text-navy align-top">{d.doc}</td>
+            <td class="p-3 align-top">
+              <span class={d.level === 'Factory' ? 'text-xs font-bold uppercase tracking-wider text-gray-500' : 'text-xs font-bold uppercase tracking-wider text-orange'}>{d.level}</span>
+            </td>
+            <td class="p-3 align-top text-gray-700">{d.covers}</td>
+            <td class="p-3 align-top text-gray-600">{d.notProves}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-12 mb-4">How to use this as a buyer</h2>
+  <p>
+    Start from the market, not from the document list. Decide which regulation applies to your product and destination, then
+    ask for the document that satisfies it. If a supplier responds with a folder of every certificate they hold, you have
+    learned that they have a folder — not that your product is compliant.
+  </p>
+  <p>
+    The three questions that get to the point:
+  </p>
+  <ul>
+    <li><strong>Which item number does this report cover?</strong> If the answer is "the whole range", the report is not
+      specific enough to rely on.</li>
+    <li><strong>What date, and has anything changed since?</strong> A material, mould or colour change invalidates the
+      evidence.</li>
+    <li><strong>Which laboratory issued it, and is it accredited for this test?</strong> A report from a lab without the
+      right scope is a piece of paper.</li>
+  </ul>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">Batteries are a separate track</h2>
+  <p>
+    A toy containing a lithium cell needs two unrelated sets of documents: the toy safety report for the product, and the
+    UN 38.3 transport report for the battery. Air carriers ask for the second one and will refuse the shipment without it,
+    regardless of how compliant the toy is. If you are planning an air shipment of a battery toy, confirm the battery
+    documentation before you confirm the freight — not after.
+  </p>
+
+  <p class="text-sm text-gray-500 bg-gray-50 border-l-4 border-orange p-4 not-prose mt-10">{notice}</p>
+</SectionLayout>

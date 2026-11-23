@@ -1,0 +1,282 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout
+  title="Container Loading Calculator for Toy Cartons (CBM)"
+  description="Free container loading calculator: enter carton length, width, height and pieces per carton to see CBM, carton count and how a 20GP, 40GP or 40HQ fills."
+  kicker="Buyer Tools"
+  h1="Container Loading Calculator"
+  lede="Enter one carton's dimensions and the order quantity. You get the CBM per carton, the carton count, the total volume you should declare to a forwarder, and how much of a 20GP, 40GP or 40HQ the shipment actually occupies."
+  parent={{ href: '/tools/', label: 'Tools' }}
+  faqs={[
+    {
+      q: 'How is CBM calculated for a carton?',
+      a: 'CBM is cubic metres. Multiply length by width by height in centimetres, then divide by 1,000,000. A carton of 56.5 x 50 x 32 cm is 56.5 x 50 x 32 = 90,400 cm3, which is 0.0904 CBM. Forwarders bill on the higher of actual volume and volumetric weight, so this figure is the one that ends up on the invoice.',
+    },
+    {
+      q: 'Why does the calculator use 28 CBM for a 20GP instead of the internal volume?',
+      a: 'A 20GP has roughly 33 CBM of internal space, but cartons are rigid and do not fill gaps, pallets and door recesses. Practical loading for cartons is typically 25 to 28 CBM. Using the conservative figure means the answer you get is the volume you can actually ship, not the volume the container theoretically holds.',
+    },
+    {
+      q: 'Does the heavier container limit ever bind before the volume limit?',
+      a: 'Yes, and it is the failure mode buyers miss. A 20GP payload is roughly 28 tonnes, a 40GP about 26.7 tonnes and a 40HQ about 26.5 tonnes, and road limits in the EU and US are often lower than the ocean limit. Dense goods such as liquid-filled bubble toys or gel kits can hit the weight ceiling while the container is still half empty. The tool flags this.',
+    },
+    {
+      q: 'Should I load to 100% of the container?',
+      a: 'No. Leave room for the door recess, for pallets if the buyer requires them, and for the last cartons to be handled without damage. Above roughly 85% of practical capacity, real loading gets slow and cartons get crushed. The tool shows the fill percentage so you can see when you are close to the limit.',
+    },
+    {
+      q: 'Can you load a mixed order from several items?',
+      a: 'Yes, mixed containers are normal for a first order. Send us the item list and quantity per item and we will build a carton plan that fills the container properly instead of leaving a half-empty 40HQ. The calculator has a mixed-load mode for that.',
+    },
+  ]}
+  related={[
+    { href: '/tools/landed-cost-calculator/', label: 'Landed Cost Calculator', note: 'Turn the freight figure you get here into a true cost per unit.' },
+    { href: '/blog/container-loading-calculation-cartons-cbm/', label: 'How container loading is calculated', note: 'The full method, including packing loss and weight limits.' },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mb-2">Single-item load</h2>
+  <p class="text-sm text-gray-500 mb-6">All dimensions in centimetres. Weight in kilograms.</p>
+
+  <div class="not-prose bg-gray-50 border border-gray-200 rounded-2xl p-6 sm:p-8">
+    <div class="grid sm:grid-cols-2 gap-4">
+      <label class="block">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Carton length (cm)</span>
+        <input id="cl" type="number" min="1" step="0.1" value="56.5" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange" />
+      </label>
+      <label class="block">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Carton width (cm)</span>
+        <input id="cw" type="number" min="1" step="0.1" value="50" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange" />
+      </label>
+      <label class="block">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Carton height (cm)</span>
+        <input id="ch" type="number" min="1" step="0.1" value="32" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange" />
+      </label>
+      <label class="block">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Pieces per carton</span>
+        <input id="ppc" type="number" min="1" step="1" value="36" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange" />
+      </label>
+      <label class="block">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Order quantity (pcs)</span>
+        <input id="qty" type="number" min="1" step="1" value="1000" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange" />
+      </label>
+      <label class="block">
+        <span class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Gross weight per carton (kg)</span>
+        <input id="kg" type="number" min="0" step="0.1" value="21.3" class="w-full border border-gray-300 rounded-lg px-4 py-3 text-navy font-semibold focus:outline-none focus:border-orange" />
+      </label>
+    </div>
+
+    <div class="mt-8 grid sm:grid-cols-3 gap-4">
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">CBM per carton</div>
+        <div id="out-cbm" class="text-2xl font-extrabold text-navy">—</div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Cartons needed</div>
+        <div id="out-ctn" class="text-2xl font-extrabold text-navy">—</div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Total CBM</div>
+        <div id="out-total" class="text-2xl font-extrabold text-orange">—</div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Total gross weight</div>
+        <div id="out-weight" class="text-2xl font-extrabold text-navy">—</div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-xl p-5 sm:col-span-2">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Container needed</div>
+        <div id="out-cont" class="text-2xl font-extrabold text-navy">—</div>
+      </div>
+    </div>
+
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="text-left text-xs uppercase tracking-wider text-gray-400 border-b border-gray-200">
+            <th class="py-3 pr-4">Container</th>
+            <th class="py-3 pr-4">Practical CBM</th>
+            <th class="py-3 pr-4">Max cartons</th>
+            <th class="py-3 pr-4">Fill used</th>
+            <th class="py-3">Payload check</th>
+          </tr>
+        </thead>
+        <tbody id="out-table" class="text-navy font-semibold"></tbody>
+      </table>
+    </div>
+    <p class="text-xs text-gray-400 mt-4 leading-relaxed">
+      Practical capacity assumes carton loading without pallets: 20GP 28 CBM, 40GP 58 CBM, 40HQ 68 CBM.
+      Payload ceilings: 20GP 28,000 kg, 40GP 26,700 kg, 40HQ 26,500 kg. Road limits in your destination country may be lower.
+    </p>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var LIMITS = [
+        { name: '20GP', cbm: 28, kg: 28000 },
+        { name: '40GP', cbm: 58, kg: 26700 },
+        { name: '40HQ', cbm: 68, kg: 26500 }
+      ];
+      var ids = ['cl', 'cw', 'ch', 'ppc', 'qty', 'kg'];
+      var el = {};
+      ids.forEach(function (id) { el[id] = document.getElementById(id); });
+
+      function num(id) {
+        var v = parseFloat(el[id].value);
+        return isNaN(v) || v <= 0 ? 0 : v;
+      }
+
+      function fmt(n, d) {
+        return n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+      }
+
+      function calc() {
+        var L = num('cl'), W = num('cw'), H = num('ch'), ppc = num('ppc'), qty = num('qty'), kg = num('kg');
+        if (!L || !W || !H || !ppc || !qty) return;
+
+        var cbm = (L * W * H) / 1000000;
+        var cartons = Math.ceil(qty / ppc);
+        var total = cbm * cartons;
+        var totalKg = kg * cartons;
+
+        document.getElementById('out-cbm').textContent = fmt(cbm, 4) + ' m³';
+        document.getElementById('out-ctn').textContent = fmt(cartons, 0) + ' cartons';
+        document.getElementById('out-total').textContent = fmt(total, 3) + ' m³';
+        document.getElementById('out-weight').textContent = kg > 0 ? fmt(totalKg, 0) + ' kg' : '—';
+
+        var rows = '';
+        var recommended = null;
+        LIMITS.forEach(function (c) {
+          var maxCartons = Math.floor(c.cbm / cbm);
+          var fill = (total / c.cbm) * 100;
+          var maxKg = kg > 0 ? c.kg / kg : Infinity;
+          var weightBound = maxKg < maxCartons;
+          var payload = kg > 0
+            ? (weightBound ? 'Weight binds at ' + fmt(Math.floor(maxKg), 0) + ' cartons' : 'Volume binds')
+            : '—';
+          if (payload === 'Volume binds' && kg > 0) payload = 'OK';
+          if (!recommended && total <= c.cbm && (kg === 0 || totalKg <= c.kg)) recommended = c.name;
+          rows += '<tr class="border-b border-gray-100">' +
+            '<td class="py-3 pr-4">' + c.name + '</td>' +
+            '<td class="py-3 pr-4">' + c.cbm + ' m³</td>' +
+            '<td class="py-3 pr-4">' + fmt(maxCartons, 0) + '</td>' +
+            '<td class="py-3 pr-4">' + fmt(fill, 1) + '%</td>' +
+            '<td class="py-3">' + payload + '</td>' +
+            '</tr>';
+        });
+        document.getElementById('out-table').innerHTML = rows;
+
+        var contEl = document.getElementById('out-cont');
+        if (recommended) {
+          contEl.textContent = '1 x ' + recommended;
+        } else {
+          var needed = Math.ceil(total / 68);
+          contEl.textContent = needed + ' x 40HQ (or ask us for a mixed-load plan)';
+        }
+      }
+
+      ids.forEach(function (id) { el[id].addEventListener('input', calc); });
+      calc();
+    })();
+  </script>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-14 mb-4">Mixed load: several items in one container</h2>
+  <p>Most first orders are mixed. Add a line per item, then read the total CBM at the bottom.</p>
+
+  <div class="not-prose bg-gray-50 border border-gray-200 rounded-2xl p-6 sm:p-8">
+    <div id="mix-rows" class="space-y-3"></div>
+    <button id="mix-add" type="button" class="mt-4 text-sm font-bold text-orange hover:text-navy transition-colors">+ Add another item</button>
+
+    <div class="mt-6 grid sm:grid-cols-2 gap-4">
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Total CBM</div>
+        <div id="mix-cbm" class="text-2xl font-extrabold text-orange">0.000 m³</div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Fits in</div>
+        <div id="mix-fit" class="text-2xl font-extrabold text-navy">—</div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var rows = document.getElementById('mix-rows');
+      var addBtn = document.getElementById('mix-add');
+      var n = 0;
+
+      function addRow() {
+        n++;
+        var div = document.createElement('div');
+        div.className = 'grid grid-cols-2 sm:grid-cols-5 gap-2 items-end';
+        div.innerHTML =
+          '<label class="block col-span-2 sm:col-span-1"><span class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">Carton L×W×H (cm)</span>' +
+          '<div class="flex gap-1">' +
+          '<input class="ml m-w w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="56" inputmode="decimal">' +
+          '<input class="ml m-w w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="50" inputmode="decimal">' +
+          '<input class="ml m-h w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="32" inputmode="decimal">' +
+          '</div></label>' +
+          '<label class="block"><span class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">Qty (pcs)</span>' +
+          '<input class="m-q w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="1000" inputmode="numeric"></label>' +
+          '<label class="block"><span class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">Pcs / carton</span>' +
+          '<input class="m-p w-full border border-gray-300 rounded px-2 py-2 text-sm font-semibold" placeholder="36" inputmode="numeric"></label>' +
+          '<div class="text-sm font-bold text-navy pb-2" data-out>—</div>' +
+          '<button type="button" class="text-xs font-bold text-gray-400 hover:text-orange pb-2 text-left" data-del>Remove</button>';
+        rows.appendChild(div);
+        div.querySelectorAll('input').forEach(function (i) { i.addEventListener('input', calc); });
+        div.querySelector('[data-del]').addEventListener('click', function () { div.remove(); calc(); });
+        calc();
+      }
+
+      function calc() {
+        var total = 0;
+        rows.querySelectorAll('div.grid').forEach(function (r) {
+          var d = r.querySelectorAll('.ml');
+          var q = parseFloat(r.querySelector('.m-q').value);
+          var p = parseFloat(r.querySelector('.m-p').value);
+          var out = r.querySelector('[data-out]');
+          if (d.length === 3 && q > 0 && p > 0) {
+            var cbm = (parseFloat(d[0].value) * parseFloat(d[1].value) * parseFloat(d[2].value)) / 1000000;
+            if (isNaN(cbm)) cbm = 0;
+            var t = cbm * Math.ceil(q / p);
+            total += t;
+            out.textContent = t.toFixed(3) + ' m³';
+          } else {
+            out.textContent = '—';
+          }
+        });
+        document.getElementById('mix-cbm').textContent = total.toFixed(3) + ' m³';
+        var fit = '—';
+        if (total > 0) {
+          if (total <= 28) fit = '1 x 20GP';
+          else if (total <= 58) fit = '1 x 40GP';
+          else if (total <= 68) fit = '1 x 40HQ';
+          else fit = Math.ceil(total / 68) + ' x 40HQ';
+        }
+        document.getElementById('mix-fit').textContent = fit;
+      }
+
+      addBtn.addEventListener('click', addRow);
+      addRow();
+      addRow();
+    })();
+  </script>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-14 mb-4">What the numbers mean in practice</h2>
+  <p>
+    Volume is only half of container planning. The other half is what the carton does to your handling. A carton
+    weighing more than about 20 kg is uncomfortable for a single warehouse worker and some fulfilment centres will
+    reject it outright, so a dense item often ships in a lighter carton than the volume maths alone would suggest.
+  </p>
+  <p>
+    The second trap is the last carton. A 1,000-piece order at 36 pieces per carton is 27.8 cartons, which is 28
+    cartons, which is 1,008 pieces worth of space. Rounding up looks trivial and is not: if that 28th carton pushes
+    the load from 27.6 to 28.6 CBM you may have moved yourself from a comfortable 20GP into a container that no
+    longer closes, or from one 40HQ into a second one.
+  </p>
+  <p>
+    If you are close to a boundary, tell us the item list before you commit. We build the carton plan from the
+    actual export carton data in our system rather than from the product dimensions, and we will usually be able to
+    rebalance quantities across items so the container closes at 80% instead of 101%.
+  </p>
+</SectionLayout>

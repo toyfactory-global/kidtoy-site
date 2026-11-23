@@ -1,0 +1,107 @@
+---
+/**
+ * Homepage inquiry form.
+ *
+ * The homepage previously had no form at all — a buyer who arrived from a
+ * Google search had to click through to /contact to ask anything, and the
+ * overwhelming majority did not. This puts the ask above the fold.
+ *
+ * Same Web3Forms endpoint and access key as the product form, so leads land in
+ * one inbox and the sendBeacon lead log in BaseLayout picks it up unchanged.
+ */
+const fieldClass =
+  'w-full px-4 py-3 bg-white border border-gray-200 focus:border-orange focus:outline-none rounded-lg text-sm text-navy placeholder:text-gray-300';
+const labelClass = 'block text-[11px] font-extrabold uppercase tracking-wider text-gray-500 mb-1.5';
+---
+
+<div class="bg-white border border-gray-200 rounded-2xl p-6 sm:p-7 shadow-xl shadow-navy/5">
+  <p class="text-orange text-[11px] font-extrabold uppercase tracking-[0.2em] mb-1.5">Request a quote</p>
+  <h2 class="text-lg sm:text-xl font-extrabold text-navy leading-snug mb-1.5">Tell us what you need</h2>
+  <p class="text-xs text-gray-500 mb-5 leading-relaxed">
+    Item numbers, quantity and destination port are enough. We reply with FOB price, carton data and lead time within one business day.
+  </p>
+
+  <form id="hero-inquiry-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-3">
+    <input type="hidden" name="access_key" value="a9f6af03-8274-436c-9dc6-046d466bce9c" />
+    <input type="hidden" name="subject" value="Homepage quote request — kidtoycn.com" />
+    <input type="hidden" name="from_name" value="Homepage Inquiry — kidtoycn.com" />
+    <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+
+    <div class="grid sm:grid-cols-2 gap-3">
+      <div>
+        <label class={labelClass} for="hero-name">Name *</label>
+        <input class={fieldClass} id="hero-name" type="text" name="name" required placeholder="Full name" />
+      </div>
+      <div>
+        <label class={labelClass} for="hero-email">Business email *</label>
+        <input class={fieldClass} id="hero-email" type="email" name="email" required placeholder="you@company.com" />
+      </div>
+      <div>
+        <label class={labelClass} for="hero-company">Company</label>
+        <input class={fieldClass} id="hero-company" type="text" name="company" placeholder="Company name" />
+      </div>
+      <div>
+        <label class={labelClass} for="hero-qty">Target quantity (pcs)</label>
+        <input class={fieldClass} id="hero-qty" type="text" name="quantity" placeholder="e.g. 500" />
+      </div>
+    </div>
+
+    <div>
+      <label class={labelClass} for="hero-message">What are you looking for? *</label>
+      <textarea class={`${fieldClass} resize-none`} id="hero-message" name="message" rows="3" required placeholder="Products or item numbers, destination country, and anything the price depends on."></textarea>
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-navy hover:bg-orange text-white px-6 py-3.5 rounded-lg font-extrabold text-sm uppercase tracking-wider transition-colors"
+    >
+      Send inquiry
+    </button>
+
+    <p id="hero-inquiry-status" class="text-sm font-semibold hidden" role="status" aria-live="polite"></p>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('hero-inquiry-form') as HTMLFormElement | null;
+  const status = document.getElementById('hero-inquiry-status');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status) return;
+
+    const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const label = button.innerHTML;
+    button.disabled = true;
+    button.textContent = 'Sending...';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', {
+            form_name: 'homepage_inquiry',
+            page_path: window.location.pathname,
+          });
+        }
+        form.reset();
+        status.className = 'text-sm font-bold text-green-600';
+        status.textContent = 'Thank you — your inquiry has been sent. We reply within one business day.';
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch {
+      status.className = 'text-sm font-bold text-red-600';
+      status.textContent = 'Could not send automatically. Please email hntoys6@sinuotoys.com or message us on WhatsApp.';
+    } finally {
+      button.disabled = false;
+      button.innerHTML = label;
+    }
+  });
+</script>

@@ -1,0 +1,117 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+
+const segments = [
+  {
+    href: '/industries/party-supplies-distributors/',
+    name: 'Party Supplies Distributors',
+    note: 'High-turn, low-unit-value bubble and water toys sold in multipacks and seasonal pallets.',
+  },
+  {
+    href: '/industries/gift-shop-retailers/',
+    name: 'Gift & Toy Retailers',
+    note: 'A saleable range rather than a single SKU: makeup cases for gifting, bubble toys for impulse buys.',
+  },
+  {
+    href: '/industries/online-marketplace-sellers/',
+    name: 'Online Marketplace Sellers',
+    note: 'Amazon, eBay, TikTok Shop and Shopify sellers who need retail-ready packaging and a compliant listing.',
+  },
+  {
+    href: '/industries/educational-toy-distributors/',
+    name: 'Educational Toy Distributors',
+    note: 'STEM and sensory lines sold to schools, nurseries and museum shops with age-graded documentation.',
+  },
+  {
+    href: '/industries/pharmacy-drugstore-chains/',
+    name: 'Pharmacy & Drugstore Chains',
+    note: 'Kids cosmetics and hygiene-adjacent gift lines, where the cosmetic regulation matters more than the toy one.',
+  },
+  {
+    href: '/industries/seasonal-holiday-suppliers/',
+    name: 'Seasonal & Holiday Suppliers',
+    note: 'Christmas, Easter, Halloween and back-to-school windows, where the ship date decides the order.',
+  },
+  {
+    href: '/industries/promotional-corporate-gifting/',
+    name: 'Promotional & Corporate Gifting',
+    note: 'Logo-printed toys and branded gift boxes for agencies, banks and event organisers.',
+  },
+  {
+    href: '/industries/amusement-park-event-operators/',
+    name: 'Amusement Parks & Event Operators',
+    note: 'Prize stock, water-play equipment and repeat consumables for venues and fairs.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Do you have a minimum order for a first order from a small retailer?',
+    a: 'The per-item MOQ in our catalogue starts at 54 pieces and runs to 500 depending on the mould and the packaging. A first order can be mixed across several items, so a small retailer can build a saleable range without committing to 500 pieces of one design. Send the item list and we will tell you what the smallest workable shipment is.',
+  },
+  {
+    q: 'Can you supply retail-ready packaging for marketplace sellers?',
+    a: 'Yes. We can print retail boxes, poly bags with warning text, barcode labels and instruction sheets to your artwork, and we can pack to a marketplace\u2019s requirements. Send the specification — including whether the product needs a suffocation warning, a tracking label or a country-of-origin mark — and we will confirm what we can print and what has to be applied locally.',
+  },
+  {
+    q: 'Which segment do most of your buyers come from?',
+    a: 'Wholesale distributors and importers who resell to retail, followed by online marketplace sellers buying retail-ready stock. Both need the same three things: a real MOQ, carton data they can quote to a forwarder, and documentation they can show a compliance team. That is why those three appear on every product page.',
+  },
+  {
+    q: 'Do you work with buyers who have never imported from China?',
+    a: 'Yes, and the first order is where most of the risk sits. We will walk through the sample, the deposit, the production window, the inspection and the shipping documents in that order, and we will tell you which step is yours rather than ours. If you need a freight forwarder we can recommend the route but not the company — you should appoint your own.',
+  },
+];
+---
+
+<SectionLayout
+  title="Toy Wholesale by Buyer Type: Distributors, Retailers, Marketplaces"
+  description="How toy sourcing differs by buyer type: party supplies distributors, gift retailers, marketplace sellers, educational distributors, pharmacies, seasonal suppliers, corporate gifting and event operators."
+  kicker="Buyer Segments"
+  h1="Wholesale Toys by Buyer Type"
+  lede="The same factory sells very differently to a party supplies distributor and a pharmacy chain. The difference is not the price — it is the MOQ, the packaging, the paperwork and the calendar. Pick the segment you buy for."
+  faqs={faqs}
+  related={[
+    { href: '/collections/all/', label: 'Full catalogue', note: 'All 40 items with MOQ, FOB price and export carton data.' },
+    { href: '/tools/wholesale-price-break-calculator/', label: 'Order volume calculator', note: 'Check a quantity against real carton data before you ask for a quote.' },
+    { href: '/factory/', label: 'How our factory works', note: 'The audit, the QC process and what a buyer can verify.' },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mb-6">Choose your segment</h2>
+
+  <div class="grid sm:grid-cols-2 gap-4 not-prose">
+    {segments.map((s) => (
+      <a href={s.href} class="block border border-gray-200 rounded-2xl p-6 hover:border-orange hover:shadow-sm transition-all group">
+        <span class="block text-lg font-extrabold text-navy group-hover:text-orange transition-colors leading-snug mb-2">{s.name}</span>
+        <span class="block text-sm text-gray-500 leading-relaxed">{s.note}</span>
+        <span class="inline-block mt-4 text-sm font-bold text-orange">Read the buying guide →</span>
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-14 mb-4">What changes between segments</h2>
+  <p>
+    A party supplies distributor buys volume of a cheap, fast-moving item and cares about the carton count more than the
+    box artwork. A gift retailer buys a range and cares about whether the packaging looks like a gift. A marketplace
+    seller needs a barcode, a poly bag and a tracking label before the goods are worth anything to them. A pharmacy
+    chain will not touch a kids cosmetics set unless the cosmetic regulation is satisfied, which is a different regime
+    from the toy regulation.
+  </p>
+  <p>
+    None of those differences show up in a price list, which is why the generic "wholesale toys" pitch fails. If you tell
+    us the channel you sell through, we can tell you what the order has to look like — and just as usefully, which items
+    in our catalogue are a bad fit for it.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">The four numbers every segment needs</h2>
+  <ul>
+    <li><strong>MOQ per item</strong> — 54 to 500 pieces depending on the mould and the packaging.</li>
+    <li><strong>Carton data</strong> — pieces per carton, carton dimensions, CBM and gross weight, on every product page.</li>
+    <li><strong>Lead time</strong> — production plus the shipping window, counted backwards from your shelf date.</li>
+    <li><strong>Documentation</strong> — what the item is tested for, and what your market will ask for at the border.</li>
+  </ul>
+  <p>
+    If any of those is missing from a page, ask. A quote without carton data cannot be costed, and a lead time without a
+    ship date cannot be planned.
+  </p>
+</SectionLayout>

@@ -1,0 +1,79 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import ProductPickGrid from '../../components/ProductPickGrid.astro';
+---
+
+<SectionLayout
+  title="Seasonal Toy Wholesale: Christmas, Easter, Summer & Halloween"
+  description="Seasonal toy sourcing with a working backwards calendar: Christmas, Easter, Halloween and summer windows, production lead times and the Chinese New Year factory closure."
+  kicker="Buyer Segment"
+  h1="Toys for Seasonal & Holiday Suppliers"
+  lede="In seasonal buying the ship date is the product. A container of Christmas bubble sticks that lands on 20 December is not late — it is worthless. This page is about counting backwards correctly."
+  parent={{ href: '/industries/', label: 'Buyer Segments' }}
+  faqs={[
+    {
+      q: 'When should a Christmas toy order be placed?',
+      a: 'Work backwards from the shelf date: allow 20–35 days of sea freight, 7–10 days of clearance and inland delivery, and 15–25 days of production. A product on shelf by mid-November needs to ship from China by late September, which means a purchase order in July or August. That is also before the Chinese New Year congestion window, which is the single biggest cause of seasonal shipments arriving late.',
+    },
+    {
+      q: 'What happens to production around Chinese New Year?',
+      a: 'Most Chenghai factories close for one to three weeks and the workforce returns gradually, so the effective slowdown is longer than the official holiday. Freight capacity is also tight in the weeks before and after. For a spring or summer season, the safe rule is to have the goods on the water before the holiday rather than in production during it.',
+    },
+    {
+      q: 'Do you have Christmas-specific products?',
+      a: 'Yes — there is a Christmas-themed six-hole bubble stick in the catalogue, and several bubble machines and light-up items work for a holiday display with seasonal packaging. We can quote a printed holiday sleeve or box, but the print run has its own minimum, so tell us the quantity before you ask for custom artwork.',
+    },
+    {
+      q: 'Can you hold stock for a later ship date?',
+      a: 'We do not operate a storage programme for buyers — that would put your stock in our warehouse with no certainty for either side. What we can do is agree a production slot so the goods are made close to the ship date, which is the part that actually matters for cash flow. Discuss the timing before the order, not after.',
+    },
+    {
+      q: 'Which seasons actually work for these products?',
+      a: 'Bubble and water toys peak in late spring and summer, makeup and gift cases peak in Q4, and light-up items work across Q4 and Halloween. Easter is a smaller window but a real one for bubble and craft items. The mistake is ordering a summer item in April for a June promotion — the production window has already gone.',
+    },
+  ]}
+  related={[
+    { href: '/collections/bubble-toys/', label: 'Bubble toys', note: 'Ten lines including two seasonal-themed sticks.' },
+    { href: '/blog/wholesale-bubble-toys-buyers-guide/', label: 'Seasonality, planned backwards', note: 'The calendar reasoning in more detail.' },
+    { href: '/tools/container-loading-calculator/', label: 'Container calculator', note: 'Check the load before you book the slot.' },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mt-2 mb-4">The backward calendar</h2>
+  <p>
+    Take the date the goods must be on shelf and subtract. Clearance and inland delivery 7–10 days, sea freight 20–35
+    days depending on the lane, production 15–25 days, plus the time it takes you to approve a sample and pay a deposit.
+    That total is usually between ten and twelve weeks — and it does not include the time you spend deciding.
+  </p>
+  <p>
+    The reason seasonal orders fail is almost never the factory. It is a buyer who starts the process twelve weeks out and
+    expects a six-week result, then pays for air freight and gives away the margin. If your window is tight, the honest
+    options are air freight, a smaller sea shipment now plus a second later, or a different product. Not a promise that
+    production can be compressed.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">Chinese New Year is the fixed constraint</h2>
+  <p>
+    Every supplier in Chenghai shares the same holiday. Production stops, workers travel, and the return is staggered over
+    the following weeks. Freight space tightens on both sides of it. If a season starts in March or April, the goods must
+    be finished and booked before the holiday, which means the order is placed in the preceding autumn — the same time
+    everyone else is competing for the same container slots.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">Seasonal packaging without seasonal MOQ</h2>
+  <p>
+    A themed box is the cheapest way to make a generic product seasonal, and the most common way to blow up a budget. The
+    toy has a MOQ; the printed box has its own. Two routes work: a printed sleeve over the stock box, which needs a lower
+    print quantity than a full box, or a sticker or hang tag, which needs almost none. Ask for all three options priced
+    against your quantity rather than assuming the box is the only answer.
+  </p>
+
+  <ProductPickGrid
+    handles={[
+      'wholesale-christmas-themed-bubble-stick-6-hole-electric-bubble-wand-with-light-kids-holiday-party-toy',
+      'wholesale-winged-mermaid-bubble-stick-electric-6-hole-bubble-wand-with-light',
+      'wholesale-dinosaur-egg-bubble-machine-toy-automatic-electric-bubble-blower-with-dynamic-music-cool-led-lights-for-kids-outdoor-play',
+      '4-mode-dual-function-electric-bubble-water-gun-combo',
+    ]}
+    note="A Christmas-themed stick for Q4, the same platform in a summer theme, a character machine that carries a gift message, and a dual-function item for the summer peak."
+  />
+</SectionLayout>

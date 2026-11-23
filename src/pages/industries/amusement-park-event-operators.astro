@@ -1,0 +1,84 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import ProductPickGrid from '../../components/ProductPickGrid.astro';
+---
+
+<SectionLayout
+  title="Wholesale Toys for Amusement Parks, Fairs & Event Operators"
+  description="Prize stock and water-play equipment for amusement parks, fairs and event operators: high-durability toy lines, bulk pricing and repeat consumables."
+  kicker="Buyer Segment"
+  h1="Toys for Amusement Parks & Event Operators"
+  lede="A park does not sell a toy, it gives one away as a prize or rents it out for an afternoon. The requirements are different from retail: the unit has to survive rough handling, the cost per unit has to sit inside a prize budget, and it has to look worth winning."
+  parent={{ href: '/industries/', label: 'Buyer Segments' }}
+  faqs={[
+    {
+      q: 'What makes a toy suitable as a prize?',
+      a: 'It has to be understood instantly, it has to look like more than it cost, and it has to survive being carried around a park for a day. Big visual impact at a low unit cost matters more than features. Bubble guns and light-up items work because they are visible from a distance and they do something immediately.',
+    },
+    {
+      q: 'Do you supply water-play equipment for parks?',
+      a: 'We supply consumer electric water blasters in the $5.65 to $16.06 range, which suit splash zones, rental counters and family water-play areas. These are consumer toys, not commercial pool equipment — if you need a product rated for continuous commercial use, that is a different product category and we would rather say so than sell you a consumer unit into a duty it was not designed for.',
+    },
+    {
+      q: 'What is the cost per unit for a prize programme?',
+      a: 'It depends on the prize tier. In our catalogue the entry bubble items start around $1.82 to $3.42 FOB, mid-tier light-up items sit around $3 to $6, and the larger water blasters run to about $16. Prize programmes usually build three tiers so a stall can hand out something for every result, and the MOQ applies per item rather than per tier.',
+    },
+    {
+      q: 'Can we reorder the same prize next season?',
+      a: 'Usually yes, and it is worth asking before you commit. Moulds last, but packaging and electronics change. If continuity matters to your programme — same prize, same look, next summer — tell us and we will confirm whether the item is likely to still be in production, rather than assume it.',
+    },
+    {
+      q: 'How much abuse should we expect?',
+      a: 'More than retail. A prize is handled by children in an outdoor setting, dropped, filled with whatever water is available, and often used continuously for hours. Battery life, seal quality and the strength of the tank fitting are the three failure points we would check on a sample before a large order — and we would rather you tested a sample in the park than discovered it in week two of the season.',
+    },
+  ]}
+  related={[
+    { href: '/collections/water-guns/', label: 'Electric water guns', note: 'Eight blasters from $5.65 to $16.06 FOB.' },
+    { href: '/collections/bubble-toys/', label: 'Bubble toys', note: 'Prize-tier bubble items from $1.82.' },
+    { href: '/blog/electric-water-gun-specs-that-matter/', label: 'Water gun specs that matter', note: 'Range, tank capacity and what actually fails in use.' },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mt-2 mb-4">Prize economics, not retail economics</h2>
+  <p>
+    A retailer asks "will this sell at $14.99". An operator asks "what does it cost me per win, and does the winner feel
+    they got something". Those are different questions and they lead to different products. The best prize item is
+    visually loud, immediately understandable, and cheap enough that a generous win rate does not wreck the maths.
+  </p>
+  <p>
+    Build the programme in tiers rather than buying one item. A small bubble or light-up novelty for the common outcome, a
+    mid-tier item for a good result, and one genuinely desirable item for the top prize. That structure keeps the average
+    cost per win low while making the top prize feel worth chasing — and it is how the operators we supply actually run
+    their stalls.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">Durability is the hidden cost</h2>
+  <p>
+    In retail, a 3% failure rate is a returns problem. In a park, it is a queue of disappointed children and a staff member
+    swapping units at the counter. The failure modes are predictable: battery compartments that leak after a wet
+    afternoon, tank seals that fail when the unit is filled from a tap at full pressure, and triggers that stick when the
+    unit is dropped on concrete.
+  </p>
+  <p>
+    Ask for a sample and abuse it before you order. Fill it, drop it, leave it in the sun, and run it until the battery
+    dies. That hour is worth more than any specification sheet, and it is the only way to know whether a $6 unit is
+    actually cheaper than a $9 one.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">Consumables and repeat visits</h2>
+  <p>
+    Bubble solution is the one consumable in this category, and for a park it is an operational item as much as a retail
+    one. A bubble machine that runs all day goes through solution quickly, and running out mid-afternoon is a visible
+    failure. If you are planning a bubble feature, size the solution supply as part of the order rather than as an
+    afterthought — we can quote solution in larger pack formats separately from the toys.
+  </p>
+
+  <ProductPickGrid
+    handles={[
+      'factory-direct-high-power-electric-water-gun-toy-dual-nozzle-automatic-water-blaster-with-accessories',
+      'high-powered-electric-ice-burst-water-gun-with-led',
+      'wholesale-pro-electric-water-gun-with-led-recoil',
+      'high-volume-cartoon-bubble-blower-gun-12000-per-min',
+    ]}
+    note="Three water blasters for splash zones and rental counters, plus a low-cost bubble gun for the prize tier."
+  />
+</SectionLayout>

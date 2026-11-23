@@ -1,0 +1,54 @@
+---
+/**
+ * Product picks for the industry and trust pages.
+ *
+ * Takes handles (not titles or prices) so every figure rendered here is read
+ * from data/products.json at build time. A price change on the product page
+ * changes the card here on the next build — there is no second copy of the
+ * price to forget about.
+ */
+import productsData from '../../data/products.json';
+import ProductCard from './ProductCard.astro';
+
+export interface Props {
+  handles: string[];
+  heading?: string;
+  note?: string;
+}
+
+const { handles, heading = 'Items buyers in this segment order most', note } = Astro.props;
+
+const picks = handles
+  .map((h) => productsData.products.find((p) => p.handle === h))
+  .filter(Boolean) as any[];
+
+const catLabel: Record<string, string> = {
+  'water-guns': 'Water Guns',
+  'kids-makeup': 'Kids Makeup',
+  'bubble-toys': 'Bubble Toys',
+  'stem-toys': 'STEM Toys',
+};
+---
+
+{picks.length > 0 && (
+  <section class="not-prose mt-12">
+    <h2 class="text-2xl font-extrabold text-navy mb-2">{heading}</h2>
+    {note && <p class="text-sm text-gray-500 mb-6 max-w-2xl leading-relaxed">{note}</p>}
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {picks.map((p) => (
+        <div>
+          <ProductCard
+            title={p.title}
+            handle={p.handle}
+            price={p.price}
+            image={p.images?.[0]?.src || '/placeholder.jpg'}
+            imageAlt={p.images?.[0]?.alt || p.title}
+          />
+          <p class="text-xs text-gray-400 mt-2">
+            {catLabel[(p.collections || [])[0]] || ''} · MOQ {p.moq} pcs
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+)}

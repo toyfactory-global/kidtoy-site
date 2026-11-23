@@ -1,0 +1,66 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+
+const studies = [
+  {
+    href: '/case-studies/mixed-container-first-order/',
+    name: 'A first order: three items, one 40HQ',
+    note: 'How a 1,300-piece mixed order is planned from MOQ to carton plan to freight — with the real carton data and the arithmetic shown.',
+    tag: 'First order',
+  },
+  {
+    href: '/case-studies/private-label-kids-makeup-programme/',
+    name: 'A private-label makeup programme',
+    note: 'Two case formats, a printed box and an ingredient label: what the branding actually adds to the MOQ, the cost and the calendar.',
+    tag: 'Private label',
+  },
+];
+---
+
+<SectionLayout
+  title="Order Walk-Throughs: How a Toy Order Actually Runs"
+  description="Two worked examples of a real toy order: a mixed first container planned from carton data, and a private-label kids makeup programme with custom packaging."
+  kicker="Worked Examples"
+  h1="Order Walk-Throughs"
+  lede="Two orders, written out end to end with the arithmetic visible: what was ordered, how the cartons were planned, what the freight and landed cost came to, and which decision changed the outcome. The numbers are worked examples drawn from real catalogue carton data, not client results."
+  related={[
+    { href: '/factory/', label: 'Inside the factory', note: 'The process these walk-throughs follow.' },
+    { href: '/tools/container-loading-calculator/', label: 'Container calculator', note: 'Run the same arithmetic on your own order.' },
+    { href: '/industries/', label: 'Buyer segments', note: 'Which buying pattern your business matches.' },
+  ]}
+  faqs={[
+    {
+      q: 'Are these real customer orders?',
+      a: 'No. They are worked examples built on the real carton data and real FOB prices in our catalogue, written to show the decision points rather than to claim a client result. We do not publish client names, volumes or margins without permission, and inventing them would make the page useless to you anyway.',
+    },
+    {
+      q: 'Why show the arithmetic instead of a success story?',
+      a: 'Because the arithmetic is the transferable part. A story about a buyer who doubled their sales tells you nothing you can apply. Knowing that 1,300 pieces across three items fills 34% of a 40HQ tells you whether your own order is efficient — and that is a decision you can act on this week.',
+    },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mt-2 mb-6">Pick a walk-through</h2>
+
+  <div class="grid sm:grid-cols-2 gap-4 not-prose">
+    {studies.map((s) => (
+      <a href={s.href} class="block border border-gray-200 rounded-2xl p-6 hover:border-orange hover:shadow-sm transition-all group">
+        <span class="inline-block text-[11px] font-bold uppercase tracking-widest text-orange mb-3">{s.tag}</span>
+        <span class="block text-lg font-extrabold text-navy group-hover:text-orange transition-colors leading-snug mb-2">{s.name}</span>
+        <span class="block text-sm text-gray-500 leading-relaxed">{s.note}</span>
+        <span class="inline-block mt-4 text-sm font-bold text-orange">Read it →</span>
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-14 mb-4">What both walk-throughs have in common</h2>
+  <p>
+    In both cases the buyer started with a shelf date and a budget rather than a product. That order of thinking is what
+    makes an order work: the product is the last variable you fix, not the first. Choose the date, cost the freight, then
+    decide which items fit the money and the container.
+  </p>
+  <p>
+    In both cases the expensive mistake was available and avoidable: in the first, ordering to the price tier instead of to
+    the container; in the second, treating a printed box as if it had the same minimum as the toy. Neither mistake is
+    exotic, and both are visible before the purchase order if someone does the arithmetic first.
+  </p>
+</SectionLayout>

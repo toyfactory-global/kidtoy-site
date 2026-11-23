@@ -11,7 +11,18 @@ export interface Props {
   related?: string[];
 }
 
-const { title, description, date, updated, related = [] } = Astro.props;
+// Astro 4 hands a markdown page's frontmatter to its layout as
+// `Astro.props.frontmatter`, not as flat props. Reading only the flat form made
+// every one of the 12 posts render with an empty <h1>, an empty <title> and
+// "Published Invalid Date" — so all 12 shipped the same fallback title, i.e.
+// twelve duplicate-title pages Google had no reason to index separately.
+const props = (Astro.props as any) || {};
+const fm = props.frontmatter || {};
+const title = props.title ?? fm.title ?? '';
+const description = props.description ?? fm.description ?? '';
+const date = props.date ?? fm.date ?? '';
+const updated = props.updated ?? fm.updated;
+const related: string[] = props.related ?? fm.related ?? [];
 const SITE = 'https://kidtoycn.com';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 

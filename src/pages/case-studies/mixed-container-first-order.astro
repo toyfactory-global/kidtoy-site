@@ -1,0 +1,188 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import productsData from '../../../data/products.json';
+
+/**
+ * Worked example. Quantities are a planning scenario; the price, MOQ, pieces
+ * per carton, CBM and gross weight are read from data/products.json, so the
+ * arithmetic on this page always matches the catalogue.
+ */
+const handles = [
+  'all-in-one-kids-makeup-toy-washable-cosmetics-bag-jewelry-for-pretend-play-wholesale-bulk-order',
+  'wholesale-cactus-bubble-machine-toy-automatic-electric-bubble-blower-with-light-music',
+  'wholesale-cartoon-bubble-gun-automatic-electric-bubble-blower-for-kids-outdoor-play-safe-summer-toy',
+];
+const planQty: Record<string, number> = {
+  [handles[0]]: 504,
+  [handles[1]]: 288,
+  [handles[2]]: 432,
+};
+
+const cell = (html: string, label: string) => {
+  const re = new RegExp(label + '[\\s\\S]{0,160}?<td[^>]*>([\\s\\S]*?)</td>', 'i');
+  const m = html.match(re);
+  return m ? m[1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim() : '';
+};
+
+const lines = handles.map((h) => {
+  const p: any = productsData.products.find((x) => x.handle === h);
+  const sku = cell(p.body_html, 'Item No\\.') || cell(p.body_html, 'Factory Item No\\.');
+  const ppc = parseInt((cell(p.body_html, 'Export Carton Qty').match(/(\d[\d,]*)/) || [])[1]?.replace(/,/g, '') || '0', 10);
+  const cbm = parseFloat((cell(p.body_html, 'Carton Volume').match(/([\d.]+)\s*CBM/i) || [])[1] || '0');
+  const gw = parseFloat((cell(p.body_html, 'Carton Gross Weight').match(/([\d.]+)\s*KG/i) || [])[1] || '0');
+  const qty = planQty[h];
+  const cartons = Math.ceil(qty / ppc);
+  return {
+    sku,
+    name: p.title.split(' - ')[0].slice(0, 46),
+    qty,
+    moq: p.moq,
+    price: p.price,
+    ppc,
+    cartons,
+    cbm: cartons * cbm,
+    kg: cartons * gw,
+    value: qty * p.price,
+  };
+});
+
+const total = {
+  qty: lines.reduce((a, l) => a + l.qty, 0),
+  cartons: lines.reduce((a, l) => a + l.cartons, 0),
+  cbm: lines.reduce((a, l) => a + l.cbm, 0),
+  kg: lines.reduce((a, l) => a + l.kg, 0),
+  value: lines.reduce((a, l) => a + l.value, 0),
+};
+
+const fill = (total.cbm / 68) * 100;
+const n0 = (n: number) => n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+const n3 = (n: number) => n.toFixed(3);
+const money = (n: number) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+---
+
+<SectionLayout
+  title="Worked Example: Planning a Mixed First Container"
+  description="A 1,224-piece mixed order across three items, planned from real carton data: carton count, CBM, container fill, order value and what the freight does to the unit cost."
+  kicker="Worked Example"
+  h1="A first order: three items, one container"
+  lede="A buyer wants three items for a spring range: a gift-boxed makeup case, a character bubble machine and a low-cost bubble gun. This is how the order was planned from the carton data, and the decision that changed the result."
+  parent={{ href: '/case-studies/', label: 'Order Walk-Throughs' }}
+  related={[
+    { href: '/tools/container-loading-calculator/', label: 'Run this on your own order', note: 'The same arithmetic, with your quantities.' },
+    { href: '/tools/landed-cost-calculator/', label: 'Landed cost calculator', note: 'Add duty and freight to the order value below.' },
+    { href: '/industries/gift-shop-retailers/', label: 'Buying for a gift shop', note: 'Why the range is built this way.' },
+  ]}
+  faqs={[
+    {
+      q: 'Why these three items and not three makeup cases?',
+      a: 'Because the buyer sells to a gift shop, where the makeup case is the planned purchase and the bubble items are the till-side add-on. Three makeup cases at three prices would compete with each other on the same shelf. One case plus two impulse items covers the same shelf space with three different buying occasions.',
+    },
+    {
+      q: 'Why order above MOQ rather than at it?',
+      a: 'Two reasons. Cartons are the unit of freight, so quantities were chosen to land on whole cartons rather than leave a partial one. And crossing a container-efficiency threshold matters more than the price tier: filling more of the container cuts freight per piece, while a small price break barely moves it.',
+    },
+    {
+      q: 'What would have changed if the quantity had been half?',
+      a: 'The goods value would halve, but the freight, the brokerage and the port charges would not. At half the volume the fill drops to roughly 17% of a 40HQ, and the freight per piece roughly doubles. That is the trap: the order looks cheaper and costs more per unit.',
+    },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mt-2 mb-4">The order</h2>
+  <p>
+    Three items, quantities chosen to sit on whole cartons and above MOQ. Every figure below is read from the same product
+    data that drives the product pages, so the price and the carton dimensions are the ones we would actually ship on.
+  </p>
+
+  <div class="not-prose overflow-x-auto -mx-4 px-4 mt-6">
+    <table class="w-full text-sm border-collapse min-w-[820px]">
+      <thead>
+        <tr class="bg-navy text-white text-left">
+          <th class="p-3 font-bold">Item</th>
+          <th class="p-3 font-bold">Qty</th>
+          <th class="p-3 font-bold">MOQ</th>
+          <th class="p-3 font-bold">FOB</th>
+          <th class="p-3 font-bold">Pcs/ctn</th>
+          <th class="p-3 font-bold">Cartons</th>
+          <th class="p-3 font-bold">CBM</th>
+          <th class="p-3 font-bold">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {lines.map((l, i) => (
+          <tr class={i % 2 ? 'bg-gray-50' : 'bg-white'}>
+            <td class="p-3 align-top"><span class="font-bold text-navy">{l.sku}</span><span class="block text-xs text-gray-500">{l.name}</span></td>
+            <td class="p-3 align-top font-semibold">{n0(l.qty)}</td>
+            <td class="p-3 align-top text-gray-500">{n0(l.moq)}</td>
+            <td class="p-3 align-top">{money(l.price)}</td>
+            <td class="p-3 align-top text-gray-500">{n0(l.ppc)}</td>
+            <td class="p-3 align-top font-semibold">{n0(l.cartons)}</td>
+            <td class="p-3 align-top">{n3(l.cbm)}</td>
+            <td class="p-3 align-top font-semibold">{money(l.value)}</td>
+          </tr>
+        ))}
+        <tr class="bg-navy text-white font-bold">
+          <td class="p-3">Total</td>
+          <td class="p-3">{n0(total.qty)}</td>
+          <td class="p-3">—</td>
+          <td class="p-3">—</td>
+          <td class="p-3">—</td>
+          <td class="p-3">{n0(total.cartons)}</td>
+          <td class="p-3">{n3(total.cbm)}</td>
+          <td class="p-3">{money(total.value)}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-12 mb-4">What the load actually is</h2>
+  <div class="not-prose grid sm:grid-cols-3 gap-4">
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5">
+      <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Total volume</div>
+      <div class="text-2xl font-extrabold text-orange">{n3(total.cbm)} m³</div>
+    </div>
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5">
+      <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">40HQ fill</div>
+      <div class="text-2xl font-extrabold text-navy">{fill.toFixed(1)}%</div>
+    </div>
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-5">
+      <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Gross weight</div>
+      <div class="text-2xl font-extrabold text-navy">{n0(total.kg)} kg</div>
+    </div>
+  </div>
+
+  <p class="mt-6">
+    {n3(total.cbm)} m³ fills about {fill.toFixed(0)}% of a 40HQ. That is a workable first shipment and it is also the single
+    most important number on this page: the freight is charged on the container, not on the piece, so at {fill.toFixed(0)}%
+    fill the buyer is paying for roughly {(100 - fill).toFixed(0)}% of empty space.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">The decision that changed the result</h2>
+  <p>
+    The first draft of this order was a single item: 504 makeup cases, about 14 cartons, roughly 1.3 m³. That is 2% of a
+    40HQ. The freight on it would have been charged as a minimum or as LCL, and the freight per piece would have been
+    several times the freight per piece of the mixed order above — for the same goods.
+  </p>
+  <p>
+    Adding two cheap items did three things at once. It lifted the fill from 2% to {fill.toFixed(0)}%, so the freight was
+    spread across a real load. It gave the retailer three price points instead of one, which is what the gift shop needed.
+    And it kept each individual commitment at or near MOQ, so the cash exposure on any single design stayed small.
+  </p>
+  <p>
+    The lesson is not "order more". It is that carton data is a planning tool, and an order designed around whole cartons
+    and container fill will beat an order designed around a price list — usually by more than the price break would have
+    been worth.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">Next: the landed cost</h2>
+  <p>
+    {money(total.value)} of goods is the factory number. Add sea freight for {n3(total.cbm)} m³, insurance, duty at the
+    buyer's national rate and the brokerage and port charges, and the true cost per piece rises. Run it through the
+    landed cost calculator with your own freight quote and your own duty rate — the result is the number that decides
+    whether the retail price works, not the FOB price.
+  </p>
+  <p>
+    One practical note on timing: this order has a spring shelf date, which means it needed to ship before Chinese New
+    Year. Placed in the autumn, the calendar works. Placed in January, it does not, and no amount of carton planning fixes
+    a missed window.
+  </p>
+</SectionLayout>

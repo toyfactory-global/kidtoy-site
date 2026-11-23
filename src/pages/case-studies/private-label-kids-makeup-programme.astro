@@ -1,0 +1,144 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import productsData from '../../../data/products.json';
+
+const pick = (h: string) => productsData.products.find((p: any) => p.handle === h) as any;
+
+const cell = (html: string, label: string) => {
+  const re = new RegExp(label + '[\\s\\S]{0,160}?<td[^>]*>([\\s\\S]*?)</td>', 'i');
+  const m = html.match(re);
+  return m ? m[1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim() : '';
+};
+
+const handles = [
+  'wholesale-glam-maker-unicorn-kids-makeup-set-pink-iron-vanity-case-with-mirror-12-color-eyeshadow-7-brushes-beauty-blender-girls-cosmetic-pretend-play-kit',
+  'wholesale-kids-makeup-treasure-box-pink-vanity-case-with-seashell-compact-4-color-eyeshadow-nail-art-kit-girls-cosmetic-pretend-play-set-for-children',
+];
+
+const lines = handles.map((h) => {
+  const p = pick(h);
+  const sku = cell(p.body_html, 'Item No\\.') || cell(p.body_html, 'Factory Item No\\.');
+  const ppc = parseInt((cell(p.body_html, 'Export Carton Qty').match(/(\d[\d,]*)/) || [])[1]?.replace(/,/g, '') || '0', 10);
+  const cbm = parseFloat((cell(p.body_html, 'Carton Volume').match(/([\d.]+)\s*CBM/i) || [])[1] || '0');
+  return {
+    sku,
+    name: p.title.split(' - ')[0].slice(0, 44),
+    price: p.price,
+    moq: p.moq,
+    ppc,
+    cbm,
+  };
+});
+
+const money = (n: number) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const n0 = (n: number) => n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+---
+
+<SectionLayout
+  title="Worked Example: A Private-Label Kids Makeup Programme"
+  description="What private label actually adds to a kids makeup order: the printed box minimum, the ingredient and warning label, the artwork cycle and the real calendar."
+  kicker="Worked Example"
+  h1="A private-label makeup programme"
+  lede="A buyer wants two makeup cases under their own brand, with a printed box and their own labels. The toy MOQ is the small part of the problem — the print run, the artwork cycle and the cosmetic labelling are what decide whether the programme is feasible."
+  parent={{ href: '/case-studies/', label: 'Order Walk-Throughs' }}
+  related={[
+    { href: '/blog/private-label-kids-makeup-moq-labelling/', label: 'Private label and labelling', note: 'The artwork, label and MOQ mechanics in detail.' },
+    { href: '/industries/pharmacy-drugstore-chains/', label: 'Selling to pharmacies', note: 'Why the cosmetic regime, not the toy regime, applies.' },
+    { href: '/certifications/', label: 'Certificates and audits', note: 'What a product document proves and what it does not.' },
+  ]}
+  faqs={[
+    {
+      q: 'Does private label change the MOQ?',
+      a: 'The toy MOQ does not change; the packaging does. A stock colour box comes from existing stock, while a printed box is a separate print and die-cut run with its own minimum, and that minimum is usually higher than the toy quantity on small items. Plan the printed box against the print minimum, not against the toy MOQ.',
+    },
+    {
+      q: 'What has to be on the label for a kids cosmetic?',
+      a: 'At minimum: the ingredient list in the required nomenclature, the nominal content, a batch code, the responsible person or manufacturer details for that market, and any warning the market requires. For the EU the responsible person must be established in the EU and named on the label. The factory can print what you specify; it cannot act as your responsible person.',
+    },
+    {
+      q: 'How long does artwork approval take?',
+      a: 'A week for a clean proof cycle, longer if the artwork is not final or if the copy changes after the first proof. Every change restarts the cycle. The realistic plan is: brief, proof, corrections, final approval, print, pack, ship — and the two steps that slip are always the corrections and the final approval, because they depend on the buyer.',
+    },
+    {
+      q: 'Can the same case be used for two different brands?',
+      a: 'Not in the same production run, because the printed case is committed to one artwork. Between runs, yes. That is why brands usually start with one case format and add a second once the first is selling, rather than launching a range of four at once and discovering the artwork cost on all four.',
+    },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mt-2 mb-4">The two items</h2>
+  <p>
+    Two case formats at different price points, so the buyer has an entry item and a gifting item. Prices, MOQ and carton
+    data below are the catalogue figures.
+  </p>
+
+  <div class="not-prose overflow-x-auto -mx-4 px-4 mt-6">
+    <table class="w-full text-sm border-collapse min-w-[680px]">
+      <thead>
+        <tr class="bg-navy text-white text-left">
+          <th class="p-3 font-bold">Item</th>
+          <th class="p-3 font-bold">FOB</th>
+          <th class="p-3 font-bold">Toy MOQ</th>
+          <th class="p-3 font-bold">Pcs / carton</th>
+          <th class="p-3 font-bold">CBM / carton</th>
+          <th class="p-3 font-bold">Cartons at MOQ</th>
+        </tr>
+      </thead>
+      <tbody>
+        {lines.map((l, i) => (
+          <tr class={i % 2 ? 'bg-gray-50' : 'bg-white'}>
+            <td class="p-3 align-top"><span class="font-bold text-navy">{l.sku}</span><span class="block text-xs text-gray-500">{l.name}</span></td>
+            <td class="p-3 align-top">{money(l.price)}</td>
+            <td class="p-3 align-top font-semibold">{n0(l.moq)}</td>
+            <td class="p-3 align-top text-gray-500">{n0(l.ppc)}</td>
+            <td class="p-3 align-top text-gray-500">{l.cbm.toFixed(3)}</td>
+            <td class="p-3 align-top font-semibold">{n0(Math.ceil(l.moq / l.ppc))}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-12 mb-4">What the branding actually adds</h2>
+  <p>
+    <strong>A second minimum.</strong> The toy is ready at MOQ. The printed box is not: it has a print minimum of its own,
+    and on a compact case that minimum is typically the larger of the two numbers. This is the point where a programme
+    that looked affordable at MOQ turns out to need two or three times the quantity.
+  </p>
+  <p>
+    <strong>An artwork cycle.</strong> A printed box needs a dieline, a proof, corrections and a signed approval before
+    printing starts. A week if the artwork arrives complete; three weeks if the copy is still being debated internally.
+    The factory cannot compress this — it can only wait for the approval.
+  </p>
+  <p>
+    <strong>A label that satisfies a cosmetic regulation.</strong> Ingredient list, nominal content, batch code, and the
+    responsible person for the destination market. On a kids cosmetic, that last item is the one that stops programmes:
+    for the EU, a responsible person must be established in the EU. A factory in Guangdong cannot be that party, so the
+    buyer needs an agency or an EU-established partner before the label can be finalised.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">The cheaper route most brands should take first</h2>
+  <p>
+    For a first programme, a printed sleeve over the stock case, or a printed belly band, gives most of the branding
+    effect at a fraction of the print minimum. It also lets the buyer test the market before committing to a full custom
+    box on two formats. The compromise is that the case underneath is still the stock case — if the brand needs a fully
+    owned look, that is a different budget and a different timeline, and it should be planned as such.
+  </p>
+  <p>
+    The sequence that works: stock packaging with a printed insert card for the first order, a printed sleeve on the
+    second, a fully printed case once the item is proven. Each step is a real decision with a real cost, and none of them
+    requires betting the whole budget on artwork that has not been tested in market.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">The calendar, counted backwards</h2>
+  <p>
+    From a Q4 shelf date: allow 20–35 days sea freight, 7–10 days clearance and inland, 15–25 days production, one to three
+    weeks for the artwork cycle, and time for the sample. That is roughly four months, and it does not include the time
+    spent deciding which two items to launch. A programme briefed in September for a December launch is an air-freight
+    programme whether or not anyone has said so.
+  </p>
+  <p>
+    Start with the label, not the artwork. The label has external dependencies — the responsible person, the ingredient
+    declaration, any market-specific warning — and those are the parts the factory cannot solve for you. Once the label is
+    settled, the box artwork is a design task with a predictable duration.
+  </p>
+</SectionLayout>

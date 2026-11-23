@@ -1,38 +1,69 @@
 ---
-import { getCollection } from 'astro:content';
+/**
+ * Nav model: four product categories (the commercial intent), then the three
+ * sections a buyer needs before ordering — tools, guides, the factory — then the
+ * contact CTA. Every page added in the LuxoPack pass has to be reachable from
+ * here or from the footer, otherwise the integrity gate reports it as an orphan.
+ */
+const cats = [
+  { href: '/collections/water-guns/', label: 'Water Guns' },
+  { href: '/collections/kids-makeup/', label: 'Makeup' },
+  { href: '/collections/bubble-toys/', label: 'Bubble' },
+  { href: '/collections/stem-toys/', label: 'STEM' },
+];
+const sections = [
+  { href: '/tools/', label: 'Tools' },
+  { href: '/industries/', label: 'By Buyer' },
+  { href: '/blog/', label: 'Guides' },
+  { href: '/factory/', label: 'Factory' },
+];
 ---
 
 <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
   <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-    <a href="/" class="text-navy font-extrabold text-xl tracking-tight">
+    <a href="/" class="text-navy font-extrabold text-xl tracking-tight shrink-0">
       KIDTOY<span class="text-orange">FACTORY</span>
     </a>
-    <div class="hidden md:flex items-center gap-6">
-      <a href="/collections/water-guns/" class="text-sm font-semibold text-navy hover:text-orange transition-colors uppercase tracking-wide">Water Guns</a>
-      <a href="/collections/kids-makeup/" class="text-sm font-semibold text-navy hover:text-orange transition-colors uppercase tracking-wide">Makeup</a>
-      <a href="/collections/bubble-toys/" class="text-sm font-semibold text-navy hover:text-orange transition-colors uppercase tracking-wide">Bubble Toys</a>
-      <a href="/collections/stem-toys/" class="text-sm font-semibold text-navy hover:text-orange transition-colors uppercase tracking-wide">STEM Toys</a>
-      <a href="/collections/all/" class="text-sm font-semibold text-navy hover:text-orange transition-colors uppercase tracking-wide">All Products</a>
-      <a href="/blog/" class="text-sm font-semibold text-navy hover:text-orange transition-colors uppercase tracking-wide">Guides</a>
-      <a href="/contact/" class="ml-4 bg-navy text-white px-5 py-2 rounded text-sm font-bold hover:bg-orange transition-colors">CONTACT US</a>
+
+    <div class="hidden lg:flex items-center gap-5">
+      {cats.map((c) => (
+        <a href={c.href} class="text-sm font-semibold text-navy hover:text-orange transition-colors uppercase tracking-wide">{c.label}</a>
+      ))}
+      <span class="w-px h-5 bg-gray-200"></span>
+      {sections.map((s) => (
+        <a href={s.href} class="text-sm font-semibold text-navy hover:text-orange transition-colors uppercase tracking-wide">{s.label}</a>
+      ))}
+      <a href="/contact/" class="ml-2 bg-navy text-white px-5 py-2 rounded text-sm font-bold hover:bg-orange transition-colors">CONTACT US</a>
     </div>
-    <button class="md:hidden text-navy" id="menu-toggle" aria-label="Toggle menu">
+
+    <button class="lg:hidden text-navy" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
     </button>
   </nav>
-  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white px-4 pb-4">
-    <a href="/collections/water-guns/" class="block py-3 text-sm font-semibold text-navy border-b border-gray-50">Water Guns</a>
-    <a href="/collections/kids-makeup/" class="block py-3 text-sm font-semibold text-navy border-b border-gray-50">Makeup</a>
-    <a href="/collections/bubble-toys/" class="block py-3 text-sm font-semibold text-navy border-b border-gray-50">Bubble Toys</a>
-    <a href="/collections/stem-toys/" class="block py-3 text-sm font-semibold text-navy border-b border-gray-50">STEM Toys</a>
+
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-100 bg-white px-4 pb-4">
+    {cats.map((c) => (
+      <a href={c.href} class="block py-3 text-sm font-semibold text-navy border-b border-gray-50">{c.label}</a>
+    ))}
     <a href="/collections/all/" class="block py-3 text-sm font-semibold text-navy border-b border-gray-50">All Products</a>
-    <a href="/blog/" class="block py-3 text-sm font-semibold text-navy border-b border-gray-50">Buyer Guides</a>
+    {sections.map((s) => (
+      <a href={s.href} class="block py-3 text-sm font-semibold text-navy border-b border-gray-50">{s.label}</a>
+    ))}
+    <a href="/certifications/" class="block py-3 text-sm font-semibold text-navy border-b border-gray-50">Certificates</a>
+    <a href="/case-studies/" class="block py-3 text-sm font-semibold text-navy border-b border-gray-50">Order Walk-Throughs</a>
+    <a href="/about/" class="block py-3 text-sm font-semibold text-navy border-b border-gray-50">About</a>
     <a href="/contact/" class="block py-3 text-sm font-bold text-orange">Contact Us</a>
   </div>
 </header>
 
 <script is:inline>
-  document.getElementById('menu-toggle')?.addEventListener('click', () => {
-    document.getElementById('mobile-menu')?.classList.toggle('hidden');
-  });
+  (function () {
+    var btn = document.getElementById('menu-toggle');
+    var menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', function () {
+      var open = menu.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', String(!open));
+    });
+  })();
 </script>

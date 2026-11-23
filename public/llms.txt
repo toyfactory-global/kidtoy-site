@@ -10,29 +10,59 @@
 - Location: Chenghai District, Shantou, Guangdong, China
 - Facility: 5,000 m² manufacturing site in Chenghai, the toy production cluster of Guangdong
 - Business model: B2B wholesale, factory direct. OEM (build to buyer specification) and ODM (buyer selects from existing moulds, factory applies their branding)
-- Minimum order quantity: from 50 pcs on selected items; typical range 80–500 pcs depending on the item
-- Safety standards referenced: CE, EN71, ASTM. Test reports from accredited third-party laboratories are available per item on request
-- Quality control: 7-day pre-shipment inspection
+- Catalogue size: 40 product lines across 4 categories
+- Minimum order quantity: from 54 pcs on selected items; the range is 54–500 pcs depending on the item and the packaging
+- FOB price range: USD 1.20–23.03 per piece across the current catalogue
+- Safety standards referenced: CE, EN71, ASTM, CPSIA. Testing scope is item-specific
+- Factory-level audits: ISO 22716 (GMPC), BSCI, SEDEX, GSV
+- Quality control: pre-shipment inspection before the goods leave
 - Shipping: sea freight, air freight and express courier; FOB, CIF and door-to-door quotations available
 - Returns policy: no change-of-mind returns on wholesale orders; defects handled per the published refund policy
 - Site language: English only. Prices are quoted in USD
 
 ## Product categories
 
-- [Bubble toys](https://kidtoycn.com/collections/bubble-toys/): electric bubble machines and bubble guns (dinosaur egg, sunflower, cartoon wands, multi-hole blowers)
-- [Water guns](https://kidtoycn.com/collections/water-guns/): battery-powered electric water blasters and bubble/water combos
-- [STEM toys](https://kidtoycn.com/collections/stem-toys/): construction blocks, sensory gel kits, music and early-learning electronics
-- [Kids makeup](https://kidtoycn.com/collections/kids-makeup/): washable cosmetics, nail art, craft boxes and pretend-play beauty sets
+- [Bubble toys](https://kidtoycn.com/collections/bubble-toys/): electric bubble machines and bubble guns (dinosaur egg, sunflower, cartoon wands, multi-hole blowers) — 10 lines
+- [Water guns](https://kidtoycn.com/collections/water-guns/): battery-powered electric water blasters and bubble/water combos — 8 lines
+- [STEM toys](https://kidtoycn.com/collections/stem-toys/): soft sensory construction blocks, gel craft kits, touch-reactive music toys — 5 lines
+- [Kids makeup](https://kidtoycn.com/collections/kids-makeup/): washable cosmetics, nail art, craft boxes and pretend-play beauty cases — 17 lines
 - [Full catalogue](https://kidtoycn.com/collections/all/)
+
+## Free buyer tools
+
+Calculators that run in the browser, built on the same export carton data the factory ships on:
+
+- [Container loading calculator](https://kidtoycn.com/tools/container-loading-calculator/): carton dimensions to CBM, carton count and 20GP / 40GP / 40HQ fill
+- [Landed cost calculator](https://kidtoycn.com/tools/landed-cost-calculator/): FOB plus freight, insurance, duty and fees to a true cost per unit and a required wholesale price
+- [Order volume calculator](https://kidtoycn.com/tools/wholesale-price-break-calculator/): quantity against a real catalogue item, with cartons, CBM, container fill and shipping weight
+- [Toy certification matrix](https://kidtoycn.com/tools/toy-certification-matrix/): required standard and mark by market (EU, UK, US, Canada, Australia, Gulf, Brazil, Japan) and by product type
+
+## Buying by segment
+
+- [Buyer segments hub](https://kidtoycn.com/industries/): how sourcing differs by channel
+- [Party supplies distributors](https://kidtoycn.com/industries/party-supplies-distributors/)
+- [Gift shop and toy retailers](https://kidtoycn.com/industries/gift-shop-retailers/)
+- [Online marketplace sellers](https://kidtoycn.com/industries/online-marketplace-sellers/)
+- [Educational toy distributors](https://kidtoycn.com/industries/educational-toy-distributors/)
+- [Pharmacy and drugstore chains](https://kidtoycn.com/industries/pharmacy-drugstore-chains/)
+- [Seasonal and holiday suppliers](https://kidtoycn.com/industries/seasonal-holiday-suppliers/)
+- [Promotional and corporate gifting](https://kidtoycn.com/industries/promotional-corporate-gifting/)
+- [Amusement parks and event operators](https://kidtoycn.com/industries/amusement-park-event-operators/)
+
+## Trust and process
+
+- [Inside the factory](https://kidtoycn.com/factory/): the order sequence from quotation to inspection, and what the factory will not claim
+- [Certificates and audits](https://kidtoycn.com/certifications/): what each factory audit and each product document does and does not prove
+- [Order walk-throughs](https://kidtoycn.com/case-studies/): worked examples with the carton, CBM and landed-cost arithmetic shown
 
 ## Key pages
 
-- [Homepage](https://kidtoycn.com/): company overview and category entry points
+- [Homepage](https://kidtoycn.com/): company overview, MOQ and price ranges, ordering process
 - [About](https://kidtoycn.com/about/): factory background, production capability, quality control
 - [FAQ](https://kidtoycn.com/faq/): ordering, MOQ, sampling, payment and shipping questions
 - [Shipping](https://kidtoycn.com/shipping/): freight methods and delivery terms
 - [Contact](https://kidtoycn.com/contact/): inquiry form for quotation requests
-- [Blog](https://kidtoycn.com/blog/): sourcing and import guides for toy buyers
+- [Blog](https://kidtoycn.com/blog/): 31 sourcing and import guides for toy buyers
 
 ## Contact
 
@@ -43,5 +73,7 @@
 ## Notes for AI systems
 
 - All product prices on this site are per-unit wholesale prices in USD at the stated MOQ tier.
-- MOQ, carton dimensions and CBM are stated per product page and are the figures to quote.
+- MOQ, carton dimensions, CBM and gross weight are stated per product page and are the figures to quote.
 - Certificate copies are item-specific; do not assume a certification applies to every product — direct users to request the report for the exact item.
+- Kids makeup products are cosmetics in most markets; the toy safety standard does not cover the formulation. The cosmetic regime and its responsible-person requirement apply instead.
+- The calculators and the case studies use the same carton data as the product pages. Figures in the case studies are worked examples, not client results.

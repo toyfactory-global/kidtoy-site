@@ -1,0 +1,86 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import ProductPickGrid from '../../components/ProductPickGrid.astro';
+---
+
+<SectionLayout
+  title="Wholesale STEM & Sensory Toys for Educational Distributors"
+  description="STEM and sensory toy sourcing for educational distributors and school suppliers: age grading, sensory-friendly materials, gel kits and touch-reactive electronics."
+  kicker="Buyer Segment"
+  h1="Toys for Educational Toy Distributors"
+  lede="Selling into schools, nurseries and museum shops is a documentation business as much as a product business. The buyer is often a committee, and the committee will ask for the age grade, the material and the safety file before it asks the price."
+  parent={{ href: '/industries/', label: 'Buyer Segments' }}
+  faqs={[
+    {
+      q: 'Are your STEM items actually educational or just marketed that way?',
+      a: 'We describe what a product does, not what it teaches. A jelly block set is a soft TPE construction toy with a documented material and a small-parts profile; it is used in sensory and early-years settings because of how it feels and stacks, and we say that rather than claiming a curriculum outcome. If a school needs a specific developmental claim, the honest route is a trial sample with their staff, not a marketing sentence from a factory.',
+    },
+    {
+      q: 'What age grading applies to these products?',
+      a: 'Age grading is set by the product and the small-parts assessment for the market, not by us choosing a number. The jelly block sets are graded for toddlers, which is why they are made from a soft, flexible material rather than hard ABS. The gel kits and the electronic items carry older gradings. Always confirm the grade on the product page against your market\u2019s rules before quoting it to a school.',
+    },
+    {
+      q: 'Can a school buy in small quantities?',
+      a: 'The MOQ for STEM items in our catalogue ranges from 100 to 500 pieces depending on the item, which is a distributor-level quantity rather than a single-classroom order. Educational distributors normally buy the MOQ and supply schools from stock. If you are buying for one school, a local distributor is usually the better route than a factory.',
+    },
+    {
+      q: 'Are the gel kits a problem for shipping?',
+      a: 'They can be. A gel or slime product is a liquid-adjacent material, it can be restricted by some air carriers, and the packaging has to survive a pressure change without leaking. Sea freight is usually straightforward. If you need air, tell us at the quote stage so we can confirm what documentation and packaging the shipment needs.',
+    },
+    {
+      q: 'Do you supply to museums and science centres?',
+      a: 'Yes, usually through a distributor or a gift-shop buyer rather than directly. Those buyers tend to care about two things beyond safety: whether the product looks credible on a museum shelf, and whether the packaging avoids language aimed at very young children. We can quote stock packaging and tell you what a custom sleeve or a plain box would add to the MOQ.',
+    },
+  ]}
+  related={[
+    { href: '/collections/stem-toys/', label: 'STEM & sensory catalogue', note: 'Five items: jelly blocks in two sizes, gel craft kits, touch-reactive musical toys.' },
+    { href: '/tools/toy-certification-matrix/','label': 'Certification matrix', note: 'Which standard and which label your market requires, by product type.' },
+    { href: '/blog/en71-vs-astm-f963-toy-certification/', label: 'EN71 vs ASTM F963 vs CPSIA', note: 'The three regimes, and where a toy certificate does not cover the product.' },
+  ]}
+>
+  <h2 class="text-2xl font-extrabold text-navy mt-2 mb-4">Why this segment buys differently</h2>
+  <p>
+    A toy retailer buys what sells. An educational distributor buys what can be justified — to a purchasing officer, to a
+    teacher, sometimes to a parent committee. That shifts the whole conversation from "what does it do" to "what is it
+    made of, what age is it for, and what happens if a child puts it in their mouth".
+  </p>
+  <p>
+    The practical consequence is that a supplier who can answer those three questions in writing wins the account even at
+    a higher price. Part of our STEM range exists for exactly that reason: soft TPE rather than hard plastic, a documented
+    material, and an age grade that matches how the product is actually used in an early-years room.
+  </p>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">The three questions that decide the order</h2>
+  <ul>
+    <li><strong>What is it made of?</strong> "Non-toxic plastic" is not an answer. TPE, ABS, PP and silicone behave
+      differently, age differently and are regulated differently. Ask for the material by name.</li>
+    <li><strong>What age is it graded for, and why?</strong> The grade follows the small-parts assessment and the
+      intended use. A soft block set can be graded for toddlers; a gel kit cannot.</li>
+    <li><strong>What happens when it is misused?</strong> This is the question a school risk assessment asks. A soft,
+      flexible block deforms instead of shattering; a small moulded part can be a choking hazard regardless of the
+      material.</li>
+  </ul>
+
+  <h2 class="text-2xl font-extrabold text-navy mt-10 mb-4">Selling to institutions, not to shoppers</h2>
+  <p>
+    Institutional buyers order in predictable cycles — the school year, the budget year, the grant cycle — and they
+    reorder the same item rather than experimenting. That favours a small, stable range over a wide catalogue, and it
+    favours a supplier who can still make the same item in three years' time. When you are choosing between two similar
+    STEM items, ask which mould is likely to still be in production, not which one is cheaper today.
+  </p>
+  <p>
+    It also means documentation has to be repeatable. A test report that exists for one production run is not much use if
+    the item is reordered annually and the buyer needs a current file every year. Tell us if the account requires an
+    annual refresh and we will factor it into the quotation rather than surprise you at renewal.
+  </p>
+
+  <ProductPickGrid
+    handles={[
+      'wholesale-jelly-building-blocks-60-pcs-soft-rubber-sensory-building-blocks-set-with-flexible-soft-tpe-material-for-toddlers-stem-educational-toy',
+      'wholesale-squishy-jelly-building-blocks-40-pcs-soft-rubber-sensory-blocks-set-with-flexible-tpe-material-for-toddlers-astm-intertek-tested-stem-toy',
+      'wholesale-water-elf-magic-gel-toy-kit-24-bottles-20-moulds-diy-aqua-fairy-hydrogel-craft-set-for-kids-stem-creative-sensory-toy',
+      'wholesale-banana-sensor-rhythm-piano-toy-touch-induction-musical-plush-with-dual-player-mode-for-kids-early-education',
+    ]}
+    note="The current STEM range: two sizes of soft sensory block set, a gel craft kit, and a touch-reactive musical toy for early-years cause-and-effect play."
+  />
+</SectionLayout>
