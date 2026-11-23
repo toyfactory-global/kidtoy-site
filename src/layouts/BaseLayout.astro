@@ -134,5 +134,33 @@ const fullDesc = description || 'Direct source for high-quality toys and childre
         );
       })();
     </script>
+
+    <!-- OPEN IN A NEW TAB. The buyer wanted every link to open a fresh tab so the
+         catalogue, the guide they were reading and the page they came from all
+         stay open. Doing it here rather than adding target="_blank" to a hundred
+         anchors means new pages inherit the behaviour automatically, and
+         ctrl/cmd/shift-click keeps the browser's own meaning. In-page anchors
+         (#quote), mailto:, tel: and downloads are left alone. -->
+    <script is:inline>
+      (function () {
+        document.addEventListener('click', function (e) {
+          if (e.defaultPrevented || e.button !== 0) return;
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+          var a = e.target.closest ? e.target.closest('a') : null;
+          if (!a) return;
+          var href = a.getAttribute('href');
+          if (!href || href.charAt(0) === '#') return;
+          if (/^(mailto:|tel:|javascript:)/i.test(href)) return;
+          if (a.hasAttribute('download')) return;
+          if (a.target === '_blank' || a.target === '_new') return;
+          var url;
+          try { url = new URL(href, location.href); } catch (err) { return; }
+          if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
+          if (url.pathname === location.pathname && url.hash && !url.search) return;
+          e.preventDefault();
+          window.open(url.href, '_blank', 'noopener');
+        });
+      })();
+    </script>
   </body>
 </html>
