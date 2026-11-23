@@ -296,8 +296,16 @@ const faqs = [
           </div>
 
           {collection.banner && (
-            <a href={`/collections/${collection.handle}/`} class="block mb-6 overflow-hidden rounded-xl">
-              <img src={collection.banner} alt={collection.title} class="w-full h-auto" loading="lazy" />
+            <a href={`/collections/${collection.handle}/`} class="block mb-6 overflow-hidden rounded-xl bg-gray-100">
+              {/* The frame enforces 3.2:1 whatever the source file is, so one tall
+                  asset cannot make its section twice the height of the others. */}
+              <img
+                src={collection.banner}
+                alt={`${collection.title} wholesale range`}
+                class="w-full h-auto aspect-[32/10] object-cover"
+                loading="lazy"
+                decoding="async"
+              />
             </a>
           )}
 
