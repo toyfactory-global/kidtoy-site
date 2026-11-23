@@ -22,6 +22,12 @@ const priceMax = Math.max(...prices);
 
 const money = (n: number) => '$' + n.toFixed(2);
 
+// Hero poster assets: the original V3.8 transparent PNGs. They are deliberately
+// the two categories with the widest price spread (makeup and water guns), so
+// the poster reads as a range rather than a single product.
+const heroMakeup = 'https://sc02.alicdn.com/kf/Af8923c1f621547b6ab6869248b119717w.png';
+const heroWaterGun = 'https://sc02.alicdn.com/kf/Aacb85bc4dfdb40438c391ee78e83a560B.png';
+
 const faqs = [
   {
     q: 'What is your minimum order quantity?',
@@ -70,55 +76,135 @@ const faqs = [
   title="Wholesale Toys Direct from a Chenghai Factory"
   description={`Toy manufacturer in Chenghai since 2001. ${products.length} wholesale lines across kids makeup, bubble toys, electric water guns and STEM — MOQ from ${moqMin} pcs, FOB ${money(priceMin)}–${money(priceMax)}, OEM/ODM.`}
 >
-  <!-- ================= HERO ================= -->
-  <section class="relative overflow-hidden bg-white border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 grid lg:grid-cols-[1.15fr_0.85fr] gap-12 items-center">
-      <div>
-        <span class="inline-block bg-orange/10 text-orange px-4 py-2 rounded-full text-[11px] font-extrabold tracking-[0.18em] mb-6">
+  <!-- ================= HERO POSTER ================= -->
+  <section class="relative overflow-hidden border-b border-gray-100" style="background: linear-gradient(90deg, #EDF4FF 0%, #FFFFFF 40%, #FFFFFF 60%, #F3F0FF 100%);">
+    <style>
+      .hero-glow { position: absolute; width: 520px; height: 520px; border-radius: 50%; filter: blur(110px); opacity: 0.4; pointer-events: none; }
+      .hero-img { mix-blend-mode: multiply; filter: brightness(1.05) contrast(1.1); pointer-events: none; }
+    </style>
+    <div class="relative w-full flex items-center justify-center lg:justify-between gap-6 px-[6%] py-16 lg:py-20" style="min-height: 780px;">
+      <!-- Left product: kids makeup -->
+      <div class="relative w-[26%] min-w-[200px] items-center justify-center hidden lg:flex" style="min-height: 470px;">
+        <div class="hero-glow" style="left: -60px; top: 10%; background: #FFE3E3;"></div>
+        <img src={heroMakeup} alt="Wholesale kids makeup set in a carry case" class="hero-img relative z-[1] w-full h-auto" style="transform: scale(1.12);" />
+      </div>
+
+      <!-- Centre: the poster headline -->
+      <div class="text-center flex-1 max-w-3xl mx-auto relative z-10">
+        <span class="inline-block bg-orange text-white px-6 py-2.5 rounded-full text-[11px] font-extrabold tracking-[0.16em] mb-8">
           CHENGHAI FACTORY · SINCE 2001
         </span>
-        <h1 class="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold text-navy leading-[1.05] tracking-tight mb-6">
-          Wholesale toys,<br />
-          straight from the<br />
-          <span class="text-orange">production line.</span>
+        <h1 class="text-4xl sm:text-5xl lg:text-[4rem] font-extrabold text-navy leading-[1.05] tracking-tight">
+          WHOLESALE GIFT &amp; TOY<br />
+          <span class="text-orange text-3xl sm:text-4xl lg:text-[2.9rem] tracking-tight">FACTORY DIRECT SUPPLY</span>
         </h1>
-        <p class="text-lg text-gray-500 leading-relaxed max-w-xl mb-8">
-          {products.length} wholesale toy lines for importers, distributors and marketplace sellers — kids makeup,
-          bubble toys, electric water guns and STEM. MOQ from {moqMin} pieces, FOB {money(priceMin)} to {money(priceMax)},
-          with the carton data you need to cost the freight before you commit.
+        <p class="text-base lg:text-lg text-gray-500 mt-7 max-w-xl mx-auto leading-relaxed">
+          {products.length} wholesale toy lines for importers, distributors and marketplace sellers. MOQ from
+          {moqMin} pieces, FOB {money(priceMin)} to {money(priceMax)} — with the carton data you need to cost the
+          freight before you commit.
         </p>
+        <div class="flex flex-col sm:flex-row gap-4 mt-9 justify-center">
+          <a href="/collections/all/" class="bg-navy text-white px-9 py-4 rounded font-bold text-sm hover:bg-orange transition-colors">
+            BROWSE THE CATALOGUE
+          </a>
+          <a href="#quote" class="border-2 border-navy text-navy px-9 py-4 rounded font-bold text-sm hover:bg-navy hover:text-white transition-colors">
+            REQUEST A QUOTE
+          </a>
+        </div>
+        <p class="text-xs text-gray-400 mt-6 tracking-wide">
+          {products.length} lines · MOQ {moqMin}–{moqMax} pcs · 25 years · 5,000 m² in Chenghai
+        </p>
+      </div>
 
-        <div class="flex flex-wrap gap-x-8 gap-y-4 mb-9">
+      <!-- Right product: electric water gun -->
+      <div class="relative w-[27%] min-w-[210px] items-center justify-center hidden lg:flex" style="min-height: 470px;">
+        <div class="hero-glow" style="right: -60px; top: 12%; background: #CDE9FF;"></div>
+        <img src={heroWaterGun} alt="Wholesale electric water gun blaster" class="hero-img relative z-[1] w-full h-auto" style="transform: scale(1.15);" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUOTE BAND ================= -->
+  <section id="quote" class="bg-white border-b border-gray-100 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid lg:grid-cols-[0.95fr_1.05fr] gap-10 items-start">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Request a quote</p>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy leading-tight mb-4">
+          Send the item numbers. We send the numbers back.
+        </h2>
+        <p class="text-gray-600 leading-relaxed mb-6">
+          Item numbers, target quantity and destination port are enough. You get unit price, MOQ, carton dimensions,
+          total CBM and a production window — straight from our own production records, within one business day.
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div>
             <div class="text-2xl font-extrabold text-navy">{products.length}</div>
-            <div class="text-xs text-gray-400 uppercase tracking-wider">Catalogue lines</div>
+            <div class="text-[11px] text-gray-400 uppercase tracking-wider">Catalogue lines</div>
           </div>
           <div>
             <div class="text-2xl font-extrabold text-navy">{moqMin}+</div>
-            <div class="text-xs text-gray-400 uppercase tracking-wider">MOQ per item</div>
+            <div class="text-[11px] text-gray-400 uppercase tracking-wider">MOQ per item</div>
           </div>
           <div>
             <div class="text-2xl font-extrabold text-navy">25 yrs</div>
-            <div class="text-xs text-gray-400 uppercase tracking-wider">Manufacturing</div>
+            <div class="text-[11px] text-gray-400 uppercase tracking-wider">Manufacturing</div>
           </div>
           <div>
             <div class="text-2xl font-extrabold text-navy">5,000 m²</div>
-            <div class="text-xs text-gray-400 uppercase tracking-wider">Chenghai plant</div>
+            <div class="text-[11px] text-gray-400 uppercase tracking-wider">Chenghai plant</div>
           </div>
-        </div>
-
-        <div class="flex flex-wrap gap-3">
-          <a href="/collections/all/" class="bg-navy text-white px-7 py-3.5 rounded-lg font-bold text-sm hover:bg-orange transition-colors">
-            Browse the catalogue
-          </a>
-          <a href="https://wa.me/8613715961913?text=Hello%20Kidtoy%20Factory%2C%20I%20would%20like%20a%20quotation" target="_blank" rel="noopener noreferrer" class="border-2 border-navy text-navy px-7 py-3.5 rounded-lg font-bold text-sm hover:bg-navy hover:text-white transition-colors">
-            WhatsApp us
-          </a>
         </div>
       </div>
 
-      <div class="lg:pl-4">
+      <div>
         <HeroInquiryForm />
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FACTORY ================= -->
+  <section class="py-16 bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+      <div class="grid grid-cols-2 gap-4 -skew-y-3">
+        <div class="space-y-4">
+          <div class="h-44 bg-gray-100 rounded-xl overflow-hidden skew-y-3"><img src="https://sc01.alicdn.com/kf/H428b51622ec946f4932ed35bc5920addu.png" alt="Chenghai toy factory building" class="w-full h-full object-cover" loading="lazy" /></div>
+          <div class="h-44 bg-gray-100 rounded-xl overflow-hidden skew-y-3"><img src="https://sc01.alicdn.com/kf/H86381d3008dd4c6598369147d6676cd3V.png" alt="Toy production workshop" class="w-full h-full object-cover" loading="lazy" /></div>
+        </div>
+        <div class="space-y-4 mt-8">
+          <div class="h-44 bg-gray-100 rounded-xl overflow-hidden skew-y-3"><img src="https://sc01.alicdn.com/kf/H6b5dd0979c984ccdb93d56d8b7799d670.png" alt="Assembly line" class="w-full h-full object-cover" loading="lazy" /></div>
+          <div class="h-44 bg-gray-100 rounded-xl overflow-hidden skew-y-3"><img src="https://sc01.alicdn.com/kf/H713c066d3f76416b92eedacf7add641eM.png" alt="Quality control inspection" class="w-full h-full object-cover" loading="lazy" /></div>
+        </div>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-orange mb-3">The factory</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-6">
+          Trusted manufacturing<br />since 2001
+        </h2>
+        <p class="text-gray-500 leading-relaxed mb-4">
+          Located in <strong class="text-navy">Chenghai, Guangdong</strong> — the toy production cluster of eastern
+          Guangdong. Our 5,000 m² facility runs moulding, electronics sub-assembly, packing and pre-shipment inspection
+          under one roof, so the carton data on this site comes from our own export records rather than from a trading
+          company's estimate.
+        </p>
+        <p class="text-gray-500 leading-relaxed mb-8">
+          The factory holds the social and quality audits; product test reports sit at item level and vary by model and
+          market. If you need a specific standard for a specific item, ask with the item number and we will tell you
+          what exists today.
+        </p>
+        <div class="grid grid-cols-2 gap-4 mb-8">
+          <div class="bg-white p-5 border-l-4 border-orange shadow-sm">
+            <strong class="block text-navy text-xl">25+ Years</strong>
+            <span class="text-sm text-gray-400">Manufacturing &amp; export</span>
+          </div>
+          <div class="bg-white p-5 border-l-4 border-orange shadow-sm">
+            <strong class="block text-navy text-xl">5,000 m²</strong>
+            <span class="text-sm text-gray-400">Chenghai plant</span>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="/factory/" class="bg-navy text-white px-6 py-3 rounded-lg font-bold text-sm hover:bg-orange transition-colors">Inside the factory</a>
+          <a href="/certifications/" class="border-2 border-navy text-navy px-6 py-3 rounded-lg font-bold text-sm hover:bg-navy hover:text-white transition-colors">Certificates &amp; audits</a>
+        </div>
       </div>
     </div>
   </section>
