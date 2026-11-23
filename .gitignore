@@ -30,3 +30,6 @@ img-check.js
 titles.js
 retitle.js
 blog-audit.js
+temp-banners/
+banner-size.js
+build-stem-banner.js
