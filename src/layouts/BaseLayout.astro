@@ -135,14 +135,18 @@ const fullDesc = description || 'Direct source for high-quality toys and childre
       })();
     </script>
 
-    <!-- OPEN IN A NEW TAB. The buyer wanted every link to open a fresh tab so the
-         catalogue, the guide they were reading and the page they came from all
-         stay open. Doing it here rather than adding target="_blank" to a hundred
-         anchors means new pages inherit the behaviour automatically, and
-         ctrl/cmd/shift-click keeps the browser's own meaning. In-page anchors
-         (#quote), mailto:, tel: and downloads are left alone. -->
+    <!-- OPEN IN A NEW TAB — desktop only. The buyer wanted every link to open a
+         fresh tab on a computer so the catalogue, the guide and the page they
+         came from stay open; on a phone those tabs are invisible and the back
+         button becomes unreliable, so below 1024px links navigate normally.
+         One delegated handler rather than target="_blank" on every anchor means
+         new pages inherit the behaviour, and ctrl/cmd/shift-click still means
+         what the browser says it means. In-page anchors (#quote), mailto:, tel:
+         and downloads are left alone. -->
     <script is:inline>
       (function () {
+        var isPhone = window.matchMedia('(max-width: 1023px)');
+
         document.addEventListener('click', function (e) {
           if (e.defaultPrevented || e.button !== 0) return;
           if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -152,10 +156,24 @@ const fullDesc = description || 'Direct source for high-quality toys and childre
           if (!href || href.charAt(0) === '#') return;
           if (/^(mailto:|tel:|javascript:)/i.test(href)) return;
           if (a.hasAttribute('download')) return;
-          if (a.target === '_blank' || a.target === '_new') return;
+
           var url;
           try { url = new URL(href, location.href); } catch (err) { return; }
           if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
+
+          if (isPhone.matches) {
+            // On a phone a new tab is invisible and the back button stops working.
+            // Any internal link that was hardcoded target="_blank" is pulled back
+            // into the same tab so the whole site behaves consistently.
+            if (a.target === '_blank' && url.origin === location.origin) {
+              e.preventDefault();
+              location.href = url.href;
+            }
+            return;
+          }
+
+          if (a.target === '_blank' || a.target === '_new') return;
+          // Same page, hash only: let the browser scroll instead of opening a copy.
           if (url.pathname === location.pathname && url.hash && !url.search) return;
           e.preventDefault();
           window.open(url.href, '_blank', 'noopener');
