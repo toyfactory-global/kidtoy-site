@@ -34,3 +34,14 @@ temp-banners/
 banner-size.js
 build-stem-banner.js
 retitle-products.js
+work/
+fetch-hn176877.js
+probe-logo.py
+probe-logo2.py
+crop-check.py
+strip-hn176877.py
+to-webp-hn176877.py
+add-hn176877.js
+drop-hn176877.py
+verify-hn176877.js
+verify-schema.js
