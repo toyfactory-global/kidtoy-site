@@ -52,3 +52,6 @@ debug-cert.js
 fix-cert-tiles.py
 fix-cert-prose.py
 list-remaining-claims.js
+audit-sku.js
+fix-sku-176877.py
+verify-sku.js
