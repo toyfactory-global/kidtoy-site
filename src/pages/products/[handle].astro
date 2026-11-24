@@ -23,6 +23,23 @@ const productSku = product.variants?.[0]?.sku || `KT-${product.id.toString().sli
 const skuLabel = product.variants?.[0]?.sku ? 'Item No.' : 'Item No.';
 const gallery = [{ src: mainImage, alt: product.title }, ...detailImages.map(img => ({ src: img.src, alt: img.alt || product.title }))];
 
+/* ---- Certification, evidenced per product ------------------------------
+ * The trust card used to read "Certified Safety / CE · ASTM · EN71" on every
+ * product page regardless of what was on file. The ERP export leaves the 认证
+ * field empty for most items, so that line asserted marks the factory may not
+ * hold for the model — the first thing a buyer checks before a test order.
+ *
+ * Now the card quotes the product's own specification table, and falls back to
+ * an invitation to ask rather than a claim.
+ */
+const certMatch = String(product.body_html || '').match(
+  /<td[^>]*>\s*Certification\s*<\/td>\s*<td[^>]*>([\s\S]*?)<\/td>/i
+);
+const certRaw = certMatch
+  ? certMatch[1].replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim()
+  : '';
+const certText = /^[-–—0]?$|^n\/?a$|^none$/i.test(certRaw) ? '' : certRaw;
+
 /* ---- SEO helpers ------------------------------------------------------- */
 const SITE = 'https://kidtoycn.com';
 const stripHtml = (h) =>
@@ -171,8 +188,8 @@ const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
           <div class="flex items-start gap-2.5 bg-gray-50 rounded-lg p-3.5">
             <span class="text-green-600 text-lg leading-none mt-0.5">✓</span>
             <div>
-              <p class="text-sm font-bold text-navy leading-tight">Certified Safety</p>
-              <p class="text-xs text-gray-400">CE · ASTM · EN71</p>
+              <p class="text-sm font-bold text-navy leading-tight">{certText ? 'Certified Safety' : 'Testing on Request'}</p>
+              <p class="text-xs text-gray-400 line-clamp-2">{certText || 'Ask us what applies'}</p>
             </div>
           </div>
           <div class="flex items-start gap-2.5 bg-gray-50 rounded-lg p-3.5">

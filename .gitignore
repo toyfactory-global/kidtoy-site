@@ -45,3 +45,10 @@ add-hn176877.js
 drop-hn176877.py
 verify-hn176877.js
 verify-schema.js
+probe-cert.js
+scan-cert-claims.js
+verify-cert-card.js
+debug-cert.js
+fix-cert-tiles.py
+fix-cert-prose.py
+list-remaining-claims.js
