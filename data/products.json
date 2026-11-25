@@ -2556,6 +2556,71 @@
         "stem-toys"
       ],
       "moq": 72
+    },
+    {
+      "id": "9183874000001",
+      "title": "5-in-1 STEM Robot Building Set, 495 Pcs + App",
+      "handle": "5-in-1-stem-robot-building-set-495-pcs",
+      "body_html": "<p>495 pieces that build five different machines: two walking robots, a dump truck, an anti-aircraft vehicle and a tank. Every build uses the same track base and gearbox, so a buyer can stock one SKU and offer five toys — the reason this format outsells single-model robot kits at the same shelf price.</p>\n\n<h3>Two ways to drive it</h3>\n<p>A 2.4G handset gives immediate control, which is what a child reaches for first. The app adds three modes a handset cannot: gravity steering by tilting the phone, a path mode where you draw a route and the machine follows it, and a programming mode where you queue a sequence of moves and watch it run. The last one is what turns a remote-control toy into something a parent will call educational.</p>\n\n<h3>How the movement works</h3>\n<p>The turret rotates a full 360 degrees, the gear ring turns 360 degrees, the arms swing on joints, and the gun is detachable. That range is what separates a buildable model from a static display piece — the build is the first hour, the movement is the rest of the month.</p>\n\n<h3>Specification</h3>\n<table>\n  <tr><td>Item No.</td><td>S183874</td></tr>\n  <tr><td>Factory Item No.</td><td>KJ96135</td></tr>\n  <tr><td>MOQ Minimum Order Quantity</td><td>60 PCS (5 cartons)</td></tr>\n  <tr><td>Packing</td><td>Colour box, 27.5 x 22.5 x 7 cm</td></tr>\n  <tr><td>Pieces</td><td>495 pcs, five models from one set</td></tr>\n  <tr><td>Models</td><td>Robot I, Robot II, dump truck, anti-aircraft vehicle, tank</td></tr>\n  <tr><td>Control</td><td>2.4G remote plus app: remote, gravity, path and programming modes</td></tr>\n  <tr><td>Age grading</td><td>Ages 12+ (as printed on the box)</td></tr>\n  <tr><td>Power</td><td>3.7 V 500 mAh pack included; remote needs 2 x AA, not included</td></tr>\n  <tr><td>Export Carton Qty</td><td>12 PCS / Carton</td></tr>\n  <tr><td>Carton Dimension</td><td>44 x 29 x 46.5 cm</td></tr>\n  <tr><td>Carton Volume</td><td>0.059 CBM (2.09 cuft)</td></tr>\n  <tr><td>Carton Gross Weight</td><td>19 KG</td></tr>\n  <tr><td>Carton Net Weight</td><td>17.5 KG</td></tr>\n</table>\n<h3>Buying notes</h3>\n<p>Twelve sets per carton at 0.059 CBM and 19 kg gross. That is a dense carton, so this line fills a container on weight before volume and pairs well with bulky items such as bubble machines. The 60-piece minimum is five cartons.</p>\n\n<p>The 3.7 V 500 mAh pack ships with the set; the remote takes two AA cells that are <strong>not</strong> included, so if you sell into a market where that matters, say so on your own listing.</p>\n\n<p>Testing scope varies by model and market - contact us to confirm what applies for this one.</p>",
+      "vendor": "Kidtoy Factory",
+      "type": "Building Blocks",
+      "tags": [
+        "STEM",
+        "Building Blocks",
+        "Robot",
+        "App Control",
+        "Rechargeable",
+        "Wholesale"
+      ],
+      "price": 16.8,
+      "compare_at_price": null,
+      "images": [
+        {
+          "src": "/images/183874.webp",
+          "alt": "Five-in-one STEM robot building set with box, five models and component row"
+        },
+        {
+          "src": "/images/183874-1.webp",
+          "alt": "Five robot models built from the set: two robots, dump truck, AA vehicle and tank"
+        },
+        {
+          "src": "/images/183874-2.webp",
+          "alt": "Robot models on a lunar-surface backdrop with the 2.4G remote control"
+        },
+        {
+          "src": "/images/183874-3.webp",
+          "alt": "The five buildable models: Robot I, Robot II, dump truck, anti-aircraft vehicle, tank"
+        },
+        {
+          "src": "/images/183874-4.webp",
+          "alt": "Feature panel showing 360-degree turret, gear rotation and detachable gun"
+        },
+        {
+          "src": "/images/183874-5.webp",
+          "alt": "Dual control: 2.4G remote and app, with remote, gravity, path and programming modes"
+        }
+      ],
+      "variants": [
+        {
+          "sku": "S183874",
+          "price": 16.8,
+          "inventory_quantity": 0
+        }
+      ],
+      "collections": [
+        "stem-toys"
+      ],
+      "moq": 60,
+      "video": {
+        "src": "/videos/183874.mp4",
+        "poster": "/videos/183874-poster.webp",
+        "width": 1280,
+        "height": 720,
+        "duration": "PT42S",
+        "durationLabel": "42 seconds",
+        "uploadDate": "2026-11-25",
+        "caption": "The tank build driven by remote, then switched to app and programming mode"
+      }
     }
   ],
   "collections": [

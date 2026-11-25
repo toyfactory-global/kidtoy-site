@@ -86,3 +86,6 @@ probe-band.py
 strip-hn180402.py
 crop-hn180402.py
 add-hn180402.js
+fetch-hn183874.js
+make-video-183874.js
+add-hn183874.js
