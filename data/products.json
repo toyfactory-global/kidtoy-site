@@ -2678,6 +2678,60 @@
         "uploadDate": "2026-11-25",
         "caption": "Science and education programming blocks, from build to app control"
       }
+    },
+    {
+      "id": "9183916000001",
+      "title": "Engineering Robot Blocks, 5 Models + App Control",
+      "handle": "engineering-robot-blocks-5-models",
+      "body_html": "<p>Five tracked engineering machines built from one block set: a scooped loader, a round-disc fire rescue vehicle, a transforming engineering vehicle, an articulated engineering arm and a bulldozer. Every build shares the same track base, motor module and control board, so one SKU covers a shelf of construction toys.</p>\n\n<h3>The vehicles, not the brick count</h3>\n<p>What sells this line is the shape language. The builds are modelled on real municipal plant — the loader's bucket, the fire vehicle's disc body, the dozer's blade — so a child recognises them from the street. That is a different proposition from a generic robot kit, and it is why the range holds up against licensed construction toys at a lower price point.</p>\n\n<h3>Two ways to drive it</h3>\n<p>The 2.4 GHz handset works to about 30 metres and handles forward, back, left and right. The app adds programming and path modes, so the same machine can be driven like a toy car or sequenced like a robot. The joints on the arm and blade are movable by hand as well, which matters for display and for play without the battery.</p>\n\n<h3>Specification</h3>\n<table>\n  <tr><td>Item No.</td><td>S183916</td></tr>\n  <tr><td>Factory Item No.</td><td>K96183</td></tr>\n  <tr><td>MOQ Minimum Order Quantity</td><td>120 PCS (5 cartons)</td></tr>\n  <tr><td>Packing</td><td>Colour box, 25 x 20 x 7 cm</td></tr>\n  <tr><td>Models</td><td>5 builds: superman, loader, fire rescue vehicle, engineering arm, bulldozer</td></tr>\n  <tr><td>Control</td><td>2.4 GHz, 30 m range, forward / back / left / right</td></tr>\n  <tr><td>App</td><td>Phone remote, programming and path modes</td></tr>\n  <tr><td>Age grading</td><td>Ages 12+ (as printed on the box)</td></tr>\n  <tr><td>Power</td><td>3.7 V 500 mAh lithium pack</td></tr>\n  <tr><td>Export Carton Qty</td><td>24 PCS / Carton</td></tr>\n  <tr><td>Carton Dimension</td><td>52 x 43 x 42 cm</td></tr>\n  <tr><td>Carton Volume</td><td>0.094 CBM (3.31 cuft)</td></tr>\n</table>\n<h3>Buying notes</h3>\n<p>Twenty-four sets per carton at 0.094 CBM. Volume is what sets the container count on this line; it is not dense enough to hit a weight limit first, so pair it with heavy stock if you are building a mixed box.</p>\n\n<p>The carton weight is not recorded on our item sheet, so we have left it off rather than print a zero. Ask us for the measured gross weight before you book freight — a forwarder will need it and an estimate is worse than a request.</p>\n\n<p>The set runs on a 3.7 V 500 mAh lithium pack. Testing scope varies by model and market - contact us to confirm what applies for this one.</p>",
+      "vendor": "Kidtoy Factory",
+      "type": "Building Blocks",
+      "tags": [
+        "STEM",
+        "Building Blocks",
+        "Engineering",
+        "App Control",
+        "Wholesale"
+      ],
+      "price": 12.4,
+      "compare_at_price": null,
+      "images": [
+        {
+          "src": "/images/183916.webp",
+          "alt": "Engineering robot block set with its box and all five builds on white"
+        },
+        {
+          "src": "/images/183916-1.webp",
+          "alt": "Five builds with the contents laid out: 2.4G remote, blocks, instructions, app modes"
+        },
+        {
+          "src": "/images/183916-2.webp",
+          "alt": "The five engineering models named: superman, loader, fire rescue vehicle, arm and bulldozer"
+        },
+        {
+          "src": "/images/183916-3.webp",
+          "alt": "Urban engineering vehicle styles with the app programming panel in hand"
+        },
+        {
+          "src": "/images/183916-4.webp",
+          "alt": "Feature panel: remote control, multi-joint movement, power module and multiple modes"
+        },
+        {
+          "src": "/images/183916-5.webp",
+          "alt": "Child playing with two of the builds and the 2.4G remote control"
+        }
+      ],
+      "variants": [
+        {
+          "sku": "S183916",
+          "price": 12.4,
+          "inventory_quantity": 0
+        }
+      ],
+      "collections": [
+        "stem-toys"
+      ],
+      "moq": 120
     }
   ],
   "collections": [
