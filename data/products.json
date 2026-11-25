@@ -2621,6 +2621,63 @@
         "uploadDate": "2026-11-25",
         "caption": "The tank build driven by remote, then switched to app and programming mode"
       }
+    },
+    {
+      "id": "9183899000001",
+      "title": "Intelligent STEM Robot Blocks, App & Voice Control",
+      "handle": "intelligent-stem-robot-blocks-app-voice",
+      "body_html": "<p>A 612-piece tracked robot kit that builds twelve different machines from the same box: a walker, a tank, a tracked crawler, a dump truck, a gun turret, a telescope clamp, a swing, a helicopter, a propellor aircraft, a fighter and more. Each build uses the same track base and brain, so the parts box covers a whole product range.</p>\n\n<h3>Four ways to control it</h3>\n<p>The 2.4G handset drives it directly to about 30 metres. The app adds programming, where you queue a sequence of moves and watch it run; path mode, where you draw a route and the machine follows it; gravity mode, where tilting the phone steers; and voice mode, where spoken words trigger forward, back and turn. Between them, the same kit is a remote-control toy for one child and a first programming exercise for another.</p>\n\n<h3>Where it sits against the cheaper kits</h3>\n<p>The difference is the brain, not the brick count. A plain block set ends when the model is finished; this one keeps going because the movement and the app are the point. That is also why it carries a 6+ grade rather than the 12+ that plainer robot kits often use.</p>\n\n<h3>Specification</h3>\n<table>\n  <tr><td>Item No.</td><td>S183899</td></tr>\n  <tr><td>Factory Item No.</td><td>KJ96131</td></tr>\n  <tr><td>MOQ Minimum Order Quantity</td><td>60 PCS (5 cartons)</td></tr>\n  <tr><td>Packing</td><td>Colour box, 27.5 x 7 x 22.5 cm</td></tr>\n  <tr><td>Pieces</td><td>612 pcs</td></tr>\n  <tr><td>Build configurations</td><td>12 forms from one set</td></tr>\n  <tr><td>Control</td><td>2.4G remote, 30 m range, plus app: programming, path, gravity, voice</td></tr>\n  <tr><td>Age grading</td><td>Ages 6+ (as printed on the box)</td></tr>\n  <tr><td>Power</td><td>3.7 V 500 mAh pack; two remote styles available</td></tr>\n  <tr><td>Export Carton Qty</td><td>12 PCS / Carton</td></tr>\n  <tr><td>Carton Dimension</td><td>44 x 29 x 46.5 cm</td></tr>\n  <tr><td>Carton Volume</td><td>0.059 CBM (2.09 cuft)</td></tr>\n  <tr><td>Carton Gross Weight</td><td>13.7 KG</td></tr>\n  <tr><td>Carton Net Weight</td><td>12.89 KG</td></tr>\n</table>\n<h3>Buying notes</h3>\n<p>Twelve sets per carton at 0.059 CBM and 13.7 kg gross — a dense carton, so this line fills a container on weight before volume and pairs well with bulky stock.</p>\n\n<p>The 3.7 V 500 mAh pack ships with the set. Two remote styles are available, so tell us which you want before we quote; mixing them in one carton is possible but adds a line to the packing list.</p>\n\n<p>Testing scope varies by model and market - contact us to confirm what applies for this one.</p>",
+      "vendor": "Kidtoy Factory",
+      "type": "Building Blocks",
+      "tags": [
+        "STEM",
+        "Building Blocks",
+        "Robot",
+        "App Control",
+        "Voice Control",
+        "Wholesale"
+      ],
+      "price": 19.8,
+      "compare_at_price": null,
+      "images": [
+        {
+          "src": "/images/183899.webp",
+          "alt": "Intelligent STEM robot building set with its 612-piece colour box and five builds"
+        },
+        {
+          "src": "/images/183899-1.webp",
+          "alt": "Tracked robot model with the app mode icons: programming, path and gravity sensing"
+        },
+        {
+          "src": "/images/183899-2.webp",
+          "alt": "Child holding a tablet running the programming app beside three finished builds"
+        },
+        {
+          "src": "/images/183899-3.webp",
+          "alt": "Child controlling a robot by voice command, with forward, back and turn prompts"
+        }
+      ],
+      "variants": [
+        {
+          "sku": "S183899",
+          "price": 19.8,
+          "inventory_quantity": 0
+        }
+      ],
+      "collections": [
+        "stem-toys"
+      ],
+      "moq": 60,
+      "video": {
+        "src": "/videos/183899.mp4",
+        "poster": "/videos/183899-poster.webp",
+        "width": 480,
+        "height": 276,
+        "duration": "PT44S",
+        "durationLabel": "44 seconds",
+        "uploadDate": "2026-11-25",
+        "caption": "Science and education programming blocks, from build to app control"
+      }
     }
   ],
   "collections": [
