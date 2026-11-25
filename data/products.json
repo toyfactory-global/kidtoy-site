@@ -2732,6 +2732,67 @@
         "stem-toys"
       ],
       "moq": 120
+    },
+    {
+      "id": "9183919000001",
+      "title": "Bluetooth Guitar Building Set, 500 Pcs + Speaker",
+      "handle": "bluetooth-guitar-building-set-500-pcs",
+      "body_html": "<p>A 500-piece brick guitar that plays music. Build the body, neck and headstock, clip the amplifier unit into the back, pair a phone over Bluetooth, and the model becomes a speaker shaped like an electric guitar. It is decoration and audio in one object, which is why it sells to a different buyer than a plain block set.</p>\n\n<h3>What moves, and why it matters</h3>\n<p>The tuning pegs turn, the rocker arm swings, the back panel opens to seat the speaker unit, and a bracket holds the guitar upright. Those four details are what turn a model into something you leave on a shelf rather than put back in the box — and they are the usual quality difference between a display kit and a static brick sculpture.</p>\n\n<h3>Who buys it</h3>\n<p>Three groups: music shops and instrument retailers looking for a gift line, gift shops that want a licensed-feeling novelty without a licence, and marketplace sellers whose audience is adults rather than children even though the box is graded 6+. The adult-gift angle is worth knowing before you price it — it supports a retail price well above a child's block set of the same piece count.</p>\n\n<h3>Specification</h3>\n<table>\n  <tr><td>Item No.</td><td>S183919</td></tr>\n  <tr><td>Factory Item No.</td><td>K96174</td></tr>\n  <tr><td>MOQ Minimum Order Quantity</td><td>120 PCS (5 cartons)</td></tr>\n  <tr><td>Packing</td><td>Colour box, 20 x 25 x 7 cm</td></tr>\n  <tr><td>Pieces</td><td>500 pcs</td></tr>\n  <tr><td>Audio</td><td>Bluetooth speaker unit: music playback, voice, Bluetooth input</td></tr>\n  <tr><td>Moving parts</td><td>Functioning tuning pegs, swinging rocker arm, opening back panel</td></tr>\n  <tr><td>Display</td><td>Configurable bracket for upright display</td></tr>\n  <tr><td>Age grading</td><td>Ages 6+ (as printed on the box)</td></tr>\n  <tr><td>Export Carton Qty</td><td>24 PCS / Carton</td></tr>\n  <tr><td>Carton Dimension</td><td>52 x 44 x 42 cm</td></tr>\n  <tr><td>Carton Volume</td><td>0.096 CBM (3.39 cuft)</td></tr>\n  <tr><td>Carton Gross Weight</td><td>14.7 KG</td></tr>\n  <tr><td>Carton Net Weight</td><td>13.5 KG</td></tr>\n</table>\n<h3>Buying notes</h3>\n<p>Twenty-four sets per carton at 0.096 CBM and 14.7 kg gross. The box is 20 x 25 x 7 cm, so it stands on a shelf without depth — useful if your planogram is tight.</p>\n\n<p>The item is in stock at the factory, which matters for this category: gift buyers tend to order late and in small quantities. Ask us for the current stock position before you commit to a delivery date.</p>\n\n<p>Testing scope varies by model and market - contact us to confirm what applies for this one.</p>",
+      "vendor": "Kidtoy Factory",
+      "type": "Building Blocks",
+      "tags": [
+        "STEM",
+        "Building Blocks",
+        "Bluetooth",
+        "Music",
+        "Gift",
+        "Wholesale"
+      ],
+      "price": 11.6,
+      "compare_at_price": null,
+      "images": [
+        {
+          "src": "/images/183919.webp",
+          "alt": "Bluetooth speaker block guitar with neon Music sign, phone and speaker unit"
+        },
+        {
+          "src": "/images/183919-1.webp",
+          "alt": "Block guitar displayed on a gold marble table with the high fidelity speaker"
+        },
+        {
+          "src": "/images/183919-2.webp",
+          "alt": "High fidelity exterior design: guitar and speaker with the configurable bracket"
+        },
+        {
+          "src": "/images/183919-3.webp",
+          "alt": "Detail panels: simulated tuning chord, swinging rocker, opening back, bracket"
+        },
+        {
+          "src": "/images/183919-4.webp",
+          "alt": "Block guitar on a sofa, playing music from a phone over Bluetooth"
+        }
+      ],
+      "variants": [
+        {
+          "sku": "S183919",
+          "price": 11.6,
+          "inventory_quantity": 0
+        }
+      ],
+      "collections": [
+        "stem-toys"
+      ],
+      "moq": 120,
+      "video": {
+        "src": "/videos/183919.mp4",
+        "poster": "/videos/183919-poster.webp",
+        "width": 720,
+        "height": 1280,
+        "duration": "PT21S",
+        "durationLabel": "21 seconds",
+        "uploadDate": "2026-11-25",
+        "caption": "The guitar playing from a phone, and the speaker unit on its own"
+      }
     }
   ],
   "collections": [
