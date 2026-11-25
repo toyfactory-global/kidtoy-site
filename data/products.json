@@ -2506,6 +2506,56 @@
         "stem-toys"
       ],
       "moq": 90
+    },
+    {
+      "id": "9180402000001",
+      "title": "Football Board Game, 2-Player Tabletop with Scoreboard",
+      "handle": "football-board-game-2-player-tabletop",
+      "body_html": "<p>A two-player tabletop football pitch, 57 cm long once assembled, with spring-loaded shooting handles at each end and a two-digit electronic scoreboard between the goals. Pull the handle, the striker fires, and the ball crosses the pitch on a rail — the scoreboard counts it. No batteries to swap mid-match, no screen, no app.</p>\n\n<h3>What makes it a retail line rather than a novelty</h3>\n<p>Most tabletop football games are either too small to be satisfying or too expensive to stock. This one sits in between: a full pitch at 57 x 28 cm that still packs into a 42 x 31 x 7 cm box, so it shelves like a board game rather than a bulky toy. The scoreboard does the work that usually needs a human referee, which is what lets two children play it without an adult.</p>\n\n<h3>Assembly</h3>\n<p>The base, scoreboard, goal mechanisms and handles clip together without tools. First assembly takes a few minutes; the box carries a four-step guide. Buyers sometimes ask whether it can be sold assembled — it cannot, the carton is sized for the flat pack.</p>\n\n<h3>Specification</h3>\n<table>\n  <tr><td>Item No.</td><td>S180402</td></tr>\n  <tr><td>Factory Item No.</td><td>2021</td></tr>\n  <tr><td>MOQ Minimum Order Quantity</td><td>72 PCS (3 cartons)</td></tr>\n  <tr><td>Packing</td><td>Colour box, 42 x 31 x 7 cm</td></tr>\n  <tr><td>Unit size</td><td>57 x 28 x 11.5 cm assembled</td></tr>\n  <tr><td>Players</td><td>2, with spring-loaded shooting handles</td></tr>\n  <tr><td>Scoring</td><td>Electronic scoreboard, 2-digit</td></tr>\n  <tr><td>Certification</td><td>EN71, ASTM, HR4040, 8P, EU cadmium, EC declaration, EMC, EN62115, PAHS</td></tr>\n  <tr><td>Export Carton Qty</td><td>24 PCS / Carton</td></tr>\n  <tr><td>Carton Dimension</td><td>89 x 45 x 68 cm</td></tr>\n  <tr><td>Carton Volume</td><td>0.272 CBM (9.61 cuft)</td></tr>\n  <tr><td>Carton Gross Weight</td><td>16.5 KG</td></tr>\n  <tr><td>Carton Net Weight</td><td>13 KG</td></tr>\n</table>\n<h3>Buying notes</h3>\n<p>The carton is large for its weight: 24 sets at 0.272 CBM and 16.5 kg. Volume, not weight, sets the container count, so this line is worth pairing with dense items rather than shipping alone. The 72-piece minimum is three cartons.</p>\n\n<p>Certification on this item covers EN71, ASTM, HR4040, 8P, the EU cadmium limit, an EC declaration, EMC, EN62115 and PAHS. Tell us the destination market and we will confirm which of those your import file needs; a US shipment and an EU shipment do not ask for the same paperwork even though the reports overlap.</p>",
+      "vendor": "Kidtoy Factory",
+      "type": "Sports Toy",
+      "tags": [
+        "STEM",
+        "Sports",
+        "Board Game",
+        "Football",
+        "Wholesale"
+      ],
+      "price": 4.3,
+      "compare_at_price": null,
+      "images": [
+        {
+          "src": "/images/180402.webp",
+          "alt": "Tabletop football board game with two shooting handles and an electronic scoreboard"
+        },
+        {
+          "src": "/images/180402-1.webp",
+          "alt": "Tabletop football pitch showing its 56.8 x 27.7 x 11.1 cm dimensions"
+        },
+        {
+          "src": "/images/180402-2.webp",
+          "alt": "Close-up of the goal mechanism, scoreboard and shooting handle in use"
+        },
+        {
+          "src": "/images/180402-3.webp",
+          "alt": "Two players using the shooting handles during a tabletop football match"
+        },
+        {
+          "src": "/images/180402-4.webp",
+          "alt": "Overhead view of a parent and child playing the tabletop football game"
+        }
+      ],
+      "variants": [
+        {
+          "sku": "S180402",
+          "price": 4.3,
+          "inventory_quantity": 0
+        }
+      ],
+      "collections": [
+        "stem-toys"
+      ],
+      "moq": 72
     }
   ],
   "collections": [
