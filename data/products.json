@@ -2265,6 +2265,64 @@
         "stem-toys"
       ],
       "moq": 500
+    },
+    {
+      "id": "9176698000001",
+      "title": "Face-Changing Cube Game, 16 Blocks + 55 Cards",
+      "handle": "face-changing-cube-game-16-blocks-55-cards",
+      "body_html": "<p>Sixteen 3 cm cubes, each printed on all six faces with an eye, a brow, a mouth, a heart or a swirl. Lay the blocks out with the 55 cards and the game is to rebuild the face on the card using the blocks you have. Because the faces are made of parts rather than whole pictures, the same block set produces hundreds of combinations, and every one of them is a different expression.</p>\n\n<h3>What is in the box</h3>\n<ul>\n  <li>16 printed blocks, 3 cm cube, plastic, four colour ways</li>\n  <li>55 cards: expression cards to copy, plus prompt cards that ask a question or set a task</li>\n  <li>Printed colour box, 24.5 x 4 x 17.5 cm</li>\n</ul>\n\n<h3>Why it works as a retail line</h3>\n<p>The game is two products in one. The expression cards make it a visual puzzle for younger players; the prompt cards turn the same box into a conversation game for older ones, which is why the box is graded <strong>Ages 6+</strong> and plays with more than one person. That double use is what keeps it on a shelf past the first week.</p>\n\n<p>For a buyer, the appeal is the carton. Each set is compact, the box is rigid, and 72 sets go into a carton of 0.152 CBM at 25 kg gross. That is a light, volume-efficient line: a 40HQ holds roughly 440 cartons on volume before weight becomes the limit.</p>\n\n<h3>Specification</h3>\n<table>\n  <tr><td>Item No.</td><td>S176698</td></tr>\n  <tr><td>Factory Item No.</td><td>8012</td></tr>\n  <tr><td>MOQ Minimum Order Quantity</td><td>216 PCS (3 cartons)</td></tr>\n  <tr><td>Packing</td><td>Colour box</td></tr>\n  <tr><td>Box size</td><td>24.5 x 4 x 17.5 cm</td></tr>\n  <tr><td>Pieces per set</td><td>16 blocks (3 cm) + 55 cards</td></tr>\n  <tr><td>Age grading</td><td>Ages 6+ (as printed on the box)</td></tr>\n  <tr><td>Export Carton Qty</td><td>72 PCS / Carton</td></tr>\n  <tr><td>Carton Dimension</td><td>73.5 x 37.5 x 55 cm</td></tr>\n  <tr><td>Carton Volume</td><td>0.152 CBM (5.35 cuft)</td></tr>\n  <tr><td>Carton Gross Weight</td><td>25 KG</td></tr>\n  <tr><td>Carton Net Weight</td><td>22 KG</td></tr>\n</table>\n\n\n<h3>Buying notes</h3>\n<p>Block colours are fixed across the run, so a mixed pallet keeps the four-way colour balance the cards depend on. If you are building a display, the colour box front is the same artwork on every unit, which makes shelf blocking straightforward.</p>\n\n<p>Testing scope varies by model and market - contact us to confirm what applies for this one. We would rather tell you what we can support than send a certificate that does not match your destination.</p>",
+      "vendor": "Kidtoy Factory",
+      "type": "Educational Toy",
+      "tags": [
+        "STEM",
+        "Educational",
+        "Face Blocks",
+        "Party Game",
+        "Wholesale"
+      ],
+      "price": 2.2,
+      "compare_at_price": null,
+      "images": [
+        {
+          "src": "/images/176698.webp",
+          "alt": "Face-changing cube game with 16 printed blocks and 55 expression cards on a white background"
+        },
+        {
+          "src": "/images/176698-1.webp",
+          "alt": "Child playing the face-changing cube game with blocks and cards on a table"
+        },
+        {
+          "src": "/images/176698-2.webp",
+          "alt": "Child with the colour box, 16 blocks and 55 cards laid out"
+        },
+        {
+          "src": "/images/176698-3.webp",
+          "alt": "55 expression and question cards in red, green, blue and yellow"
+        },
+        {
+          "src": "/images/176698-4.webp",
+          "alt": "Printed face blocks stacked in four colours on an orange background"
+        },
+        {
+          "src": "/images/176698-5.webp",
+          "alt": "Face blocks in flight showing eyes, mouths and heart faces on a cream background"
+        },
+        {
+          "src": "/images/176698-6.webp",
+          "alt": "Close-up of four cube faces: eye, brow, open mouth and teeth"
+        }
+      ],
+      "variants": [
+        {
+          "sku": "S176698",
+          "price": 2.2,
+          "inventory_quantity": 0
+        }
+      ],
+      "collections": [
+        "stem-toys"
+      ],
+      "moq": 216
     }
   ],
   "collections": [

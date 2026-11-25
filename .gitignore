@@ -57,3 +57,9 @@ fix-sku-176877.py
 verify-sku.js
 remove-s176877.py
 verify-removal.js
+fetch-hn176698.js
+crop-hn176698.py
+strip-hn176698.py
+to-webp-hn176698.py
+add-hn176698.js
+verify-hn176698.js
