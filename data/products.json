@@ -2323,6 +2323,60 @@
         "stem-toys"
       ],
       "moq": 216
+    },
+    {
+      "id": "9193156000001",
+      "title": "Handheld Gamepad Rhythm Game, 5 Modes + RGB",
+      "handle": "handheld-gamepad-rhythm-game-5-modes-rgb",
+      "body_html": "<p>A handheld gamepad with nine backlit buttons and five ways to play. Whack-a-Mole runs to 999 levels with the timer shortening as you climb; Memory plays a growing sequence of eight levels; Music turns the button grid into an eight-note instrument with recording; Chase lights the buttons in a random order that you repeat back. The fifth mode is the light panel itself, with eleven rhythms.</p>\n\n<h3>What it does that the cheap version does not</h3>\n<p>Most light-up handhelds have one function and one colour. This one has six physical buttons — modes, levels, on-off, volume, light and pause — so the player can change difficulty and sound without cycling through a menu, and nine RGB buttons that hold a soft, diffuse glow rather than a hard point of light. The light button cycles eleven rhythms, which is what keeps it interesting after the first week.</p>\n\n<h3>Who it sells to</h3>\n<p>The supplier positions it across four audiences — children, students, office workers and older players — because the difficulty is adjustable and the play is quiet. That is unusual for a toy and useful for a buyer: the same SKU can sit in a toy aisle, a stationery shop or a gift display without a different box.</p>\n\n<h3>Specification</h3>\n<table>\n  <tr><td>Item No.</td><td>S193156</td></tr>\n  <tr><td>Factory Item No.</td><td>8793</td></tr>\n  <tr><td>MOQ Minimum Order Quantity</td><td>288 PCS (3 cartons)</td></tr>\n  <tr><td>Packing</td><td>Colour box, 15 x 5 x 10 cm</td></tr>\n  <tr><td>Functions</td><td>5 modes: whack-a-mole, memory, music, chase, light</td></tr>\n  <tr><td>Lighting</td><td>9 RGB buttons, 11 lighting rhythms</td></tr>\n  <tr><td>Material</td><td>ABS, with English instruction manual</td></tr>\n  <tr><td>Certification</td><td>EN71 7P, EN62115</td></tr>\n  <tr><td>Export Carton Qty</td><td>96 PCS / Carton</td></tr>\n  <tr><td>Carton Dimension</td><td>45.5 x 42 x 40.5 cm</td></tr>\n  <tr><td>Carton Volume</td><td>0.077 CBM (2.73 cuft)</td></tr>\n  <tr><td>Carton Gross Weight</td><td>17 KG</td></tr>\n  <tr><td>Carton Net Weight</td><td>16.3 KG</td></tr>\n</table>\n<h3>Buying notes</h3>\n<p>Each set packs into a colour box of 15 x 5 x 10 cm, and 96 sets fit a carton of 0.077 CBM at 17 kg gross. That is a dense carton for its volume, so a container fills on weight before it fills on space — worth knowing when you are mixing it with bulky bubble toys.</p>\n\n<p>The unit runs on dry cells. Our record does not state the cell size or how many, so confirm the battery configuration with us before you print anything on your own packaging. Batteries are not included.</p>\n\n<p>The item carries EN71 7P and EN62115 testing. If you are shipping into a market that needs a different scope, tell us the destination and we will confirm what we can support rather than leave you to assume it matches.</p>",
+      "vendor": "Kidtoy Factory",
+      "type": "Electronic Toy",
+      "tags": [
+        "STEM",
+        "Electronic",
+        "Rhythm Game",
+        "Handheld",
+        "Wholesale"
+      ],
+      "price": 2.6,
+      "compare_at_price": null,
+      "images": [
+        {
+          "src": "/images/193156.webp",
+          "alt": "Handheld gamepad rhythm game lit up with coloured buttons on a white background"
+        },
+        {
+          "src": "/images/193156-1.webp",
+          "alt": "Gamepad button callouts: modes, levels, on-off, volume, light, pause"
+        },
+        {
+          "src": "/images/193156-2.webp",
+          "alt": "Four game modes: whack-a-mole, memory, music and chase"
+        },
+        {
+          "src": "/images/193156-3.webp",
+          "alt": "RGB lighting grid showing eleven lighting rhythms"
+        },
+        {
+          "src": "/images/193156-4.webp",
+          "alt": "Child, student, worker and elder playing the handheld gamepad"
+        },
+        {
+          "src": "/images/193156-5.webp",
+          "alt": "Feature comparison panel listing six function buttons and RGB lighting"
+        }
+      ],
+      "variants": [
+        {
+          "sku": "S193156",
+          "price": 2.6,
+          "inventory_quantity": 0
+        }
+      ],
+      "collections": [
+        "stem-toys"
+      ],
+      "moq": 288
     }
   ],
   "collections": [
