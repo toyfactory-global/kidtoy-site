@@ -55,3 +55,5 @@ list-remaining-claims.js
 audit-sku.js
 fix-sku-176877.py
 verify-sku.js
+remove-s176877.py
+verify-removal.js

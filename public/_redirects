@@ -65,3 +65,9 @@
 # catalogue index, not unrelated traffic. Mapped to /collections/all/ only.
 /collections/frontpage/    /collections/all/          301
 /collections/frontpage     /collections/all/          301
+
+# --- product withdrawn 2026-11-25 (listing removed) ---
+# Live for a day and pushed to IndexNow, so it gets a 301 to the
+# collection rather than a 404 that sits in the index for weeks.
+/products/face-changing-wooden-block-puzzle-16-blocks-64-cards/    /collections/stem-toys/    301
+/products/face-changing-wooden-block-puzzle-16-blocks-64-cards     /collections/stem-toys/    301
