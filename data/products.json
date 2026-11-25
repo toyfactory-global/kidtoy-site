@@ -2452,6 +2452,60 @@
         "uploadDate": "2026-11-25",
         "caption": "Hands-on demo: a full round on the 5-in-1 XO machine"
       }
+    },
+    {
+      "id": "9173432000001",
+      "title": "Magic Tricks Set, 22 Props + Instruction Booklet",
+      "handle": "magic-tricks-set-22-props",
+      "body_html": "<p>Twenty-two props and an instruction booklet, in a box that opens like a magic case. The set covers the classic beginner repertoire: cups and balls, a levitating wand, rope restoration, a thumb tip and silk vanish, linking and unlinking rings, a see-through box, card changes, prediction cards and a colour-changing ball.</p>\n\n<h3>What is actually in the box</h3>\n<p>The record lists <strong>22 props</strong>. The box front advertises <strong>158 ways to play</strong>, which counts variations of those props rather than 158 separate objects — worth knowing before you write your own listing copy. The instruction booklet is included; it is what makes the set usable by someone who has never performed a trick.</p>\n\n<h3>Why a magic set sells differently from a toy</h3>\n<p>A magic set is bought by an adult for a child, and the adult is buying a performance, not a plaything. That makes the demo the product: a buyer who can see the levitating wand work will stock it, and one who only sees a pile of plastic will not. It also explains why the set is boxed rather than bagged — the box is part of the gift.</p>\n\n<h3>Specification</h3>\n<table>\n  <tr><td>Item No.</td><td>S173432</td></tr>\n  <tr><td>Factory Item No.</td><td>51001</td></tr>\n  <tr><td>MOQ Minimum Order Quantity</td><td>90 PCS (5 cartons)</td></tr>\n  <tr><td>Packing</td><td>Colour box, 24 x 16 x 27.2 cm</td></tr>\n  <tr><td>Contents</td><td>22 props, instruction booklet, levitating wand</td></tr>\n  <tr><td>Skill level</td><td>Easy to learn (box copy)</td></tr>\n  <tr><td>Export Carton Qty</td><td>18 PCS / Carton</td></tr>\n  <tr><td>Carton Dimension</td><td>75 x 33 x 83 cm</td></tr>\n  <tr><td>Carton Volume</td><td>0.205 CBM (7.25 cuft)</td></tr>\n  <tr><td>Carton Gross Weight</td><td>11.5 KG</td></tr>\n  <tr><td>Carton Net Weight</td><td>10.2 KG</td></tr>\n</table>\n<h3>Buying notes</h3>\n<p>The carton is the awkward part of this line: 18 sets per carton at 0.205 CBM, 11.5 kg gross. That is a large carton for its weight, so a container fills on volume rather than on weight, and the 90-piece minimum is five cartons. If you are building a mixed container, put this against your dense lines to use the space.</p>\n\n<p>The box measures 24 x 16 x 27.2 cm, which is big enough to need shelf depth — check it against your planogram before you commit to a quantity.</p>\n\n<p>Testing scope varies by model and market - contact us to confirm what applies for this one.</p>",
+      "vendor": "Kidtoy Factory",
+      "type": "Magic Set",
+      "tags": [
+        "STEM",
+        "Magic",
+        "Educational",
+        "Gift",
+        "Wholesale"
+      ],
+      "price": 3.76,
+      "compare_at_price": null,
+      "images": [
+        {
+          "src": "/images/173432.webp",
+          "alt": "22-piece magic tricks set laid out on white: hat, wand, cups, rings, cards and props"
+        },
+        {
+          "src": "/images/173432-1.webp",
+          "alt": "Magic tricks colour box shown with its 24 x 16 x 27.2 cm dimensions"
+        },
+        {
+          "src": "/images/173432-2.webp",
+          "alt": "Child in top hat and cape performing with the magic set and its box"
+        },
+        {
+          "src": "/images/173432-3.webp",
+          "alt": "Parent and child playing with the magic tricks set on the floor"
+        },
+        {
+          "src": "/images/173432-4.webp",
+          "alt": "First twelve tricks: magic hat, wand, rope, cups, balls, thumb tip, ring and cards"
+        },
+        {
+          "src": "/images/173432-5.webp",
+          "alt": "Remaining tricks: rings, dominoes, hypnosis cards, poker and card switches"
+        }
+      ],
+      "variants": [
+        {
+          "sku": "S173432",
+          "price": 3.76,
+          "inventory_quantity": 0
+        }
+      ],
+      "collections": [
+        "stem-toys"
+      ],
+      "moq": 90
     }
   ],
   "collections": [

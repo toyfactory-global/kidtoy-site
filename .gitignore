@@ -77,3 +77,6 @@ make-video.js
 make-video-176698.js
 add-video-176698.js
 verify-video-176698.js
+fetch-hn173432.js
+strip-hn173432.py
+add-hn173432.js
