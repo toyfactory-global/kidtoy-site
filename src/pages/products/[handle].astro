@@ -23,6 +23,10 @@ const productSku = product.variants?.[0]?.sku || `KT-${product.id.toString().sli
 const skuLabel = product.variants?.[0]?.sku ? 'Item No.' : 'Item No.';
 const gallery = [{ src: mainImage, alt: product.title }, ...detailImages.map(img => ({ src: img.src, alt: img.alt || product.title }))];
 
+// Optional demo clip, self-hosted under /videos/. Only this one item has one so
+// far; everything else renders without the section.
+const video = product.video || null;
+
 /* ---- Certification, evidenced per product ------------------------------
  * The trust card used to read "Certified Safety / CE · ASTM · EN71" on every
  * product page regardless of what was on file. The ERP export leaves the 认证
@@ -258,6 +262,36 @@ const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
       </div>
     </div>
 
+    <!-- Product video. Self-hosted rather than embedded: the clip shows the item
+         being played, which is the one thing a still photo cannot convey, and a
+         YouTube dependency was not available for this listing. preload="none"
+         keeps 4.6 MB off the initial page load; the poster carries the visual. -->
+    {video && (
+      <section class="mt-14 pt-10 border-t border-gray-100">
+        <div class="max-w-3xl mb-6">
+          <p class="text-xs font-bold uppercase tracking-widest text-orange mb-2">Demo</p>
+          <h2 class="text-2xl font-extrabold text-navy">See it played</h2>
+        </div>
+        <div class="mx-auto" style="max-width: 420px;">
+          <video
+            class="w-full rounded-xl bg-navy shadow-sm"
+            controls
+            playsinline
+            preload="none"
+            poster={video.poster}
+            width={video.width}
+            height={video.height}
+          >
+            <source src={video.src} type="video/mp4" />
+            Your browser does not support embedded video.
+          </video>
+          <p class="text-xs text-gray-400 mt-3 text-center">
+            {video.caption || 'Product demo'} · {video.durationLabel || ''}
+          </p>
+        </div>
+      </section>
+    )}
+
     <ProductInquiryForm productTitle={product.title} sku={productSku} moq={product.moq} />
 
     <!-- Product JSON-LD -->
@@ -296,6 +330,23 @@ const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
         "seller": { "@id": `${SITE}/#organization` }
       }
     })} />
+
+    <!-- VideoObject: the clip is self-hosted, so this is the only structured
+         signal that tells a search engine a product video exists here. -->
+    {video && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": `${product.title} - product demo`,
+        "description": `${product.title}. Wholesale from Kidtoy Factory, Chenghai.`,
+        "thumbnailUrl": [absoluteImage(video.poster)],
+        "uploadDate": video.uploadDate,
+        "duration": video.duration,
+        "contentUrl": absoluteImage(video.src),
+        "embedUrl": `${SITE}/products/${product.handle}/`,
+        "publisher": { "@id": `${SITE}/#organization` }
+      })} />
+    )}
 
     <!-- Breadcrumb JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify({

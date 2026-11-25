@@ -2377,6 +2377,71 @@
         "stem-toys"
       ],
       "moq": 288
+    },
+    {
+      "id": "9196597000001",
+      "title": "Electronic XO Chess Game, 5-in-1 Handheld",
+      "handle": "electronic-xo-chess-game-5-in-1-handheld",
+      "body_html": "<p>A palm-sized electronic XO machine: nine backlit buttons in a three-by-three grid, five built-in games, and light and sound feedback on every move. It plays tic-tac-toe against the machine or against a second player, and the button rings show whose turn it is — red, blue, or dark for a free square.</p>\n\n<h3>Why a video matters for this one</h3>\n<p>XO is a game about turn order, and a still photo cannot show turn order. The clip below runs a full round so a buyer can see the light sequence, the response time and the build quality in the hand. There is no YouTube version yet, so the file is hosted on this page — it plays here and nowhere else.</p>\n\n<h3>What is in the box</h3>\n<ul>\n  <li>XO game machine, 12 x 8.1 x 3.3 cm, yellow, red or blue shell</li>\n  <li>3.7 V rechargeable lithium battery</li>\n  <li>USB charging cable</li>\n  <li>Colour box, 13.5 x 8.5 x 4 cm</li>\n</ul>\n\n<h3>Specification</h3>\n<table>\n  <tr><td>Item No.</td><td>S196597</td></tr>\n  <tr><td>Factory Item No.</td><td>781-1</td></tr>\n  <tr><td>MOQ Minimum Order Quantity</td><td>288 PCS (3 cartons)</td></tr>\n  <tr><td>Packing</td><td>Colour box, 13.5 x 8.5 x 4 cm</td></tr>\n  <tr><td>Unit size</td><td>12 x 8.1 x 3.3 cm</td></tr>\n  <tr><td>Functions</td><td>5-in-1 XO (tic-tac-toe) game machine</td></tr>\n  <tr><td>Power</td><td>3.7 V rechargeable lithium battery, USB charging</td></tr>\n  <tr><td>Export Carton Qty</td><td>96 PCS / Carton</td></tr>\n  <tr><td>Carton Dimension</td><td>54 x 30 x 41.5 cm</td></tr>\n  <tr><td>Carton Volume</td><td>0.067 CBM (2.37 cuft)</td></tr>\n  <tr><td>Carton Gross Weight</td><td>15.5 KG</td></tr>\n  <tr><td>Carton Net Weight</td><td>13.5 KG</td></tr>\n</table>\n<h3>Buying notes</h3>\n<p>Three shell colours ship assorted, which makes the carton self-merchandising: open it and you have a three-colour display. At 96 sets per carton of 0.067 CBM and 15.5 kg gross, this is one of the densest lines we run — a 40HQ fills on weight well before volume, so plan the mix accordingly.</p>\n\n<p>The unit carries a 3.7 V lithium cell, which matters for air freight: lithium batteries installed in equipment are a different shipping category from loose cells. Tell us if you intend to fly stock and we will confirm what documentation your forwarder will ask for.</p>\n\n<p>Testing scope varies by model and market - contact us to confirm what applies for this one.</p>",
+      "vendor": "Kidtoy Factory",
+      "type": "Electronic Toy",
+      "tags": [
+        "STEM",
+        "Electronic",
+        "XO Game",
+        "Handheld",
+        "Rechargeable",
+        "Wholesale"
+      ],
+      "price": 3.6,
+      "compare_at_price": null,
+      "images": [
+        {
+          "src": "/images/196597.webp",
+          "alt": "Electronic XO chess game machine in yellow, red and blue on a white background"
+        },
+        {
+          "src": "/images/196597-1.webp",
+          "alt": "XO chess game machine next to its yellow colour box"
+        },
+        {
+          "src": "/images/196597-2.webp",
+          "alt": "Close-up of the nine-button XO grid showing red and blue light rings"
+        },
+        {
+          "src": "/images/196597-3.webp",
+          "alt": "Battery and USB charging cable supplied with the XO chess game"
+        },
+        {
+          "src": "/images/196597-4.webp",
+          "alt": "Diagram of how a round works, with the light path across the grid"
+        },
+        {
+          "src": "/images/196597-5.webp",
+          "alt": "XO chess game machine held in one hand, showing its size"
+        }
+      ],
+      "variants": [
+        {
+          "sku": "S196597",
+          "price": 3.6,
+          "inventory_quantity": 0
+        }
+      ],
+      "collections": [
+        "stem-toys"
+      ],
+      "moq": 288,
+      "video": {
+        "src": "/videos/196597.mp4",
+        "poster": "/videos/196597-poster.webp",
+        "width": 720,
+        "height": 960,
+        "duration": "PT33S",
+        "durationLabel": "33 seconds",
+        "uploadDate": "2026-11-25",
+        "caption": "Hands-on demo: a full round on the 5-in-1 XO machine"
+      }
     }
   ],
   "collections": [
