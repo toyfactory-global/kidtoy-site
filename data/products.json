@@ -2322,7 +2322,17 @@
       "collections": [
         "stem-toys"
       ],
-      "moq": 216
+      "moq": 216,
+      "video": {
+        "src": "/videos/176698.mp4",
+        "poster": "/videos/176698-poster.webp",
+        "width": 1280,
+        "height": 720,
+        "duration": "PT17S",
+        "durationLabel": "17 seconds",
+        "uploadDate": "2026-11-25",
+        "caption": "Hands-on demo: building a face from the blocks, then reading the card"
+      }
     },
     {
       "id": "9193156000001",

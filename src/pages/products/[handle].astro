@@ -27,6 +27,10 @@ const gallery = [{ src: mainImage, alt: product.title }, ...detailImages.map(img
 // far; everything else renders without the section.
 const video = product.video || null;
 
+// Landscape clips get a wide player, portrait ones stay narrow. A 16:9 video in a
+// 420px column would be a 236px strip - too small to see what is being played.
+const videoMaxWidth = !video ? 420 : video.width >= video.height ? 760 : 420;
+
 /* ---- Certification, evidenced per product ------------------------------
  * The trust card used to read "Certified Safety / CE · ASTM · EN71" on every
  * product page regardless of what was on file. The ERP export leaves the 认证
@@ -272,7 +276,7 @@ const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
           <p class="text-xs font-bold uppercase tracking-widest text-orange mb-2">Demo</p>
           <h2 class="text-2xl font-extrabold text-navy">See it played</h2>
         </div>
-        <div class="mx-auto" style="max-width: 420px;">
+        <div class="mx-auto" style={`max-width: ${videoMaxWidth}px;`}>
           <video
             class="w-full rounded-xl bg-navy shadow-sm"
             controls
