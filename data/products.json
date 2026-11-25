@@ -2853,6 +2853,71 @@
         "uploadDate": "2026-11-25",
         "caption": "The rescue robot driven by remote, then switched to the app"
       }
+    },
+    {
+      "id": "9183968000001",
+      "title": "2-in-1 Electric Dinosaur & Robot, 832 Pcs + App",
+      "handle": "2-in-1-electric-dinosaur-robot-832-pcs",
+      "body_html": "<p>832 pieces, two builds, one box. The first is a T-Rex that walks on its hind legs with a hinged jaw and a sweeping tail; take it apart and the same parts become a humanoid robot with rotating arms and a shield. Both run from the same power box, over a 2.4 GHz handset or the app.</p>\n\n<h3>The build that people underestimate</h3>\n<p>Most two-in-one kits are one good model and one afterthought. This one uses a shared spine and hip assembly, so the dinosaur's walk carries over to the robot — the gait is biomimetic on both. That is the difference a buyer notices on a table: the model does not shuffle, it strides.</p>\n\n<h3>Where the glow comes from</h3>\n<p>Several spine and claw pieces are moulded in glow material. They need a few minutes under a lamp before the effect shows, which is worth saying on your own listing — buyers who expect a battery-powered light are disappointed, buyers who know it charges under light are not.</p>\n\n<h3>Specification</h3>\n<table>\n  <tr><td>Item No.</td><td>S183968</td></tr>\n  <tr><td>Factory Item No.</td><td>K96114</td></tr>\n  <tr><td>MOQ Minimum Order Quantity</td><td>60 PCS (5 cartons)</td></tr>\n  <tr><td>Packing</td><td>Colour box, 35 x 7 x 24 cm</td></tr>\n  <tr><td>Pieces</td><td>832 pcs</td></tr>\n  <tr><td>Builds</td><td>2: walking T-Rex, humanoid robot</td></tr>\n  <tr><td>Control</td><td>2.4 GHz, 30 m range, plus app remote and programming</td></tr>\n  <tr><td>Lighting</td><td>Glow-in-the-dark parts (charge under light first)</td></tr>\n  <tr><td>Movement</td><td>Biomimetic walking, opening mouth, articulated hands and tail</td></tr>\n  <tr><td>Age grading</td><td>Ages 12+ (as printed on the box)</td></tr>\n  <tr><td>Power</td><td>Rechargeable lithium pack in the power box, USB charging</td></tr>\n  <tr><td>Export Carton Qty</td><td>12 PCS / Carton</td></tr>\n  <tr><td>Carton Dimension</td><td>45 x 37 x 50 cm</td></tr>\n  <tr><td>Carton Volume</td><td>0.083 CBM (2.94 cuft)</td></tr>\n  <tr><td>Carton Gross Weight</td><td>15 KG</td></tr>\n  <tr><td>Carton Net Weight</td><td>14 KG</td></tr>\n</table>\n<h3>Buying notes</h3>\n<p>Twelve sets per carton at 0.083 CBM and 15 kg gross, with a box 35 x 7 x 24 cm. The carton is compact for the piece count, so this line is economical to ship but heavy enough that a mixed container should balance it against bubble or plush items.</p>\n\n<p>Recharging is over USB from the power box; no loose cells to stock or to explain at the border.</p>\n\n<p>Testing scope varies by model and market - contact us to confirm what applies for this one.</p>",
+      "vendor": "Kidtoy Factory",
+      "type": "Building Blocks",
+      "tags": [
+        "STEM",
+        "Building Blocks",
+        "Dinosaur",
+        "App Control",
+        "Glow",
+        "Wholesale"
+      ],
+      "price": 18.4,
+      "compare_at_price": null,
+      "images": [
+        {
+          "src": "/images/183968.webp",
+          "alt": "Two-in-one electric dinosaur and robot block set with box, power box and USB cable"
+        },
+        {
+          "src": "/images/183968-1.webp",
+          "alt": "T-Rex built from 832 pieces beside the robot form and the colour box"
+        },
+        {
+          "src": "/images/183968-2.webp",
+          "alt": "Variable dinosaur: programming and app control, with the motion sequence on screen"
+        },
+        {
+          "src": "/images/183968-3.webp",
+          "alt": "Robot form with glow-in-the-dark parts and rotating arm joints"
+        },
+        {
+          "src": "/images/183968-4.webp",
+          "alt": "Biomimetic walking design: mouth opens, hand joints move, tail articulated"
+        },
+        {
+          "src": "/images/183968-5.webp",
+          "alt": "Power box with rechargeable lithium battery, charging port and switch"
+        }
+      ],
+      "variants": [
+        {
+          "sku": "S183968",
+          "price": 18.4,
+          "inventory_quantity": 0
+        }
+      ],
+      "collections": [
+        "stem-toys"
+      ],
+      "moq": 60,
+      "video": {
+        "src": "/videos/183968.mp4",
+        "poster": "/videos/183968-poster.webp",
+        "width": 1280,
+        "height": 720,
+        "duration": "PT60S",
+        "durationLabel": "60 seconds",
+        "uploadDate": "2026-11-25",
+        "caption": "The T-Rex walking, then rebuilt as the robot and driven from the app"
+      }
     }
   ],
   "collections": [

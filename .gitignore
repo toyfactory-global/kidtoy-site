@@ -102,3 +102,8 @@ verify-183919.js
 make-hn183920.js
 add-hn183920.js
 verify-183920.js
+probe-corner-183968.py
+strip-183968.py
+strip-183968b.py
+make-hn183968.js
+add-hn183968.js
