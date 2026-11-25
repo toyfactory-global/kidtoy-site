@@ -2793,6 +2793,66 @@
         "uploadDate": "2026-11-25",
         "caption": "The guitar playing from a phone, and the speaker unit on its own"
       }
+    },
+    {
+      "id": "9183920000001",
+      "title": "Desert Rescue Robot Blocks, 5 Models + App",
+      "handle": "desert-rescue-robot-blocks-5-models",
+      "body_html": "<p>539 pieces that build five rescue machines: a flame-fighting walker, a firefighting unit, a high-pressure water cannon vehicle, a fault-clearing Hercules and an explosive-removal robot. One box covers a whole rescue-themed shelf, which is the reason this format works for a distributor who cannot carry six separate SKUs.</p>\n\n<h3>Built to be posed, not just driven</h3>\n<p>The head rotates, each arm and hand articulates, the mouth opens and closes, and the boom turns and extends. That is more articulation than most block robots at this price, and it is what lets a child set the machine up like a character rather than drive it in circles.</p>\n\n<h3>Two ways to run it</h3>\n<p>The 2.4 GHz handset reaches about 30 metres for forward, back and steering. The app adds remote driving from a phone, gravity steering, path drawing and a programming sequence. Having both matters at retail: the handset is what a younger child picks up, the app is what justifies the 12+ grade and the higher shelf price.</p>\n\n<h3>Specification</h3>\n<table>\n  <tr><td>Item No.</td><td>S183920</td></tr>\n  <tr><td>Factory Item No.</td><td>K96178</td></tr>\n  <tr><td>MOQ Minimum Order Quantity</td><td>60 PCS (5 cartons)</td></tr>\n  <tr><td>Packing</td><td>Colour box, 27 x 7 x 29 cm</td></tr>\n  <tr><td>Pieces</td><td>539 pcs</td></tr>\n  <tr><td>Models</td><td>5 builds: Steel Flame Dragon, Firefighting King Kong, Water Cannon King, Hercules, Explosive-removal Robot</td></tr>\n  <tr><td>Control</td><td>2.4 GHz, 30 m range, plus app: remote, gravity, path, programming</td></tr>\n  <tr><td>Moving parts</td><td>Rotating head, articulated arms and hands, opening mouth, rotating and extending boom</td></tr>\n  <tr><td>Age grading</td><td>Ages 12+ (as printed on the box)</td></tr>\n  <tr><td>Power</td><td>3.7 V 500 mAh lithium pack</td></tr>\n  <tr><td>Export Carton Qty</td><td>12 PCS / Carton</td></tr>\n  <tr><td>Carton Dimension</td><td>45 x 31 x 56 cm</td></tr>\n  <tr><td>Carton Volume</td><td>0.078 CBM (2.76 cuft)</td></tr>\n  <tr><td>Carton Gross Weight</td><td>12.3 KG</td></tr>\n  <tr><td>Carton Net Weight</td><td>11.3 KG</td></tr>\n</table>\n<h3>Buying notes</h3>\n<p>Twelve sets per carton at 0.078 CBM and 12.3 kg gross. This is a middle-density carton — heavier than the bubble lines, lighter than the die-cast items — so it sits well in a mixed container.</p>\n\n<p>The item is in stock at the factory. For a rescue-themed range that is worth asking about before you commit to a delivery window, because the five builds share parts and a partial stock position can limit which models you can pack.</p>\n\n<p>Testing scope varies by model and market - contact us to confirm what applies for this one.</p>",
+      "vendor": "Kidtoy Factory",
+      "type": "Building Blocks",
+      "tags": [
+        "STEM",
+        "Building Blocks",
+        "Rescue",
+        "App Control",
+        "Wholesale"
+      ],
+      "price": 17.8,
+      "compare_at_price": null,
+      "images": [
+        {
+          "src": "/images/183920.webp",
+          "alt": "Desert rescue robot block set with box, five builds, remote and app modes"
+        },
+        {
+          "src": "/images/183920-1.webp",
+          "alt": "Box and five builds: rescue robot, tracked unit, racer and construction machines"
+        },
+        {
+          "src": "/images/183920-2.webp",
+          "alt": "Five named builds: Steel Flame Dragon, Firefighting King Kong, Water Cannon King, Hercules, Explosive-removal Robot"
+        },
+        {
+          "src": "/images/183920-3.webp",
+          "alt": "Joint detail: rotating head, movable arms and hands, opening mouth, rotating boom"
+        },
+        {
+          "src": "/images/183920-4.webp",
+          "alt": "Rescue robots on a lunar backdrop, driven by 2.4 GHz remote or the app"
+        }
+      ],
+      "variants": [
+        {
+          "sku": "S183920",
+          "price": 17.8,
+          "inventory_quantity": 0
+        }
+      ],
+      "collections": [
+        "stem-toys"
+      ],
+      "moq": 60,
+      "video": {
+        "src": "/videos/183920.mp4",
+        "poster": "/videos/183920-poster.webp",
+        "width": 1280,
+        "height": 720,
+        "duration": "PT44S",
+        "durationLabel": "44 seconds",
+        "uploadDate": "2026-11-25",
+        "caption": "The rescue robot driven by remote, then switched to the app"
+      }
     }
   ],
   "collections": [
