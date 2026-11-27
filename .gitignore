@@ -107,3 +107,10 @@ strip-183968.py
 strip-183968b.py
 make-hn183968.js
 add-hn183968.js
+audit-traffic.js
+audit-live.js
+audit-live2.js
+check-meta-dup.js
+check-gsc-anomalies.js
+scan-desc-quality.js
+dump-descriptions.js

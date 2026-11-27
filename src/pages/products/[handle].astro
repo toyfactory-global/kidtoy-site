@@ -58,7 +58,26 @@ const stripHtml = (h) =>
     .replace(/\s+/g, ' ')
     .trim();
 
-const plainBody = stripHtml(product.body_html);
+/* Body copy nearly always opens with section headings ("Full Product
+   Specification Details", "Product Highlights"), and an earlier version sliced
+   the meta description straight off that, producing 22 pages whose search
+   snippet read "Full Product Specification Details Item Detailed Parameters
+   Item No. S212709 ...". Several of those sat at position 5-8 with zero clicks
+   in 92 days. Strip the lead-in headings before taking the first sentence. */
+const SECTION_HEADING =
+  /^(?:Full Product Specification Details|Product Specification Details|Product Highlights|Product Details|Product Features|Key Features|Main Features|Features|Specifications|Specification|Description)\s*[:：]?\s*/i;
+const stripHeadings = (text) => {
+  let out = text;
+  for (let i = 0; i < 8; i += 1) {
+    const next = out.replace(SECTION_HEADING, '');
+    if (next === out) break;
+    out = next;
+  }
+  // leftover check marks and box glyphs from pasted supplier copy
+  return out.replace(/[\u2705\u274c\u2b50\u26a0\u2611\u25a0\u25cf\u2192\ufe0f]/g, '').replace(/\s+/g, ' ').trim();
+};
+
+const plainBody = stripHeadings(stripHtml(String(product.body_html || '').replace(/<table[\s\S]*?<\/table>/gi, ' ')));
 // Use the real body copy when it is substantive; otherwise fall back to a
 // factual B2B sentence. Never emit the title alone (duplicate of `name`).
 const metaDescription =
@@ -70,9 +89,25 @@ const metaDescription =
 // REAL order quantity for this SKU. A hardcoded "MOQ 50+" used to be stamped on
 // all 40 products, which was wrong for every item whose MOQ is higher.
 const metaDescShort = (() => {
+  /* Prefer a complete first sentence: a snippet cut mid-clause reads like a
+     truncation, and a snippet ending in "…" loses clicks even at position 5. */
   const base = metaDescription.replace(/\s+/g, ' ').trim();
-  const trimmed = base.length > 132 ? base.slice(0, 132).replace(/\s+\S*$/, '') + '…' : base;
-  return `${trimmed} MOQ ${product.moq} pcs.`;
+  const sentence = (base.match(/^(.{35,140}?[.!?])\s/) || [])[1] || '';
+  if (sentence && sentence.length + ` MOQ ${product.moq} pcs.`.length <= 158) {
+    return `${sentence} MOQ ${product.moq} pcs.`;
+  }
+  /* If the sentence is too long, end on a clause rather than mid-phrase: a
+     comma becomes a full stop, so the snippet reads as a finished thought. */
+  const cut = (() => {
+    if (base.length <= 130) return base;
+    const window = base.slice(0, 130);
+    const clause = (window.match(/^([\s\S]*[,;:])\s/) || [])[1] || '';
+    if (clause.length >= 80 && clause.length + ` MOQ ${product.moq} pcs.`.length <= 158) {
+      return clause.replace(/[,;:]$/, '.');
+    }
+    return window.replace(/\s+\S*$/, '') + '…';
+  })();
+  return `${cut} MOQ ${product.moq} pcs.`;
 })();
 
 const catHandle = (product.collections || [])[0] || '';
