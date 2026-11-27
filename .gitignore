@@ -118,3 +118,4 @@ verify-p1p3.js
 verify-p4.js
 dump-keyfacts.js
 scan-spec-rows.js
+verify-live-desc.js
