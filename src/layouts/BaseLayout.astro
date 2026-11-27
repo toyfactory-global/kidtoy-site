@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SEOMeta from '../components/SEOMeta.astro';
+import InquiryGuard from '../components/InquiryGuard.astro';
 
 export interface Props {
   title?: string;
@@ -120,7 +121,7 @@ const fullDesc = description || 'Direct source for high-quality toys and childre
         var LOG = 'https://kidstoyglobal.com/api/inquiry-log';
         function send(form) {
           var action = form.getAttribute('action') || '';
-          if (action.indexOf('web3forms.com') === -1) return;
+          if (action.indexOf('web3forms.com') === -1 && action.indexOf('/api/inquiry') === -1) return;
           try {
             var body = new URLSearchParams();
             new FormData(form).forEach(function (value, key) {
@@ -189,5 +190,6 @@ const fullDesc = description || 'Direct source for high-quality toys and childre
         });
       })();
     </script>
+  <InquiryGuard />
   </body>
 </html>

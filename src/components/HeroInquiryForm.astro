@@ -21,8 +21,7 @@ const labelClass = 'block text-[11px] font-extrabold uppercase tracking-wider te
     Item numbers, quantity and destination port are enough. We reply with FOB price, carton data and lead time within one business day.
   </p>
 
-  <form id="hero-inquiry-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-3">
-    <input type="hidden" name="access_key" value="a9f6af03-8274-436c-9dc6-046d466bce9c" />
+  <form id="hero-inquiry-form" action="/api/inquiry" method="POST" class="space-y-3">
     <input type="hidden" name="subject" value="Homepage quote request — kidtoycn.com" />
     <input type="hidden" name="from_name" value="Homepage Inquiry — kidtoycn.com" />
     <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
@@ -76,6 +75,9 @@ const labelClass = 'block text-[11px] font-extrabold uppercase tracking-wider te
     button.textContent = 'Sending...';
 
     try {
+      // Ticket + Turnstile token. A script POSTing to /api/inquiry has
+      // neither and is refused before it reaches Web3Forms.
+      await window.inqPrepare?.(form);
       const res = await fetch(form.action, {
         method: 'POST',
         body: new FormData(form),

@@ -1,0 +1,155 @@
+---
+/**
+ * Inquiry preparation for kidtoycn.com.
+ *
+ * Different shape from the kidstoyglobal.com guard: the forms on this site
+ * already have their own submit handler that reads `data.success` and swaps a
+ * status line, so this does NOT intercept the submit. It only makes sure the
+ * payload carries what the server needs:
+ *
+ *   1. page_path  — which page the buyer was reading.
+ *   2. form_ts / form_sig — a proof-of-page-load ticket, fetched once per page.
+ *      A script that POSTs to /api/inquiry directly never has one and is
+ *      refused with 403. This is the part that actually stops the bots.
+ *   3. cf-turnstile-response — a fresh token, executed at submit time (tokens
+ *      are single use and expire in 300 s, so a token minted at page load would
+ *      be dead by the time someone finishes writing an RFQ).
+ *
+ * Every step fails soft: if the ticket or the widget cannot be obtained the
+ * form still submits, and the server tags it [unverified] rather than binning a
+ * possible buyer.
+ */
+---
+
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+
+<script is:inline>
+  (function () {
+    var SITEKEY = "0x4AAAAAAGVa7PHBygeZkEp7";
+    var TOKEN_TIMEOUT = 6000;
+
+    var ticketPromise = null;
+    var widgetId = null;
+    var pending = null;
+
+    function getTicket() {
+      if (ticketPromise) return ticketPromise;
+      ticketPromise = fetch("/api/inquiry", {
+        headers: { accept: "application/json" },
+        credentials: "same-origin",
+      })
+        .then(function (res) {
+          return res.ok ? res.json() : null;
+        })
+        .then(function (data) {
+          if (data && data.ticket && data.t && data.sig) return data;
+          ticketPromise = null;
+          return null;
+        })
+        .catch(function () {
+          ticketPromise = null;
+          return null;
+        });
+      return ticketPromise;
+    }
+
+    function ensureInput(form, name, value) {
+      var el = form.querySelector('input[name="' + name + '"]');
+      if (!el) {
+        el = document.createElement("input");
+        el.type = "hidden";
+        el.name = name;
+        form.appendChild(el);
+      }
+      el.value = value;
+      return el;
+    }
+
+    function renderWidget() {
+      if (widgetId !== null || !window.turnstile || !SITEKEY) return;
+      var holder = document.getElementById("inq-turnstile");
+      if (!holder) return;
+      try {
+        widgetId = window.turnstile.render(holder, {
+          sitekey: SITEKEY,
+          execution: "execute",
+          appearance: "interaction-only",
+          callback: function (token) {
+            if (pending) {
+              var resolve = pending;
+              pending = null;
+              resolve(token || "");
+            }
+          },
+          "timeout-callback": function () {
+            if (pending) {
+              var resolve = pending;
+              pending = null;
+              resolve("");
+            }
+          },
+          "error-callback": function () {
+            if (pending) {
+              var resolve = pending;
+              pending = null;
+              resolve("");
+            }
+          },
+        });
+      } catch (e) {
+        widgetId = null;
+      }
+    }
+
+    function getToken() {
+      return new Promise(function (resolve) {
+        renderWidget();
+        if (widgetId === null || !window.turnstile) return resolve("");
+        pending = resolve;
+        var done = false;
+        var settle = function () {
+          if (done) return;
+          done = true;
+          if (pending === resolve) pending = null;
+          resolve("");
+        };
+        setTimeout(settle, TOKEN_TIMEOUT);
+        try {
+          window.turnstile.execute(widgetId);
+        } catch (e) {
+          settle();
+        }
+      });
+    }
+
+    window.inqPrepare = function (form) {
+      return (async function () {
+        ensureInput(form, "page_path", window.location.pathname);
+
+        var ticket = await getTicket();
+        if (ticket) {
+          ensureInput(form, "form_ts", String(ticket.t));
+          ensureInput(form, "form_sig", String(ticket.sig));
+        }
+
+        var token = await getToken();
+        if (token) ensureInput(form, "cf-turnstile-response", token);
+      })().catch(function () {
+        /* prepare is best-effort; the server decides what to do with a thin payload */
+      });
+    };
+
+    // Warm both caches while the buyer is still typing.
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", function () {
+        getTicket();
+        renderWidget();
+      });
+    } else {
+      getTicket();
+      renderWidget();
+    }
+  })();
+</script>
+
+<div id="inq-turnstile" aria-hidden="true" style="height:0;overflow:hidden"></div>

@@ -24,8 +24,7 @@ const labelClass = 'block text-[11px] font-extrabold uppercase tracking-wider te
         Item No. <span class="text-white font-bold">{sku}</span> is attached to your message automatically.
       </p>
 
-      <form id="inquiry-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
-        <input type="hidden" name="access_key" value="a9f6af03-8274-436c-9dc6-046d466bce9c" />
+      <form id="inquiry-form" action="/api/inquiry" method="POST" class="space-y-4">
         <input type="hidden" name="subject" value={`Inquiry: ${productTitle} (${sku})`} />
         <input type="hidden" name="from_name" value="Product Page Inquiry — kidtoycn.com" />
         <input type="hidden" name="product" value={productTitle} />
@@ -83,6 +82,9 @@ const labelClass = 'block text-[11px] font-extrabold uppercase tracking-wider te
     button.textContent = 'Sending...';
 
     try {
+      // Ticket + Turnstile token. A script POSTing to /api/inquiry has
+      // neither and is refused before it reaches Web3Forms.
+      await window.inqPrepare?.(form);
       const res = await fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
