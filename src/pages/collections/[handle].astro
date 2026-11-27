@@ -40,6 +40,79 @@ const moqText = moqMin === null
 
 const intro = (collection.body_html || '').trim();
 
+/* ---- Range-level facts ---------------------------------------------------
+   These four pages carry a third of the site's impressions, so they need the
+   numbers a buyer compares on (price band, MOQ band, carton size) rather than a
+   bare image wall. Everything below is computed from the products actually
+   assigned to the collection — nothing is typed in by hand, so it cannot drift
+   when items are added.
+*/
+const specRow = (html, aliases) => {
+  const table = String(html || '').match(/<table[\s\S]*?<\/table>/i);
+  if (!table) return '';
+  for (const tr of table[0].match(/<tr[\s\S]*?<\/tr>/gi) || []) {
+    const cells = [...tr.matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((m) =>
+      m[1].replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim()
+    );
+    if (cells.length >= 2) {
+      const label = cells[0].toLowerCase();
+      if (aliases.some((a) => a.toLowerCase() === label) && cells[1] && !/^[-–—]+$/.test(cells[1])) {
+        return cells[1];
+      }
+    }
+  }
+  return '';
+};
+const firstNumber = (s) => {
+  const m = String(s || '').match(/\d+(?:\.\d+)?/);
+  return m ? Number(m[0]) : null;
+};
+
+const rows = catProducts.map((p) => {
+  const cbm = firstNumber(specRow(p.body_html, ['Carton Volume', 'Export Carton Volume', 'CBM']));
+  const ctn = specRow(p.body_html, ['Export Carton Qty', 'Quantity Per Full Export Carton']);
+  const size = specRow(p.body_html, ['Carton Dimension', 'Carton Size']);
+  const unitsPerCarton = firstNumber(ctn);
+  return {
+    title: p.title,
+    handle: p.handle,
+    sku: p.variants?.[0]?.sku || '',
+    moq: p.moq,
+    price: p.price,
+    ctn: ctn,
+    size: size,
+    cbm: cbm,
+    unitsPerCarton: unitsPerCarton,
+  };
+});
+
+const prices = rows.map((r) => r.price).filter((n) => typeof n === 'number' && n > 0);
+const priceMin = prices.length ? Math.min(...prices) : null;
+const priceMax = prices.length ? Math.max(...prices) : null;
+const cbms = rows.map((r) => r.cbm).filter((n) => typeof n === 'number' && n > 0);
+const cbmMin = cbms.length ? Math.min(...cbms) : null;
+const cbmMax = cbms.length ? Math.max(...cbms) : null;
+const cbmAvg = cbms.length ? cbms.reduce((a, b) => a + b, 0) / cbms.length : null;
+
+// Cartons that fit a 40HQ at the practical usable volume, as a planning figure.
+const usableCbm = 68;
+const cartonsPer40 = cbmAvg ? Math.floor(usableCbm / cbmAvg) : null;
+
+const priceText =
+  priceMin === null
+    ? ''
+    : priceMin === priceMax
+      ? `USD ${priceMin.toFixed(2)} per piece`
+      : `USD ${priceMin.toFixed(2)} – ${priceMax.toFixed(2)} per piece`;
+
+const collectionDesc = (() => {
+  const bits = [`${catProducts.length} wholesale lines in the ${collection.title.toLowerCase()} range, from our Chenghai factory (est. 2001).`];
+  if (moqMin !== null) bits.push(moqMin === moqMax ? `MOQ ${moqMin} pcs.` : `MOQ ${moqMin}–${moqMax} pcs.`);
+  if (priceText) bits.push(`FOB ${priceMin === priceMax ? `USD ${priceMin.toFixed(2)}` : `USD ${priceMin.toFixed(2)}–${priceMax.toFixed(2)}`}.`);
+  bits.push('OEM/ODM available.');
+  return bits.join(' ');
+})();
+
 const faqs = [
   {
     q: `What is the minimum order quantity for ${collection.title.toLowerCase()}?`,
@@ -62,15 +135,33 @@ const faqs = [
     a: 'Yes. We ship by sea, air and express courier. We can quote FOB, CIF or door-to-door delivery, and we will tell you the carton count and total CBM so you can compare freight options.'
   }
 ];
+
+/* Two more answers built from this collection's own numbers, so a buyer can
+   size a first order without waiting for a reply. Only added when the data
+   exists — an empty range would be worse than no answer. */
+if (priceText) {
+  faqs.push({
+    q: `What do ${collection.title.toLowerCase()} cost per piece?`,
+    a: `Current FOB pricing across this range is ${priceText}, ex-works Chenghai. Price moves with order volume, printing and packaging specification, and it is quoted per item on your quantity.`
+  });
+}
+if (cbmAvg && cartonsPer40) {
+  faqs.push({
+    q: 'How many cartons fit in one 40HQ container?',
+    a: `Cartons in this range run from ${cbmMin.toFixed(3)} to ${cbmMax.toFixed(3)} CBM, averaging ${cbmAvg.toFixed(3)} CBM. At a practical usable volume of about ${usableCbm} CBM that is roughly ${cartonsPer40.toLocaleString('en-US')} cartons for a single item — mixed loads are usually lower, because mixed carton sizes waste space. We will give you an exact carton count and loading plan for your item list.`
+  });
+}
 ---
 
-<BaseLayout title={collection.title} description={`Browse our ${collection.title.toLowerCase()} collection - factory direct wholesale pricing, OEM/ODM available.`}>
+<BaseLayout title={collection.title} description={collectionDesc}>
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <nav class="text-sm text-gray-400 mb-6">
       <a href="/" class="hover:text-orange">Home</a> / <span class="text-navy font-semibold">{collection.title}</span>
     </nav>
     <h1 class="text-3xl sm:text-4xl font-extrabold text-navy mb-2">{collection.title}</h1>
-    <p class="text-gray-400 mb-4">Factory direct wholesale &bull; MOQ from 50 pcs &bull; OEM/ODM supported</p>
+    <p class="text-gray-400 mb-4">
+      Factory direct wholesale &bull; {catProducts.length} lines &bull; {moqMin !== null ? (moqMin === moqMax ? `MOQ ${moqMin} pcs` : `MOQ ${moqMin}–${moqMax} pcs`) : 'MOQ quoted per item'} &bull; OEM/ODM supported
+    </p>
 
     <!-- Editorial intro: these pages used to be a bare image wall -->
     {intro ? (
@@ -82,6 +173,50 @@ const faqs = [
         the production line rather than a trading company margin. {moqText}
       </p>
     )}
+
+    <!-- Range at a glance: the comparison a buyer would otherwise build in a
+         spreadsheet. Every column is read from the product's own spec table. -->
+    <section class="mt-12 mb-14">
+      <h2 class="text-xl sm:text-2xl font-extrabold text-navy mb-2">The Range, Line by Line</h2>
+      <p class="text-sm text-gray-500 mb-5 max-w-3xl">
+        {catProducts.length} items in this collection. MOQ, FOB price and carton data are the current figures for each SKU — enquiry for volume breaks above the standard quantity.
+      </p>
+      <div class="overflow-x-auto rounded-xl border border-gray-100">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-navy text-white text-left">
+              <th class="px-4 py-3 font-bold whitespace-nowrap">Item</th>
+              <th class="px-4 py-3 font-bold whitespace-nowrap">Item No.</th>
+              <th class="px-4 py-3 font-bold whitespace-nowrap">MOQ</th>
+              <th class="px-4 py-3 font-bold whitespace-nowrap">FOB / pc</th>
+              <th class="px-4 py-3 font-bold whitespace-nowrap">Units / ctn</th>
+              <th class="px-4 py-3 font-bold whitespace-nowrap">Carton</th>
+              <th class="px-4 py-3 font-bold whitespace-nowrap">CBM</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            {rows.map((r) => (
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                  <a href={`/products/${r.handle}/`} class="font-semibold text-navy hover:text-orange">{r.title}</a>
+                </td>
+                <td class="px-4 py-3 text-gray-500 whitespace-nowrap">{r.sku || '—'}</td>
+                <td class="px-4 py-3 font-semibold text-navy whitespace-nowrap">{r.moq} pcs</td>
+                <td class="px-4 py-3 font-semibold text-navy whitespace-nowrap">{r.price > 0 ? `$${r.price.toFixed(2)}` : 'On request'}</td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">{r.ctn || '—'}</td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">{r.size || '—'}</td>
+                <td class="px-4 py-3 text-gray-600 whitespace-nowrap">{r.cbm ? r.cbm.toFixed(3) : '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {cbmAvg && (
+        <p class="text-xs text-gray-400 mt-3">
+          Cartons in this range average {cbmAvg.toFixed(3)} CBM, so a 40HQ at roughly {usableCbm} CBM usable holds about {cartonsPer40} cartons of a single line. Mixed loads run lower — ask for a loading plan built on your item list.
+        </p>
+      )}
+    </section>
 
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
       {catProducts.map(product => (

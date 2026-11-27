@@ -114,3 +114,7 @@ check-meta-dup.js
 check-gsc-anomalies.js
 scan-desc-quality.js
 dump-descriptions.js
+verify-p1p3.js
+verify-p4.js
+dump-keyfacts.js
+scan-spec-rows.js

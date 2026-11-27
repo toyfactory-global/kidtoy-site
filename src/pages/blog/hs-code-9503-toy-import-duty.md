@@ -31,6 +31,12 @@ Two things sit *outside* 9503 even though buyers assume otherwise:
 
 That last row is the one that causes real money problems. If you ship a makeup kit in a reusable aluminium case, the case is a component of the toy and 9503 normally applies. If you ship a toy *plus* a separate retail backpack, customs may split the shipment.
 
+## Does the HS code decide the duty rate?
+
+Partly — and that is the trap. The HS code selects the tariff line, and the tariff line carries the base duty rate. But the amount you actually pay is the base rate plus whatever additional duties are in force for that origin, and those sit outside Chapter 95 entirely. Two shipments of identical toys from two origins can carry different total duty with the same HS code, and one origin can change rate by notice without the code changing at all.
+
+So the HS code is necessary and not sufficient. Treat it as the first of three lookups: the heading, the national tariff line, and the trade-remedy measures on top.
+
 ## Why the 6-digit code is not enough
 
 Everyone quotes "9503" in a quote sheet. Customs works at the national level.
@@ -63,6 +69,8 @@ Two practical notes:
 
 - **Freight is part of the customs value** in most jurisdictions (CIF basis). A $0.30/pc saving on freight also reduces duty and VAT slightly.
 - **VAT is usually recoverable** if you are VAT-registered. Duty is not. When you compare suppliers, compare duty-inclusive cost, not VAT-inclusive.
+
+You can run the arithmetic in this block with our [landed cost calculator](/tools/landed-cost-calculator/), which applies duty to the CIF value rather than the goods value — the single most common mistake in a hand-built costing. For layer 3, [how to find your actual Section 301 rate](/blog/us-section-301-tariff-on-chinese-toys/) walks through the lookup, and if you are building a full container, the [container loading calculator](/tools/container-loading-calculator/) turns carton dimensions into a loaded CBM figure, which is what the freight line needs.
 
 ## Documents that must match the code
 

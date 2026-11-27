@@ -48,6 +48,54 @@ const certRaw = certMatch
   : '';
 const certText = /^[-–—0]?$|^n\/?a$|^none$/i.test(certRaw) ? '' : certRaw;
 
+/* ---- Key facts ----------------------------------------------------------
+   Buyers and AI engines both want the same few numbers before anything else:
+   MOQ, price, units per carton, carton size and CBM. All of it is already in
+   the spec table — this only lifts it into named fields. Nothing is inferred:
+   if a row is absent, the field is not rendered.
+*/
+const specRows = (() => {
+  const table = String(product.body_html || '').match(/<table[\s\S]*?<\/table>/i);
+  if (!table) return {};
+  const out = {};
+  for (const tr of table[0].match(/<tr[\s\S]*?<\/tr>/gi) || []) {
+    const cells = [...tr.matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((m) =>
+      m[1].replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim()
+    );
+    if (cells.length >= 2 && cells[0] && !(cells[0].toLowerCase() in out)) {
+      out[cells[0].toLowerCase()] = cells[1];
+    }
+  }
+  return out;
+})();
+const spec = (...aliases) => {
+  for (const a of aliases) {
+    const v = specRows[a.toLowerCase()];
+    if (v && !/^[-–—]+$/.test(v)) return v;
+  }
+  return '';
+};
+
+const fCartonQty = spec('Export Carton Qty', 'Quantity Per Full Export Carton', 'Inner Box Qty');
+const fCartonSize = spec('Carton Dimension', 'Carton Size', 'Outer Export Carton Size');
+const fCartonCbm = spec('Carton Volume', 'Export Carton Volume', 'CBM');
+const fCartonGw = spec('Carton Gross Weight', 'G.W./N.W.');
+const fPieces = spec('Pieces', 'Pieces per set', 'Set Contents', 'Contents');
+const fPack = spec('Packaging Size', 'Single Package Size', 'Package Type & Size', 'Packing', 'Unit size', 'Box size');
+
+const keyFacts = [
+  { k: 'Item No.', v: productSku },
+  { k: 'MOQ', v: `${product.moq} pcs` },
+  { k: 'FOB price', v: product.price > 0 ? `USD ${product.price.toFixed(2)} / pc at MOQ` : 'Quoted on request' },
+  fPieces ? { k: 'Set contents', v: fPieces } : null,
+  fCartonQty ? { k: 'Units per carton', v: fCartonQty } : null,
+  fCartonSize ? { k: 'Carton size', v: fCartonSize } : null,
+  fCartonCbm ? { k: 'Carton volume', v: fCartonCbm } : null,
+  fCartonGw ? { k: 'Carton gross weight', v: fCartonGw } : null,
+  fPack ? { k: 'Inner packing', v: fPack } : null,
+  { k: 'Testing scope', v: certText || 'Testing on request — ask us what applies' },
+].filter(Boolean);
+
 /* ---- SEO helpers ------------------------------------------------------- */
 const SITE = 'https://kidtoycn.com';
 const stripHtml = (h) =>
@@ -212,6 +260,20 @@ const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
           </div>
         </div>
 
+        <!-- Key facts: the numbers a buyer checks before reading anything else,
+             and the block AI answers quote when someone asks for a spec -->
+        <section class="mb-6 rounded-2xl border border-gray-100 overflow-hidden">
+          <h2 class="bg-navy text-white text-[11px] font-extrabold uppercase tracking-widest px-5 py-3">Key Facts</h2>
+          <dl class="divide-y divide-gray-100 bg-white">
+            {keyFacts.map((f) => (
+              <div class="flex items-start justify-between gap-6 px-5 py-2.5">
+                <dt class="text-[11px] font-bold uppercase tracking-wide text-gray-400 pt-0.5 shrink-0">{f.k}</dt>
+                <dd class="text-sm font-semibold text-navy text-right leading-snug break-words">{f.v}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
         <!-- Key Selling Points -->
         <div class="grid grid-cols-2 gap-3 mb-6">
           <div class="flex items-start gap-2.5 bg-gray-50 rounded-lg p-3.5">
@@ -356,7 +418,12 @@ const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
         { "@type": "PropertyValue", "name": "Minimum Order Quantity", "value": `${product.moq} pcs` },
         { "@type": "PropertyValue", "name": "OEM/ODM", "value": "Available, including custom packaging" },
         { "@type": "PropertyValue", "name": "Place of Origin", "value": "Chenghai, Guangdong, China" },
-        { "@type": "PropertyValue", "name": "Factory Established", "value": "2001" }
+        { "@type": "PropertyValue", "name": "Factory Established", "value": "2001" },
+        ...(fCartonQty ? [{ "@type": "PropertyValue", "name": "Units per carton", "value": fCartonQty }] : []),
+        ...(fCartonSize ? [{ "@type": "PropertyValue", "name": "Carton size", "value": fCartonSize }] : []),
+        ...(fCartonCbm ? [{ "@type": "PropertyValue", "name": "Carton volume", "value": fCartonCbm }] : []),
+        ...(fCartonGw ? [{ "@type": "PropertyValue", "name": "Carton gross weight", "value": fCartonGw }] : []),
+        ...(fPieces ? [{ "@type": "PropertyValue", "name": "Set contents", "value": fPieces }] : [])
       ],
       "offers": {
         "@type": "Offer",

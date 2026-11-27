@@ -14,6 +14,10 @@ Chenghai, in Shantou, Guangdong, is the densest toy production cluster in China.
 
 Here are eight checks, ordered by how much they cost you to run.
 
+## How long does it take to verify a toy factory?
+
+About two weeks of elapsed time, and almost no money. The first five checks need nothing but attention — a company-registry lookup, a map, one video call, and two emails — so they can be finished inside a week. The paid sample is what consumes the calendar, because it has to be produced and then shipped to you. A supplier who claims the whole process can be compressed into 48 hours is either not sending you a real sample or not answering checks 4 and 5.
+
 ## 1. Match the legal name to the bank account
 
 Before anything else: the company name on the proforma invoice, the name on the business licence, and the name on the bank account must be **the same legal entity**.
@@ -59,6 +63,8 @@ You can also ask for a photo of the mould itself. A factory that owns tooling is
 Ask for the PDF report and confirm the item number on the report matches the item you are ordering — not the category, the item.
 
 Check the issuing lab, the test scope, and the date. A report covering EN71-1/-2/-3 for a different model tells you the factory tests, not that this product passed.
+
+Two useful follow-ups: what the factory claims as its certification scope in general (we list ours on [certifications](/certifications/)), and how the report reads line by line. Our guide to [reading a toy test report](/blog/how-to-read-a-toy-test-report/) covers the scope section, the sample photographs and the borderline results in detail.
 
 ## 6. Order a paid sample before discussing volume
 
@@ -109,3 +115,13 @@ Steps 1 to 5 cost you nothing but attention, and they are the ones that catch th
 Applied to a small trial order, the sequence is short: check the entity, watch the line run, order a paid sample, read the report for that item number, then scale.
 
 If you want to test the process on a low-value item, our [4-bottle water elf trial pack](/products/wholesale-magic-water-elf-toy-4-bottles-6-moulds-trial-pack-diy-aqua-fairy-hydrogel-gel-craft-kit-for-kids-stem-sensory-toy/) sits at a 500-piece MOQ specifically so a buyer can validate the line before committing to the [24-bottle production kit](/products/wholesale-water-elf-magic-gel-toy-kit-24-bottles-20-moulds-diy-aqua-fairy-hydrogel-craft-set-for-kids-stem-creative-sensory-toy/).
+
+## Do I still need a third-party inspection after verifying the factory?
+
+Usually yes, for the first order. Verifying the factory tells you who you are dealing with; it does not tell you what came off the line on the day your goods were packed. Those are different questions, and the first one is answered once while the second has to be answered per shipment.
+
+The practical compromise is to inspect the first two orders and then step back to factory self-inspection with photographs and a retained sample, once the defect rate has proven stable. Our [defect claims and AQL](/blog/defect-claims-and-aql/) guide sets out how to agree the sampling level in the purchase order, so that "failed inspection" is a defined event rather than an argument.
+
+## Where to start
+
+If you are at the beginning of this process, three pages on this site are worth reading before you contact anyone: [the factory](/factory/) for what our own production floor looks like, [certifications](/certifications/) for the paperwork we hold and what we only claim on request, and [a worked first order](/case-studies/mixed-container-first-order/) for the arithmetic of a mixed container — carton counts, CBM and landed cost, using real numbers from a real order.
