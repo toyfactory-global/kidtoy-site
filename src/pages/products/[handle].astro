@@ -21,6 +21,8 @@ if (!product) {
 const mainImage = product.images?.[0]?.src || '/placeholder.jpg';
 const detailImages = product.images?.slice(1) || [];
 const productSku = product.variants?.[0]?.sku || `KT-${product.id.toString().slice(-8)}`;
+const productUnit = product.unit || 'pcs';
+const productUnitOne = productUnit.replace(/s$/, '');
 const skuLabel = product.variants?.[0]?.sku ? 'Item No.' : 'Item No.';
 const gallery = [{ src: mainImage, alt: product.title }, ...detailImages.map(img => ({ src: img.src, alt: img.alt || product.title }))];
 
@@ -86,8 +88,8 @@ const fPack = spec('Packaging Size', 'Single Package Size', 'Package Type & Size
 
 const keyFacts = [
   { k: 'Item No.', v: productSku },
-  { k: 'MOQ', v: `${product.moq} pcs` },
-  { k: 'FOB price', v: product.price > 0 ? `USD ${product.price.toFixed(2)} / pc at MOQ` : 'Quoted on request' },
+  { k: 'MOQ', v: `${product.moq} ${productUnit}` },
+  { k: 'FOB price', v: product.price > 0 ? `USD ${product.price.toFixed(2)} / ${productUnitOne} at MOQ` : 'Quoted on request' },
   fPieces ? { k: 'Set contents', v: fPieces } : null,
   fCartonQty ? { k: 'Units per carton', v: fCartonQty } : null,
   fCartonSize ? { k: 'Carton size', v: fCartonSize } : null,
@@ -132,7 +134,7 @@ const plainBody = stripHeadings(stripHtml(String(product.body_html || '').replac
 const metaDescription =
   plainBody.length >= 120 && !/^Global Shipping/i.test(plainBody)
     ? plainBody.slice(0, 300).replace(/\s+\S*$/, '') + '.'
-    : `${product.title} — factory-direct wholesale from our Chenghai toy factory (est. 2001). MOQ ${product.moq} pcs, OEM/ODM and custom packaging available.`;
+    : `${product.title} — factory-direct wholesale from our Chenghai toy factory (est. 2001). MOQ ${product.moq} ${productUnit}, OEM/ODM and custom packaging available.`;
 
 // <meta name="description"> is capped near 155 chars and must always carry the
 // REAL order quantity for this SKU. A hardcoded "MOQ 50+" used to be stamped on
@@ -142,8 +144,8 @@ const metaDescShort = (() => {
      truncation, and a snippet ending in "…" loses clicks even at position 5. */
   const base = metaDescription.replace(/\s+/g, ' ').trim();
   const sentence = (base.match(/^(.{35,140}?[.!?])\s/) || [])[1] || '';
-  if (sentence && sentence.length + ` MOQ ${product.moq} pcs.`.length <= 158) {
-    return `${sentence} MOQ ${product.moq} pcs.`;
+  if (sentence && sentence.length + ` MOQ ${product.moq} ${productUnit}.`.length <= 158) {
+    return `${sentence} MOQ ${product.moq} ${productUnit}.`;
   }
   /* If the sentence is too long, end on a clause rather than mid-phrase: a
      comma becomes a full stop, so the snippet reads as a finished thought. */
@@ -151,12 +153,12 @@ const metaDescShort = (() => {
     if (base.length <= 130) return base;
     const window = base.slice(0, 130);
     const clause = (window.match(/^([\s\S]*[,;:])\s/) || [])[1] || '';
-    if (clause.length >= 80 && clause.length + ` MOQ ${product.moq} pcs.`.length <= 158) {
+    if (clause.length >= 80 && clause.length + ` MOQ ${product.moq} ${productUnit}.`.length <= 158) {
       return clause.replace(/[,;:]$/, '.');
     }
     return window.replace(/\s+\S*$/, '') + '…';
   })();
-  return `${cut} MOQ ${product.moq} pcs.`;
+  return `${cut} MOQ ${product.moq} ${productUnit}.`;
 })();
 
 const catHandle = (product.collections || [])[0] || '';
@@ -393,7 +395,7 @@ const absoluteImage = (src) => (src?.startsWith('http') ? src : SITE + src);
         "audienceType": "Wholesale distributors, retailers and brand owners"
       },
       "additionalProperty": [
-        { "@type": "PropertyValue", "name": "Minimum Order Quantity", "value": `${product.moq} pcs` },
+        { "@type": "PropertyValue", "name": "Minimum Order Quantity", "value": `${product.moq} ${productUnit}` },
         { "@type": "PropertyValue", "name": "OEM/ODM", "value": "Available, including custom packaging" },
         { "@type": "PropertyValue", "name": "Place of Origin", "value": "Chenghai, Guangdong, China" },
         { "@type": "PropertyValue", "name": "Factory Established", "value": "2001" },
