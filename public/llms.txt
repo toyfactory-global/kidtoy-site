@@ -10,7 +10,7 @@
 - Location: Chenghai District, Shantou, Guangdong, China
 - Facility: 5,000 m² manufacturing site in Chenghai, the toy production cluster of Guangdong
 - Business model: B2B wholesale, factory direct. OEM (build to buyer specification) and ODM (buyer selects from existing moulds, factory applies their branding)
-- Catalogue size: 61 product lines across 4 categories
+- Catalogue size: 62 product lines across 4 categories
 - Minimum order quantity: from 54 pcs on selected items; the range is 54–500 pcs depending on the item and the packaging
 - FOB price range: USD 1.20–23.03 per piece across the current catalogue
 - Safety standards referenced: CE, EN71, ASTM, CPSIA. Testing scope is item-specific
@@ -25,7 +25,7 @@
 - [Bubble toys](https://kidtoycn.com/collections/bubble-toys/): electric bubble machines and bubble guns (dinosaur egg, sunflower, cartoon wands, multi-hole blowers) — 10 lines
 - [Water guns](https://kidtoycn.com/collections/water-guns/): battery-powered electric water blasters and bubble/water combos — 8 lines
 - [STEM toys](https://kidtoycn.com/collections/stem-toys/): soft sensory construction blocks, gel craft kits, touch-reactive music toys, face-changing cube games, handheld rhythm pads, electronic XO chess, magic sets, tabletop football games, buildable robot kits, app and voice control robots, engineering vehicle sets, bluetooth speaker builds, desert rescue robot sets, dinosaur robot builds — 16 lines
-- [Kids makeup](https://kidtoycn.com/collections/kids-makeup/): washable cosmetics, nail art, craft boxes and pretend-play beauty cases, DIY beading machines and charm jewellery boxes, nail art dressing tables and beaded dressing tables — 27 lines
+- [Kids makeup](https://kidtoycn.com/collections/kids-makeup/): washable cosmetics, nail art, craft boxes and pretend-play beauty cases, DIY beading machines and charm jewellery boxes, nail art dressing tables and beaded dressing tables and charm jewellery tins — 28 lines
 - [Full catalogue](https://kidtoycn.com/collections/all/)
 
 ## Free buyer tools
