@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProductCard from '../../components/ProductCard.astro';
+import { GUIDE_MAP } from '../../data/guide-map';
 import productsData from '../../../data/products.json';
 
 export function getStaticPaths() {
@@ -39,6 +40,7 @@ const moqText = moqMin === null
     : `MOQ ranges from ${moqMin} to ${moqMax} pcs depending on the item.`;
 
 const intro = (collection.body_html || '').trim();
+const collectionGuides = GUIDE_MAP[handle] || [];
 
 /* ---- Range-level facts ---------------------------------------------------
    These four pages carry a third of the site's impressions, so they need the
@@ -217,6 +219,23 @@ if (cbmAvg && cartonsPer40) {
         </p>
       )}
     </section>
+
+    {collectionGuides.length > 0 && (
+      <section class="mt-14 mb-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-navy mb-2">Before You Order: Guides for This Range</h2>
+        <p class="text-sm text-gray-500 mb-5 max-w-3xl">
+          What buyers ask us most often about this category — written from the factory side, with the numbers we actually quote.
+        </p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {collectionGuides.map((g) => (
+            <a href={`/blog/${g.slug}/`} class="group block border border-gray-100 rounded-xl p-5 hover:border-orange hover:shadow-sm transition-all">
+              <p class="text-xs font-bold uppercase tracking-widest text-orange mb-2">Guide</p>
+              <p class="text-sm font-bold text-navy group-hover:text-orange transition-colors leading-snug">{g.title}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
 
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
       {catProducts.map(product => (
