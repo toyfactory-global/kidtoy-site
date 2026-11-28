@@ -50,9 +50,10 @@ const collectionGuides = GUIDE_MAP[handle] || [];
    when items are added.
 */
 const specRow = (html, aliases) => {
-  const table = String(html || '').match(/<table[\s\S]*?<\/table>/i);
+  const all = String(html || '').match(/<table[\s\S]*?<\/table>/gi) || [];
+  const table = (all.find((t) => /Item No\./i.test(t)) || all[0] || null);
   if (!table) return '';
-  for (const tr of table[0].match(/<tr[\s\S]*?<\/tr>/gi) || []) {
+  for (const tr of (table.match(/<tr[\s\S]*?<\/tr>/gi) || [])) {
     const cells = [...tr.matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((m) =>
       m[1].replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim()
     );

@@ -176,3 +176,10 @@ fix-sku-collision2.js
 prep-204545.js
 add-204545.js
 verify-204545.js
+prep-203912.js
+add-203912.js
+verify-203912.js
+patch-llms-203912.js
+patch-spec-table.js
+patch-spec-table2.js
+regress-facts.js

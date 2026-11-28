@@ -58,10 +58,14 @@ const certText = /^[-–—0]?$|^n\/?a$|^none$/i.test(certRaw) ? '' : certRaw;
    if a row is absent, the field is not rendered.
 */
 const specRows = (() => {
-  const table = String(product.body_html || '').match(/<table[\s\S]*?<\/table>/i);
+  const specTable = (() => {
+    const all = String(product.body_html || '').match(/<table[\s\S]*?<\/table>/gi) || [];
+    return all.find((t) => /Item No\./i.test(t)) || all[0] || null;
+  })();
+  const table = specTable;
   if (!table) return {};
   const out = {};
-  for (const tr of table[0].match(/<tr[\s\S]*?<\/tr>/gi) || []) {
+  for (const tr of (table.match(/<tr[\s\S]*?<\/tr>/gi) || [])) {
     const cells = [...tr.matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((m) =>
       m[1].replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim()
     );
