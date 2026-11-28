@@ -186,3 +186,6 @@ regress-facts.js
 prep-203480.js
 add-203480.js
 verify-203480.js
+prep-197220.js
+add-197220.js
+verify-197220.js
