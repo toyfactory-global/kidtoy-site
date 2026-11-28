@@ -2918,6 +2918,60 @@
         "uploadDate": "2026-11-25",
         "caption": "The T-Rex walking, then rebuilt as the robot and driven from the app"
       }
+    },
+    {
+      "id": "9183968000017",
+      "title": "Unicorn Kids Makeup Set & Vanity Case, 5+",
+      "handle": "unicorn-kids-makeup-set-vanity-case",
+      "body_html": "<p>A complete first makeup kit in a pink vanity case shaped like a unicorn, with a silver horn handle and a die-cut front panel. It is a complete first makeup kit rather than a sampler: powder, blush, three eyeshadow formats, lips, nails, tools and a hair clip, at a price that still works as a gift.</p>\n\n<h3>What is actually inside</h3>\n<p>The case holds a pressed powder compact with a mirror and a small comb, a six-colour eyeshadow palette, two duo compacts and one round eyeshadow, a blush compact, two lip glosses, two lipsticks, two nail polishes, five brushes, two powder puffs and a sponge, a toe separator, a unicorn nail file, a rainbow hair extension clip and a sticker sheet.</p>\n\n<p>That combination is deliberate. A kit that only has colour sits unused after the first afternoon; one that includes tools — brushes, puffs, a separator, a file — keeps being opened, because a child can copy what an adult does rather than just paint.</p>\n\n<h3>The case is the product</h3>\n<p>This is the format that carries the price. The case is moulded with a sculpted unicorn face and a metal-finish horn, and it has a real handle, so it reads as a handbag rather than packaging. On a shelf that is the whole sale: at 20 x 17 x 8 cm it stands up on its own and photographs well from any angle, which matters more on a marketplace thumbnail than any copy you write.</p>\n\n<h3>About the washability claim</h3>\n<p>The box states the colour washes off with water and soap. That is worth leading with, because removal is the single biggest objection a parent has to kids cosmetics — more than price, more than contents. It is also worth testing on a sample yourself: apply a swatch to skin, leave it ten minutes, then wash with soap and water as a parent would, and see how much remains.</p>\n\n<h3>Which regulation applies</h3>\n<p>Colour cosmetics for children are cosmetics in most markets, not toys. That means the cosmetic regime governs the formulation — ingredient restrictions, labelling, and a responsible person in the destination market — and the toy standard does not cover the formulation itself. Buyers often assume the toy certificate covers the whole product; it does not. See <a href=\"/blog/kids-cosmetics-vs-toy-regulation/\">cosmetics law or toy law</a> for where the line falls.</p>\n\n<h3>Specification</h3>\n<table>\n  <tr><td>Item No.</td><td>S202520</td></tr>\n  <tr><td>Factory Item No.</td><td>MNY-10060A</td></tr>\n  <tr><td>MOQ Minimum Order Quantity</td><td>72 PCS (3 cartons)</td></tr>\n  <tr><td>Packing</td><td>Colour box, 20 x 17 x 8 cm (vanity case inside)</td></tr>\n  <tr><td>Contents</td><td>16 labelled parts: case, powder compact with mirror and comb, 6-colour palette, 2 duo shadows, 1 round shadow, blush, lips, nails, 5 brushes, puffs and sponge, toe separator, nail file, hair clip, stickers</td></tr>\n  <tr><td>Age grading</td><td>Ages 5+ (as printed on the box)</td></tr>\n  <tr><td>Removal</td><td>Washes off with water and soap (box claim)</td></tr>\n  <tr><td>Export Carton Qty</td><td>24 PCS / Carton</td></tr>\n  <tr><td>Carton Dimension</td><td>52 x 43 x 35 cm</td></tr>\n  <tr><td>Carton Volume</td><td>0.078 CBM (2.76 cuft)</td></tr>\n  <tr><td>Carton Gross Weight</td><td>16.1 KG</td></tr>\n  <tr><td>Carton Net Weight</td><td>14.7 KG</td></tr>\n</table>\n<h3>Buying notes</h3>\n<p>Twenty-four sets per carton at 0.078 CBM and 16.1 kg gross, so a 40HQ takes a large number of cartons and the freight per unit is low for a boxed gift item. Minimum order is three cartons.</p>\n\n<p>The case is rigid and hollow, so cartons should not be stacked beyond what the board takes — ask us for the crush test result if you plan high pallets. The box is small for the contents, which is why the outer carton carries 24 rather than 12.</p>\n\n<p>Testing scope varies by market and by the formulation supplied. The certification field for this item is empty in our records, so treat it as <strong>testing on request</strong> — tell us the destination and we will confirm what applies before you commit.</p>",
+      "vendor": "Kidtoy Factory",
+      "type": "Kids Cosmetics",
+      "tags": [
+        "Kids Makeup",
+        "Unicorn",
+        "Vanity Case",
+        "Pretend Play",
+        "Wholesale"
+      ],
+      "price": 8.37,
+      "compare_at_price": null,
+      "images": [
+        {
+          "src": "/images/202520.webp",
+          "alt": "Unicorn kids makeup set laid out: vanity case, eyeshadow palettes, blush, lip gloss, lipstick, nail polish and brushes"
+        },
+        {
+          "src": "/images/202520-1.webp",
+          "alt": "Pink unicorn vanity case with silver horn handle, colour box measuring 20 x 17 x 8 cm, ages 5+"
+        },
+        {
+          "src": "/images/202520-2.webp",
+          "alt": "Labelled contents of the unicorn makeup set, from pressed powder and eyeshadow to toe separator and nail file"
+        },
+        {
+          "src": "/images/202520-3.webp",
+          "alt": "Four in-use shots: face powder, eyeshadow, blush and lip gloss applied by children"
+        },
+        {
+          "src": "/images/202520-4.webp",
+          "alt": "Box claim panel: easy to remove, washes off with water and soap, skin friendly formulation"
+        },
+        {
+          "src": "/images/202520-5.webp",
+          "alt": "Two children holding the unicorn makeup case with the palette and brushes in front"
+        }
+      ],
+      "variants": [
+        {
+          "sku": "S202520",
+          "price": 8.37,
+          "inventory_quantity": 0
+        }
+      ],
+      "collections": [
+        "kids-makeup"
+      ],
+      "moq": 72
     }
   ],
   "collections": [
