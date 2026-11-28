@@ -62,7 +62,7 @@ Calculators that run in the browser, built on the same export carton data the fa
 - [FAQ](https://kidtoycn.com/faq/): ordering, MOQ, sampling, payment and shipping questions
 - [Shipping](https://kidtoycn.com/shipping/): freight methods and delivery terms
 - [Contact](https://kidtoycn.com/contact/): inquiry form for quotation requests
-- [Blog](https://kidtoycn.com/blog/): 66 sourcing and import guides for toy buyers
+- [Blog](https://kidtoycn.com/blog/): 62 sourcing and import guides for toy buyers
 
 ## Contact
 

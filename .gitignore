@@ -121,3 +121,4 @@ scan-spec-rows.js
 verify-live-desc.js
 count-blog-inlinks.js
 check-zero-posts.js
+verify-merge.js

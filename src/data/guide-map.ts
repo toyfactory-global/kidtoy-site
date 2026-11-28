@@ -21,8 +21,8 @@ export const GUIDE_MAP: Record<string, GuideLink[]> = {
   ],
   'bubble-toys': [
     { slug: 'wholesale-bubble-toys-buyers-guide', title: 'The bubble toy category, explained' },
-    { slug: 'bubble-solution-quality-and-cost', title: 'What bubble solution quality costs you' },
-    { slug: 'bubble-machine-failure-modes', title: 'How bubble machines fail in the field' },
+    { slug: 'electric-vs-manual-bubble-toys', title: 'Electric or manual: which sells' },
+    { slug: 'bubble-toy-battery-and-charging', title: 'Battery and charging, explained' },
     { slug: 'shipping-bubble-toys-batteries-liquids', title: 'Shipping: batteries, liquids and freight' },
     { slug: 'toy-moq-landed-cost-calculation', title: 'MOQ and landed cost, calculated' },
     { slug: 'container-loading-calculation-cartons-cbm', title: 'How many cartons fit in a container' },
@@ -36,11 +36,11 @@ export const GUIDE_MAP: Record<string, GuideLink[]> = {
     { slug: 'toy-moq-landed-cost-calculation', title: 'MOQ and landed cost, calculated' },
   ],
   'kids-makeup': [
-    { slug: 'wholesale-kids-beauty-sets-build-a-range', title: 'Building a kids beauty range' },
     { slug: 'kids-makeup-case-formats-buying-guide', title: 'How the case sets your retail price' },
-    { slug: 'makeup-case-materials-aluminium-vs-card', title: 'Aluminium, card or tin: what the case costs' },
+    { slug: 'private-label-kids-makeup-moq-labelling', title: 'Private label: MOQ and label fields' },
     { slug: 'kids-cosmetics-vs-toy-regulation', title: 'Cosmetics law or toy law — which applies' },
     { slug: 'kids-makeup-ingredients-washable', title: 'Washable formulas and ingredient limits' },
-    { slug: 'private-label-kids-makeup-moq-labelling', title: 'Private label: MOQ and label fields' },
+    { slug: 'kids-nail-polish-safety', title: 'Nail polish: what the limits really are' },
+    { slug: 'wholesale-toy-price-points-by-channel', title: 'Price points by sales channel' },
   ],
 };

@@ -71,3 +71,16 @@
 # collection rather than a 404 that sits in the index for weeks.
 /products/face-changing-wooden-block-puzzle-16-blocks-64-cards/    /collections/stem-toys/    301
 /products/face-changing-wooden-block-puzzle-16-blocks-64-cards     /collections/stem-toys/    301
+
+# --- guides merged 2026-11-28 (four low-value URLs consolidated into two) ---
+# All four sat at 0 impressions and 0 AI citations over 92 days, so the 301 is
+# housekeeping rather than a rescue: it keeps stray inbound links and the index
+# pointed at the page that now carries the content.
+/blog/bubble-solution-quality-and-cost/            /blog/wholesale-bubble-toys-buyers-guide/    301
+/blog/bubble-solution-quality-and-cost             /blog/wholesale-bubble-toys-buyers-guide/    301
+/blog/bubble-machine-failure-modes/                /blog/wholesale-bubble-toys-buyers-guide/    301
+/blog/bubble-machine-failure-modes                 /blog/wholesale-bubble-toys-buyers-guide/    301
+/blog/makeup-case-materials-aluminium-vs-card/     /blog/kids-makeup-case-formats-buying-guide/ 301
+/blog/makeup-case-materials-aluminium-vs-card      /blog/kids-makeup-case-formats-buying-guide/ 301
+/blog/wholesale-kids-beauty-sets-build-a-range/    /blog/kids-makeup-case-formats-buying-guide/ 301
+/blog/wholesale-kids-beauty-sets-build-a-range     /blog/kids-makeup-case-formats-buying-guide/ 301
